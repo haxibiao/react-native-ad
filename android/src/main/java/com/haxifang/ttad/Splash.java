@@ -16,7 +16,7 @@ import com.haxifang.ttad.modules.SplashActivity;
 public class Splash extends ReactContextBaseJavaModule {
 
     String TAG = "天真的调试";
-    Context mContext;
+    ReactApplicationContext mContext;
 
     public Splash(@NonNull ReactApplicationContext reactContext) {
         super(reactContext);

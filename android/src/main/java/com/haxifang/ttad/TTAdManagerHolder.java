@@ -6,6 +6,7 @@ import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.facebook.react.bridge.ReactApplicationContext;
 
 /**
  * 可以用一个单例来保存TTAdManager实例，在需要初始化sdk的时候调用
@@ -21,14 +22,25 @@ public class TTAdManagerHolder {
         return TTAdSdk.getAdManager();
     }
 
-    public static void init(Context context, String appid) {
+    public static void init(ReactApplicationContext context, String appid) {
         doInit(context, appid);
     }
 
     //step1:接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
-    private static void doInit(Context context, String appid) {
+    private static void doInit(final ReactApplicationContext context, final String appid) {
         if (!sInit) {
-            TTAdSdk.init(context, buildConfig(context, appid));
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    context.getCurrentActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TTAdSdk.init(context, buildConfig(context, appid));
+                        }
+                    });
+                }
+            }).start();
+
             sInit = true;
         }
     }
