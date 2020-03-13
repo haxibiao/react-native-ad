@@ -1,9 +1,9 @@
 {
   "name": "hxf-byted-ad",
-  "title": "Hxf Byted Ad",
-  "version": "1.0.0",
-  "description": "TODO",
-  "main": "index.js",
+  "title": "穿山甲广告模块",
+  "version": "1.0.1",
+  "description": "哈希坊组件库之穿山甲广告模块",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +16,8 @@
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Bin",
+    "email": "bin@haxifang.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

@@ -14,6 +14,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 public class TTAdManagerHolder {
 
     static boolean sInit;
+    public static ReactApplicationContext mContext;
 
     public static TTAdManager get() {
         if (!sInit) {
@@ -23,10 +24,11 @@ public class TTAdManagerHolder {
     }
 
     public static void init(ReactApplicationContext context, String appid) {
+        mContext = context;
         doInit(context, appid);
     }
 
-    //step1:接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
+    // 接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
     private static void doInit(final ReactApplicationContext context, final String appid) {
         if (!sInit) {
             new Thread(new Runnable() {

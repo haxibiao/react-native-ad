@@ -9,7 +9,15 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  NativeEventEmitter,
+  NativeModules,
+} from 'react-native';
 import {loadSplashAd} from 'hxf-byted-ad';
 
 export default class App extends Component<{}> {
@@ -34,7 +42,30 @@ export default class App extends Component<{}> {
             borderRadius: 50,
           }}
           onPress={() => {
-            loadSplashAd('5016582', '816582039');
+            const splashAd = loadSplashAd('5016582', '816582039');
+
+            splashAd.subscrib('onAdTimeOver', event => {
+              console.log('广告时间结束监听', event);
+            });
+
+            splashAd.subscrib('onAdSkip', i => {
+              console.log('用户点击跳过监听', i);
+            });
+
+            splashAd.subscrib('onError', e => {
+              console.log('开屏加载失败监听', e);
+            });
+
+            // const a = 'onAdTimeOver';
+            // const { BytedADSplash } = NativeModules;
+
+            // const event = new NativeEventEmitter(BytedADSplash);
+            // event.addListener('TTSplashAdListener', reminder => {
+            //   console.log(reminder);
+            //   if (reminder[a]) {
+            //     console.log(a, reminder[a]);
+            //   }
+            // });
           }}>
           <Text style={{textAlign: 'center'}}>echo Log</Text>
         </TouchableOpacity>
