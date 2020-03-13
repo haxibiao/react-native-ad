@@ -38,15 +38,16 @@ loadSplashAd(appid, codeid);
 ```
 
 开屏广告监听回调，调用 `loadSplashAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+
 | 监听事件 | 回调参数类型 | 说明 |
-|---|---|---|
+| ---------- | :-----------: | :-----------: |
 | onError | string | 开屏广告渲染失败将会回调，返回错误信息 |
 | onTimeout | boolean | 开屏广告加载超时回调，返回 true |
 | onAdClicked | boolean | 开屏广告被点击回调，返回 true |
 | onAdSkip | boolean | 用户点击跳过广告回调，返回 true |
 | onAdTimeOver | boolean | 开屏广告展示倒计时结束回调，返回 true |
 
-事例代码：
+示例代码：
 ```
 const splashAd = loadSplashAd(appid,codeid);
 
