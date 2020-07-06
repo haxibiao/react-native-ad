@@ -27,14 +27,14 @@ export default class App extends Component<{}> {
   };
 
   componentDidMount() {
-    console.log('组件', TTAd);
-    console.log('组件', ad.TTAd);
-    // TTAD.init('5016582');
+    // console.log('组件', TTAd);
+    // console.log('组件', ad.TTAd);
+    TTAd.init('5016582');
   }
   render() {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.welcome}>☆BytedAd example☆</Text>
+        <Text style={styles.welcome}>☆BytedAd example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
@@ -47,8 +47,8 @@ export default class App extends Component<{}> {
             borderRadius: 50,
           }}
           onPress={() => {
-            const splashAd = loadSplashAd('5016582', '816582039');
-
+            const splashAd = TTAd.loadSplashAd('5016582', '816582039');
+            
             splashAd.subscrib('onAdTimeOver', event => {
               console.log('广告时间结束监听', event);
             });
@@ -73,7 +73,7 @@ export default class App extends Component<{}> {
             // });
           }}>
           <Text style={{textAlign: 'center'}}>echo Log</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         {/* <TTAD.DrawFeedAd codeid="916582757" /> */}
 
         {/* <Text>Hello</Text> */}
