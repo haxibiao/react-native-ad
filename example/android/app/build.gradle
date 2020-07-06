@@ -179,7 +179,7 @@ android {
 }
 
 dependencies {
-    implementation project(':hxf-byted-ad')
+    implementation project(':react-native-ad')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

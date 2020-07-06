@@ -2,5 +2,5 @@ rootProject.name = 'example'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
-include ':hxf-byted-ad'
-project(':hxf-byted-ad').projectDir = new File(rootProject.projectDir, '../../android')
+include ':react-native-ad'
+project(':react-native-ad').projectDir = new File(rootProject.projectDir, '../../android')

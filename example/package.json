@@ -11,7 +11,7 @@
     "postinstall": "node ../scripts/examples_postinstall.js"
   },
   "dependencies": {
-    "hxf-byted-ad": "file:../",
+    "react-native-ad": "file:../",
     "react": "16.9.0",
     "react-native": "0.61.5"
   },
