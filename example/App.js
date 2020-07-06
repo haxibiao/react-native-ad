@@ -18,7 +18,7 @@ import {
   NativeEventEmitter,
   NativeModules,
 } from 'react-native';
-import TTAd, {loadSplashAd, DrawFeedAd} from 'react-native-ad';
+import ad, {TTAd} from 'react-native-ad';
 
 export default class App extends Component<{}> {
   state = {
@@ -27,8 +27,9 @@ export default class App extends Component<{}> {
   };
 
   componentDidMount() {
-    // console.log('组件', DrawFeedAd);
-    TTAd.init('5016582');
+    console.log('组件', TTAd);
+    console.log('组件', ad.TTAd);
+    // TTAD.init('5016582');
   }
   render() {
     return (
@@ -73,11 +74,7 @@ export default class App extends Component<{}> {
           }}>
           <Text style={{textAlign: 'center'}}>echo Log</Text>
         </TouchableOpacity> */}
-        <DrawFeedAd appid="5016582" codeid="916582757">
-          <View style={{ }}>
-            <Text style={{color: '#FFF'}}>Hello</Text>
-          </View>
-        </DrawFeedAd>
+        {/* <TTAD.DrawFeedAd codeid="916582757" /> */}
 
         {/* <Text>Hello</Text> */}
       </View>
