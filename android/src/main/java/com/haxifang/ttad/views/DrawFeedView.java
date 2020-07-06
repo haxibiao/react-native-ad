@@ -24,7 +24,11 @@ import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTDrawFeedAd;
 import com.bytedance.sdk.openadsdk.TTNativeAd;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxifang.R;
 import com.haxifang.ttad.TTAdManagerHolder;
 
@@ -113,7 +117,104 @@ public class DrawFeedView extends RelativeLayout {
 
     // 加载原生渲染方式的 Draw 广告
     private void loadExpressDrawNativeAd() {
+        // 创建广告请求参数AdSlot,具体参数含义参考文档
+        float expressViewWidth = 1080;
+        float expressViewHeight = 1920;
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(_codeid)
+                .setSupportDeepLink(true)
+                .setImageAcceptedSize(1080, 1920)
+                .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp
+                .setAdCount(1) // 请求广告数量为1到3条
+                .build();
 
+        // 请求广告,对请求回调的广告作渲染处理
+        mTTAdNative.loadExpressDrawFeedAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+            @Override
+            public void onError(int code, String message) {
+                Log.d(TAG, message);
+                // showToast(message);
+            }
+
+            @Override
+            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
+                if (ads == null || ads.isEmpty()) {
+                    // TToast.show(mContext, " ad is null!");
+                    return;
+                }
+                for (final TTNativeExpressAd ad : ads) {
+                    // 点击监听器必须在getAdView之前调
+                    ad.setVideoAdListener(new TTNativeExpressAd.ExpressVideoAdListener() {
+                        @Override
+                        public void onVideoLoad() {
+
+                        }
+
+                        @Override
+                        public void onVideoError(int errorCode, int extraCode) {
+
+                        }
+
+                        @Override
+                        public void onVideoAdStartPlay() {
+
+                        }
+
+                        @Override
+                        public void onVideoAdPaused() {
+
+                        }
+
+                        @Override
+                        public void onVideoAdContinuePlay() {
+
+                        }
+
+                        @Override
+                        public void onProgressUpdate(long current, long duration) {
+
+                        }
+
+                        @Override
+                        public void onVideoAdComplete() {
+
+                        }
+
+                        @Override
+                        public void onClickRetry() {
+                            // TToast.show(mContext, " onClickRetry !");
+                            Log.d("drawss", "onClickRetry!");
+                        }
+                    });
+                    ad.setCanInterruptVideoPlay(true);
+                    ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
+                        @Override
+                        public void onAdClicked(View view, int type) {
+
+                        }
+
+                        @Override
+                        public void onAdShow(View view, int type) {
+
+                        }
+
+                        @Override
+                        public void onRenderFail(View view, String msg, int code) {
+
+                        }
+
+                        @Override
+                        public void onRenderSuccess(View view, float width, float height) {
+                            // TToast.show(mContext, "Draw渲染成功");
+                            mContainer.addView(ad.getExpressAdView());
+                        }
+                    });
+                    ad.render();
+                }
+
+
+            }
+        });
     }
 
     // 开始加载自定义方式的 Draw 广告
@@ -241,7 +342,7 @@ public class DrawFeedView extends RelativeLayout {
                     @Override
                     public void onAnimationStart(Animation animation) {
                         // 点赞动画执行开始方法
-                        Log.d(TAG, "onAnimationStart: 测试");
+                        // Log.d(TAG, "onAnimationStart: 测试");
                     }
 
                     @Override
@@ -313,16 +414,22 @@ public class DrawFeedView extends RelativeLayout {
 
     // 组件 Error 事件返回
     public void onError(String message) {
-
+        WritableMap event = Arguments.createMap();
+        event.putString("message", message);
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdError", event);
     }
 
     // 广告点击回调响应事件
     public void onAdClick() {
-
+        WritableMap event = Arguments.createMap();
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdClick", event);
     }
 
     // 广告加载回调
     public void onAdLoad(String headIconUrl) {
+        WritableMap event = Arguments.createMap();
+        event.putString("headicon", headIconUrl);
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdShow", event);
     }
 
 }
