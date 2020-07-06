@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/tt_video_layout_hxb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_gradient"
+        android:orientation="vertical"
+        android:paddingBottom="60dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_marginRight="10dp"
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/usAvatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/extra_large" />
+
+            <LinearLayout
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="30dp">
+
+                <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/btn_likevideo"
+                    android:src="@drawable/ic_video_like"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:text="66 W" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAdAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="\@ 广の告之"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:gravity="left"
+            android:padding="10dp"
+            android:text="广告信息视频的标题文字... 如果文比较多的话，就会这样 巴拉巴拉"
+            android:textColor="#FFFFFF"
+            android:visibility="gone">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btnAction"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/btn_rounded_red"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="点击下载APP"
+            android:textColor="#F8F8FA" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,16 +1,16 @@
 {
-  "name": "hxf-byted-ad",
+  "name": "react-native-ad",
   "title": "穿山甲广告模块",
   "version": "1.0.1",
   "description": "哈希坊组件库之穿山甲广告模块",
-  "main": "index.ts",
+  "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/hxf-byted-ad.git",
-    "baseUrl": "https://github.com/github_account/hxf-byted-ad"
+    "url": "git+https://github.com/github_account/react-native-ad.git",
+    "baseUrl": "https://github.com/github_account/react-native-ad"
   },
   "keywords": [
     "react-native"

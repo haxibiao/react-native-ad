@@ -26,7 +26,7 @@ public class Splash extends ReactContextBaseJavaModule {
     @NonNull
     @Override
     public String getName() {
-        return "BytedADSplash";
+        return "TTAdSplash";
     }
 
     @ReactMethod

@@ -18,18 +18,22 @@ import {
   NativeEventEmitter,
   NativeModules,
 } from 'react-native';
-import {loadSplashAd} from 'hxf-byted-ad';
+import TTAd, {loadSplashAd, DrawFeedAd} from 'react-native-ad';
 
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
     message: '--',
   };
-  componentDidMount() {}
+
+  componentDidMount() {
+    // console.log('组件', DrawFeedAd);
+    TTAd.init('5016582');
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆BytedAd example☆</Text>
+        {/* <Text style={styles.welcome}>☆BytedAd example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
@@ -68,7 +72,14 @@ export default class App extends Component<{}> {
             // });
           }}>
           <Text style={{textAlign: 'center'}}>echo Log</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <DrawFeedAd appid="5016582" codeid="916582757">
+          <View style={{ }}>
+            <Text style={{color: '#FFF'}}>Hello</Text>
+          </View>
+        </DrawFeedAd>
+
+        {/* <Text>Hello</Text> */}
       </View>
     );
   }
