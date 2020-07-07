@@ -7,7 +7,7 @@ const NativeDrawFeedAd = requireNativeComponent("TTAdDrawFeed");
 // isExpress 用来区分是否用原生方式渲染
 
 interface Props {
-  codeid: string;
+  codeId: string;
   isExpress?: boolean;
   onError?: Function;
   onLoad?: Function;
@@ -15,11 +15,11 @@ interface Props {
 }
 
 export const DrawFeedAd = (props: Props) => {
-  const { codeid, isExpress, onError, onLoad, onAdClick } = props;
+  const { codeId, isExpress, onError, onLoad, onAdClick } = props;
   const [visible, setVisible] = React.useState(true);
 
   const draw_video_provider = "";
-  let codeid_draw_video = codeid;
+  let codeid_draw_video = codeId;
 
   return (
     visible && (

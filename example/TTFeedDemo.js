@@ -10,9 +10,10 @@ export default function TTDrawFeedDemo() {
 
   return (
     <View style={styles.container}>
-      <TTAd.DrawFeedAd
-        codeId="916582757" // 广告位 codeid （必传），注意区分 Android 和 IOS
-        isExpress={false} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：false
+      <TTAd.FeedAd
+        codeId="916582486" // 广告位 codeid （必传），注意区分 Android 和 IOS
+        visible={true}
+        adWidth={300}
         onLoad={smg => {
           // 广告加载成功回调
           console.log('头条 Draw Feed 广告加载成功！', smg);

@@ -14,6 +14,7 @@ import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.haxifang.ttad.AdManager;
 import com.haxifang.ttad.DrawFeed;
+import com.haxifang.ttad.Feed;
 import com.haxifang.ttad.Splash;
 import com.haxifang.ttad.TTAdManagerHolder;
 
@@ -29,7 +30,8 @@ public class BytedAdPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-                new DrawFeed(reactContext)
+                new DrawFeed(reactContext),
+                new Feed(reactContext)
         );
     }
 }
