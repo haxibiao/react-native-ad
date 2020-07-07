@@ -22,7 +22,7 @@ export default function TTDrawFeedDemo() {
           // 广告加载失败回调
           console.log('头条 Draw Feed 广告加载失败！', err);
         }}
-        onAdClick={val => {
+        onClick={val => {
           // 广告点击回调
           console.log('头条 Draw Feed 广告被用户点击！', val);
         }}

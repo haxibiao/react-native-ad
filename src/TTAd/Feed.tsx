@@ -35,20 +35,20 @@ const FeedAd = (props: Props) => {
       adWidth={adWidth}
       style={{ width: adWidth, height }}
       onError={(e: any) => {
-        console.log("onError feed", e.nativeEvent);
+        // console.log("onError feed", e.nativeEvent);
         visibleHandler(false);
         onError && onError(e.nativeEvent);
       }}
       onAdClick={(e: any) => {
-        console.log("onClick FeedAd ");
+        // console.log("onClick FeedAd ");
         onClick && onClick(e.nativeEvent);
       }}
       onAdClosed={(e: any) => {
-        console.log("onAdClosed", e.nativeEvent);
+        // console.log("onAdClosed", e.nativeEvent);
         visibleHandler(false);
       }}
       onLayoutChanged={(e: any) => {
-        console.log("onLayoutChanged feed", e.nativeEvent);
+        // console.log("onLayoutChanged feed", e.nativeEvent);
         if (e.nativeEvent.height) {
           setHeight(e.nativeEvent.height);
           onLoad && onLoad(e.nativeEvent);

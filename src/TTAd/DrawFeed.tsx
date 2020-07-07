@@ -11,11 +11,11 @@ interface Props {
   isExpress?: boolean;
   onError?: Function;
   onLoad?: Function;
-  onAdClick?: Function;
+  onClick?: Function;
 }
 
 export const DrawFeedAd = (props: Props) => {
-  const { codeId, isExpress, onError, onLoad, onAdClick } = props;
+  const { codeId, isExpress, onError, onLoad, onClick } = props;
   const [visible, setVisible] = React.useState(true);
 
   const draw_video_provider = "";
@@ -33,7 +33,7 @@ export const DrawFeedAd = (props: Props) => {
           setVisible(false);
           onError && onError(e.nativeEvent);
         }}
-        onAdClick={onAdClick}
+        onAdClick={onClick}
         onAdShow={(e: any) => {
           console.log("onAdShow", e.nativeEvent);
         }}
