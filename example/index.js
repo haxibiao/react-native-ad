@@ -3,11 +3,12 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './App';
+import App from './src/App';
 import {name as appName} from './app.json';
 
-import TTSplashDemo from './TTSplashDemo'; // 头条开屏广告对接示例
-import TTDrawFeedDemo from './TTDrawFeedDemo'; // 头条 DrawFeed 广告对接示例
-import TTFeedDemo from './TTFeedDemo'; // 头条 Feed 广告对接示例
+import TTSplashDemo from './src/TTSplashDemo'; // 头条开屏广告对接示例
+import TTDrawFeedDemo from './src/TTDrawFeedDemo'; // 头条 DrawFeed 广告对接示例
+import TTFeedDemo from './src/TTFeedDemo'; // 头条 Feed 广告对接示例
+import TTBannerDemo from './src/TTBannerDemo'; // 头条 Banner 广告对接示例
 
-AppRegistry.registerComponent(appName, () => TTFeedDemo);
+AppRegistry.registerComponent(appName, () => TTBannerDemo);
