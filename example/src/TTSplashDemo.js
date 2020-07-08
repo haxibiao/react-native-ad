@@ -28,6 +28,14 @@ export default function TTSplashDemo() {
           splashAd.subscrib('onError', e => {
             console.log('开屏加载失败监听', e);
           });
+
+          splashAd.subscrib('onAdClicked', e => {
+            console.log('开屏被用户点击了', e);
+          });
+
+          splashAd.subscrib('onAdShow', e => {
+            console.log('开屏开始展示', e);
+          });
         }}>
         <Text style={{textAlign: 'center'}}> Start SplashAd</Text>
       </TouchableOpacity>
