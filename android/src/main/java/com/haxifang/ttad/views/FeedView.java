@@ -256,6 +256,11 @@ public class FeedView extends RelativeLayout {
             public void onCancel() {
                 // TToast.show(mContext, "点击取消 ");
             }
+
+            @Override
+            public void onRefuse() {
+
+            }
         });
     }
 

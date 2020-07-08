@@ -253,6 +253,11 @@ public class BannerView extends LinearLayout {
             public void onCancel() {
                 // TToast.show(mContext, "点击取消 ");
             }
+
+            @Override
+            public void onRefuse() {
+
+            }
         });
     }
 
