@@ -20,27 +20,30 @@ interface EVENT_TYPE {
   onAdShow: string; // 开屏广告开始展示
 }
 
+const listenerCache = {};
+
 export default (appid: string, codeid: string) => {
   const eventEmitter = new NativeEventEmitter(TTAdSplash);
   TTAdSplash.loadSplashAd(appid, codeid);
   return {
     subscrib: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
-      let i = 0; // 这里 i 用来防止多次回调
+
+      if (listenerCache[type]) {
+        listenerCache[type].remove()
+      }
 
       if (type === 'onAdShow') {
         // 开屏广告通知另外注册，
-        eventEmitter.addListener("TTSplashAdListenerOnAdShow", (event: any) => {
-          i === 0 && callback(event[type]);
-          i++;
+        return listenerCache['onAdShow'] = eventEmitter.addListener("TTSplashAdListenerOnAdShow", (event: any) => {
+          callback(event[type]);
         });
-        return;
+        ;
       }
 
-      eventEmitter.addListener("TTSplashAdListener", (event: any) => {
+      return listenerCache[type] = eventEmitter.addListener("TTSplashAdListener", (event: any) => {
         if (event[type]) {
-          i === 0 && callback(event[type]);
+          callback(event[type]);
         }
-        i++;
       })
     }
   };
