@@ -6,6 +6,7 @@ import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 
 /**
@@ -15,6 +16,7 @@ public class TTAdManagerHolder {
 
     static boolean sInit;
     public static ReactApplicationContext mContext;
+    public static Promise mPromise;
 
     public static TTAdManager get() {
         if (!sInit) {
@@ -26,6 +28,10 @@ public class TTAdManagerHolder {
     public static void init(ReactApplicationContext context, String appid) {
         mContext = context;
         doInit(context, appid);
+    }
+
+    public static void setPromise(Promise promise) {
+        mPromise = promise;
     }
 
     // 接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明

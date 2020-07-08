@@ -2,10 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import ad, {TTAd} from 'react-native-ad';
 
-export default function TTSplashDemo() {
+export default function TTFullScreenDemo() {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>☆ BytedAd Splash Screen example Powered By HaXiBiao ☆</Text>
+      <Text style={styles.welcome}>
+        ☆ BytedAd Full Screen Video example, Powered By HaXiBiao ☆
+      </Text>
       <TouchableOpacity
         style={{
           marginVertical: 20,
@@ -15,21 +17,11 @@ export default function TTSplashDemo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const splashAd = TTAd.loadSplashAd('5016582', '816582039');
-
-          splashAd.subscrib('onAdTimeOver', event => {
-            console.log('广告时间结束监听', event);
-          });
-
-          splashAd.subscrib('onAdSkip', i => {
-            console.log('用户点击跳过监听', i);
-          });
-
-          splashAd.subscrib('onError', e => {
-            console.log('开屏加载失败监听', e);
+          TTAd.loadFullVideoAd('5016582', '916582815').then(val => {
+            console.log('FullVideoAd', val);
           });
         }}>
-        <Text style={{textAlign: 'center'}}> Start SplashAd</Text>
+        <Text style={{textAlign: 'center'}}> Start FullVideoAd</Text>
       </TouchableOpacity>
     </View>
   );
