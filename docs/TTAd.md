@@ -9,7 +9,7 @@
 > 当前 IOS 集成广告平台 SDK 版本：???
 
 文档目录：
-- [创建获取 appId 和广告位 codeId](创建获取appId和广告位codeId)
+- [创建获取 appId 和广告位 codeId](#创建获取appId和广告位codeId)
 - [安装配置 react-native-ad 模块](#安装配置react-native-ad模块)
 - [开屏（Splash）广告的对接及示例](#开屏（Splash）广告的对接及示例)
 - [激励视频（RewardVideo）广告的对接及示例](#激励视频（RewardVideo）广告的对接及示例)
