@@ -44,23 +44,6 @@ export default function TTRewardVideoDemo() {
         <Text style={{textAlign: 'center'}}> Start RewardVideoAd</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={{
-          marginVertical: 20,
-          paddingHorizontal: 30,
-          paddingVertical: 15,
-          backgroundColor: '#F96',
-          borderRadius: 50,
-        }}
-        onPress={() => {
-          const rewardVideo = TTAd.loadRewardVideoAd('5016582', '916582412');
-
-          rewardVideo.subscrib('onAdLoaded', event => {
-            console.log('广告加载成功监听222222', event);
-          });
-        }}>
-        <Text style={{textAlign: 'center'}}> Start RewardVideoAd 2</Text>
-      </TouchableOpacity>
     </View>
   );
 }
