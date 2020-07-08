@@ -209,6 +209,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                         event();
 
                         // showToast("开屏广告点击");
+                        goToMainActivity();
                     }
 
                     @Override
@@ -219,6 +220,9 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                         // params.putBoolean("onAdShow", true);
                         // 回调监听方法
                         // event();
+                        WritableMap p = Arguments.createMap();
+                        p.putBoolean("onAdShow",true);
+                        sendEvent("TTSplashAdListenerOnAdShow", p);
 
                         // showToast("开屏广告展示");
                     }
