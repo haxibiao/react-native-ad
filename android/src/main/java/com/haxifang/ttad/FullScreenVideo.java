@@ -22,6 +22,7 @@ import com.haxifang.ttad.modules.SplashActivity;
 public class FullScreenVideo extends ReactContextBaseJavaModule {
 
     final private String TAG = "hxb-rn-FullScreen";
+    final private static String REACT_CLASS = "TTFullScreenVideo";
     protected ReactApplicationContext mContext;
 
     public FullScreenVideo(ReactApplicationContext reactContext) {
@@ -31,7 +32,7 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "TTFullScreenVideo";
+        return REACT_CLASS;
     }
 
 //    @ReactMethod
@@ -46,8 +47,6 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 //    }
 
 
-
-
     @ReactMethod
     public void startAd(ReadableMap options, final Promise promise) {
 
@@ -60,8 +59,8 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 
 
         // 判断头条 SDK 是否初始化
-        if(!TTAdManagerHolder.sInit) {
-            TTAdManagerHolder.init(mContext,appid);
+        if (!TTAdManagerHolder.sInit) {
+            TTAdManagerHolder.init(mContext, appid);
         }
 
         Intent intent = new Intent(mContext, FullScreenActivity.class);
@@ -76,7 +75,6 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
             Log.e(TAG, "startAd: ", e);
         }
     }
-
 
 
 }

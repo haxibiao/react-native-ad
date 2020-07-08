@@ -17,6 +17,7 @@ import com.haxifang.ttad.Banner;
 import com.haxifang.ttad.DrawFeed;
 import com.haxifang.ttad.Feed;
 import com.haxifang.ttad.FullScreenVideo;
+import com.haxifang.ttad.RewardVideo;
 import com.haxifang.ttad.Splash;
 import com.haxifang.ttad.TTAdManagerHolder;
 
@@ -27,6 +28,7 @@ public class BytedAdPackage implements ReactPackage {
         modules.add(new Splash(reactContext));
         modules.add(new AdManager(reactContext));
         modules.add(new FullScreenVideo(reactContext));
+        modules.add(new RewardVideo(reactContext));
         return modules;
     }
 

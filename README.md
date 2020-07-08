@@ -1,4 +1,4 @@
-# hxf-byted-ad
+# react-native-ad
 
 #### 安装方法🔨
 

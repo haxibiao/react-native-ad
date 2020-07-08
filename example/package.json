@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "rs": "rm -rf node_modules/ && yarn && yarn start",
     "test": "jest",
     "lint": "eslint .",
     "postinstall": "node ../scripts/examples_postinstall.js"

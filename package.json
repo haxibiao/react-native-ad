@@ -1,8 +1,8 @@
 {
   "name": "react-native-ad",
   "title": "穿山甲广告模块",
-  "version": "1.0.1",
-  "description": "哈希坊组件库之穿山甲广告模块",
+  "version": "1.0.2",
+  "description": "哈希坊组件库之广告模块",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
