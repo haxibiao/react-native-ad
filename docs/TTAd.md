@@ -9,10 +9,10 @@
 > 当前 IOS 集成广告平台 SDK 版本：???
 
 文档目录：
-- [创建获取 appId 和广告位 codeId](#创建获取appId和广告位codeId)
+- [创建获取 appId 和广告位 codeId](#创建获取appid和广告位codeid)
 - [安装配置 react-native-ad 模块](#安装配置react-native-ad模块)
-- [开屏（Splash）广告的对接及示例](#开屏Splash广告的对接及示例)
-- [激励视频（RewardVideo）广告的对接及示例](#激励视频RewardVideo广告的对接及示例)
+- [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例)
+- [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例)
 - [全屏视频（FullVideo）广告的对接及示例]()
 - [信息流（Feed）广告的对接及示例]()
 - [视频信息流（DrawFeed）广告的对接及示例]()
@@ -132,7 +132,7 @@ TTAd.loadRewardVideoAd(appid, codeid);
 ...
 ```
 
-激励视频监听回调，调用 `TTAd.loadSplashAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+激励视频监听回调，调用 `TTAd.loadRewardVideoAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
 
 | 监听事件 | 回调参数类型 | 说明 |
 | ---------- | :-----------: | :-----------: |
