@@ -14,12 +14,12 @@
 - [安装配置 react-native-ad 模块](#安装配置react-native-ad模块)
 - [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例)
 - [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例)
-- [全屏视频（FullVideo）广告的对接及示例]()
-- [信息流（Feed）广告的对接及示例]()
-- [视频信息流（DrawFeed）广告的对接及示例]()
-- [横幅（Banner）广告的对接及示例]()
-- [常见问题及模块更新]()
-- [更新日志]()
+- [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullVideo广告的对接及示例)
+- [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例)
+- [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例)
+- [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
+- [常见问题及模块更新](#常见问题及模块更新)
+- [更新日志](#更新日志)
 
 ## 创建获取 appId 和广告位 codeId
 
@@ -234,3 +234,245 @@ rewardVideo.then(val => {
 | 304  | onDownloadActive | 下载失败，点击下载区域重新下载 |
 
 更多使用示例代码请查看：[TTRewardVideoDemo](../example/src/TTRewardVideoDemo.js)
+
+## 全屏视频（FullVideo）广告的对接及示例
+
+导入 `TTAd` 模块
+
+**import {TTAd} from 'react-native-ad';**
+
+调用 TTAd.loadFullVideoAd 方法，需要传入穿山甲广告平台的 appid 和 codeid
+
+```
+...
+const appid = "";
+const codeid = "";
+TTAd.loadFullVideoAd(appid, codeid);
+...
+```
+
+全屏视频广告回调操作获取方式通过 Promise 异步获取用户对全屏视频的关键操作，将获取一个 json 数据对应相关的 boolean 值：video_play（视频是否播放完），ad_click（用户是否点击广告），apk_install（用户是否安装广告应用），verify_status（认证激励状态）
+
+示例代码：
+
+```
+const rewardVideoAd = loadRewardVideoAd(appid,codeid);
+
+rewardVideo.then(val => {
+    console.log('FullVideoAd', val);
+});
+
+```
+
+返回数据示例（更多操作可以看具体代码示例）：
+
+```
+{
+    "video_play":"false",
+    "ad_click":"false",
+    "apk_install":"false",
+    "verify_status":"false"
+}
+```
+
+更多使用示例代码请查看：[TTFullScreenDemo](../example/src/TTFullScreenDemo.js)
+
+## 信息流（Feed）广告的对接及示例
+
+导入 `TTAd` 模块
+
+**import {TTAd} from 'react-native-ad';**
+
+调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+
+```
+...
+
+React.useEffect(() => {
+
+  const appid = "";
+
+  TTAd.init(appid);
+
+}, []);
+
+...
+```
+
+使用组件 <TTAd.FeedAd /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
+
+```
+<TTAd.FeedAd
+  codeId="00000000" // 广告位 codeid （必传)
+  visible={true}
+  adWidth={300}
+  onLoad={smg => {
+    // 广告加载成功回调
+    console.log('头条 Feed 广告加载成功！', smg);
+  }}
+  onError={err => {
+    // 广告加载失败回调
+    console.log('头条 Feed 广告加载失败！', err);
+  }}
+  onClick={val => {
+    // 广告点击回调
+    console.log('头条 Feed 广告被用户点击！', val);
+  }}
+/>
+```
+
+TTAd.FeedAd 参数参照表：
+
+| 参数名  |  参数类型  |                说明                |
+| ------- | :--------: | :--------------------------------: |
+| codeId  |   string   |             广告位 ID              |
+| adWidth |   number   |              广告宽度              |
+| visible |  boolean   |     是否显示广告，控制广告显示     |
+| onLoad  | () => void | 广告加载成功回调，返回相应回调信息 |
+| onError | () => void | 广告加载失败回调，返回相应回调信息 |
+| onClick | () => void |   广告点击回调，返回相应回调信息   |
+
+更多使用示例代码请查看：[TTFeedDemo](../example/src/TTFeedDemo.js)
+
+## 视频信息流（DrawFeed）广告的对接及示例
+
+导入 `TTAd` 模块
+
+**import {TTAd} from 'react-native-ad';**
+
+调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+
+```
+...
+
+React.useEffect(() => {
+
+  const appid = "";
+
+  TTAd.init(appid);
+
+}, []);
+
+...
+```
+
+使用组件 <TTAd.DrawFeedAd /> 显示广告，codeId（ 广告位 ID ）必传
+
+```
+<TTAd.DrawFeedAd
+  codeId="00000000" // 广告位 codeid （必传），注意区分 Android 和 IOS
+  isExpress={false} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：false
+  onLoad={smg => {
+    // 广告加载成功回调
+    console.log('头条 Draw Feed 广告加载成功！', smg);
+  }}
+  onError={err => {
+    // 广告加载失败回调
+    console.log('头条 Draw Feed 广告加载失败！', err);
+  }}
+  onClick={val => {
+    // 广告点击回调
+    console.log('头条 Draw Feed 广告被用户点击！', val);
+  }}
+/>
+```
+
+TTAd.DrawFeedAd 参数参照表：
+
+| 参数名    |  参数类型  |                             说明                              |
+| --------- | :--------: | :-----------------------------------------------------------: |
+| codeId    |   string   |                           广告位 ID                           |
+| isExpress |  boolean   | isExpress 用来区分是否用原生方式渲染（非必传），默认值：false |
+| onLoad    | () => void |              广告加载成功回调，返回相应回调信息               |
+| onError   | () => void |              广告加载失败回调，返回相应回调信息               |
+| onClick   | () => void |                广告点击回调，返回相应回调信息                 |
+
+更多使用示例代码请查看：[TTDrawFeedDemo](../example/src/TTDrawFeedDemo.js)
+
+## 横幅（Banner）广告的对接及示例
+
+导入 `TTAd` 模块
+
+**import {TTAd} from 'react-native-ad';**
+
+调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+
+```
+...
+
+React.useEffect(() => {
+
+  const appid = "";
+
+  TTAd.init(appid);
+
+}, []);
+
+...
+```
+
+使用组件 <TTAd.BannerAd /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
+
+```
+<TTAd.BannerAd
+  codeId="000000000" // 广告位 codeid （必传），注意区分 Android 和 IOS
+  adWidth={350}
+  onLoad={smg => {
+    // 广告加载成功回调
+    console.log('头条 Draw Banner 广告加载成功！', smg);
+  }}
+  onError={err => {
+    // 广告加载失败回调
+    console.log('头条 Draw Banner 广告加载失败！', err);
+  }}
+  onClick={val => {
+    // 广告点击回调
+    console.log('头条 Draw Banner 广告被用户点击！', val);
+  }}
+/>
+```
+
+TTAd.BannerAd 参数参照表：
+
+| 参数名  |  参数类型  |                说明                |
+| ------- | :--------: | :--------------------------------: |
+| codeId  |   string   |             广告位 ID              |
+| adWidth |   number   |              广告宽度              |
+| onLoad  | () => void | 广告加载成功回调，返回相应回调信息 |
+| onError | () => void | 广告加载失败回调，返回相应回调信息 |
+| onClick | () => void |   广告点击回调，返回相应回调信息   |
+
+更多使用示例代码请查看：[TTBannerDemo](../example/src/TTBannerDemo.js)
+
+## 常见问题及模块更新
+
+怎么查看当前版本？执行 `yarn list | grep "react-native-ad"`，将会输出你当前项目安装的 react-native-ad 版本
+
+然后可以使用 npm update 来更新模块
+
+```
+$ npm update react-native-ad
+```
+
+或者使用 yarn upgrade 来更新
+
+```
+$ yarn upgrade react-native-ad
+```
+
+
+## 更新日志
+- v1.0.0
+  - 初始化项目
+  - 对接 TTAd 开屏广告 android 模块
+
+- v1.0.1
+  - 规范接口，代码结构
+  - 对接 TTAd 信息流，视频信息流，Banner 广告模块
+  - 补全 example 示例
+
+- v1.0.2
+  - 升级 Android TTAd SDK 版本 v3.1.0.0
+  - 规范完善 example 示例
+  - 对接 TTAd 激励视频，全屏视频广告模块
+  - 完善对接文档整理
