@@ -5,7 +5,9 @@ import ad, {TTAd} from 'react-native-ad';
 export default function TTSplashDemo() {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>☆ BytedAd Splash Screen example Powered By HaXiBiao ☆</Text>
+      <Text style={styles.welcome}>
+        ☆ BytedAd Splash Screen example Powered By HaXiBiao ☆
+      </Text>
       <TouchableOpacity
         style={{
           marginVertical: 20,
@@ -17,23 +19,23 @@ export default function TTSplashDemo() {
         onPress={() => {
           const splashAd = TTAd.loadSplashAd('5016582', '816582039');
 
-          splashAd.subscrib('onAdTimeOver', event => {
+          splashAd.subscribe('onAdTimeOver', (event) => {
             console.log('广告时间结束监听', event);
           });
 
-          splashAd.subscrib('onAdSkip', i => {
+          splashAd.subscribe('onAdSkip', (i) => {
             console.log('用户点击跳过监听', i);
           });
 
-          splashAd.subscrib('onError', e => {
+          splashAd.subscribe('onError', (e) => {
             console.log('开屏加载失败监听', e);
           });
 
-          splashAd.subscrib('onAdClicked', e => {
+          splashAd.subscribe('onAdClicked', (e) => {
             console.log('开屏被用户点击了', e);
           });
 
-          splashAd.subscrib('onAdShow', e => {
+          splashAd.subscribe('onAdShow', (e) => {
             console.log('开屏开始展示', e);
           });
         }}>

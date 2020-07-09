@@ -48,16 +48,16 @@ export default class App extends Component<{}> {
           }}
           onPress={() => {
             const splashAd = TTAd.loadSplashAd('5016582', '816582039');
-            
-            splashAd.subscrib('onAdTimeOver', event => {
+
+            splashAd.subscribe('onAdTimeOver', (event) => {
               console.log('广告时间结束监听', event);
             });
 
-            splashAd.subscrib('onAdSkip', i => {
+            splashAd.subscribe('onAdSkip', (i) => {
               console.log('用户点击跳过监听', i);
             });
 
-            splashAd.subscrib('onError', e => {
+            splashAd.subscribe('onError', (e) => {
               console.log('开屏加载失败监听', e);
             });
 

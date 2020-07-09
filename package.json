@@ -1,23 +1,23 @@
 {
   "name": "react-native-ad",
-  "title": "穿山甲广告模块",
+  "title": "react-native 广告联盟SDK",
   "version": "1.0.2",
-  "description": "哈希坊组件库之广告模块",
+  "description": "给rn封装一些常用的广告平台的 sdk，头条穿山甲，腾讯广点通，百度百青藤等广告模块...",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-ad.git",
-    "baseUrl": "https://github.com/github_account/react-native-ad"
+    "url": "git+https://github.com/haxibiao/react-native-ad.git",
+    "baseUrl": "https://github.com/haxibiao/react-native-ad"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Bin",
-    "email": "bin@haxifang.com"
+    "name": "wangbin",
+    "email": "wangbin@haxibiao.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",

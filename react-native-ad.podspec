@@ -3,18 +3,18 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "hxf-byted-ad"
+  s.name         = "react-native-ad"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.description  = <<-DESC
-                  hxf-byted-ad
+                  react-native-ad
                    DESC
-  s.homepage     = "https://github.com/github_account/hxf-byted-ad"
+  s.homepage     = "https://github.com/haxibiao/react-native-ad"
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
   s.authors      = { "Your Name" => "yourname@email.com" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/github_account/hxf-byted-ad.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/haxibiao/react-native-ad.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true

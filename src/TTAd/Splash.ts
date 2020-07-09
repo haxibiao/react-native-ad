@@ -26,10 +26,10 @@ export default (appid: string, codeid: string) => {
   const eventEmitter = new NativeEventEmitter(TTAdSplash);
   TTAdSplash.loadSplashAd(appid, codeid);
   return {
-    subscrib: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
+    subscribe: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
 
       if (listenerCache[type]) {
-        listenerCache[type].remove()
+        listenerCache[type].remove();
       }
 
       if (type === 'onAdShow') {
@@ -44,7 +44,7 @@ export default (appid: string, codeid: string) => {
         if (event[type]) {
           callback(event[type]);
         }
-      })
+      });
     }
   };
 };

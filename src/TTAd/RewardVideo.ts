@@ -19,16 +19,16 @@ interface EVENT_TYPE {
   onDownloadActive: string; // 广告应用下载相应监听
 }
 
-export default function(appid: string, codeid: string) {
+export default function (appid: string, codeid: string) {
   const RewardVideo = TTRewardVideo.startAd({ appid, codeid });
   const eventEmitter = new NativeEventEmitter(TTRewardVideo);
 
-  RewardVideo.subscrib = (
+  RewardVideo.subscribe = (
     type: keyof EVENT_TYPE,
     callback: (event: any) => void,
   ) => {
-    if(listenerCache[type]) {
-      listenerCache[type].remove()
+    if (listenerCache[type]) {
+      listenerCache[type].remove();
     }
     return listenerCache[type] = eventEmitter.addListener("TTRewardVideo-" + type, (event: any) => {
       callback(event);

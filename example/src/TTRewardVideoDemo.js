@@ -19,31 +19,28 @@ export default function TTRewardVideoDemo() {
         onPress={() => {
           const rewardVideo = TTAd.loadRewardVideoAd('5016582', '916582412');
 
-          rewardVideo.then(val => {
+          rewardVideo.then((val) => {
             console.log('FullVideoAd', val);
           });
 
-          rewardVideo.subscrib('onAdLoaded', event => {
+          rewardVideo.subscribe('onAdLoaded', (event) => {
             console.log('广告加载成功监听111111', event);
           });
 
-          rewardVideo.subscrib('onAdError', event => {
+          rewardVideo.subscribe('onAdError', (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          rewardVideo.subscrib('onAdClose', event => {
+          rewardVideo.subscribe('onAdClose', (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscrib('onAdClicked', event => {
+          rewardVideo.subscribe('onAdClicked', (event) => {
             console.log('广告点击查看详情监听', event);
           });
-
-
         }}>
         <Text style={{textAlign: 'center'}}> Start RewardVideoAd</Text>
       </TouchableOpacity>
-
     </View>
   );
 }
