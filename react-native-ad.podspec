@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/haxibiao/react-native-ad"
   s.license      = "MIT"
   # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.authors      = { "Your Name" => "yourname@email.com" }
+  s.authors      = { "ivan" => "ivan@haxibiao.com" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/haxibiao/react-native-ad.git", :tag => "#{s.version}" }
 
@@ -22,5 +22,7 @@ Pod::Spec.new do |s|
   s.dependency "React"
   # ...
   # s.dependency "..."
+
+  s.dependency 'Bytedance-UnionAD'
 end
 

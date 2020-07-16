@@ -34,7 +34,9 @@ target 'example' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'hxf-byted-ad', :path => '../node_modules/hxf-byted-ad'
+  pod 'react-native-ad', :path => '../../'
+
+  pod 'Bytedance-UnionAD', '~> 2.9.5.8'
 
   target 'exampleTests' do
     inherit! :search_paths
