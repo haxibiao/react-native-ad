@@ -1,4 +1,4 @@
-import TTAd from "./src/TTAd";
+import ad from "./src";
 
-export { TTAd };
-export default { TTAd };
+export { ad };
+export default { ad };

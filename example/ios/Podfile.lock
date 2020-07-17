@@ -1,6 +1,6 @@
 PODS:
   - boost-for-react-native (1.63.0)
-  - Bytedance-UnionAD (2.9.5.8)
+  - Bytedance-UnionAD (3.1.0.5)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.61.5)
   - FBReactNativeSpec (0.61.5):
@@ -184,6 +184,7 @@ PODS:
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
   - react-native-ad (1.0.2):
+    - Bytedance-UnionAD
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -223,7 +224,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - Bytedance-UnionAD (~> 2.9.5.8)
+  - Bytedance-UnionAD (~> 3.1.0.4)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -240,7 +241,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-ad (from `../node_modules/react-native-ad`)
+  - react-native-ad (from `../../`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -289,7 +290,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-ad:
-    :path: "../node_modules/react-native-ad"
+    :path: "../../"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -315,7 +316,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  Bytedance-UnionAD: af6f65144b4fce6329946e89f262ffc8c6c1937c
+  Bytedance-UnionAD: 4768919f6de97eb29687b8e50cee65eef5e9f3a9
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
@@ -330,7 +331,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-ad: 3e9ef18da64679b7df63b813154aa782d167e232
+  react-native-ad: 9a38045297bdb0685e3fecc2c6b6787c0128cace
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -343,6 +344,6 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: e02ff7230d23e513d91d6104a485b5f2899fda44
+PODFILE CHECKSUM: f4670865ade1e2c0d0cf6ed98b1fdaac4ad2c058
 
 COCOAPODS: 1.9.1

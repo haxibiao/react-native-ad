@@ -18,7 +18,7 @@ import {
   NativeEventEmitter,
   NativeModules,
 } from 'react-native';
-import ad, {TTAd} from 'react-native-ad';
+import {ad} from 'react-native-ad';
 
 export default class App extends Component<{}> {
   state = {
@@ -27,14 +27,12 @@ export default class App extends Component<{}> {
   };
 
   componentDidMount() {
-    // console.log('组件', TTAd);
-    // console.log('组件', ad.TTAd);
-    TTAd.init('5016582');
+    ad.init('5016582');
   }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆BytedAd example☆</Text>
+        <Text style={styles.welcome}>☆广告 example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
@@ -47,17 +45,17 @@ export default class App extends Component<{}> {
             borderRadius: 50,
           }}
           onPress={() => {
-            const splashAd = TTAd.loadSplashAd('5016582', '816582039');
+            const splashAd = ad.loadSplashAd('5016582', '816582039');
 
-            splashAd.subscribe('onAdTimeOver', (event) => {
+            splashAd.subscribe('onAdTimeOver', event => {
               console.log('广告时间结束监听', event);
             });
 
-            splashAd.subscribe('onAdSkip', (i) => {
+            splashAd.subscribe('onAdSkip', i => {
               console.log('用户点击跳过监听', i);
             });
 
-            splashAd.subscribe('onError', (e) => {
+            splashAd.subscribe('onError', e => {
               console.log('开屏加载失败监听', e);
             });
 

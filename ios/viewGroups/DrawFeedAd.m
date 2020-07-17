@@ -9,7 +9,7 @@
 
 #import "DrawFeedAd.h"
 #import <BUAdSDK/BUNativeExpressAdManager.h>
-#import "BUDPlayerController.h"
+
 #import "BUDMacros.h"
 #import "NSString+LocalizedString.h"
 #include "AdBoss.h"
@@ -37,10 +37,7 @@
 @property (nonatomic, strong) BUNativeExpressAdManager *adManager;
 @property (nonatomic, copy) NSArray *dataSource;
 
-
-@property (nonatomic, strong)BUDPlayerController *player;
 @end
-
 
 @implementation DrawFeedAd
 
@@ -52,7 +49,6 @@
     return;
   }
   self._codeid = codeid;
-  [self buildupVideoView];
   [self buildupView];
   [self loadExpressAds];
 }
@@ -225,99 +221,8 @@
 }
 
 
-
--(void)autoPlay {
-  self.player = [self reuseInlinePlayer];
-  NSString *resourceName = [NSString stringWithFormat:@"drawLocal_0%u",arc4random()%8];
-  NSString *loacUrl = [[NSBundle mainBundle] pathForResource:resourceName ofType:@"mp4"];
-  _player.contentURL = [NSURL fileURLWithPath:loacUrl];
-  [_player play];
-}
-
-- (void)pause {
-  [_player pause];
-}
-
-- (void)setPlayer:(BUDPlayerController *)player {
-  _player = player;
-  if (_player) {
-    _player.view.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
-    [self insertSubview:_player.view atIndex:0];
-  }
-}
-
 - (BOOL)willDealloc {
   return NO;
-}
-
-- (BUDPlayerController *)reuseInlinePlayer {
-  static BUDPlayerController* player = nil;
-  if (!player) {
-    player = [[BUDPlayerController alloc] init];
-  }else{
-    player.contentURL = nil;
-    [player.view removeFromSuperview];
-    [player pause];
-  }
-  return player;
-}
-
--(void)refreshUIAtIndex:(NSUInteger)index{
-  self.titleLabel.text = [NSString localizedStringWithFormat:[NSString localizedStringForKey:DrawTitle],(unsigned long)index];
-  self.descriptionLabel.text = [NSString localizedStringForKey:DrawDescription];
-  self.backgroundColor = [UIColor blackColor];
-}
-
-
-
-- (void)buildupVideoView{
-  self.nativeAdRelatedView = [[BUNativeAdRelatedView alloc] init];
-  
-  if (!self.nativeAdRelatedView.videoAdView.superview) {
-    self.nativeAdRelatedView.videoAdView.frame = CGRectMake(0, 0, GlobleWidth, GlobleHeight);
-    [self.nativeAdRelatedView.videoAdView playerPlayIncon:[UIImage imageNamed:@"adPlay.png"] playInconSize:CGSizeMake(60, 60)];
-    //Whether to support click pause
-    self.nativeAdRelatedView.videoAdView.drawVideoClickEnable = YES;
-    [self insertSubview:self.nativeAdRelatedView.videoAdView atIndex:0];
-  }
-  
-  if (!self.nativeAdRelatedView.adLabel.superview) {
-    self.nativeAdRelatedView.adLabel.frame = CGRectMake(13, GlobleHeight*0.835, 30, 16);
-    [self addSubview:self.nativeAdRelatedView.adLabel];
-  }
-  
-  if (self.creativeButton && !self.creativeButton.superview) {
-    self.creativeButton.frame = CGRectMake(10, GlobleHeight*0.83, GlobleWidth*0.6, 36);
-    
-    [self.creativeButton.layer setCornerRadius:3];
-    [self addSubview:self.creativeButton];
-  }
-  [self addAccessibilityIdentifier];
-}
-
-- (UIButton *)creativeButton{
-  if (!_creativeButton) {
-    _creativeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_creativeButton setTitle:[NSString localizedStringForKey:Detail] forState:UIControlStateNormal];
-    _creativeButton.backgroundColor = BUD_RGB(0x80,0xbb,0x41);
-    _creativeButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-  }
-  return _creativeButton;
-}
-
--(void)refreshUIWithModel:(BUNativeAd *)model{
-  self.titleLabel.text = model.data.AdTitle;
-  self.descriptionLabel.text = model.data.AdDescription;
-  [self.creativeButton setTitle:model.data.buttonText forState:UIControlStateNormal];
-  [self.nativeAdRelatedView refreshData:model];
-}
-
-#pragma mark addAccessibilityIdentifier
-- (void)addAccessibilityIdentifier {
-  self.creativeButton.accessibilityIdentifier = @"button";
-  self.nativeAdRelatedView.videoAdView.accessibilityIdentifier = @"draw_view";
-  self.titleLabel.accessibilityIdentifier = @"draw_appname";
-  self.descriptionLabel.accessibilityIdentifier = @"draw_appdetial";
 }
 
 

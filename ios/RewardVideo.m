@@ -54,10 +54,13 @@ static RCTEventEmitter* staticEventEmitter = nil;
 
 - (NSArray<NSString *> *)supportedEvents {
   return @[
-           @"RewardVideo-adloaded",
-           @"RewardVideo-videocached",
-           @"RewardVideo-videoplayed",
-           @"RewardVideo-adclick"
+           @"RewardVideo-onAdError",
+           @"RewardVideo-onAdLoaded",
+           @"RewardVideo-onAdVideoCached",
+           @"RewardVideo-onAdClicked",
+           @"RewardVideo-onAdClose",
+           @"RewardVideo-onVideoComplete",
+           @"RewardVideo-onDownloadActive"
            ];
 }
 
