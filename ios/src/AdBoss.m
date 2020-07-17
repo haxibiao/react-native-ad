@@ -79,7 +79,6 @@ static RCTPromiseRejectBlock adReject;
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
-//  rewardedVideoAd.delegate = self;
     [rewardAd loadAdData];
 }
 
@@ -90,7 +89,6 @@ static RCTPromiseRejectBlock adReject;
 + (void)loadFullScreenAd:(NSString *)codeid {
   #warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
   fullScreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:codeid];
-//  fullScreenAd.delegate = self;
   [fullScreenAd loadAdData];
 }
 

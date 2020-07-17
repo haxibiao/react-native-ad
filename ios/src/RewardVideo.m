@@ -72,7 +72,7 @@ RCT_EXPORT_METHOD(loadAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock
     return;
   }
   
-  [AdBoss loadRewardAd:codeid userid:options[@"tt_uid"]];
+  [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
   resolve(@"OK");
 }
 
@@ -82,9 +82,10 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
   if(codeid == nil) {
     return;
   }
-  
-  //也许有缓存，先加载一下
-//  [AdBoss loadRewardAd:codeid userid:options[@"tt_uid"]];
+
+  [AdBoss init:options[@"appid"]];
+
+  [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
   
   RewardVideoViewController *vc = [RewardVideoViewController new];
   vc.view.backgroundColor = [UIColor whiteColor];
@@ -109,6 +110,7 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
 //        @"verify_status":@0
 //      });
 //    }
+
   }];
   
 }

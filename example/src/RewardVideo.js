@@ -17,7 +17,7 @@ export default function RewardVideo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const rewardVideo = ad.loadRewardVideoAd('5016582', '916582412');
+          const rewardVideo = ad.loadRewardVideoAd('5016582', '945294086');
 
           // rewardVideo.then(val => {
           //   console.log('RewardVideo', val);

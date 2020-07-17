@@ -10,8 +10,20 @@
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import "AdBoss.h"
 
+#define BUD_RGB(a,b,c) [UIColor colorWithRed:(a/255.0) green:(b/255.0) blue:(c/255.0) alpha:1]
+#define GlobleHeight [UIScreen mainScreen].bounds.size.height
+#define GlobleWidth [UIScreen mainScreen].bounds.size.width
+#define inconWidth 45
+#define inconEdge 15
+#define bu_textEnde 5
+#define bu_textColor BUD_RGB(0xf0, 0xf0, 0xf0)
+#define bu_textFont 14
+
 @interface RewardVideoViewController () <BUNativeExpressRewardedVideoAdDelegate>
+
 @property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedVideoAd;
+@property (nonatomic, strong, nullable) UILabel *titleLabel;
+
 @end
 
 @implementation RewardVideoViewController
@@ -20,24 +32,23 @@
 
     self.rewardedVideoAd = [AdBoss getRewardAd];
   
-  //rewardedVideoAd 无缓存？
+  NSLog(@"rewardedVideoAd viewDidLoad");
+  
   self.rewardedVideoAd.delegate = self;
   [self.rewardedVideoAd loadAdData];
-  
-//  [self.rewardedVideoAd showAdFromRootViewController:self];
-//  self.navigationController]
+
 }
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-  NSLog(@"rewardedVideoAd data load success");
+  NSLog(@"rewardedVideoAd 激励视频 VideoAdDidLoad");
   [rewardedVideoAd showAdFromRootViewController:self];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-  NSLog(@"rewardedVideoAd video load success");
-  
+  NSLog(@"rewardedVideoAd 激励视频 nativeExpressRewardedVideoAd didFailWithError");
+  NSLog(@"rewardedVideoAd didFailWithError: %@", error);
   UIViewController *rootVC = [AdBoss getWindow].rootViewController;
   [rewardedVideoAd showAdFromRootViewController:rootVC];
 }
@@ -64,6 +75,8 @@
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
+    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
+    [rewardedVideoAd showAdFromRootViewController:rootVC];
 }
 
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {

@@ -224,7 +224,6 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - Bytedance-UnionAD (~> 3.1.0.4)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -344,6 +343,6 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: f4670865ade1e2c0d0cf6ed98b1fdaac4ad2c058
+PODFILE CHECKSUM: 62db31a6e09ddc7351406251d851d976f458e2b7
 
 COCOAPODS: 1.9.1
