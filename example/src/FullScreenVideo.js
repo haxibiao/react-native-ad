@@ -6,7 +6,7 @@ export default function FullVideo() {
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
-        ☆ BytedAd Full Screen Video example, Powered By HaXiBiao ☆
+        ☆ Full Screen Video example, Powered By HaXiBiao ☆
       </Text>
       <TouchableOpacity
         style={{
@@ -17,8 +17,26 @@ export default function FullVideo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          ad.loadFullVideoAd('5016582', '916582815').then(val => {
+          let fullVideo = ad.startFullVideo('5016582', '945294087');
+          console.log('FullVideoAd rs:', fullVideo);
+          fullVideo.result?.then(val => {
             console.log('FullVideoAd', val);
+          });
+
+          fullVideo.subscribe('onAdLoaded', event => {
+            console.log('广告加载成功监听111111', event);
+          });
+
+          fullVideo.subscribe('onAdError', event => {
+            console.log('广告加载失败监听', event);
+          });
+
+          fullVideo.subscribe('onAdClose', event => {
+            console.log('广告被关闭监听', event);
+          });
+
+          fullVideo.subscribe('onAdClicked', event => {
+            console.log('广告点击查看详情监听', event);
           });
         }}>
         <Text style={{textAlign: 'center'}}> Start FullVideoAd</Text>

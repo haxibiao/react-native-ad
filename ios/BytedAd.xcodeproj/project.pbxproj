@@ -6,10 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		B3E7B58A1CC2AC0600A0062D /* BytedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* BytedAd.m */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -24,6 +20,39 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libBytedAd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBytedAd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C025F1224C84A3E00F311F6 /* FullScreenVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenVideo.m; sourceTree = "<group>"; };
+		2C025F1424C84A3E00F311F6 /* BUDSlotViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSlotViewModel.m; sourceTree = "<group>"; };
+		2C025F1524C84A3E00F311F6 /* BUDDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDefs.h; sourceTree = "<group>"; };
+		2C025F1624C84A3E00F311F6 /* BUDSlotViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSlotViewModel.h; sourceTree = "<group>"; };
+		2C025F1724C84A3E00F311F6 /* SplashAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashAd.h; sourceTree = "<group>"; };
+		2C025F1824C84A3E00F311F6 /* AdBoss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBoss.h; sourceTree = "<group>"; };
+		2C025F1A24C84A3E00F311F6 /* DrawFeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawFeedAd.h; sourceTree = "<group>"; };
+		2C025F1B24C84A3E00F311F6 /* FeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAd.m; sourceTree = "<group>"; };
+		2C025F1C24C84A3E00F311F6 /* DrawFeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAd.m; sourceTree = "<group>"; };
+		2C025F1D24C84A3E00F311F6 /* FeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAdManager.m; sourceTree = "<group>"; };
+		2C025F1E24C84A3E00F311F6 /* FeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedAd.h; sourceTree = "<group>"; };
+		2C025F1F24C84A3E00F311F6 /* DrawFeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAdManager.m; sourceTree = "<group>"; };
+		2C025F2024C84A3E00F311F6 /* RewardVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVideo.m; sourceTree = "<group>"; };
+		2C025F2224C84A3E00F311F6 /* BUDBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBase64.m; sourceTree = "<group>"; };
+		2C025F2424C84A3E00F311F6 /* NSString+LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedString.h"; sourceTree = "<group>"; };
+		2C025F2524C84A3E00F311F6 /* UIView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Draw.m"; sourceTree = "<group>"; };
+		2C025F2624C84A3E00F311F6 /* NSString+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Json.m"; sourceTree = "<group>"; };
+		2C025F2724C84A3E00F311F6 /* NSString+LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedString.m"; sourceTree = "<group>"; };
+		2C025F2824C84A3E00F311F6 /* NSString+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Json.h"; sourceTree = "<group>"; };
+		2C025F2924C84A3E00F311F6 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
+		2C025F2A24C84A3E00F311F6 /* BUDCocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDCocoaSecurity.h; sourceTree = "<group>"; };
+		2C025F2B24C84A3E00F311F6 /* BUDBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBase64.h; sourceTree = "<group>"; };
+		2C025F2C24C84A3E00F311F6 /* BUDCocoaSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDCocoaSecurity.m; sourceTree = "<group>"; };
+		2C025F2D24C84A3E00F311F6 /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
+		2C025F2F24C84A3E00F311F6 /* BUDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
+		2C025F3124C84A3E00F311F6 /* RewardVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVideoViewController.m; sourceTree = "<group>"; };
+		2C025F3224C84A3E00F311F6 /* FullscreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullscreenViewController.h; sourceTree = "<group>"; };
+		2C025F3324C84A3E00F311F6 /* RewardVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVideoViewController.h; sourceTree = "<group>"; };
+		2C025F3424C84A3E00F311F6 /* FullscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullscreenViewController.m; sourceTree = "<group>"; };
+		2C025F3524C84A3E00F311F6 /* FullScreenVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenVideo.h; sourceTree = "<group>"; };
+		2C025F3624C84A3E00F311F6 /* AdBoss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBoss.m; sourceTree = "<group>"; };
+		2C025F3724C84A3E00F311F6 /* SplashAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashAd.m; sourceTree = "<group>"; };
+		2C025F3824C84A3E00F311F6 /* RewardVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVideo.h; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* BytedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BytedAd.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* BytedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BytedAd.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,9 +76,98 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2C025F1124C84A3E00F311F6 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F2E24C84A3E00F311F6 /* Macros */,
+				2C025F3024C84A3E00F311F6 /* ViewControllers */,
+				2C025F1324C84A3E00F311F6 /* ViewModels */,
+				2C025F1924C84A3E00F311F6 /* ViewManagers */,
+				2C025F2124C84A3E00F311F6 /* Utils */,
+				2C025F3524C84A3E00F311F6 /* FullScreenVideo.h */,
+				2C025F1224C84A3E00F311F6 /* FullScreenVideo.m */,
+				2C025F1724C84A3E00F311F6 /* SplashAd.h */,
+				2C025F3724C84A3E00F311F6 /* SplashAd.m */,
+				2C025F1824C84A3E00F311F6 /* AdBoss.h */,
+				2C025F3624C84A3E00F311F6 /* AdBoss.m */,
+				2C025F3824C84A3E00F311F6 /* RewardVideo.h */,
+				2C025F2024C84A3E00F311F6 /* RewardVideo.m */,
+				2C025F2D24C84A3E00F311F6 /* AdManager.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2C025F1324C84A3E00F311F6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F1424C84A3E00F311F6 /* BUDSlotViewModel.m */,
+				2C025F1524C84A3E00F311F6 /* BUDDefs.h */,
+				2C025F1624C84A3E00F311F6 /* BUDSlotViewModel.h */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2C025F1924C84A3E00F311F6 /* ViewManagers */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F1A24C84A3E00F311F6 /* DrawFeedAd.h */,
+				2C025F1B24C84A3E00F311F6 /* FeedAd.m */,
+				2C025F1C24C84A3E00F311F6 /* DrawFeedAd.m */,
+				2C025F1D24C84A3E00F311F6 /* FeedAdManager.m */,
+				2C025F1E24C84A3E00F311F6 /* FeedAd.h */,
+				2C025F1F24C84A3E00F311F6 /* DrawFeedAdManager.m */,
+			);
+			path = ViewManagers;
+			sourceTree = "<group>";
+		};
+		2C025F2124C84A3E00F311F6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F2224C84A3E00F311F6 /* BUDBase64.m */,
+				2C025F2324C84A3E00F311F6 /* Category */,
+				2C025F2A24C84A3E00F311F6 /* BUDCocoaSecurity.h */,
+				2C025F2B24C84A3E00F311F6 /* BUDBase64.h */,
+				2C025F2C24C84A3E00F311F6 /* BUDCocoaSecurity.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2C025F2324C84A3E00F311F6 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F2424C84A3E00F311F6 /* NSString+LocalizedString.h */,
+				2C025F2524C84A3E00F311F6 /* UIView+Draw.m */,
+				2C025F2624C84A3E00F311F6 /* NSString+Json.m */,
+				2C025F2724C84A3E00F311F6 /* NSString+LocalizedString.m */,
+				2C025F2824C84A3E00F311F6 /* NSString+Json.h */,
+				2C025F2924C84A3E00F311F6 /* UIView+Draw.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		2C025F2E24C84A3E00F311F6 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F2F24C84A3E00F311F6 /* BUDMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		2C025F3024C84A3E00F311F6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C025F3124C84A3E00F311F6 /* RewardVideoViewController.m */,
+				2C025F3224C84A3E00F311F6 /* FullscreenViewController.h */,
+				2C025F3324C84A3E00F311F6 /* RewardVideoViewController.h */,
+				2C025F3424C84A3E00F311F6 /* FullscreenViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				2C025F1124C84A3E00F311F6 /* src */,
 				B3E7B5881CC2AC0600A0062D /* BytedAd.h */,
 				B3E7B5891CC2AC0600A0062D /* BytedAd.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -95,6 +213,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -112,7 +231,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* BytedAd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,15 +334,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/src/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BytedAd;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/src/**";
 			};
 			name = Debug;
 		};
@@ -236,11 +356,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
+					"$(SRCROOT)/src/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = BytedAd;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/src/**";
 			};
 			name = Release;
 		};

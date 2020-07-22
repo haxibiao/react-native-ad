@@ -10,16 +10,18 @@
 
 文档目录：
 
-- [创建获取 appId 和广告位 codeId](#创建获取appid和广告位codeid)
-- [安装配置 react-native-ad 模块](#安装配置react-native-ad模块)
-- [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例)
-- [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例)
-- [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullVideo广告的对接及示例)
-- [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例)
-- [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例)
-- [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
-- [常见问题及模块更新](#常见问题及模块更新)
-- [更新日志](#更新日志)
+- [穿山甲（头条）React Native 广告模块对接文档](#穿山甲头条react-native-广告模块对接文档)
+  - [创建获取 appId 和广告位 codeId](#创建获取-appid-和广告位-codeid)
+      - [获取穿山甲 appId](#获取穿山甲-appid)
+      - [获取穿山甲 codeId](#获取穿山甲-codeid)
+  - [安装配置 react-native-ad 模块](#安装配置-react-native-ad-模块)
+  - [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例)
+  - [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例)
+      - [激励视频回调对象](#激励视频回调对象)
+  - [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullvideo广告的对接及示例)
+  - [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例)
+  - [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例)
+  - [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
 
 ## 创建获取 appId 和广告位 codeId
 
@@ -61,21 +63,21 @@ npm install -D git+http://auto:hxb332211@code.haxibiao.cn/native/bytedad.git
 
 ## 开屏（Splash）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.loadSplashAd 方法，需要传入穿山甲广告平台的 appid 和 codeid
+调用 ad.loadSplashAd 方法，需要传入穿山甲广告平台的 appid 和 codeid
 
 ```
 ...
 const appid = "";
 const codeid = "";
-TTAd.loadSplashAd(appid, codeid);
+ad.loadSplashAd(appid, codeid);
 ...
 ```
 
-开屏广告监听回调，调用 `TTAd.loadSplashAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+开屏广告监听回调，调用 `ad.loadSplashAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
 
 | 监听事件     | 回调参数类型 |                  说明                  |
 | ------------ | :----------: | :------------------------------------: |
@@ -117,25 +119,25 @@ splashAd.subscribe('onAdClicked', i => {
 
 ```
 
-更多使用示例代码请查看：[TTSplashDemo](../example/src/TTSplashDemo.js)
+更多使用示例代码请查看：[SplashAd](../example/src/SplashAd.js)
 
 ## 激励视频（RewardVideo）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.loadRewardVideoAd 方法，两个必传参数需要传入穿山甲广告平台的 appid 和 codeid
+调用 ad.startRewardVideo 方法，两个必传参数需要传入穿山甲广告平台的 appid 和 codeid
 
 ```
 ...
 const appid = "";
 const codeid = "";
-TTAd.loadRewardVideoAd(appid, codeid);
+ad.startRewardVideo(appid, codeid);
 ...
 ```
 
-激励视频监听回调，调用 `TTAd.loadRewardVideoAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+激励视频监听回调，调用 `ad.startRewardVideo` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
 
 | 监听事件         | 回调参数类型 |                               说明                               |
 | ---------------- | :----------: | :--------------------------------------------------------------: |
@@ -150,7 +152,7 @@ TTAd.loadRewardVideoAd(appid, codeid);
 示例代码：
 
 ```
-const rewardVideoAd = loadRewardVideoAd(appid,codeid);
+const rewardVideoAd = startRewardVideo(appid,codeid);
 
 rewardVideo.subscribe('onAdLoaded', event => {
 console.log('广告加载成功监听', event);
@@ -186,7 +188,7 @@ console.log('广告应用下载相关监听', event);
 示例代码：
 
 ```
-const rewardVideoAd = loadRewardVideoAd(appid,codeid);
+const rewardVideoAd = startRewardVideo(appid,codeid);
 
 rewardVideo.then(val => {
     console.log('FullVideoAd', val);
@@ -237,17 +239,17 @@ rewardVideo.then(val => {
 
 ## 全屏视频（FullVideo）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.loadFullVideoAd 方法，需要传入穿山甲广告平台的 appid 和 codeid
+调用 ad.startFullVideo 方法，需要传入穿山甲广告平台的 appid 和 codeid
 
 ```
 ...
 const appid = "";
 const codeid = "";
-TTAd.loadFullVideoAd(appid, codeid);
+ad.startFullVideo(appid, codeid);
 ...
 ```
 
@@ -256,7 +258,7 @@ TTAd.loadFullVideoAd(appid, codeid);
 示例代码：
 
 ```
-const rewardVideoAd = loadRewardVideoAd(appid,codeid);
+const rewardVideoAd = startRewardVideo(appid,codeid);
 
 rewardVideo.then(val => {
     console.log('FullVideoAd', val);
@@ -275,15 +277,15 @@ rewardVideo.then(val => {
 }
 ```
 
-更多使用示例代码请查看：[TTFullScreenDemo](../example/src/TTFullScreenDemo.js)
+更多使用示例代码请查看：[FullScreenVideo](../example/src/FullScreenVideo.js)
 
 ## 信息流（Feed）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+调用 ad.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
 
 ```
 ...
@@ -292,17 +294,17 @@ React.useEffect(() => {
 
   const appid = "";
 
-  TTAd.init(appid);
+  ad.init(appid);
 
 }, []);
 
 ...
 ```
 
-使用组件 <TTAd.FeedAd /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
+使用组件 <ad.FeedAd /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
 
 ```
-<TTAd.FeedAd
+<ad.FeedAd
   codeId="00000000" // 广告位 codeid （必传)
   visible={true}
   adWidth={300}
@@ -321,7 +323,7 @@ React.useEffect(() => {
 />
 ```
 
-TTAd.FeedAd 参数参照表：
+ad.FeedAd 参数参照表：
 
 | 参数名  |  参数类型  |                说明                |
 | ------- | :--------: | :--------------------------------: |
@@ -332,15 +334,15 @@ TTAd.FeedAd 参数参照表：
 | onError | () => void | 广告加载失败回调，返回相应回调信息 |
 | onClick | () => void |   广告点击回调，返回相应回调信息   |
 
-更多使用示例代码请查看：[TTFeedDemo](../example/src/TTFeedDemo.js)
+更多使用示例代码请查看：[FeedAd](../example/src/FeedAd.js)
 
 ## 视频信息流（DrawFeed）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+调用 ad.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
 
 ```
 ...
@@ -349,17 +351,17 @@ React.useEffect(() => {
 
   const appid = "";
 
-  TTAd.init(appid);
+  ad.init(appid);
 
 }, []);
 
 ...
 ```
 
-使用组件 <TTAd.DrawFeedAd /> 显示广告，codeId（ 广告位 ID ）必传
+使用组件 <ad.DrawFeedAd /> 显示广告，codeId（ 广告位 ID ）必传
 
 ```
-<TTAd.DrawFeedAd
+<ad.DrawFeedAd
   codeId="00000000" // 广告位 codeid （必传），注意区分 Android 和 IOS
   isExpress={false} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：false
   onLoad={smg => {
@@ -377,7 +379,7 @@ React.useEffect(() => {
 />
 ```
 
-TTAd.DrawFeedAd 参数参照表：
+ad.DrawFeedAd 参数参照表：
 
 | 参数名    |  参数类型  |                             说明                              |
 | --------- | :--------: | :-----------------------------------------------------------: |
@@ -387,15 +389,15 @@ TTAd.DrawFeedAd 参数参照表：
 | onError   | () => void |              广告加载失败回调，返回相应回调信息               |
 | onClick   | () => void |                广告点击回调，返回相应回调信息                 |
 
-更多使用示例代码请查看：[TTDrawFeedDemo](../example/src/TTDrawFeedDemo.js)
+更多使用示例代码请查看：[DrawFeed](../example/src/DrawFeed.js)
 
 ## 横幅（Banner）广告的对接及示例
 
-导入 `TTAd` 模块
+导入 `ad` 模块
 
-**import {TTAd} from 'react-native-ad';**
+**import {ad} from 'react-native-ad';**
 
-调用 TTAd.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+调用 ad.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
 
 ```
 ...
@@ -404,45 +406,9 @@ React.useEffect(() => {
 
   const appid = "";
 
-  TTAd.init(appid);
+  ad.init(appid);
 
 }, []);
-
-...
-```
-
-使用组件 <TTAd.BannerAd /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
-
-```
-<TTAd.BannerAd
-  codeId="000000000" // 广告位 codeid （必传），注意区分 Android 和 IOS
-  adWidth={350}
-  onLoad={smg => {
-    // 广告加载成功回调
-    console.log('头条 Draw Banner 广告加载成功！', smg);
-  }}
-  onError={err => {
-    // 广告加载失败回调
-    console.log('头条 Draw Banner 广告加载失败！', err);
-  }}
-  onClick={val => {
-    // 广告点击回调
-    console.log('头条 Draw Banner 广告被用户点击！', val);
-  }}
-/>
-```
-
-TTAd.BannerAd 参数参照表：
-
-| 参数名  |  参数类型  |                说明                |
-| ------- | :--------: | :--------------------------------: |
-| codeId  |   string   |             广告位 ID              |
-| adWidth |   number   |              广告宽度              |
-| onLoad  | () => void | 广告加载成功回调，返回相应回调信息 |
-| onError | () => void | 广告加载失败回调，返回相应回调信息 |
-| onClick | () => void |   广告点击回调，返回相应回调信息   |
-
-更多使用示例代码请查看：[TTBannerDemo](../example/src/TTBannerDemo.js)
 
 ## 常见问题及模块更新
 
@@ -451,28 +417,35 @@ TTAd.BannerAd 参数参照表：
 然后可以使用 npm update 来更新模块
 
 ```
-$ npm update react-native-ad
+
+\$ npm update react-native-ad
+
 ```
 
 或者使用 yarn upgrade 来更新
 
 ```
-$ yarn upgrade react-native-ad
+
+\$ yarn upgrade react-native-ad
+
 ```
 
-
 ## 更新日志
-- v1.0.0
-  - 初始化项目
-  - 对接 TTAd 开屏广告 android 模块
 
-- v1.0.1
-  - 规范接口，代码结构
-  - 对接 TTAd 信息流，视频信息流，Banner 广告模块
-  - 补全 example 示例
+-   v1.0.0
 
-- v1.0.2
-  - 升级 Android TTAd SDK 版本 v3.1.0.0
-  - 规范完善 example 示例
-  - 对接 TTAd 激励视频，全屏视频广告模块
-  - 完善对接文档整理
+    -   初始化项目
+    -   对接 ad 开屏广告 android 模块
+
+-   v1.0.1
+
+    -   规范接口，代码结构
+    -   对接 ad 信息流，视频信息流，Banner 广告模块
+    -   补全 example 示例
+
+-   v1.0.2
+    -   升级 Android ad SDK 版本 v3.1.0.0
+    -   规范完善 example 示例
+    -   对接 ad 激励视频，全屏视频广告模块
+    -   完善对接文档整理
+```

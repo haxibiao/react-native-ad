@@ -5,22 +5,7 @@
 //  Copyright © 2019 Facebook. All rights reserved.
 //
 
-
-#import <Foundation/Foundation.h>
-#import <React/RCTEventEmitter.h>
-#import <React/RCTBridgeModule.h>
-
-#import <BUAdSDK/BUAdSDKManager.h>
-#import <BUAdSDK/BURewardedVideoModel.h>
-#import "BUAdSDK/BUSplashAdView.h"
-#include "AdBoss.h"
-
-
-@interface Splash : RCTEventEmitter <RCTBridgeModule>
-{
-  
-}
-@end
+#import "SplashAd.h"
 
 @implementation Splash
 

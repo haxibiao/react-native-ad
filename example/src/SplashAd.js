@@ -6,7 +6,7 @@ export default function SplashAd() {
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
-        ☆ BytedAd Splash Screen example Powered By HaXiBiao ☆
+        ☆ Splash Screen example Powered By HaXiBiao ☆
       </Text>
       <TouchableOpacity
         style={{
@@ -17,25 +17,25 @@ export default function SplashAd() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const splashAd = ad.loadSplashAd('5016582', '816582039');
+          const splashAd = ad.startSplash('5016582', '816582039');
 
-          splashAd.subscribe('onAdTimeOver', event => {
+          splashAd.subscribe('onAdTimeOver', (event) => {
             console.log('广告时间结束监听', event);
           });
 
-          splashAd.subscribe('onAdSkip', i => {
+          splashAd.subscribe('onAdSkip', (i) => {
             console.log('用户点击跳过监听', i);
           });
 
-          splashAd.subscribe('onError', e => {
+          splashAd.subscribe('onError', (e) => {
             console.log('开屏加载失败监听', e);
           });
 
-          splashAd.subscribe('onAdClicked', e => {
+          splashAd.subscribe('onAdClicked', (e) => {
             console.log('开屏被用户点击了', e);
           });
 
-          splashAd.subscribe('onAdShow', e => {
+          splashAd.subscribe('onAdShow', (e) => {
             console.log('开屏开始展示', e);
           });
         }}>

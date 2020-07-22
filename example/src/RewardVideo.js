@@ -6,7 +6,7 @@ export default function RewardVideo() {
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
-        ☆ BytedAd Reward Video example, Powered By HaXiBiao ☆
+        ☆ Reward Video example, Powered By HaXiBiao ☆
       </Text>
       <TouchableOpacity
         style={{
@@ -17,25 +17,25 @@ export default function RewardVideo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const rewardVideo = ad.loadRewardVideoAd('5016582', '945294086');
+          const rewardVideo = ad.startRewardVideo('5016582', '945294086');
 
           // rewardVideo.then(val => {
           //   console.log('RewardVideo', val);
           // });
 
-          rewardVideo.subscribe('onAdLoaded', event => {
+          rewardVideo.subscribe('onAdLoaded', (event) => {
             console.log('广告加载成功监听111111', event);
           });
 
-          rewardVideo.subscribe('onAdError', event => {
+          rewardVideo.subscribe('onAdError', (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          rewardVideo.subscribe('onAdClose', event => {
+          rewardVideo.subscribe('onAdClose', (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscribe('onAdClicked', event => {
+          rewardVideo.subscribe('onAdClicked', (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

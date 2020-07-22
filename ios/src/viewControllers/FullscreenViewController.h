@@ -6,6 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <BUAdSDK/BUNativeExpressFullscreenVideoAd.h>
+#import "BUDMacros.h"
+#import "AdBoss.h"
+#import "FullScreenVideo.h" 
+#import "NSString+LocalizedString.h"
+
 
 @interface FullscreenViewController : UIViewController
 @property (nonatomic, copy) NSString *slotID;
