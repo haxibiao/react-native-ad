@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libBytedAd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBytedAd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libreact-native-ad.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libreact-native-ad.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C025F1224C84A3E00F311F6 /* FullScreenVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenVideo.m; sourceTree = "<group>"; };
 		2C025F1424C84A3E00F311F6 /* BUDSlotViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSlotViewModel.m; sourceTree = "<group>"; };
 		2C025F1524C84A3E00F311F6 /* BUDDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDefs.h; sourceTree = "<group>"; };
@@ -53,8 +53,6 @@
 		2C025F3624C84A3E00F311F6 /* AdBoss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBoss.m; sourceTree = "<group>"; };
 		2C025F3724C84A3E00F311F6 /* SplashAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashAd.m; sourceTree = "<group>"; };
 		2C025F3824C84A3E00F311F6 /* RewardVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVideo.h; sourceTree = "<group>"; };
-		B3E7B5881CC2AC0600A0062D /* BytedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BytedAd.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* BytedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BytedAd.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +69,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libBytedAd.a */,
+				134814201AA4EA6300B7C361 /* libreact-native-ad.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,11 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				2C025F1A24C84A3E00F311F6 /* DrawFeedAd.h */,
-				2C025F1B24C84A3E00F311F6 /* FeedAd.m */,
 				2C025F1C24C84A3E00F311F6 /* DrawFeedAd.m */,
-				2C025F1D24C84A3E00F311F6 /* FeedAdManager.m */,
-				2C025F1E24C84A3E00F311F6 /* FeedAd.h */,
 				2C025F1F24C84A3E00F311F6 /* DrawFeedAdManager.m */,
+				2C025F1E24C84A3E00F311F6 /* FeedAd.h */,
+				2C025F1B24C84A3E00F311F6 /* FeedAd.m */,
+				2C025F1D24C84A3E00F311F6 /* FeedAdManager.m */,
 			);
 			path = ViewManagers;
 			sourceTree = "<group>";
@@ -168,8 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				2C025F1124C84A3E00F311F6 /* src */,
-				B3E7B5881CC2AC0600A0062D /* BytedAd.h */,
-				B3E7B5891CC2AC0600A0062D /* BytedAd.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,9 +173,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* BytedAd */ = {
+		58B511DA1A9E6C8500147676 /* react-native-ad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "BytedAd" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "react-native-ad" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -189,9 +185,9 @@
 			);
 			dependencies = (
 			);
-			name = BytedAd;
+			name = "react-native-ad";
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libBytedAd.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libreact-native-ad.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +204,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "BytedAd" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "react-native-ad" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -221,7 +217,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* BytedAd */,
+				58B511DA1A9E6C8500147676 /* react-native-ad */,
 			);
 		};
 /* End PBXProject section */
@@ -342,7 +338,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = BytedAd;
+				PRODUCT_NAME = "react-native-ad";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/src/**";
 			};
@@ -360,7 +356,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = BytedAd;
+				PRODUCT_NAME = "react-native-ad";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/src/**";
 			};
@@ -369,7 +365,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "BytedAd" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "react-native-ad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -378,7 +374,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "BytedAd" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "react-native-ad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,

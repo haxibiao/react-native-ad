@@ -1,16 +1,16 @@
-import {NativeModules} from "react-native";
+import { NativeModules } from "react-native";
 
-import startSplash from "./SplashAd";
+import startSplash from "./Splash";
 import startFullVideo from "./FullScreenVideo";
 import startRewardVideo from "./RewardVideo";
 import DrawFeed from "./DrawFeed";
-import FeedAd from "./FeedAd";
+import Feed from "./Feed";
 
-const {AdManager}=NativeModules;
+const { AdManager } = NativeModules;
 
-export const init=(appid: string) => {
+export const init = ({ appid }) => {
 	//FIXME: init 传入一些codeid可以提前加载广告，比如视频类
-	AdManager.init(appid);
+	AdManager.init({ appid });
 };
 
 export default {
@@ -19,5 +19,5 @@ export default {
 	startFullVideo,
 	startRewardVideo,
 	DrawFeed,
-	FeedAd,
+	Feed,
 };

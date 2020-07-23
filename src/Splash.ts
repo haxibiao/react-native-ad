@@ -5,11 +5,10 @@ import {
 	requireNativeComponent,
 } from "react-native";
 
-const {SplashAd}=NativeModules;
 
 // 默认很多是用旧的native方式申请的drawfeed 代码位...
 // const isExpress = DrawFeedUseExpress ? DrawFeedUseExpress : "false";
-const isExpress="false";
+const isExpress = "false";
 
 interface EVENT_TYPE {
 	onError: string; // 广告加载失败监听
@@ -20,29 +19,20 @@ interface EVENT_TYPE {
 	onAdShow: string; // 开屏广告开始展示
 }
 
-const listenerCache={};
+const listenerCache = {};
 
-export default (appid: string,codeid: string) => {
-	const eventEmitter=new NativeEventEmitter(SplashAd);
-	SplashAd.loadSplashAd(appid,codeid);
+export default (appid: string, codeid: string) => {
+	const { SplashAd } = NativeModules;
+	const eventEmitter = new NativeEventEmitter(SplashAd);
+	SplashAd.loadSplashAd({ appid, codeid });
 
 	return {
-		subscribe: (type: keyof EVENT_TYPE,callback: (event: any) => void) => {
-
-			if(listenerCache[type]) {
+		subscribe: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
+			if (listenerCache[type]) {
 				listenerCache[type].remove();
 			}
-
-			if(type==='onAdShow') {
-				// 开屏广告通知另外注册，
-				return listenerCache['onAdShow']=eventEmitter.addListener("SplashAdListenerOnAdShow",(event: any) => {
-					callback(event[type]);
-				});
-				;
-			}
-
-			return listenerCache[type]=eventEmitter.addListener("SplashAdListener",(event: any) => {
-				if(event[type]) {
+			return listenerCache[type] = eventEmitter.addListener("Splash-" + type, (event: any) => {
+				if (event[type]) {
 					callback(event[type]);
 				}
 			});

@@ -7,7 +7,7 @@ import {
 
 
 
-const listenerCache={};
+const listenerCache = {};
 
 interface EVENT_TYPE {
 	onAdError: string; // 广告加载失败监听
@@ -19,21 +19,18 @@ interface EVENT_TYPE {
 	onDownloadActive: string; // 广告应用下载相应监听
 }
 
-export default function(appid: string,codeid: string) {
-	const {RewardVideo}=NativeModules;
-	const eventEmitter=new NativeEventEmitter(RewardVideo);
-	let result=RewardVideo.startAd({appid,codeid});
+export default function (appid: string, codeid: string) {
+	const { RewardVideo } = NativeModules;
+	const eventEmitter = new NativeEventEmitter(RewardVideo);
+	let result = RewardVideo.startAd({ appid, codeid });
 
 	return {
 		result,
-		subscribe: (
-			type: keyof EVENT_TYPE,
-			callback: (event: any) => void,
-		) => {
-			if(listenerCache[type]) {
+		subscribe: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
+			if (listenerCache[type]) {
 				listenerCache[type].remove();
 			}
-			return listenerCache[type]=eventEmitter.addListener("RewardVideo-"+type,(event: any) => {
+			return listenerCache[type] = eventEmitter.addListener("RewardVideo-" + type, (event: any) => {
 				callback(event);
 			});
 		}

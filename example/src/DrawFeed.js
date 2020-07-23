@@ -2,16 +2,17 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
-export default function TTDrawFeedDemo() {
+export default function DrawFeed() {
   React.useEffect(() => {
     // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
-    ad.init('5016582');
+    ad.init({appid: '5016582'});
   }, []);
 
   return (
     <View style={styles.container}>
-      <ad.DrawFeedAd
-        codeId="916582757" // 广告位 codeid （必传），注意区分 Android 和 IOS
+      <ad.DrawFeed
+        appid="5016582"
+        codeid="945339778" // 广告位 codeid （必传），注意区分 Android 和 IOS
         isExpress={false} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：false
         onLoad={smg => {
           // 广告加载成功回调

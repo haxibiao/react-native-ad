@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
-export default function FeedAd() {
+export default function Feed() {
   React.useEffect(() => {
     // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
     ad.init('5016582');
@@ -10,7 +10,7 @@ export default function FeedAd() {
 
   return (
     <View style={styles.container}>
-      <ad.FeedAd
+      <ad.Feed
         codeId="916582486" // 广告位 codeid （必传），注意区分 Android 和 IOS
         visible={true}
         adWidth={300}

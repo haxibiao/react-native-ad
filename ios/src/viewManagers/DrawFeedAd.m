@@ -26,7 +26,10 @@
 
 
 @interface DrawFeedAd() <BUNativeExpressAdViewDelegate>
+
+@property(nonatomic, strong) NSString *_appid;
 @property(nonatomic, strong) NSString *_codeid;
+
 @property (nonatomic, strong, nullable) UIImageView *likeImg;
 @property (nonatomic, strong, nullable) UILabel *likeLable;
 @property (nonatomic, strong, nullable) UIImageView *commentImg;
@@ -42,15 +45,16 @@
 @implementation DrawFeedAd
 
 
+- (void)setAppId:(NSString *)appid {
+    BUD_Log(@"DrawVideo set appid %@", appid);
+    self._appid = appid;
+    [self loadExpressAds];
+}
+
 - (void)setCodeId:(NSString *)codeid {
-  BUD_Log(@"DrawVideo set codeid %@", codeid);
-  if(!codeid.length) {
-    BUD_Log(@"DrawVideo 无效 codeid %@", codeid);
-    return;
-  }
-  self._codeid = codeid;
-  [self buildupView];
-  [self loadExpressAds];
+    BUD_Log(@"DrawVideo set codeid %@", codeid);
+    self._codeid = codeid;
+    [self loadExpressAds];
 }
 
 
@@ -64,7 +68,7 @@
     [self addSubview:self.titleLabel];
     
     self.descriptionLabel = [UILabel new];
-  self.descriptionLabel.frame = CGRectMake(10, GlobleHeight*0.72+32, GlobleWidth-70, 50);
+    self.descriptionLabel.frame = CGRectMake(10, GlobleHeight*0.72+32, GlobleWidth-70, 50);
     self.descriptionLabel.font = [UIFont systemFontOfSize:15];
     self.descriptionLabel.numberOfLines = 0;
     self.descriptionLabel.textColor = bu_textColor;
@@ -104,40 +108,49 @@
 }
 
 - (void)loadExpressAds {
-  
-  BUAdSlot *slot1 = [[BUAdSlot alloc] init];
-  slot1.ID = self._codeid;
-  slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
-  slot1.isOriginAd = YES; //required
-  slot1.position = BUAdSlotPositionTop;
-  slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
-  slot1.isSupportDeepLink = YES;
-  
-  
-//  CGSizeMake(1080, 1920)
-
-  if (!self.adManager) {
-      self.adManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:[AdBoss getWindow].bounds.size];
-  }
-//  self.adManager.adSize = self.bounds.size;
-  self.adManager.delegate = self;
-  [self.adManager loadAd:1];
-  
+    
+    if(self._appid  == nil) {
+        return;
+    }
+    else {
+        NSLog(@"init drawfeed appid %@", self._appid);
+        [AdBoss init:self._appid];
+    }
+    
+    BUAdSlot *slot1 = [[BUAdSlot alloc] init];
+    slot1.ID = self._codeid;
+    slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
+    slot1.isOriginAd = YES; //required
+    slot1.position = BUAdSlotPositionTop;
+    slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
+    slot1.isSupportDeepLink = YES;
+    
+    
+    //  CGSizeMake(1080, 1920)
+    
+    if (!self.adManager) {
+        UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
+        self.adManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:rootVC.view.bounds.size];
+    }
+    //  self.adManager.adSize = self.bounds.size;
+    self.adManager.delegate = self;
+    [self.adManager loadAd:1];
+    
 }
 
 
 
 #pragma mark - BUNativeExpressAdViewDelegate
 - (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {
-  
-  BUD_Log(@"DrawVideo nativeExpressAdSuccessToLoad isReady = %d",views[0].isReady ?1:0);
-  
-  if (views.count) {
+    
+    BUD_Log(@"DrawVideo nativeExpressAdSuccessToLoad isReady = %d",views[0].isReady ?1:0);
+    
+    if (views.count) {
         [views enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             BUNativeExpressAdView *expressAdView = (BUNativeExpressAdView *)obj;
             [expressAdView render];
         }];
-  }
+    }
 }
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
@@ -147,13 +160,15 @@
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
     
-  NSLog(@"====== %p draw 成功渲染 videoDuration = %ld",nativeExpressAdView,(long)nativeExpressAdView.videoDuration);
-  
-  dispatch_async(dispatch_get_main_queue(), ^{
-    nativeExpressAdView.rootViewController = [AdBoss getWindow].rootViewController;
-    [self addSubview: nativeExpressAdView];
-  });
-
+    NSLog(@"====== %p draw 成功渲染 videoDuration = %ld",nativeExpressAdView,(long)nativeExpressAdView.videoDuration);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
+        
+        nativeExpressAdView.rootViewController = rootVC;
+        [self addSubview: nativeExpressAdView];
+    });
+    
 }
 
 - (void)updateCurrentPlayedTime {
@@ -179,15 +194,15 @@
 
 - (void)nativeExpressAdViewDidClick:(BUNativeExpressAdView *)nativeExpressAdView {
     BUD_Log(@"%s",__func__);
-  
-  //TODO: 日后回调给RN 统计点击事件和贡献奖励
-  
-//  dispatch_async(dispatch_get_main_queue(), ^{
-//     self.onAdClicked(@{
-//         @"message":@"Draw视频广告 been clicked"
-//       });
-//  });
- 
+    
+    //TODO: 日后回调给RN 统计点击事件和贡献奖励
+    
+    //  dispatch_async(dispatch_get_main_queue(), ^{
+    //     self.onAdClicked(@{
+    //         @"message":@"Draw视频广告 been clicked"
+    //       });
+    //  });
+    
 }
 
 - (void)nativeExpressAdViewPlayerDidPlayFinish:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
@@ -208,7 +223,7 @@
 
 - (void)nativeExpressAdViewDidCloseOtherController:(BUNativeExpressAdView *)nativeExpressAdView interactionType:(BUInteractionType)interactionType {
     
-  NSString *str = nil;
+    NSString *str = nil;
     if (interactionType == BUInteractionTypePage) {
         str = @"ladingpage";
     } else if (interactionType == BUInteractionTypeVideoAdDetail) {
@@ -216,13 +231,13 @@
     } else {
         str = @"appstoreInApp";
     }
-  
+    
     BUD_Log(@"%s __ %@",__func__,str);
 }
 
 
 - (BOOL)willDealloc {
-  return NO;
+    return NO;
 }
 
 

@@ -27,7 +27,9 @@ export default class App extends Component<{}> {
   };
 
   componentDidMount() {
-    ad.init('5016582');
+    ad.init({
+      appid: '5016582',
+    });
   }
   render() {
     return (
@@ -45,7 +47,7 @@ export default class App extends Component<{}> {
             borderRadius: 50,
           }}
           onPress={() => {
-            const splashAd = ad.loadSplashAd('5016582', '816582039');
+            const splashAd = ad.startSplash('5016582', '816582039');
 
             splashAd.subscribe('onAdTimeOver', event => {
               console.log('广告时间结束监听', event);
@@ -70,11 +72,26 @@ export default class App extends Component<{}> {
             //   }
             // });
           }}>
-          <Text style={{textAlign: 'center'}}>echo Log</Text>
+          <Text style={{textAlign: 'center'}}>开屏广告</Text>
         </TouchableOpacity>
-        {/* <TTAD.DrawFeedAd codeid="916582757" /> */}
 
-        {/* <Text>Hello</Text> */}
+        <ad.Feed
+          codeId="916582486" // 广告位 codeid （必传），注意区分 Android 和 IOS
+          visible={true}
+          adWidth={200}
+          onLoad={smg => {
+            // 广告加载成功回调
+            console.log('头条 Feed 广告加载成功！', smg);
+          }}
+          onError={err => {
+            // 广告加载失败回调
+            console.log('头条 Feed 广告加载失败！', err);
+          }}
+          onClick={val => {
+            // 广告点击回调
+            console.log('头条 Feed 广告被用户点击！', val);
+          }}
+        />
       </View>
     );
   }

@@ -5,7 +5,7 @@
       location = "group:example.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../ios/BytedAd.xcodeproj">
+      location = "group:/data/packages/react-native-ad/ios/react-native-ad.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
