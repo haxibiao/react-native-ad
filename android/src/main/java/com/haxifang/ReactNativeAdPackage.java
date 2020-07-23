@@ -13,8 +13,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.haxifang.ad.AdManager;
-import com.haxifang.ad.DrawFeed;
-import com.haxifang.ad.Feed;
+import com.haxifang.ad.DrawFeedViewManager;
+import com.haxifang.ad.FeedAdViewManager;
 import com.haxifang.ad.FullScreenVideo;
 import com.haxifang.ad.RewardVideo;
 import com.haxifang.ad.SplashAd;
@@ -34,8 +34,8 @@ public class ReactNativeAdPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-                new DrawFeed(reactContext),
-                new FeedAd(reactContext)
+                new DrawFeedViewManager(reactContext),
+                new FeedAdViewManager(reactContext)
         );
     }
 }

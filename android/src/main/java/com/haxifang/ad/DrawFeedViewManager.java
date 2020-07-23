@@ -14,13 +14,12 @@ import com.haxifang.ad.views.DrawFeedView;
 
 import java.util.Map;
 
-public class DrawFeed extends ViewGroupManager<DrawFeedView> {
+public class DrawFeedViewManager extends ViewGroupManager<DrawFeedView> {
 
-    public static final String REACT_CLASS = "DrawFeed";
-    private ReactApplicationContext reactContext;
+    public static final String REACT_CLASS = "DrawFeedAd";
 
-    public DrawFeed(ReactApplicationContext context) {
-        reactContext = context;
+    public DrawFeedViewManager(ReactApplicationContext context) {
+        AdManager.reactAppContext = context;
     }
 
     @NonNull
@@ -35,9 +34,9 @@ public class DrawFeed extends ViewGroupManager<DrawFeedView> {
         return new DrawFeedView(reactContext);
     }
 
-    @ReactProp(name = "is_express")
-    public void setIsExpress(@NonNull DrawFeedView view, @NonNull String is_express) {
-        view.setIsExpress(is_express);
+    @ReactProp(name = "appid")
+    public void setAppId(@NonNull DrawFeedView view, @Nullable String appid) {
+        view.setAppId(appid);
     }
 
     @ReactProp(name = "codeid")

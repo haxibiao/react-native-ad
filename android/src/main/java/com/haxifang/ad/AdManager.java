@@ -5,31 +5,32 @@ import androidx.annotation.NonNull;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 
 public class AdManager extends ReactContextBaseJavaModule {
+    public static ReactApplicationContext reactAppContext;
+    protected String TAG = "AdManager";
 
-    private ReactApplicationContext reactContext;
-    protected String REACT_CLASS = "AdManager";
-    protected String TAG = REACT_CLASS;
 
     public AdManager(ReactApplicationContext reactContext) {
-        super(reactContext);
-        this.reactContext = reactContext;
+        super(reactAppContext);
+        reactAppContext = reactContext;
     }
 
     @NonNull
     @Override
     public String getName() {
-        return REACT_CLASS;
+        return TAG;
     }
 
     @ReactMethod
-    public void init(String appid) {
+    public void init(ReadableMap options) {
+		String appid = options.hasKey("appid") ? options.getString("appid") : null;
+
         // 判断头条 SDK 是否初始化
         if (!TTAdManagerHolder.sInit) {
-            TTAdManagerHolder.init(reactContext, appid);
+            TTAdManagerHolder.init(reactAppContext, appid);
         }
     }
-
 
 }

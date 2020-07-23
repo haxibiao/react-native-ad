@@ -25,7 +25,7 @@ import java.util.List;
 
 public class FeedView extends RelativeLayout {
 
-    private static final String TAG = "hxb-rn-ad-TTAdFeedView";
+    private static final String TAG = "FeedAd";
 
     private Activity mContext;
     private ReactContext reactContext;

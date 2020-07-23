@@ -1,4 +1,4 @@
-package com.haxifang.ad.modules;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -29,8 +29,7 @@ import com.haxifang.ad.WeakHandler;
 
 public class SplashActivity extends Activity implements WeakHandler.IHandler {
 
-    static String TAG = "头条开屏广告";
-//    static String ttAppId = "5016582";
+    static String TAG = "SplashAd";
 
     private TTAdNative mTTAdNative;
     private FrameLayout mSplashContainer;
@@ -134,7 +133,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
             // RN 回调注册方法
             private void event() {
                 // 回调监听方法
-                sendEvent("TTSplashAdListener", params);
+                sendEvent("Splash-", params);
             }
 
             @Override
@@ -222,7 +221,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                         // event();
                         WritableMap p = Arguments.createMap();
                         p.putBoolean("onAdShow",true);
-                        sendEvent("TTSplashAdListenerOnAdShow", p);
+                        sendEvent("Splash-OnAdShow", p);
 
                         // showToast("开屏广告展示");
                     }

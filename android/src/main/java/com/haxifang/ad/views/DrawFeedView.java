@@ -30,6 +30,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxifang.R;
+import com.haxifang.ad.AdManager;
 import com.haxifang.ad.TTAdManagerHolder;
 
 import java.util.ArrayList;
@@ -37,8 +38,9 @@ import java.util.List;
 
 public class DrawFeedView extends RelativeLayout {
 
-    private String TAG = "hxb-rn-ad-draw";
-    private String _isExpress = null;
+    private String TAG = "DrawFeed";
+	private String _isExpress = "true";
+	private String _appid = null;
     private String _codeid = null;
     protected Context mContext;
     protected ReactContext reactContext;
@@ -52,9 +54,6 @@ public class DrawFeedView extends RelativeLayout {
         reactContext = context;
         mContext = context;
 
-        // 初始化广告 SDK
-        mTTAdNative = TTAdManagerHolder.get().createAdNative(mContext);
-
         // 初始化广告渲染组件
         inflate(mContext, R.layout.tt_drew_video_hxb, this);
         mContainer = findViewById(R.id.tt_video_layout_hxb);
@@ -63,31 +62,35 @@ public class DrawFeedView extends RelativeLayout {
         setupLayoutHack();
     }
 
-    public void setIsExpress(String isExpress) {
-        // 设置 Draw 广告渲染方式
-        _isExpress = isExpress;
-        loadAd();
-    }
-
+	public void setAppId(String appId) {
+        _appid = appId;
+        loadDrawFeedAd();
+	}
+	
     public void setCodeId(String codeId) {
-        // 设置广告 code id
         _codeid = codeId;
-        loadDrawAd();
+        loadDrawFeedAd();
     }
 
-    void loadDrawAd() {
-        if (_isExpress == null || _codeid == null) {
-            Log.d(TAG, "loadDrawAd: 属性还不完整 _isExpress=" + _isExpress + " _codeid=" + _codeid);
+    void loadDrawFeedAd() {
+        if (_appid == null || _codeid == null) {
+            Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _appid=" + _appid + " _codeid=" + _codeid);
             return;
-        }
+		}
+        Log.d(TAG, "初始化appid "+_appid+"，获得sdk mTTAdNative " + _codeid);
+		//初始化appid，获得sdk mTTAdNative
+		if(!TTAdManagerHolder.sInit) {
+			TTAdManagerHolder.init(AdManager.reactAppContext, _appid);
+		}
+		mTTAdNative = TTAdManagerHolder.get().createAdNative(mContext);
 
         if (_isExpress.equals("true")) {
             // 开始渲染 Draw 广告，原生模版
-            Log.d(TAG, "loadDrawAd: loadExpressDrawNativeAd()");
+            Log.d(TAG, "loadDrawFeedAd: loadExpressDrawNativeAd()");
             loadExpressDrawNativeAd();
         } else {
             // 开始渲染 Draw 广告，自定义模版
-            Log.d(TAG, "loadDrawAd: loadAd");
+            Log.d(TAG, "loadDrawFeedAd: loadAd");
             loadAd();
         }
 

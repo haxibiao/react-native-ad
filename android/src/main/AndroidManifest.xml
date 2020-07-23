@@ -17,9 +17,9 @@
 
     <application>
 
-        <activity android:name=".ttad.modules.SplashActivity" />
-        <activity android:name=".ttad.modules.FullScreenActivity" />
-        <activity android:name=".ttad.modules.RewardActivity" />
+        <activity android:name=".ad.activities.SplashActivity" />
+        <activity android:name=".ad.activities.FullScreenActivity" />
+        <activity android:name=".ad.activities.RewardActivity" />
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"

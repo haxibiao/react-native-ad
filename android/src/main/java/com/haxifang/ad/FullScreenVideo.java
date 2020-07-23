@@ -1,5 +1,7 @@
 package com.haxifang.ad;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,15 +17,16 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.haxifang.ad.modules.FullScreenActivity;
-import com.haxifang.ad.modules.SplashActivity;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.haxifang.ad.activities.FullScreenActivity;
+
 
 
 public class FullScreenVideo extends ReactContextBaseJavaModule {
 
-    final private String TAG = "FullScreenVideo";
-    final private static String REACT_CLASS = "FullScreenVideo";
-    protected ReactApplicationContext mContext;
+    final private static String TAG = "FullScreenVideo";
+    protected static ReactApplicationContext mContext;
 
     public FullScreenVideo(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -32,7 +35,7 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return REACT_CLASS;
+        return TAG;
     }
 
 //    @ReactMethod
@@ -76,5 +79,8 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
         }
     }
 
-
+    // 发送事件到RN
+    public static void sendEvent(String eventName, @Nullable WritableMap params) {
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(TAG + "-" + eventName, params);
+    }
 }

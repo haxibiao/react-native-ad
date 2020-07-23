@@ -11,11 +11,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.haxifang.ad.modules.SplashActivity;
+import com.haxifang.ad.activities.SplashActivity;
 
 public class SplashAd extends ReactContextBaseJavaModule {
 
-    String TAG = "天真的调试";
+    String TAG = "SplashAd";
     ReactApplicationContext mContext;
 
     public SplashAd(@NonNull ReactApplicationContext reactContext) {
@@ -30,7 +30,9 @@ public class SplashAd extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void loadSplashAd(String appid, String codeid) {
+    public void loadSplashAd(ReadableMap options) {
+		String appid = options.hasKey("appid") ? options.getString("appid") : null;
+        String codeid = options.hasKey("codeid") ? options.getString("codeid") : null;
 
         // 判断头条 SDK 是否初始化
         if(!TTAdManagerHolder.sInit) {

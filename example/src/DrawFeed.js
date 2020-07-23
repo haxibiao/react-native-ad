@@ -4,8 +4,10 @@ import {ad} from 'react-native-ad';
 
 export default function DrawFeed() {
   React.useEffect(() => {
-    // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
-    ad.init({appid: '5016582'});
+    return () => {
+      // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
+      ad.init({appid: '5016582'});
+    };
   }, []);
 
   return (
@@ -13,7 +15,7 @@ export default function DrawFeed() {
       <ad.DrawFeed
         appid="5016582"
         codeid="945339778" // 广告位 codeid （必传），注意区分 Android 和 IOS
-        isExpress={false} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：false
+        express={true} // isExpress 用来区分是否用原生方式渲染（非必传），默认值：true
         onLoad={smg => {
           // 广告加载成功回调
           console.log('头条 Draw Feed 广告加载成功！', smg);

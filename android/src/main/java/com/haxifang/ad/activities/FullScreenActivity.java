@@ -1,4 +1,4 @@
-package com.haxifang.ad.modules;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.haxifang.ad.TTAdManagerHolder;
 
 public class FullScreenActivity extends Activity {
 
-    final private String TAG = "hxb-rn-FullScreen";
+    final private String TAG = "FullScreenVideo";
 
     private Promise rewardPromise;
     private Activity rewardActivity;

@@ -1,6 +1,7 @@
 package com.haxifang.ad;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
@@ -14,7 +15,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
  */
 public class TTAdManagerHolder {
 
-    static boolean sInit;
+    private static String TAG = "TTAdManagerHolder";
+    public static boolean sInit;
     public static ReactApplicationContext mContext;
     public static Promise mPromise;
 
@@ -43,6 +45,7 @@ public class TTAdManagerHolder {
                     context.getCurrentActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d(TAG, "真实设置 appid "+appid);
                             TTAdSdk.init(context, buildConfig(context, appid));
                         }
                     });

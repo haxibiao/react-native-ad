@@ -13,19 +13,19 @@ import com.haxifang.ad.views.FeedView;
 
 import java.util.Map;
 
-public class FeedAd extends ViewGroupManager<FeedView> {
+public class FeedAdViewManager extends ViewGroupManager<FeedView> {
 
-    public static final String REACT_CLASS = "FeedAd";
+    public static final String TAG = "FeedAd";
     private ReactContext mContext;
 
-    public FeedAd(ReactApplicationContext context) {
+    public FeedAdViewManager(ReactApplicationContext context) {
         mContext = context;
     }
 
     @NonNull
     @Override
     public String getName() {
-        return REACT_CLASS;
+        return TAG;
     }
 
     @NonNull
@@ -70,26 +70,22 @@ public class FeedAd extends ViewGroupManager<FeedView> {
     @Override
     public Map getExportedCustomBubblingEventTypeConstants() {
         return MapBuilder.builder()
-                .put(
-                        "onAdClick",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onAdClick")))
-                .put(
-                        "onAdError",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onAdError")))
-                .put(
-                        "onCloseAd",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onCloseAd")))
-                .put(
-                        "onLayoutChanged",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onLayoutChanged")))
+                .put("onAdClick",
+					MapBuilder.of(
+						"phasedRegistrationNames",
+						MapBuilder.of("bubbled", "onAdClick")))
+                .put("onAdError",
+					MapBuilder.of(
+						"phasedRegistrationNames",
+						MapBuilder.of("bubbled", "onAdError")))
+                .put("onCloseAd",
+					MapBuilder.of(
+						"phasedRegistrationNames",
+						MapBuilder.of("bubbled", "onCloseAd")))
+                .put("onLayoutChanged",
+					MapBuilder.of(
+						"phasedRegistrationNames",
+						MapBuilder.of("bubbled", "onLayoutChanged")))
                 .build();
     }
 

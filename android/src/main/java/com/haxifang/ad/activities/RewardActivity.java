@@ -1,4 +1,4 @@
-package com.haxifang.ad.modules;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,7 @@ import static com.haxifang.ad.RewardVideo.sendEvent;
 
 public class RewardActivity extends Activity {
 
-    final private static String TAG = "hxb-rn-RewardVideo";
+    final private static String TAG = "RewardVideo";
     private Promise rewardPromise;
     private Activity rewardActivity;
     private TTAdNative mTTAdNative;
