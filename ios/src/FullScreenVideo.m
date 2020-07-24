@@ -11,7 +11,6 @@
 @implementation FullScreenVideo
 
 RCT_EXPORT_MODULE();
-
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
@@ -20,7 +19,6 @@ RCT_EXPORT_MODULE();
 {
     return dispatch_get_main_queue();
 }
-
 - (NSArray<NSString *> *)supportedEvents {
     return @[
         @"FullScreenVideo-onAdLoaded",

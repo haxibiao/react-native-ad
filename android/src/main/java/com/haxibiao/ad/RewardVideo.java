@@ -1,4 +1,8 @@
-package com.haxifang.ad;
+package com.haxibiao.ad;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +14,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.haxifang.ad.activities.RewardActivity;
+import com.haxibiao.ad.activities.RewardActivity;
+import com.haxibiao.ad.utils.TToast;
 
 public class RewardVideo extends ReactContextBaseJavaModule {
 
@@ -44,11 +49,50 @@ public class RewardVideo extends ReactContextBaseJavaModule {
         if (!TTAdManagerHolder.sInit) {
             TTAdManagerHolder.init(mContext, appid);
 		}
-		TTAdManagerHolder.setPromise(promise);
+		
+		AdBoss.rewardPromise = promise;
 
         // 启动激励视频广告页面
         RewardActivity.startActivity(mContext.getCurrentActivity(), codeid);
 
+	}
+
+
+    /**
+     * 启动穿山甲激励视频
+     * @param codeid
+     */
+    public static void startTT(String codeid) {
+        //主动看激励视频时，才检查这个权限...
+        // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+        AdBoss.ttAdManager.requestPermissionIfNecessary(mContext);
+        Activity ac = mContext.getCurrentActivity();
+        if (ac != null) {
+            ac.runOnUiThread(() -> {
+                Intent intent = new Intent(mContext, RewardActivity.class);
+                ac.startActivityForResult(intent, 10000);
+            });
+        }
+    }
+
+    /**
+     * 启动优量汇激励视频
+     * @param codeId
+     */
+    public static void startTx(String codeId) {
+        String appId = AdBoss.tx_appid;
+        final String message = "启动腾讯激励视频";
+        Log.d(TAG, message + "AppID：" + appId + "  codeID: " + codeId);
+        Activity ac = mContext.getCurrentActivity();
+        if (ac != null) {
+            ac.runOnUiThread(() -> {
+                TToast.show(mContext, message);
+                Intent intent = new Intent(mContext, com.haxibiao.ad.activities.RewardActivity.class);
+                intent.putExtra("appid", appId);
+                intent.putExtra("codeid", codeId);
+                ac.startActivity(intent);
+            });
+        }
     }
 
     // 发送事件到RN

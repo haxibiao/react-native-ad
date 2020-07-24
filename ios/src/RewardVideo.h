@@ -17,6 +17,8 @@
 #import <BUAdSDK/BURewardedVideoModel.h>
 
 @interface RewardVideo : RCTEventEmitter <RCTBridgeModule>
-{
-}
+
+//发送事件到rn
++ (void)emitEvent:(NSDictionary *)payload;
+
 @end

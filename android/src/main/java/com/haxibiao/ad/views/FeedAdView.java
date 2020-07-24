@@ -1,4 +1,4 @@
-package com.haxifang.ad.views;
+package com.haxibiao.ad.views;
 
 import android.app.Activity;
 import android.util.Log;
@@ -16,14 +16,14 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.haxifang.R;
-import com.haxifang.ad.TTAdManagerHolder;
-import com.haxifang.ad.utils.DislikeDialog;
-import com.haxifang.ad.utils.Utils;
+import com.haxibiao.R;
+import com.haxibiao.ad.AdBoss;
+import com.haxibiao.ad.utils.DislikeDialog;
+import com.haxibiao.ad.utils.Utils;
 
 import java.util.List;
 
-public class FeedView extends RelativeLayout {
+public class FeedAdView extends RelativeLayout {
 
     private static final String TAG = "FeedAd";
 
@@ -40,15 +40,15 @@ public class FeedView extends RelativeLayout {
 
     final protected RelativeLayout mExpressContainer;
 
-    public FeedView(ReactContext context) {
+    public FeedAdView(ReactContext context) {
         super(context);
         mContext = context.getCurrentActivity();
         reactContext = context;
         inflate(context, R.layout.tt_feed_view_hxb, this);
         mExpressContainer = findViewById(R.id.feed_container);
 
-        // 初始化广告 SDK
-        mTTAdNative = TTAdManagerHolder.get().createAdNative(mContext);
+        // 广告 SDK
+        mTTAdNative = AdBoss.mTTAdNative;
 
         // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
         Utils.setupLayoutHack(this);
@@ -99,7 +99,7 @@ public class FeedView extends RelativeLayout {
                 .setNativeAdType(AdSlot.TYPE_INTERACTION_AD).build();
 
         // 请求广告，对请求回调的广告作渲染处理
-        final FeedView _this = this;
+        final FeedAdView _this = this;
         mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
             @Override
             public void onError(int code, String message) {
@@ -136,7 +136,7 @@ public class FeedView extends RelativeLayout {
 
     // 绑定Feed express ================================
     final private void bindAdListener(TTNativeExpressAd ad) {
-        final FeedView _this = this;
+        final FeedAdView _this = this;
         final RelativeLayout mExpressContainer = findViewById(R.id.feed_container);
         ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
             @Override

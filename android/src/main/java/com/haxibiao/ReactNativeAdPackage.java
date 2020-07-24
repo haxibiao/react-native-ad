@@ -1,4 +1,4 @@
-package com.haxifang;
+package com.haxibiao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,20 +12,20 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
-import com.haxifang.ad.AdManager;
-import com.haxifang.ad.DrawFeedViewManager;
-import com.haxifang.ad.FeedAdViewManager;
-import com.haxifang.ad.FullScreenVideo;
-import com.haxifang.ad.RewardVideo;
-import com.haxifang.ad.SplashAd;
-import com.haxifang.ad.TTAdManagerHolder;
+import com.haxibiao.ad.AdManager;
+import com.haxibiao.ad.DrawFeedViewManager;
+import com.haxibiao.ad.FeedAdViewManager;
+import com.haxibiao.ad.FullScreenVideo;
+import com.haxibiao.ad.RewardVideo;
+import com.haxibiao.ad.SplashAd;
+import com.haxibiao.ad.TTAdManagerHolder;
 
 public class ReactNativeAdPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new SplashAd(reactContext));
         modules.add(new AdManager(reactContext));
+        modules.add(new SplashAd(reactContext));
         modules.add(new FullScreenVideo(reactContext));
         modules.add(new RewardVideo(reactContext));
         return modules;

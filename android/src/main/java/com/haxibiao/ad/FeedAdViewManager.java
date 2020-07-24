@@ -1,4 +1,4 @@
-package com.haxifang.ad;
+package com.haxibiao.ad;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,11 +9,11 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.haxifang.ad.views.FeedView;
+import com.haxibiao.ad.views.FeedAdView;
 
 import java.util.Map;
 
-public class FeedAdViewManager extends ViewGroupManager<FeedView> {
+public class FeedAdViewManager extends ViewGroupManager<FeedAdView> {
 
     public static final String TAG = "FeedAd";
     private ReactContext mContext;
@@ -30,8 +30,8 @@ public class FeedAdViewManager extends ViewGroupManager<FeedView> {
 
     @NonNull
     @Override
-    protected FeedView createViewInstance(@NonNull ThemedReactContext reactContext) {
-        return new FeedView(reactContext);
+    protected FeedAdView createViewInstance(@NonNull ThemedReactContext reactContext) {
+        return new FeedAdView(reactContext);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class FeedAdViewManager extends ViewGroupManager<FeedView> {
 //    }
 
     @ReactProp(name = "codeid")
-    public void setCodeId(FeedView view, @Nullable String codeid) {
+    public void setCodeId(FeedAdView view, @Nullable String codeid) {
         view.setCodeId(codeid);
     }
 
@@ -63,7 +63,7 @@ public class FeedAdViewManager extends ViewGroupManager<FeedView> {
 //    }
 
     @ReactProp(name = "adWidth")
-    public void setAdWidth(FeedView view, @Nullable int adWidth) {
+    public void setAdWidth(FeedAdView view, @Nullable int adWidth) {
         view.setWidth(adWidth);
     }
 

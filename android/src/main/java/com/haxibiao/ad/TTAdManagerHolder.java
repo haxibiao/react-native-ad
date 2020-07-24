@@ -1,4 +1,4 @@
-package com.haxifang.ad;
+package com.haxibiao.ad;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,7 +8,7 @@ import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 
 /**
  * 可以用一个单例来保存TTAdManager实例，在需要初始化sdk的时候调用
@@ -17,7 +17,7 @@ public class TTAdManagerHolder {
 
     private static String TAG = "TTAdManagerHolder";
     public static boolean sInit;
-    public static ReactApplicationContext mContext;
+    public static Context mContext;
     public static Promise mPromise;
 
     public static TTAdManager get() {
@@ -27,7 +27,7 @@ public class TTAdManagerHolder {
         return TTAdSdk.getAdManager();
     }
 
-    public static void init(ReactApplicationContext context, String appid) {
+    public static void init(Context context, String appid) {
         mContext = context;
         doInit(context, appid);
     }
@@ -37,21 +37,9 @@ public class TTAdManagerHolder {
     }
 
     // 接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明
-    private static void doInit(final ReactApplicationContext context, final String appid) {
+    private static void doInit(final Context context, final String appid) {
         if (!sInit) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    context.getCurrentActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.d(TAG, "真实设置 appid "+appid);
-                            TTAdSdk.init(context, buildConfig(context, appid));
-                        }
-                    });
-                }
-            }).start();
-
+            TTAdSdk.init(context, buildConfig(context, appid));
             sInit = true;
         }
     }
@@ -60,7 +48,7 @@ public class TTAdManagerHolder {
         return new TTAdConfig.Builder()
                 .appId(appid)
                 .useTextureView(true) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
-                .appName("答妹")
+                .appName("答妹") //FIXME: 需要重构这里
                 .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
                 .allowShowNotify(true) //是否允许sdk展示通知栏提示
                 .allowShowPageWhenScreenLock(true) //是否在锁屏场景支持展示广告落地页

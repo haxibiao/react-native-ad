@@ -1,4 +1,4 @@
-package com.haxifang.ad;
+package com.haxibiao.ad;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +19,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.haxifang.ad.activities.FullScreenActivity;
+import com.haxibiao.ad.activities.FullScreenActivity;
 
 
 

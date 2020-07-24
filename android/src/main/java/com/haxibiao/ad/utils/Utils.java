@@ -1,4 +1,4 @@
-package com.haxifang.ad.utils;
+package com.haxibiao.ad.utils;
 
 import android.view.Choreographer;
 import android.view.View;

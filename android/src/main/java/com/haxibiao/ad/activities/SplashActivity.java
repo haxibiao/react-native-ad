@@ -1,4 +1,4 @@
-package com.haxifang.ad.activities;
+package com.haxibiao.ad.activities;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -23,9 +23,11 @@ import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.haxifang.R;
-import com.haxifang.ad.TTAdManagerHolder;
-import com.haxifang.ad.WeakHandler;
+import com.haxibiao.R;
+import com.haxibiao.ad.AdBoss;
+import com.haxibiao.ad.AdManager;
+import com.haxibiao.ad.TTAdManagerHolder;
+import com.haxibiao.ad.WeakHandler;
 
 public class SplashActivity extends Activity implements WeakHandler.IHandler {
 
@@ -58,7 +60,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
         code_id = extras.getString("codeid");
 
         // 初始化广告 SDK
-        mTTAdNative = TTAdManagerHolder.get().createAdNative(this);
+        mTTAdNative = AdBoss.mTTAdNative;
 
         // 在合适的时机申请权限，如read_phone_state,防止获取不了 imei 时候，下载类广告没有填充的问题
         // 在开屏时候申请不太合适，因为该页面倒计时结束或者请求超时会跳转，在该页面申请权限，体验不好
@@ -271,7 +273,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
 
     // 注册监听方法
     private static void sendEvent(String eventName, WritableMap params) {
-        TTAdManagerHolder.mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+        AdManager.reactAppContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit(eventName, params);
     }
 

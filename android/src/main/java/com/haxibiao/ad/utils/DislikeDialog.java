@@ -1,4 +1,4 @@
-package com.haxifang.ad.utils;
+package com.haxibiao.ad.utils;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import com.bytedance.sdk.openadsdk.FilterWord;
 import com.bytedance.sdk.openadsdk.TTDislikeDialogAbstract;
 import com.bytedance.sdk.openadsdk.dislike.TTDislikeListView;
-import com.haxifang.R;
+import com.haxibiao.R;
 
 import java.util.ArrayList;
 import java.util.List;

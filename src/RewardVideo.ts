@@ -19,7 +19,7 @@ interface EVENT_TYPE {
 	onDownloadActive: string; // 广告应用下载相应监听
 }
 
-export default function (appid: string, codeid: string) {
+export default function ({ appid, codeid }) {
 	const { RewardVideo } = NativeModules;
 	const eventEmitter = new NativeEventEmitter(RewardVideo);
 	let result = RewardVideo.startAd({ appid, codeid });

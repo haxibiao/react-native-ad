@@ -3,13 +3,6 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function DrawFeed() {
-  React.useEffect(() => {
-    return () => {
-      // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
-      ad.init({appid: '5016582'});
-    };
-  }, []);
-
   return (
     <View style={styles.container}>
       <ad.DrawFeed

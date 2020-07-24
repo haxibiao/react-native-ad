@@ -1,4 +1,4 @@
-package com.haxifang.ad.views;
+package com.haxibiao.ad.views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,9 +29,10 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.haxifang.R;
-import com.haxifang.ad.AdManager;
-import com.haxifang.ad.TTAdManagerHolder;
+import com.haxibiao.R;
+import com.haxibiao.ad.AdBoss;
+import com.haxibiao.ad.AdManager;
+import com.haxibiao.ad.TTAdManagerHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class DrawFeedView extends RelativeLayout {
 		if(!TTAdManagerHolder.sInit) {
 			TTAdManagerHolder.init(AdManager.reactAppContext, _appid);
 		}
-		mTTAdNative = TTAdManagerHolder.get().createAdNative(mContext);
+		mTTAdNative = AdBoss.mTTAdNative;
 
         if (_isExpress.equals("true")) {
             // 开始渲染 Draw 广告，原生模版

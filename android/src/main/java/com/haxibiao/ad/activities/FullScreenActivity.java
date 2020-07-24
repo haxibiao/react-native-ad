@@ -1,4 +1,4 @@
-package com.haxifang.ad.activities;
+package com.haxibiao.ad.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,8 +12,9 @@ import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.facebook.react.bridge.Promise;
-import com.haxifang.R;
-import com.haxifang.ad.TTAdManagerHolder;
+import com.haxibiao.R;
+import com.haxibiao.ad.AdBoss;
+import com.haxibiao.ad.TTAdManagerHolder;
 
 public class FullScreenActivity extends Activity {
 
@@ -36,7 +37,7 @@ public class FullScreenActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeid = extras.getString("codeid");
 
-        mTTAdNative = TTAdManagerHolder.get().createAdNative(this);
+        mTTAdNative = AdBoss.mTTAdNative;
         loadAdSlot(codeid, TTAdConstant.VERTICAL, rewardPromise);
     }
 

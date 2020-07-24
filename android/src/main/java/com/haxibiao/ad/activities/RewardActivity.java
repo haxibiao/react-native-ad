@@ -1,4 +1,4 @@
-package com.haxifang.ad.activities;
+package com.haxibiao.ad.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,11 +17,12 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
-import com.haxifang.R;
-import com.haxifang.ad.RewardVideo;
-import com.haxifang.ad.TTAdManagerHolder;
+import com.haxibiao.R;
+import com.haxibiao.ad.AdBoss;
+import com.haxibiao.ad.RewardVideo;
+import com.haxibiao.ad.TTAdManagerHolder;
 
-import static com.haxifang.ad.RewardVideo.sendEvent;
+import static com.haxibiao.ad.RewardVideo.sendEvent;
 
 public class RewardActivity extends Activity {
 
@@ -66,7 +67,7 @@ public class RewardActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeId = extras.getString("codeId");
 
-        mTTAdNative = TTAdManagerHolder.get().createAdNative(this);
+        mTTAdNative = AdBoss.mTTAdNative;
 
         // 开始加载广告
         loadAd(codeId);
@@ -95,6 +96,7 @@ public class RewardActivity extends Activity {
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
 
+		//FIXME:  穿山甲需要全面替换 express 模式
         // 请求广告
         mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
             @Override

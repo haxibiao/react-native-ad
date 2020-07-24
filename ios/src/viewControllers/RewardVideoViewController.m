@@ -9,6 +9,7 @@
 #import <BUAdSDK/BUNativeExpressRewardedVideoAd.h>
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import "AdBoss.h"
+#import "RewardVideo.h"
 
 #define BUD_RGB(a,b,c) [UIColor colorWithRed:(a/255.0) green:(b/255.0) blue:(c/255.0) alpha:1]
 #define GlobleHeight [UIScreen mainScreen].bounds.size.height
@@ -29,28 +30,32 @@
 @implementation RewardVideoViewController
 
 - (void)viewDidLoad {
-
+    
     self.rewardedVideoAd = [AdBoss getRewardAd];
-  
-  NSLog(@"rewardedVideoAd viewDidLoad");
-  
-  self.rewardedVideoAd.delegate = self;
-  [self.rewardedVideoAd loadAdData];
-
+    
+    NSLog(@"rewardedVideoAd viewDidLoad");
+    
+    self.rewardedVideoAd.delegate = self;
+    [self.rewardedVideoAd loadAdData];
+    
 }
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-  NSLog(@"rewardedVideoAd 激励视频 VideoAdDidLoad");
-  [rewardedVideoAd showAdFromRootViewController:self];
+    NSLog(@"rewardedVideoAd 激励视频 VideoAdDidLoad");
+    [rewardedVideoAd showAdFromRootViewController:self];
+    
+    [RewardVideo emitEvent: @{@"type": @"onAdLoaded", @"message": @"success"}];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-  NSLog(@"rewardedVideoAd 激励视频 nativeExpressRewardedVideoAd didFailWithError");
-  NSLog(@"rewardedVideoAd didFailWithError: %@", error);
-  UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-  [rewardedVideoAd showAdFromRootViewController:rootVC];
+    NSLog(@"rewardedVideoAd 激励视频 nativeExpressRewardedVideoAd didFailWithError");
+    NSLog(@"rewardedVideoAd didFailWithError: %@", error);
+    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
+    [rewardedVideoAd showAdFromRootViewController:rootVC];
+    
+    [RewardVideo emitEvent: @{@"type": @"onAdError", @"message": @""}];
 }
 
 
@@ -65,7 +70,7 @@
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s 视频视图渲染成功",__func__);
-  [self.rewardedVideoAd showAdFromRootViewController:self];
+    [self.rewardedVideoAd showAdFromRootViewController:self];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
@@ -75,8 +80,6 @@
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-    [rewardedVideoAd showAdFromRootViewController:rootVC];
 }
 
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
@@ -89,40 +92,44 @@
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
+    [RewardVideo emitEvent: @{@"type": @"onAdClose", @"message": @""}];
     
-  //完成关闭
-  UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-  [rootVC dismissViewControllerAnimated:true completion:^{
-    //通知boss给RN回调...
+    //完成关闭
+//    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
+    UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
+    
+    [rootVC dismissViewControllerAnimated:true completion:^{
+        //通知boss给RN回调...
         if([AdBoss getRewardVideoClicks] > 0)
         {
-          [AdBoss resetClickRewardVideo];
-          [AdBoss getResolve](@{
-            @"video_play":@1,
-            @"ad_click":@1,
-            @"verify_status":@0
-          });
+            [AdBoss resetClickRewardVideo];
+            [AdBoss getResolve](@{
+                @"video_play":@1,
+                @"ad_click":@1,
+                @"verify_status":@0
+            });
         } else {
-          [AdBoss getResolve](@{
-            @"video_play":@1,
-            @"ad_click":@0,
-            @"verify_status":@0
-          });
+            [AdBoss getResolve](@{
+                @"video_play":@1,
+                @"ad_click":@0,
+                @"verify_status":@0
+            });
         }
-  }];
-  
+    }];
+    
 }
 
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-  //点了激励视频
-  [AdBoss clickRewardVideo];
+    //点了激励视频
+    [AdBoss clickRewardVideo];
+    [RewardVideo emitEvent: @{@"type": @"onAdClicked", @"message": @""}];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s",__func__);
-  //TODO: 点了跳过激励视频
-  //  [AdBoss clickRewardVideo];
+    //TODO: 点了跳过激励视频
+    //  [AdBoss clickRewardVideo];
 }
 
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
@@ -150,10 +157,10 @@
 }
 
 -(BOOL)shouldAutorotate{
-  return YES;
+    return YES;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-  return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationMaskAll;
 }
 @end

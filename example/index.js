@@ -12,4 +12,4 @@ import RewardVideo from './src/RewardVideo'; // 头条激励视频广告对接�
 import DrawFeed from './src/DrawFeed'; // 头条 DrawFeed 广告对接示例
 import Feed from './src/Feed'; // 头条 Feed 广告对接示例
 
-AppRegistry.registerComponent(appName, () => FullScreenVideo);
+AppRegistry.registerComponent(appName, () => RewardVideo);

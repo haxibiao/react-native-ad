@@ -17,25 +17,28 @@ export default function RewardVideo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const rewardVideo = ad.startRewardVideo('5016582', '945294086');
+          const rewardVideo = ad.startRewardVideo({
+            appid: '5016582',
+            codeid: '945294086',
+          });
 
-          // rewardVideo.then(val => {
-          //   console.log('RewardVideo', val);
-          // });
+          rewardVideo.result.then(val => {
+            console.log('RewardVideo 回调结果', val);
+          });
 
-          rewardVideo.subscribe('onAdLoaded', (event) => {
+          rewardVideo.subscribe('onAdLoaded', event => {
             console.log('广告加载成功监听111111', event);
           });
 
-          rewardVideo.subscribe('onAdError', (event) => {
+          rewardVideo.subscribe('onAdError', event => {
             console.log('广告加载失败监听', event);
           });
 
-          rewardVideo.subscribe('onAdClose', (event) => {
+          rewardVideo.subscribe('onAdClose', event => {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscribe('onAdClicked', (event) => {
+          rewardVideo.subscribe('onAdClicked', event => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

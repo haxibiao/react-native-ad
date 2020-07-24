@@ -15,12 +15,9 @@
 #import <BUAdSDK/BUAdSDKManager.h>
 #import <BUAdSDK/BURewardedVideoModel.h>
 
-
 @interface FullScreenVideo : RCTEventEmitter <RCTBridgeModule>
 
-  
 //发送事件到rn
-+(void) emitEvent: (NSDictionary *) payload;
-    
++ (void)emitEvent:(NSDictionary *)payload;
 
 @end

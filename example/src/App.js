@@ -25,12 +25,6 @@ export default class App extends Component<{}> {
     status: 'starting',
     message: '--',
   };
-
-  componentDidMount() {
-    ad.init({
-      appid: '5016582',
-    });
-  }
   render() {
     return (
       <View style={styles.container}>
@@ -47,7 +41,16 @@ export default class App extends Component<{}> {
             borderRadius: 50,
           }}
           onPress={() => {
-            const splashAd = ad.startSplash('5016582', '816582039');
+            const splashAd = ad.startSplash({
+              appid: '5016582',
+              codeid: '816582039',
+            });
+
+            // const splashAd = ad.startSplash({
+            //   provider: '腾讯',
+            //   appid: '1110154564',
+            //   codeid: '3090393544429091',
+            // });
 
             splashAd.subscribe('onAdTimeOver', event => {
               console.log('广告时间结束监听', event);

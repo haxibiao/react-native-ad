@@ -154,10 +154,10 @@
 		2C025F3024C84A3E00F311F6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2C025F3124C84A3E00F311F6 /* RewardVideoViewController.m */,
 				2C025F3224C84A3E00F311F6 /* FullscreenViewController.h */,
-				2C025F3324C84A3E00F311F6 /* RewardVideoViewController.h */,
 				2C025F3424C84A3E00F311F6 /* FullscreenViewController.m */,
+				2C025F3324C84A3E00F311F6 /* RewardVideoViewController.h */,
+				2C025F3124C84A3E00F311F6 /* RewardVideoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
