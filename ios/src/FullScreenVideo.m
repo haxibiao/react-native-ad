@@ -85,12 +85,8 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
     FullscreenViewController *vc = [FullscreenViewController new];
     vc.slotID = codeid;
     vc.view.backgroundColor = [UIColor whiteColor];
-    
-    // UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-    
-    UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
-    
-    [rootVC presentViewController:vc animated:true completion:^{
+
+    [[AdBoss getRootVC] presentViewController:vc animated:true completion:^{
         [AdBoss saveResolve:resolve];
         [AdBoss saveReject:reject];
     }];

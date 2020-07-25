@@ -17,25 +17,28 @@ export default function SplashAd() {
           borderRadius: 50,
         }}
         onPress={() => {
-          const splashAd = ad.startSplash('5016582', '816582039');
-
-          splashAd.subscribe('onAdTimeOver', (event) => {
-            console.log('广告时间结束监听', event);
+          const splashAd = ad.startSplash({
+            appid: '5016582',
+            codeid: '816582039',
           });
 
-          splashAd.subscribe('onAdSkip', (i) => {
+          splashAd.subscribe('onAdClose', event => {
+            console.log('广告关闭', event);
+          });
+
+          splashAd.subscribe('onAdSkip', i => {
             console.log('用户点击跳过监听', i);
           });
 
-          splashAd.subscribe('onError', (e) => {
+          splashAd.subscribe('onAdError', e => {
             console.log('开屏加载失败监听', e);
           });
 
-          splashAd.subscribe('onAdClicked', (e) => {
+          splashAd.subscribe('onAdClick', e => {
             console.log('开屏被用户点击了', e);
           });
 
-          splashAd.subscribe('onAdShow', (e) => {
+          splashAd.subscribe('onAdShow', e => {
             console.log('开屏开始展示', e);
           });
         }}>

@@ -26,29 +26,30 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.haxibiao.R;
 import com.haxibiao.ad.AdBoss;
 import com.haxibiao.ad.AdManager;
-import com.haxibiao.ad.TTAdManagerHolder;
 import com.haxibiao.ad.WeakHandler;
 
 public class SplashActivity extends Activity implements WeakHandler.IHandler {
 
+    // 开屏广告加载超时时间,建议大于1000,这里为了冷启动第一次加载到广告并且展示,示例设置了2000ms
+    private static final int AD_TIME_OUT = 2000;
+    private static final int MSG_GO_MAIN = 1;
     static String TAG = "SplashAd";
-
+    // 开屏广告加载发生超时但是SDK没有及时回调结果的时候，做的一层保护。
+    private final WeakHandler mHandler = new WeakHandler(this);
     private TTAdNative mTTAdNative;
     private FrameLayout mSplashContainer;
     // 是否强制跳转到主页面
     private boolean mForceGoMain;
-
-    // 开屏广告加载发生超时但是SDK没有及时回调结果的时候，做的一层保护。
-     private final WeakHandler mHandler = new WeakHandler(this);
-
-    // 开屏广告加载超时时间,建议大于1000,这里为了冷启动第一次加载到广告并且展示,示例设置了2000ms
-    private static final int AD_TIME_OUT = 2000;
-    private static final int MSG_GO_MAIN = 1;
-
     // 开屏广告是否已经加载
     private boolean mHasLoaded;
 
     private String code_id;
+
+    // 注册监听方法
+    private static void sendEvent(String eventName, WritableMap params) {
+        AdManager.reactAppContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,25 +131,18 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
         // 请求广告，调用开屏广告异步请求接口，对请求回调的广告作渲染处理
         mTTAdNative.loadSplashAd(adSlot, new TTAdNative.SplashAdListener() {
 
-            private WritableMap params = Arguments.createMap();
-
-            // RN 回调注册方法
-            private void event() {
-                // 回调监听方法
-                sendEvent("Splash-", params);
-            }
-
             @Override
             @MainThread
             public void onError(int code, String message) {
                 // 广告渲染失败
                 Log.d(TAG, message);
                 mHasLoaded = true;
-                showToast(message + " - " + code_id);
+//                showToast(message + " - " + code_id);
 
-                params.putString("onError", message);
                 // 回调监听方法
-                event();
+                WritableMap params = Arguments.createMap();
+                params.putString("onAdError", "广告渲染失败:" + message);
+                sendEvent(TAG + "-onAdError", params);
 
                 // 关闭开屏广告
                 goToMainActivity();
@@ -159,11 +153,11 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
             public void onTimeout() {
                 // 开屏广告渲染超时
                 mHasLoaded = true;
-                showToast("加载超时");
-
-                params.putBoolean("onTimeout", true);
+//                showToast("加载超时");
                 // 回调监听方法
-                event();
+                WritableMap params = Arguments.createMap();
+                params.putString("onAdError", "加载超时");
+                sendEvent(TAG + "-onAdError", params);
 
                 // 关闭开屏广告
                 goToMainActivity();
@@ -172,16 +166,13 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
             @Override
             @MainThread
             public void onSplashAdLoad(TTSplashAd ad) {
-                Log.d(TAG, "开屏广告请求成功");
-
                 mHasLoaded = true;
-
                 mHandler.removeCallbacksAndMessages(null);
                 if (ad == null) {
-
-                    params.putString("onError", "未知错误获取到的广告对象为空，关闭广告");
                     // 回调监听方法
-                    event();
+                    WritableMap params = Arguments.createMap();
+                    params.putString("onAdError", "未拉取到开屏广告");
+                    sendEvent(TAG + "-onAdError", params);
 
                     // 未知错误获取到的广告对象为空，关闭广告
                     goToMainActivity();
@@ -203,11 +194,10 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
 
                     @Override
                     public void onAdClicked(View view, int type) {
-                        Log.d(TAG, "onAdClicked");
-
-                        params.putBoolean("onAdClicked", true);
-                        // 回调监听方法
-                        event();
+                        Log.d(TAG, "onAdClick");
+                        WritableMap params = Arguments.createMap();
+                        params.putBoolean("onAdClick", true);
+                        sendEvent(TAG + "-onAdClick", params);
 
                         // showToast("开屏广告点击");
                         goToMainActivity();
@@ -216,26 +206,18 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                     @Override
                     public void onAdShow(View view, int type) {
                         Log.d(TAG, "onAdShow");
-
-                        // TODO:开始展示如果把监听抛回去了的话就不能抛其他监听结果回去了，这是一个坑日后使用单例看是否能解决
-                        // params.putBoolean("onAdShow", true);
-                        // 回调监听方法
-                        // event();
-                        WritableMap p = Arguments.createMap();
-                        p.putBoolean("onAdShow",true);
-                        sendEvent("Splash-OnAdShow", p);
-
+                        WritableMap params = Arguments.createMap();
+                        params.putBoolean("onAdShow", true);
+                        sendEvent(TAG + "-OnAdShow", params);
                         // showToast("开屏广告展示");
                     }
 
                     @Override
                     public void onAdSkip() {
-                        // returnIntent.putExtra("onAdSkip", true);
                         Log.d(TAG, "onAdSkip");
-
+                        WritableMap params = Arguments.createMap();
                         params.putBoolean("onAdSkip", true);
-                        // 回调监听方法
-                        event();
+                        sendEvent(TAG + "-onAdSkip", params);
 
                         // showToast("开屏广告跳过");
                         goToMainActivity();
@@ -246,11 +228,9 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                     public void onAdTimeOver() {
                         Log.d(TAG, "onAdTimeOver");
                         // showToast("开屏广告倒计时结束");
-
-                        params.putBoolean("onAdTimeOver", true);
-                        // 回调监听方法
-                        event();
-
+                        WritableMap params = Arguments.createMap();
+                        params.putBoolean("onAdClose", true);
+                        sendEvent(TAG + "-onAdClose", params);
                         goToMainActivity();
                     }
                 });
@@ -259,22 +239,15 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
         }, AD_TIME_OUT);
 
 
-
     }
 
     // 关闭开屏广告方法
     private void goToMainActivity() {
-        if(mSplashContainer != null) {
+        if (mSplashContainer != null) {
             mSplashContainer.removeAllViews();
         }
         this.overridePendingTransition(0, 0); // 不要过渡动画
         this.finish();
-    }
-
-    // 注册监听方法
-    private static void sendEvent(String eventName, WritableMap params) {
-        AdManager.reactAppContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit(eventName, params);
     }
 
     private void showToast(String msg) {

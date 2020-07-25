@@ -6,19 +6,21 @@
 //
 
 #import "RewardVideo.h"
+#import "AdBoss.h"
 
 @implementation RewardVideo 
 
 RCT_EXPORT_MODULE();
+
 + (BOOL)requiresMainQueueSetup {
     return YES;
 }
-
 
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
 }
+
 - (NSArray<NSString *> *)supportedEvents {
     return @[
         @"RewardVideo-onAdError",
@@ -88,10 +90,9 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
     
     RewardVideoViewController *vc = [RewardVideoViewController new];
     vc.view.backgroundColor = [UIColor whiteColor];
+
     
-    UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
-    
-    [rootVC presentViewController:vc animated:true completion:^{
+    [[AdBoss getRootVC] presentViewController:vc animated:true completion:^{
         
         [AdBoss saveResolve:resolve];
         [AdBoss saveReject:reject];

@@ -24,11 +24,7 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 
 +(void) init: (NSString*) appid;
 
-+(void) hookWindow: (UIWindow*) window;
-+(UIWindow*) getWindow;
-
-+(void) hookApp: (UIResponder*) app;
-+(UIResponder*) getApp;
++(UIViewController*) getRootVC;
 
 +(void) loadRewardAd: (NSString*) codeid userid:(NSString *)uid;
 +(BUNativeExpressRewardedVideoAd *) getRewardAd;

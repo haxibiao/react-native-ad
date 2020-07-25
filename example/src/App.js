@@ -52,28 +52,25 @@ export default class App extends Component<{}> {
             //   codeid: '3090393544429091',
             // });
 
-            splashAd.subscribe('onAdTimeOver', event => {
-              console.log('广告时间结束监听', event);
+            splashAd.subscribe('onAdClose', event => {
+              console.log('广告关闭', event);
             });
 
             splashAd.subscribe('onAdSkip', i => {
               console.log('用户点击跳过监听', i);
             });
 
-            splashAd.subscribe('onError', e => {
+            splashAd.subscribe('onAdError', e => {
               console.log('开屏加载失败监听', e);
             });
 
-            // const a = 'onAdTimeOver';
-            // const { BytedADSplash } = NativeModules;
+            splashAd.subscribe('onAdClick', e => {
+              console.log('开屏被用户点击了', e);
+            });
 
-            // const event = new NativeEventEmitter(BytedADSplash);
-            // event.addListener('TTSplashAdListener', reminder => {
-            //   console.log(reminder);
-            //   if (reminder[a]) {
-            //     console.log(a, reminder[a]);
-            //   }
-            // });
+            splashAd.subscribe('onAdShow', e => {
+              console.log('开屏开始展示', e);
+            });
           }}>
           <Text style={{textAlign: 'center'}}>开屏广告</Text>
         </TouchableOpacity>

@@ -10,18 +10,7 @@
 
 文档目录：
 
-- [穿山甲（头条）React Native 广告模块对接文档](#穿山甲头条react-native-广告模块对接文档)
-  - [创建获取 appId 和广告位 codeId](#创建获取-appid-和广告位-codeid)
-      - [获取穿山甲 appId](#获取穿山甲-appid)
-      - [获取穿山甲 codeId](#获取穿山甲-codeid)
-  - [安装配置 react-native-ad 模块](#安装配置-react-native-ad-模块)
-  - [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例)
-  - [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例)
-      - [激励视频回调对象](#激励视频回调对象)
-  - [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullvideo广告的对接及示例)
-  - [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例)
-  - [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例)
-  - [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
+-   [穿山甲（头条）React Native 广告模块对接文档](#穿山甲头条react-native-广告模块对接文档) - [创建获取 appId 和广告位 codeId](#创建获取-appid-和广告位-codeid) - [获取穿山甲 appId](#获取穿山甲-appid) - [获取穿山甲 codeId](#获取穿山甲-codeid) - [安装配置 react-native-ad 模块](#安装配置-react-native-ad-模块) - [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例) - [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例) - [激励视频回调对象](#激励视频回调对象) - [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullvideo广告的对接及示例) - [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例) - [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例) - [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
 
 ## 创建获取 appId 和广告位 codeId
 
@@ -77,16 +66,16 @@ ad.loadSplashAd(appid, codeid);
 ...
 ```
 
-开屏广告监听回调，调用 `ad.loadSplashAd` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+开屏广告监听回调，调用 `ad.loadSplashAd` 将返回一个对象中包含回调监听方法 `subscribe` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
 
-| 监听事件     | 回调参数类型 |                  说明                  |
-| ------------ | :----------: | :------------------------------------: |
-| onAdShow     |    string    |  开屏广告开始展示将会回调，返回 true   |
-| onError      |    string    | 开屏广告渲染失败将会回调，返回错误信息 |
-| onTimeout    |   boolean    |    开屏广告加载超时回调，返回 true     |
-| onAdClicked  |   boolean    |     开屏广告被点击回调，返回 true      |
-| onAdSkip     |   boolean    |    用户点击跳过广告回调，返回 true     |
-| onAdTimeOver |   boolean    | 开屏广告展示倒计时结束回调，返回 true  |
+| 监听事件  | 回调参数类型 |                  说明                   |
+| --------- | :----------: | :-------------------------------------: |
+| onAdShow  |    string    |   开屏广告开始展示将会回调，返回 true   |
+| onError   |    string    | 开屏广告渲染失败将会回调，返回错误信息  |
+| onTimeout |   boolean    | 开屏广告加载超时回调(仅安卓)，返回 true |
+| onAdClick |   boolean    |      开屏广告被点击回调，返回 true      |
+| onAdSkip  |   boolean    |     用户点击跳过广告回调，返回 true     |
+| onAdClose |   boolean    |  开屏广告展示倒计时结束回调，返回 true  |
 
 示例代码：
 
@@ -105,7 +94,7 @@ splashAd.subscribe('onTimeout', event => {
   console.log('广告加载超时监听', event);
 });
 
-splashAd.subscribe('onAdTimeOver', event => {
+splashAd.subscribe('onAdClose', event => {
   console.log('广告时间结束监听', event);
 });
 
@@ -113,7 +102,7 @@ splashAd.subscribe('onAdSkip', i => {
   console.log('用户点击跳过监听', i);
 });
 
-splashAd.subscribe('onAdClicked', i => {
+splashAd.subscribe('onAdClick', i => {
   console.log('广告被点击监听', i);
 });
 
@@ -137,14 +126,14 @@ ad.startRewardVideo(appid, codeid);
 ...
 ```
 
-激励视频监听回调，调用 `ad.startRewardVideo` 将返回一个对象中包含回调监听方法 `subscrib` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
+激励视频监听回调，调用 `ad.startRewardVideo` 将返回一个对象中包含回调监听方法 `subscribe` 该方法接收两个参数监听事件和监听回调方法包含一个回调参数
 
 | 监听事件         | 回调参数类型 |                               说明                               |
 | ---------------- | :----------: | :--------------------------------------------------------------: |
 | onAdLoaded       |  event: {}   |   广告加载成功回调，返回 [激励视频回调对象](#激励视频回调对象)   |
 | onAdError        |  event: {}   |   广告加载失败回调，返回 [激励视频回调对象](#激励视频回调对象)   |
 | onAdClose        |  event: {}   |    广告被关闭回调，返回 [激励视频回调对象](#激励视频回调对象)    |
-| onAdClicked      |  event: {}   | 广告点击查看详情回调，返回 [激励视频回调对象](#激励视频回调对象) |
+| onAdClick        |  event: {}   | 广告点击查看详情回调，返回 [激励视频回调对象](#激励视频回调对象) |
 | onAdVideoCached  |  event: {}   | 激励视频缓存成功回调，返回 [激励视频回调对象](#激励视频回调对象) |
 | onVideoComplete  |  event: {}   | 激励视频播放失败回调，返回 [激励视频回调对象](#激励视频回调对象) |
 | onDownloadActive |  event: {}   | 广告应用下载相关回调，返回 [激励视频回调对象](#激励视频回调对象) |
@@ -166,7 +155,7 @@ rewardVideo.subscribe('onAdClose', event => {
 console.log('广告被关闭监听', event);
 });
 
-rewardVideo.subscribe('onAdClicked', event => {
+rewardVideo.subscribe('onAdClick', event => {
 console.log('广告点击查看详情监听', event);
 });
 
@@ -226,7 +215,7 @@ rewardVideo.then(val => {
 | 200  |    onAdLoaded    |          广告加载完毕          |
 | 201  | onAdVideoCached  |        激励视频缓存成功        |
 | 202  |    onAdLoaded    |        开始展示激励视频        |
-| 203  |   onAdClicked    |        查看激励视频详情        |
+| 203  |    onAdClick     |        查看激励视频详情        |
 | 204  |    onAdClose     |          关闭激励视频          |
 | 205  | onVideoComplete  |        激励视频播放失败        |
 | 300  | onDownloadActive |        开始下载广告应用        |

@@ -58,24 +58,13 @@ static RCTPromiseRejectBlock adReject;
 
 }
 
-+ (void)hookWindow:(UIWindow *)window {
-  _window = window;
++ (UIViewController *) getRootVC {
+    return (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
-+ (UIWindow *)getWindow {
-  return _window;
-}
-
-+ (void)hookApp:(UIResponder *)app {
-  _app = app;
-}
-
-+ (UIResponder *)getApp {
-  return _app;
-}
 
 + (void) loadRewardAd:(NSString *)codeid userid:(NSString *)uid{
-  #warning Every time the data is requested, a new one BURewardedVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+//    # 避免重复请求数据，每次加载会返回新的广告数据的
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
@@ -87,7 +76,7 @@ static RCTPromiseRejectBlock adReject;
 }
 
 + (void)loadFullScreenAd:(NSString *)codeid {
-  #warning----- Every time the data is requested, a new one BUFullscreenVideoAd needs to be initialized. Duplicate request data by the same full screen video ad is not allowed.
+//  # 避免重复请求数据，每次加载会返回新的广告数据的
   fullScreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:codeid];
   [fullScreenAd loadAdData];
 }

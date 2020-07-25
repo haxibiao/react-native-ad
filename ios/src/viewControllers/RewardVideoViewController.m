@@ -44,17 +44,13 @@
 
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     NSLog(@"rewardedVideoAd 激励视频 VideoAdDidLoad");
-    [rewardedVideoAd showAdFromRootViewController:self];
-    
     [RewardVideo emitEvent: @{@"type": @"onAdLoaded", @"message": @"success"}];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    NSLog(@"rewardedVideoAd 激励视频 nativeExpressRewardedVideoAd didFailWithError");
     NSLog(@"rewardedVideoAd didFailWithError: %@", error);
-    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-    [rewardedVideoAd showAdFromRootViewController:rootVC];
     
+    [rewardedVideoAd showAdFromRootViewController:[AdBoss getRootVC]];
     [RewardVideo emitEvent: @{@"type": @"onAdError", @"message": @""}];
 }
 
@@ -64,7 +60,6 @@
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    //TODO: 激励视频下载完成了
     BUD_Log(@"%s 激励视频下载完成了",__func__);
 }
 
@@ -94,27 +89,25 @@
     BUD_Log(@"%s",__func__);
     [RewardVideo emitEvent: @{@"type": @"onAdClose", @"message": @""}];
     
-    //完成关闭
-//    UIViewController *rootVC = [AdBoss getWindow].rootViewController;
-    UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
-    
-    [rootVC dismissViewControllerAnimated:true completion:^{
-        //通知boss给RN回调...
-        if([AdBoss getRewardVideoClicks] > 0)
-        {
-            [AdBoss resetClickRewardVideo];
-            [AdBoss getResolve](@{
-                @"video_play":@1,
-                @"ad_click":@1,
-                @"verify_status":@0
-            });
-        } else {
-            [AdBoss getResolve](@{
-                @"video_play":@1,
-                @"ad_click":@0,
-                @"verify_status":@0
-            });
-        }
+    //完成播放 关闭广告 拿回promise结果
+    [[AdBoss getRootVC] dismissViewControllerAnimated:true completion:^{
+      if([AdBoss getRewardVideoClicks] > 0)
+      {
+        //每次返回rn后清空激励视频点击次数
+        [AdBoss resetClickRewardVideo];
+        
+        [AdBoss getResolve](@{
+          @"video_play":@1,
+          @"ad_click":@1, //点击
+          @"ad_skip":@1
+        });
+      }else{
+        [AdBoss getResolve](@{
+          @"video_play":@1,
+          @"ad_click":@0, //没有点击
+          @"ad_skip":@1
+        });
+      }
     }];
     
 }
