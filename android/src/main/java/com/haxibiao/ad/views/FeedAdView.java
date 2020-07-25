@@ -28,7 +28,8 @@ public class FeedAdView extends RelativeLayout {
     private static final String TAG = "FeedAd";
 
     private Activity mContext;
-    private ReactContext reactContext;
+	private ReactContext reactContext;
+	private String _appid = "";
     private String _codeid = "";
     private TTAdNative mTTAdNative;
     private AdSlot adSlot;
@@ -44,25 +45,28 @@ public class FeedAdView extends RelativeLayout {
         super(context);
         mContext = context.getCurrentActivity();
         reactContext = context;
-        inflate(context, R.layout.tt_feed_view_hxb, this);
+        inflate(context, R.layout.feed_view, this);
         mExpressContainer = findViewById(R.id.feed_container);
-
-        // 广告 SDK
-        mTTAdNative = AdBoss.mTTAdNative;
 
         // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
         Utils.setupLayoutHack(this);
 
     }
 
-    // 设置广告宽度
     public void setWidth(int width) {
         Log.d(TAG, "setCodeId: " + _codeid + ", _expectedWidth:" + width);
         _expectedWidth = width;
-        showAd();
     }
 
-    // 设置广告位 ID
+    public void setAppId(String appid) {
+        Log.d(TAG, "setAppId: " + appid );
+		_appid = appid;
+		if(!_appid.isEmpty()) {
+			AdBoss.init(mContext, _appid);
+		}
+        mTTAdNative = AdBoss.mTTAdNative;
+    }
+
     public void setCodeId(String codeId) {
         Log.d(TAG, "setCodeId: " + codeId + ", _expectedWidth:" + _expectedWidth);
         _codeid = codeId;
@@ -103,18 +107,18 @@ public class FeedAdView extends RelativeLayout {
         mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
             @Override
             public void onError(int code, String message) {
-                message = "错误结果 loadNativeExpressAd onError: " + code + ", " + message;
+                message = "错误结果 loadNativeExpressAd onAdError: " + code + ", " + message;
                 // TToast.show(getContext(), message);
                 Log.d(TAG, message);
                 mExpressContainer.removeAllViews();
-                _this.onError(message);
+                _this.onAdError(message);
             }
 
             @Override
             public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
                 Log.d(TAG, "onNativeExpressAdLoad: !!!");
                 if (ads == null || ads.size() == 0) {
-                    _this.onError("加载成功无广告内容");
+                    _this.onAdError("加载成功无广告内容");
                     return;
                 }
 
@@ -155,7 +159,7 @@ public class FeedAdView extends RelativeLayout {
             @Override
             public void onRenderFail(View view, String msg, int code) {
                 Log.d(TAG, "render fail:" + (System.currentTimeMillis() - startTime));
-                _this.onError("加载成功 渲染失败 code:" + code);
+                _this.onAdError("加载成功 渲染失败 code:" + code);
             }
 
             @Override
@@ -168,7 +172,7 @@ public class FeedAdView extends RelativeLayout {
                 // 在渲染成功回调时展示广告，提升体验
                 mExpressContainer.removeAllViews();
                 mExpressContainer.addView(view);
-                onLayoutChanged((int) width, (int) height);
+                onAdLayout((int) width, (int) height);
             }
         });
         // dislike设置
@@ -236,7 +240,7 @@ public class FeedAdView extends RelativeLayout {
                     // TToast.show(mContext, "点击=" + filterWord.getName());
                     // 用户选择不喜欢原因后，移除广告展示
                     mExpressContainer.removeAllViews();
-                    onCloseAd(filterWord.getName());
+                    onAdClose(filterWord.getName());
                 }
             });
             ad.setDislikeDialog(dislikeDialog);
@@ -249,7 +253,7 @@ public class FeedAdView extends RelativeLayout {
                 // TToast.show(mContext, "点击 " + value);
                 // 用户选择不喜欢原因后，移除广告展示
                 mExpressContainer.removeAllViews();
-                onCloseAd(value);
+                onAdClose(value);
             }
 
             @Override
@@ -266,7 +270,7 @@ public class FeedAdView extends RelativeLayout {
 
 
     // 外部事件..
-    public void onError(String message) {
+    public void onAdError(String message) {
         WritableMap event = Arguments.createMap();
         event.putString("message", message);
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdError", event);
@@ -277,19 +281,19 @@ public class FeedAdView extends RelativeLayout {
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdClick", event);
     }
 
-    public void onCloseAd(String reason) {
-        Log.d(TAG, "onCloseAd: " + reason);
+    public void onAdClose(String reason) {
+        Log.d(TAG, "onAdClose: " + reason);
         WritableMap event = Arguments.createMap();
         event.putString("reason", reason);
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onCloseAd", event);
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdClose", event);
     }
 
-    public void onLayoutChanged(int width, int height) {
-        Log.d(TAG, "onLayoutChanged: " + width + ", " + height);
+    public void onAdLayout(int width, int height) {
+        Log.d(TAG, "onAdLayout: " + width + ", " + height);
         WritableMap event = Arguments.createMap();
         event.putInt("width", width);
         event.putInt("height", height);
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onLayoutChanged", event);
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdLayout", event);
     }
 
 }

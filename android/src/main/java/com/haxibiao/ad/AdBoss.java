@@ -92,7 +92,7 @@ public class AdBoss {
     public static ReactContext reactContext;
     public static ArrayBlockingQueue<String> myBlockingQueue = new ArrayBlockingQueue<String>(1);
 
-    public static void initTT(Context context, String appId) {
+    public static void init(Context context, String appId) {
         mContext = context;
         if (context.getClass().getName() == "ReactApplicationContext") {
             reactContext = (ReactContext) context;

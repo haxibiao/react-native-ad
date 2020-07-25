@@ -19,9 +19,8 @@
 
 @implementation AdBoss
 
-static NSString *_appid = @"";
-static UIWindow *_window = nil;
-static UIResponder *_app = nil;
+static NSString *_appid = nil;
+
 static BUNativeExpressRewardedVideoAd *rewardAd = nil;
 static BUNativeExpressFullscreenVideoAd *fullScreenAd = nil;
 static int rewardClicks = 0;
@@ -31,31 +30,35 @@ static RCTPromiseResolveBlock adResolve;
 static RCTPromiseRejectBlock adReject;
 
 + (void)saveResolve:(RCTPromiseResolveBlock)resolve {
-  adResolve = resolve;
+    adResolve = resolve;
 }
 
 + (RCTPromiseResolveBlock)getResolve{
-  return adResolve;
+    return adResolve;
 }
 
 + (void)saveReject:(RCTPromiseRejectBlock)reject {
-  adReject = reject;
+    adReject = reject;
 }
 
 + (RCTPromiseRejectBlock)getReject {
-  return adReject;
+    return adReject;
 }
 
-+(void) init:(NSString*) appid {
-  _appid = appid;
-  
-#if DEBUG
-  //Whether to open log. default is none.
-  [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
-#endif
-  [BUAdSDKManager setAppID:_appid];
-  [BUAdSDKManager setIsPaidApp:NO];
++(BOOL)hasInit {
+    return _appid != nil;
+}
 
++(void)init:(NSString*) appid {
+    _appid = appid;
+    
+#if DEBUG
+    //Whether to open log. default is none.
+    [BUAdSDKManager setLoglevel:BUAdSDKLogLevelDebug];
+#endif
+    [BUAdSDKManager setAppID:_appid];
+    [BUAdSDKManager setIsPaidApp:NO];
+    
 }
 
 + (UIViewController *) getRootVC {
@@ -64,7 +67,7 @@ static RCTPromiseRejectBlock adReject;
 
 
 + (void) loadRewardAd:(NSString *)codeid userid:(NSString *)uid{
-//    # 避免重复请求数据，每次加载会返回新的广告数据的
+    //    # 避免重复请求数据，每次加载会返回新的广告数据的
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
@@ -72,30 +75,30 @@ static RCTPromiseRejectBlock adReject;
 }
 
 + (BUNativeExpressRewardedVideoAd *)getRewardAd {
-  return rewardAd;
+    return rewardAd;
 }
 
 + (void)loadFullScreenAd:(NSString *)codeid {
-//  # 避免重复请求数据，每次加载会返回新的广告数据的
-  fullScreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:codeid];
-  [fullScreenAd loadAdData];
+    //  # 避免重复请求数据，每次加载会返回新的广告数据的
+    fullScreenAd = [[BUNativeExpressFullscreenVideoAd alloc] initWithSlotID:codeid];
+    [fullScreenAd loadAdData];
 }
 
 + (BUNativeExpressFullscreenVideoAd *)getFullScreenAd{
-  return fullScreenAd;
+    return fullScreenAd;
 }
 
 //统计激励视频是否点击查看
 + (void)clickRewardVideo {
-  rewardClicks = rewardClicks + 1;
+    rewardClicks = rewardClicks + 1;
 }
 
 + (void)resetClickRewardVideo {
-  rewardClicks = 0;
+    rewardClicks = 0;
 }
 
 + (int)getRewardVideoClicks {
-  return rewardClicks;
+    return rewardClicks;
 }
 
 @end

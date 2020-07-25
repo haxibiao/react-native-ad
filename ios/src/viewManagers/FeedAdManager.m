@@ -17,14 +17,22 @@
 @implementation FeedAdManager
 
 RCT_EXPORT_MODULE(FeedAd)
-RCT_EXPORT_VIEW_PROPERTY(onLayoutChanged, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onAdLayout, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onAdError, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdClicked, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdClosed, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdClick, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdClose, RCTBubblingEventBlock)
 
 - (FeedAd *)view
 {
   return [[FeedAd alloc] init];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(appid, NSString, FeedAd)
+{
+  if (json) {
+    [view  setAppId:json];
+  }
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(codeid, NSString, FeedAd)

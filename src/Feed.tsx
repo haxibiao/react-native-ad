@@ -1,68 +1,64 @@
 import React from "react";
 import { requireNativeComponent, StyleSheet } from "react-native";
 
-const NativeFeedAd = requireNativeComponent("FeedAd");
+const FeedAdComponent = requireNativeComponent("FeedAd");
+
+console.log('FeedAdComponent', FeedAdComponent);
+
 
 interface Props {
-	codeId: string;
-	// useCache: boolean;
+	appid: string;
+	codeid: string;
 	adWidth: number;
 	visible: boolean;
 	visibleHandler: Function;
-	onError?: Function;
-	onLoad?: Function;
-	onClick?: Function;
+	onAdLayout?: Function;
+	onAdError?: Function;
+	onAdClose?: Function;
+	onAdClick?: Function;
 }
 
 const FeedAd = (props: Props) => {
 	const {
-		codeId: codeid_feed,
-		// useCache = true,
+		appid,
+		codeid,
 		adWidth = 150,
-		onError,
-		onLoad,
-		onClick,
+		onAdLayout,
+		onAdError,
+		onAdClose,
+		onAdClick,
 	} = props;
 	// let [visible, setVisible] = useState(true);
-	const { visible, visibleHandler } = props; // 状态交友父组件来控制，使得广告显示状态在父组件中可以实时监听
+	// 状态交友父组件来控制，使得广告显示状态在父组件中可以实时监听
+	const { visible = true, visibleHandler } = props;
 	const [height, setHeight] = React.useState(0); // 默认高度
 	if (!visible) return null;
 	return (
-		<NativeFeedAd
-			// provider={feed_provider}
-			codeid={ codeid_feed }
-			// useCache={useCache}
+		<FeedAdComponent
+			appid={ appid ?? null }
+			codeid={ codeid }
 			adWidth={ adWidth }
 			style={ { width: adWidth, height } }
-			onError={ (e: any) => {
-				// console.log("onError feed", e.nativeEvent);
+			onAdError={ (e: any) => {
 				visibleHandler(false);
-				onError && onError(e.nativeEvent);
+				onAdError && onAdError(e.nativeEvent);
 			} }
 			onAdClick={ (e: any) => {
-				// console.log("onClick FeedAd ");
-				onClick && onClick(e.nativeEvent);
+				onAdClick && onAdClick(e.nativeEvent);
 			} }
-			onAdClosed={ (e: any) => {
-				// console.log("onAdClosed", e.nativeEvent);
+			onAdClose={ (e: any) => {
 				visibleHandler(false);
+				onAdClose && onAdClose(e.nativeEvent);
 			} }
-			onLayoutChanged={ (e: any) => {
-				// console.log("onLayoutChanged feed", e.nativeEvent);
+			onAdLayout={ (e: any) => {
 				if (e.nativeEvent.height) {
 					setHeight(e.nativeEvent.height);
-					onLoad && onLoad(e.nativeEvent);
+					onAdLayout && onAdLayout(e.nativeEvent);
 				}
 			} }
 		/>
 	);
 };
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		width: "100%",
-	},
-});
 
 export default FeedAd;

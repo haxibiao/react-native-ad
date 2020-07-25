@@ -54,7 +54,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_splash_activity);
+        setContentView(R.layout.activity_splash);
 
         // 读取 code id
         Bundle extras = getIntent().getExtras();

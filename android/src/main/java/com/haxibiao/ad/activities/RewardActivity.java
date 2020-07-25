@@ -59,7 +59,7 @@ public class RewardActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_view_video_hxb);
+        setContentView(R.layout.video_view);
         rewardActivity = this;
         rewardPromise = TTAdManagerHolder.mPromise;
 

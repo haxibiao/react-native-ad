@@ -3,28 +3,23 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function Feed() {
-  React.useEffect(() => {
-    // 初始化 SDK 传入 appid ，已经初始化过的可以忽略，注意区分 Android 和 IOS
-    ad.init('5016582');
-  }, []);
-
   return (
     <View style={styles.container}>
       <ad.Feed
-        codeId="916582486" // 广告位 codeid （必传），注意区分 Android 和 IOS
-        visible={true}
+        appid="5016582" //可选 如果AdManager.init过,
+        codeid="916582486" //必传 广告位 codeid 注意区分 Android 和 IOS
         adWidth={300}
-        onLoad={smg => {
-          // 广告加载成功回调
-          console.log('头条 Feed 广告加载成功！', smg);
+        onAdLayout={data => {
+          console.log('Feed 广告加载成功！', data);
         }}
-        onError={err => {
-          // 广告加载失败回调
-          console.log('头条 Feed 广告加载失败！', err);
+        onAdClose={data => {
+          console.log('Feed 广告关闭！', data);
         }}
-        onClick={val => {
-          // 广告点击回调
-          console.log('头条 Feed 广告被用户点击！', val);
+        onAdError={err => {
+          console.log('Feed 广告加载失败！', err);
+        }}
+        onAdClick={val => {
+          console.log('Feed 广告被用户点击！', val);
         }}
       />
     </View>

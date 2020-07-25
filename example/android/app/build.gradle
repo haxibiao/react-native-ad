@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.diudie"
+        applicationId "com.example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -78,7 +78,7 @@ public class DislikeDialog extends TTDislikeDialogAbstract {
 
     @Override
     public int getLayoutId() {
-        return R.layout.tt_dlg_dislike_custom;
+        return R.layout.dlg_dislike_custom;
     }
 
     @Override

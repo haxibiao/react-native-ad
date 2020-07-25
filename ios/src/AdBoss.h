@@ -23,6 +23,7 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 @interface AdBoss: NSObject
 
 +(void) init: (NSString*) appid;
++(BOOL) hasInit;
 
 +(UIViewController*) getRootVC;
 

@@ -41,15 +41,21 @@ public class FeedAdViewManager extends ViewGroupManager<FeedAdView> {
 
     // 设置什么广告（头条，腾讯，百度），暂时不用
 //    @ReactProp(name = "provider")
-//    public void setProvider(FeedView view, @Nullable String provider) {
+//    public void setProvider(FeedAdView view, @Nullable String provider) {
 //        view.setProvider(provider);
 //    }
 
     // 设置广告是否使用缓存，现在先不用
 //    @ReactProp(name = "useCache")
-//    public void setUseCache(FeedView view, @Nullable Boolean useCache) {
+//    public void setUseCache(FeedAdView view, @Nullable Boolean useCache) {
 //        view.setUseCache(useCache);
 //    }
+
+    
+   @ReactProp(name = "appid")
+   public void setAppId(FeedAdView view, @Nullable String appid) {
+       view.setAppId(appid);
+   }
 
     @ReactProp(name = "codeid")
     public void setCodeId(FeedAdView view, @Nullable String codeid) {
@@ -58,7 +64,7 @@ public class FeedAdViewManager extends ViewGroupManager<FeedAdView> {
 
     // 设置大小，暂时不用
 //    @ReactProp(name = "size")
-//    public void setSize(FeedView view, @Nullable String size) {
+//    public void setSize(FeedAdView view, @Nullable String size) {
 //        view.setSize(size);
 //    }
 
@@ -78,14 +84,14 @@ public class FeedAdViewManager extends ViewGroupManager<FeedAdView> {
 					MapBuilder.of(
 						"phasedRegistrationNames",
 						MapBuilder.of("bubbled", "onAdError")))
-                .put("onCloseAd",
+                .put("onAdClose",
 					MapBuilder.of(
 						"phasedRegistrationNames",
-						MapBuilder.of("bubbled", "onCloseAd")))
-                .put("onLayoutChanged",
+						MapBuilder.of("bubbled", "onAdClose")))
+                .put("onAdLayout",
 					MapBuilder.of(
 						"phasedRegistrationNames",
-						MapBuilder.of("bubbled", "onLayoutChanged")))
+						MapBuilder.of("bubbled", "onAdLayout")))
                 .build();
     }
 

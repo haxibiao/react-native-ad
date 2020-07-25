@@ -56,7 +56,7 @@ public class DrawFeedView extends RelativeLayout {
         mContext = context;
 
         // 初始化广告渲染组件
-        inflate(mContext, R.layout.tt_drew_video_hxb, this);
+        inflate(mContext, R.layout.draw_video, this);
         mContainer = findViewById(R.id.tt_video_layout_hxb);
 
         // 修复 add view 不显示问题

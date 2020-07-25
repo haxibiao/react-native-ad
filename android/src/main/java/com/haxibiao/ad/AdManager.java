@@ -29,7 +29,7 @@ public class AdManager extends ReactContextBaseJavaModule {
     public void init(ReadableMap options) {
 		//默认头条穿山甲
 		AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
-		AdBoss.initTT(reactAppContext, AdBoss.tt_appid);
+		AdBoss.init(reactAppContext, AdBoss.tt_appid);
 		
 		// 支持一口气init所有需要的adConfig
         AdBoss.tx_appid = options.hasKey("tx_appid") ? options.getString("tx_appid") : AdBoss.tx_appid;
