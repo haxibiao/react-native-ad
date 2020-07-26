@@ -13,15 +13,15 @@ export default function DrawFeed() {
     <View style={styles.container}>
       <ad.DrawFeed
         codeid="945339778" // 广告位 codeid （必传），注意区分 Android 和 IOS
-        onLoad={(msg) => {
+        onAdLoad={(msg) => {
           // 广告加载成功回调
           console.log('Draw Feed 广告加载成功！', msg);
         }}
-        onError={(err) => {
+        onAdError={(err) => {
           // 广告加载失败回调
           console.log('Draw Feed 广告加载失败！', err);
         }}
-        onClick={(val) => {
+        onAdClick={(val) => {
           // 广告点击回调
           console.log('Draw Feed 广告被用户点击！', val);
         }}

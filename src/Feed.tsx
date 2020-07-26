@@ -40,14 +40,14 @@ const FeedAd = (props: Props) => {
 			adWidth={ adWidth }
 			style={ { width: adWidth, height } }
 			onAdError={ (e: any) => {
-				visibleHandler(false);
+				visibleHandler && visibleHandler(false);
 				onAdError && onAdError(e.nativeEvent);
 			} }
 			onAdClick={ (e: any) => {
 				onAdClick && onAdClick(e.nativeEvent);
 			} }
 			onAdClose={ (e: any) => {
-				visibleHandler(false);
+				visibleHandler && visibleHandler(false);
 				onAdClose && onAdClose(e.nativeEvent);
 			} }
 			onAdLayout={ (e: any) => {

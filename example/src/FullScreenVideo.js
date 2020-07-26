@@ -33,7 +33,7 @@ export default function FullVideo() {
           });
 
           fullVideo.subscribe('onAdLoaded', (event) => {
-            console.log('广告加载成功监听111111', event);
+            console.log('广告加载成功监听', event);
           });
 
           fullVideo.subscribe('onAdError', (event) => {
