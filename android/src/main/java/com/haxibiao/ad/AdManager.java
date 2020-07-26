@@ -9,6 +9,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+
 public class AdManager extends ReactContextBaseJavaModule {
     public static ReactApplicationContext reactAppContext;
     protected String TAG = "AdManager";
@@ -64,6 +66,15 @@ public class AdManager extends ReactContextBaseJavaModule {
         int width = options.hasKey("width") ? options.getInt("width") : 0;
         Log.d(TAG, "loadFeedAd codeid " + codeid + " width:" + width);
         AdBoss.loadFeedAd(codeid, width);
+    }
+
+    /**
+     * 主动看激励视频时，才检查这个权限
+     */
+    @ReactMethod
+    public void requestPermission() {
+        // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+        AdBoss.ttAdManager.requestPermissionIfNecessary(reactAppContext);
     }
 
 }

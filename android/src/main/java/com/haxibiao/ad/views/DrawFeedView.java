@@ -83,7 +83,7 @@ public class DrawFeedView extends RelativeLayout {
 		if(!TTAdManagerHolder.sInit) {
 			TTAdManagerHolder.init(AdManager.reactAppContext, _appid);
 		}
-		mTTAdNative = AdBoss.mTTAdNative;
+		mTTAdNative = AdBoss.TTAdSdk;
 
         if (_isExpress.equals("true")) {
             // 开始渲染 Draw 广告，原生模版

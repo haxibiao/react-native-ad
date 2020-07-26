@@ -1,11 +1,9 @@
 package com.haxibiao.ad.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -67,7 +65,7 @@ public class RewardActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeId = extras.getString("codeId");
 
-        mTTAdNative = AdBoss.mTTAdNative;
+        mTTAdNative = AdBoss.TTAdSdk;
 
         // 开始加载广告
         loadAd(codeId);

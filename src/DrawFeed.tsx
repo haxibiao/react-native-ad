@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { requireNativeComponent, StyleSheet } from "react-native";
 
-const NativeDrawFeedAd = requireNativeComponent("DrawFeedAd");
+const DrawFeedComponent = requireNativeComponent("DrawFeedAd");
+
+console.log('DrawFeedComponent', DrawFeedComponent);
 
 // 默认很多是用旧的 native 方式申请的 drawfeed 代码位...
 // isExpress 用来区分是否用原生方式渲染
@@ -20,7 +22,7 @@ export const DrawFeedAd = (props: Props) => {
 	const [visible, setVisible] = useState(true);
 	return (
 		visible && (
-			<NativeDrawFeedAd
+			<DrawFeedComponent
 				provider={ "头条" }
 				express={ express }
 				appid={ appid }

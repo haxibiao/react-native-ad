@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function Feed() {
+  useEffect(() => {
+    return () => {
+      ad.init({
+        appid: '5016582',
+      });
+    };
+  }, []);
   return (
     <View style={styles.container}>
+      <Text>测试FeedAd</Text>
       <ad.Feed
-        appid="5016582" //可选 如果AdManager.init过,
         codeid="916582486" //必传 广告位 codeid 注意区分 Android 和 IOS
         adWidth={300}
         onAdLayout={data => {
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#cccccc',
   },
   welcome: {
     fontSize: 20,

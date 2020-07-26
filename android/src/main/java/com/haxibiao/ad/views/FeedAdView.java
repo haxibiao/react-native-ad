@@ -23,15 +23,15 @@ import com.haxibiao.ad.utils.Utils;
 
 import java.util.List;
 
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+
 public class FeedAdView extends RelativeLayout {
 
     private static final String TAG = "FeedAd";
 
     private Activity mContext;
-	private ReactContext reactContext;
-	private String _appid = "";
+    private ReactContext reactContext;
     private String _codeid = "";
-    private TTAdNative mTTAdNative;
     private AdSlot adSlot;
 
     private int _expectedWidth = 0;
@@ -50,21 +50,12 @@ public class FeedAdView extends RelativeLayout {
 
         // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
         Utils.setupLayoutHack(this);
-
     }
 
     public void setWidth(int width) {
-        Log.d(TAG, "setCodeId: " + _codeid + ", _expectedWidth:" + width);
+        Log.d(TAG, "setCodeId = " + _codeid + ", setWidth:" + width);
         _expectedWidth = width;
-    }
-
-    public void setAppId(String appid) {
-        Log.d(TAG, "setAppId: " + appid );
-		_appid = appid;
-		if(!_appid.isEmpty()) {
-			AdBoss.init(mContext, _appid);
-		}
-        mTTAdNative = AdBoss.mTTAdNative;
+        showAd();
     }
 
     public void setCodeId(String codeId) {
@@ -74,6 +65,7 @@ public class FeedAdView extends RelativeLayout {
     }
 
     public void showAd() {
+        Log.d(TAG, "showAd: width:" + _expectedWidth + " codeid:" + _codeid);
         // 显示广告
         if (_expectedWidth == 0 || _codeid.isEmpty()) {
             // 广告宽度未设置或 code id 未设置，停止显示广告
@@ -81,30 +73,25 @@ public class FeedAdView extends RelativeLayout {
         }
         // 信息流广告原来不能提前预加载，很容易出现超时，必须当场加载
         // sdk里很容易出现 message send to dead thread ... 肯定有些资源线程依赖！
-        mContext.runOnUiThread(() -> {
+        runOnUiThread(() -> {
             loadTTFeedAd();
         });
-
     }
 
     // 显示头条的信息流广告
     public void loadTTFeedAd() {
 
         // 创建广告请求参数AdSlot,具体参数含义参考文档 modules.add(new Interaction(reactContext));
-        float expressViewWidth = _expectedWidth;
-        Log.d(TAG, "start to load feed ad expectedViewWidth: " + expressViewWidth);
-        float expressViewHeight = _expectedHeight;
-
         adSlot = new AdSlot.Builder().setCodeId(_codeid) // 广告位id
                 .setSupportDeepLink(true).setAdCount(1) // 请求广告数量为1到3条
-                .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp,高度0自适应
+                .setExpressViewAcceptedSize(_expectedWidth, _expectedHeight) // 期望模板广告view的size,单位dp,高度0自适应
                 .setImageAcceptedSize(640, 320)
                 // 新版本，不设置AdType 也没差量无效了...
                 .setNativeAdType(AdSlot.TYPE_INTERACTION_AD).build();
 
         // 请求广告，对请求回调的广告作渲染处理
         final FeedAdView _this = this;
-        mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+        AdBoss.TTAdSdk.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
             @Override
             public void onError(int code, String message) {
                 message = "错误结果 loadNativeExpressAd onAdError: " + code + ", " + message;

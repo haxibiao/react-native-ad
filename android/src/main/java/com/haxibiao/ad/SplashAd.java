@@ -52,7 +52,7 @@ public class SplashAd extends ReactContextBaseJavaModule {
         }
 
         // 默认走穿山甲
-		AdBoss.init(mContext, appid);
+//		AdBoss.init(mContext, appid);
 		startSplash(codeid);
 	}
 	

@@ -16,9 +16,8 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactContext;
-import com.haxibiao.ad.TTAdManagerHolder;
 
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 
 public class AdBoss {
@@ -31,14 +30,13 @@ public class AdBoss {
 
     // AdManager
     public static TTAdManager ttAdManager;
-    public static TTAdNative mTTAdNative;
+    public static TTAdNative TTAdSdk;
 
 
     // 缓存加载的头条广告
     public static TTRewardVideoAd rewardAd;
     public static TTFullScreenVideoAd fullAd;
     public static TTNativeExpressAd feedAd;
-
 
 
     // 存激励视频，全屏视频的回调
@@ -88,39 +86,45 @@ public class AdBoss {
     public static String codeid_reward_video;
     public static String codeid_reward_video_tencent;
 
-    public static Context mContext;
     public static ReactContext reactContext;
     public static ArrayBlockingQueue<String> myBlockingQueue = new ArrayBlockingQueue<String>(1);
 
     public static void init(Context context, String appId) {
-        mContext = context;
+
+        tt_appid = appId;
+        Log.d(TAG, "init feed tt_appid:" + tt_appid);
         if (context.getClass().getName() == "ReactApplicationContext") {
             reactContext = (ReactContext) context;
         }
 
-        tt_appid = appId;
-        Log.d(TAG, "tt_appid:" + tt_appid);
+//        runOnUiThread(() -> {
 
-        // step1: 初始化sdk appid
-        TTAdManagerHolder.init(context, appId);
+            // step1: 初始化sdk appid
+            TTAdManagerHolder.init(context, appId);
 
-        // step2:创建TTAdNative对象，createAdNative(Context context)
-        // feed广告context需要传入Activity对象
-        ttAdManager = TTAdManagerHolder.get();
-        mTTAdNative = ttAdManager.createAdNative(context);
+            // step2:创建TTAdNative对象，createAdNative(Context context)
+            // feed广告context需要传入Activity对象
+            ttAdManager = TTAdManagerHolder.get();
+            TTAdSdk = ttAdManager.createAdNative(context);
+            Log.d(TAG, "TTAdSdk init: " + TTAdSdk);
 
-        // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
-        // 换到激励视频时才调用
-        // ttAdManager.requestPermissionIfNecessary(mContext);
+            // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+            // 换到激励视频时才调用
+            // ttAdManager.requestPermissionIfNecessary(mContext);
+
+//        });
 
     }
 
+    public static boolean hasInit() {
+        return TTAdSdk == null;
+    }
+
     public static void initTx(Context context, String appId) {
-        mContext = context;
         tx_appid = appId;
         Log.d(TAG, "tx_appid:" + tx_appid);
 
-        // 初始化TX sdk appid 无需额外操作...
+        // 初始化TX sdk   无需额外操作...
     }
 
     public static void initBd(Context context, String appId) {
@@ -152,6 +156,7 @@ public class AdBoss {
 
     /**
      * 加载穿山甲的信息流广告
+     *
      * @param codeId
      * @param width
      */
@@ -167,7 +172,7 @@ public class AdBoss {
                 .build();
 
         // step5:请求广告，对请求回调的广告作渲染处理
-        AdBoss.mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+        AdBoss.TTAdSdk.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
             @Override
             public void onError(int code, String message) {
                 Log.d(TAG, message);

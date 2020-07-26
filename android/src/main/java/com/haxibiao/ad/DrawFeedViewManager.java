@@ -34,11 +34,6 @@ public class DrawFeedViewManager extends ViewGroupManager<DrawFeedView> {
         return new DrawFeedView(reactContext);
     }
 
-    @ReactProp(name = "appid")
-    public void setAppId(@NonNull DrawFeedView view, @Nullable String appid) {
-        view.setAppId(appid);
-    }
-
     @ReactProp(name = "codeid")
     public void setCodeId(@NonNull DrawFeedView view, @NonNull String codeid) {
         view.setCodeId(codeid);

@@ -37,7 +37,7 @@ public class FullScreenActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeid = extras.getString("codeid");
 
-        mTTAdNative = AdBoss.mTTAdNative;
+        mTTAdNative = AdBoss.TTAdSdk;
         loadAdSlot(codeid, TTAdConstant.VERTICAL, rewardPromise);
     }
 

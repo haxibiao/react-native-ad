@@ -51,11 +51,6 @@ public class FeedAdViewManager extends ViewGroupManager<FeedAdView> {
 //        view.setUseCache(useCache);
 //    }
 
-    
-   @ReactProp(name = "appid")
-   public void setAppId(FeedAdView view, @Nullable String appid) {
-       view.setAppId(appid);
-   }
 
     @ReactProp(name = "codeid")
     public void setCodeId(FeedAdView view, @Nullable String codeid) {
