@@ -10,13 +10,15 @@ Pod::Spec.new do |s|
                   react-native-ad
                    DESC
   s.homepage     = "https://github.com/haxibiao/react-native-ad"
+  # brief license entry:
   s.license      = "MIT"
-  # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.authors      = { "ivan" => "ivan@haxibiao.com" }
+  # optional - use expanded license entry instead:
+  # s.license    = { :type => "MIT", :file => "LICENSE" }
+  s.authors      = { "wangbin" => "wangbin@haxibiao.com" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/haxibiao/react-native-ad.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,swift}"
+  s.source_files = "ios/**/*.{h,c,m,swift}"
   s.requires_arc = true
 
   s.dependency "React"

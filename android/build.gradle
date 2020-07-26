@@ -77,8 +77,9 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-
+	//加载开屏广告替换appIcon用
+	implementation 'com.github.bumptech.glide:glide:4.9.0'
+	//加载广告SDK aar
     implementation fileTree(dir: 'libs', include: ['*.aar'])
 }
 

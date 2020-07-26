@@ -10,7 +10,6 @@
 #import <React/RCTComponent.h>
 
 @interface FeedAd : UIView
--(void) setAppId:(NSString *) appid;
 -(void) setCodeId:(NSString *) codeid;
 -(void) loadFeedAd; 
 @property (nonatomic, copy) RCTBubblingEventBlock onAdLayout;

@@ -22,7 +22,6 @@
 
 @interface RewardVideoViewController () <BUNativeExpressRewardedVideoAdDelegate>
 
-@property (nonatomic, strong) BUNativeExpressRewardedVideoAd *rewardedVideoAd;
 @property (nonatomic, strong, nullable) UILabel *titleLabel;
 
 @end
@@ -30,63 +29,57 @@
 @implementation RewardVideoViewController
 
 - (void)viewDidLoad {
-    
-    self.rewardedVideoAd = [AdBoss getRewardAd];
-    
-    NSLog(@"rewardedVideoAd viewDidLoad");
-    
-    self.rewardedVideoAd.delegate = self;
-    [self.rewardedVideoAd loadAdData];
-    
+    [AdBoss getRewardAd].delegate = self;
+    [[AdBoss getRewardAd] loadAdData];
 }
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 
 - (void)nativeExpressRewardedVideoAdDidLoad:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    NSLog(@"rewardedVideoAd 激励视频 VideoAdDidLoad");
+    BUD_Log(@"rewardedVideoAd 激励视频 %s",__func__);
     [RewardVideo emitEvent: @{@"type": @"onAdLoaded", @"message": @"success"}];
+    //express 只有渲染成功时才可以show ? 0.63 又必须这个时候show了
+    [[AdBoss getRewardAd] showAdFromRootViewController:self];
+}
+
+- (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
+    BUD_Log(@"%s rewardVideoAd 激励视频 渲染成功",__func__);
+    [[AdBoss getRewardAd] showAdFromRootViewController:self];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    NSLog(@"rewardedVideoAd didFailWithError: %@", error);
-    
-    [rewardedVideoAd showAdFromRootViewController:[AdBoss getRootVC]];
+    BUD_Log(@"rewardVideoAd 激励视频 didFailWithError: %@", error);
     [RewardVideo emitEvent: @{@"type": @"onAdError", @"message": @""}];
 }
 
 
 - (void)nativeExpressRewardedVideoAdCallback:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd withType:(BUNativeExpressRewardedVideoAdType)nativeExpressVideoType{
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频 %lu",__func__, nativeExpressVideoType);
 }
 
 - (void)nativeExpressRewardedVideoAdDidDownLoadVideo:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s 激励视频下载完成了",__func__);
-}
-
-- (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s 视频视图渲染成功",__func__);
-    [self.rewardedVideoAd showAdFromRootViewController:self];
+    BUD_Log(@"%s rewardVideoAd 激励视频 下载完成了",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd error:(NSError *_Nullable)error {
-    BUD_Log(@"%s  视频视图渲染出错了",__func__);
+    BUD_Log(@"%s rewardVideoAd 激励视频 渲染出错了",__func__);
     //TODO: 视频视图渲染出错了
 }
 
 - (void)nativeExpressRewardedVideoAdWillVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdDidVisible:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdWillClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdDidClose:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
     [RewardVideo emitEvent: @{@"type": @"onAdClose", @"message": @""}];
     
     //完成播放 关闭广告 拿回promise结果
@@ -113,28 +106,27 @@
 }
 
 - (void)nativeExpressRewardedVideoAdDidClick:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
     //点了激励视频
     [AdBoss clickRewardVideo];
     [RewardVideo emitEvent: @{@"type": @"onAdClicked", @"message": @""}];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
     //TODO: 点了跳过激励视频
-    //  [AdBoss clickRewardVideo];
 }
 
 - (void)nativeExpressRewardedVideoAdDidPlayFinish:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidSucceed:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdServerRewardDidFail:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
-    BUD_Log(@"%s",__func__);
+    BUD_Log(@"%s 激励视频",__func__);
 }
 
 - (void)nativeExpressRewardedVideoAdDidCloseOtherController:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd interactionType:(BUInteractionType)interactionType {
@@ -146,7 +138,7 @@
     } else {
         str = @"appstoreInApp";
     }
-    BUD_Log(@"%s __ %@",__func__,str);
+    BUD_Log(@"%s _激励视频其他关闭操作_ %@",__func__,str);
 }
 
 -(BOOL)shouldAutorotate{

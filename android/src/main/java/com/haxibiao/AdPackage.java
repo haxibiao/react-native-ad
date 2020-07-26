@@ -16,7 +16,7 @@ import com.haxibiao.ad.FullScreenVideo;
 import com.haxibiao.ad.RewardVideo;
 import com.haxibiao.ad.SplashAd;
 
-public class ReactNativeAdPackage implements ReactPackage {
+public class AdPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();

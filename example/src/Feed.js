@@ -4,11 +4,10 @@ import {ad} from 'react-native-ad';
 
 export default function Feed() {
   useEffect(() => {
-    return () => {
-      ad.init({
-        appid: '5016582',
-      });
-    };
+    ad.init({
+      appid: '5016582',
+    });
+    return () => {};
   }, []);
   return (
     <View style={styles.container}>
@@ -16,16 +15,16 @@ export default function Feed() {
       <ad.Feed
         codeid="916582486" //必传 广告位 codeid 注意区分 Android 和 IOS
         adWidth={300}
-        onAdLayout={data => {
+        onAdLayout={(data) => {
           console.log('Feed 广告加载成功！', data);
         }}
-        onAdClose={data => {
+        onAdClose={(data) => {
           console.log('Feed 广告关闭！', data);
         }}
-        onAdError={err => {
+        onAdError={(err) => {
           console.log('Feed 广告加载失败！', err);
         }}
-        onAdClick={val => {
+        onAdClick={(val) => {
           console.log('Feed 广告被用户点击！', val);
         }}
       />

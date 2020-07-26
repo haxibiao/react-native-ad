@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function SplashAd() {
+  useEffect(() => {
+    ad.init({
+      appid: '5016582',
+    });
+    return () => {};
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -22,23 +28,23 @@ export default function SplashAd() {
             codeid: '816582039',
           });
 
-          splashAd.subscribe('onAdClose', event => {
+          splashAd.subscribe('onAdClose', (event) => {
             console.log('广告关闭', event);
           });
 
-          splashAd.subscribe('onAdSkip', i => {
+          splashAd.subscribe('onAdSkip', (i) => {
             console.log('用户点击跳过监听', i);
           });
 
-          splashAd.subscribe('onAdError', e => {
+          splashAd.subscribe('onAdError', (e) => {
             console.log('开屏加载失败监听', e);
           });
 
-          splashAd.subscribe('onAdClick', e => {
+          splashAd.subscribe('onAdClick', (e) => {
             console.log('开屏被用户点击了', e);
           });
 
-          splashAd.subscribe('onAdShow', e => {
+          splashAd.subscribe('onAdShow', (e) => {
             console.log('开屏开始展示', e);
           });
         }}>

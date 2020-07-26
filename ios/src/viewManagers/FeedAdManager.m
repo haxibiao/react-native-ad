@@ -28,13 +28,6 @@ RCT_EXPORT_VIEW_PROPERTY(onAdClose, RCTBubblingEventBlock)
   return [[FeedAd alloc] init];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(appid, NSString, FeedAd)
-{
-  if (json) {
-    [view  setAppId:json];
-  }
-}
-
 RCT_CUSTOM_VIEW_PROPERTY(codeid, NSString, FeedAd)
 {
   if (json) {

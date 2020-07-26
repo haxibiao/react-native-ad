@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function FullVideo() {
+  useEffect(() => {
+    ad.init({
+      appid: '5016582',
+    });
+    return () => {};
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -17,25 +23,28 @@ export default function FullVideo() {
           borderRadius: 50,
         }}
         onPress={() => {
-          let fullVideo = ad.startFullVideo('5016582', '945294087');
+          let fullVideo = ad.startFullVideo({
+            appid: '5016582',
+            codeid: '945294087',
+          });
           console.log('FullVideoAd rs:', fullVideo);
-          fullVideo.result?.then(val => {
-            console.log('FullVideoAd', val);
+          fullVideo.result?.then((val) => {
+            console.log('FullVideoAd rs then val', val);
           });
 
-          fullVideo.subscribe('onAdLoaded', event => {
+          fullVideo.subscribe('onAdLoaded', (event) => {
             console.log('广告加载成功监听111111', event);
           });
 
-          fullVideo.subscribe('onAdError', event => {
+          fullVideo.subscribe('onAdError', (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          fullVideo.subscribe('onAdClose', event => {
+          fullVideo.subscribe('onAdClose', (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          fullVideo.subscribe('onAdClicked', event => {
+          fullVideo.subscribe('onAdClicked', (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

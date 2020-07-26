@@ -17,23 +17,17 @@
 
 @property (strong, nonatomic) NSMutableArray<__kindof BUNativeExpressAdView *> *expressAdViews;
 @property (strong, nonatomic) BUNativeExpressAdManager *nativeExpressAdManager;
-@property(nonatomic, strong) NSString *_appid;
+
 @property(nonatomic, strong) NSString *_codeid;
 
 @end
 
 @implementation FeedAd
 
-- (void)setAppId:(NSString *)appid {
-    self._appid = appid;
-    if( appid != nil) {
-        [AdBoss init:appid];
-    }
-    [self loadFeedAd];
-}
 
 - (void)setCodeId:(NSString *)codeid {
     self._codeid = codeid;
+    NSLog(@"开始 加载Feed广告 codeid: %@", self._codeid);
     [self loadFeedAd];
 }
 
@@ -42,10 +36,9 @@
  */
 - (void)loadFeedAd{
     
-    if(self._appid == nil || self._codeid == nil) {
+    if(self._codeid == nil) {
         return;
     }
-    NSLog(@"开始 加载Feed广告 appid: %@, codeid: %@", self._appid, self._codeid);
     
     if (!self.expressAdViews) {
         self.expressAdViews = [NSMutableArray arrayWithCapacity:20];

@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {ad} from 'react-native-ad';
 
 export default function RewardVideo() {
+  useEffect(() => {
+    ad.init({
+      appid: '5016582',
+    });
+    return () => {};
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -22,23 +28,23 @@ export default function RewardVideo() {
             codeid: '945294086',
           });
 
-          rewardVideo.result.then(val => {
+          rewardVideo.result.then((val) => {
             console.log('RewardVideo 回调结果', val);
           });
 
-          rewardVideo.subscribe('onAdLoaded', event => {
+          rewardVideo.subscribe('onAdLoaded', (event) => {
             console.log('广告加载成功监听111111', event);
           });
 
-          rewardVideo.subscribe('onAdError', event => {
+          rewardVideo.subscribe('onAdError', (event) => {
             console.log('广告加载失败监听', event);
           });
 
-          rewardVideo.subscribe('onAdClose', event => {
+          rewardVideo.subscribe('onAdClose', (event) => {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscribe('onAdClicked', event => {
+          rewardVideo.subscribe('onAdClicked', (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

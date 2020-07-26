@@ -27,7 +27,6 @@
 
 @interface DrawFeedAd() <BUNativeExpressAdViewDelegate>
 
-@property(nonatomic, strong) NSString *_appid;
 @property(nonatomic, strong) NSString *_codeid;
 
 @property (nonatomic, strong, nullable) UIImageView *likeImg;
@@ -44,15 +43,8 @@
 
 @implementation DrawFeedAd
 
-
-- (void)setAppId:(NSString *)appid {
-    BUD_Log(@"DrawVideo set appid %@", appid);
-    self._appid = appid;
-    [self loadExpressAds];
-}
-
 - (void)setCodeId:(NSString *)codeid {
-    BUD_Log(@"DrawVideo set codeid %@", codeid);
+    BUD_Log(@"DrawFeed set codeid %@", codeid);
     self._codeid = codeid;
     [self loadExpressAds];
 }
@@ -109,14 +101,6 @@
 
 - (void)loadExpressAds {
     
-    if(self._appid  == nil) {
-        return;
-    }
-    else {
-        NSLog(@"init drawfeed appid %@", self._appid);
-        [AdBoss init:self._appid];
-    }
-    
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self._codeid;
     slot1.AdType = BUAdSlotAdTypeDrawVideo; //required
@@ -125,9 +109,7 @@
     slot1.imgSize = [BUSize sizeBy:BUProposalSize_DrawFullScreen];
     slot1.isSupportDeepLink = YES;
     
-    
     //  CGSizeMake(1080, 1920)
-    
     if (!self.adManager) {
         UIViewController *rootVC = (UIViewController * )[UIApplication sharedApplication].delegate.window.rootViewController;
         self.adManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:rootVC.view.bounds.size];
@@ -137,8 +119,6 @@
     [self.adManager loadAd:1];
     
 }
-
-
 
 #pragma mark - BUNativeExpressAdViewDelegate
 - (void)nativeExpressAdSuccessToLoad:(BUNativeExpressAdManager *)nativeExpressAd views:(NSArray<__kindof BUNativeExpressAdView *> *)views {

@@ -17,7 +17,7 @@ interface EVENT_TYPE {
 	onDownloadActive: string; // 广告应用下载相应监听
 }
 
-export default (appid: string, codeid: string) => {
+export default ({ appid, codeid }) => {
 	const { FullScreenVideo } = NativeModules;
 	const eventEmitter = new NativeEventEmitter(FullScreenVideo);
 	let result = FullScreenVideo.startAd({ appid, codeid });

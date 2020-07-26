@@ -45,10 +45,6 @@ static RCTPromiseRejectBlock adReject;
     return adReject;
 }
 
-+(BOOL)hasInit {
-    return _appid != nil;
-}
-
 +(void)init:(NSString*) appid {
     _appid = appid;
     

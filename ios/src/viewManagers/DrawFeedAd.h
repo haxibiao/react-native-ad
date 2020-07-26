@@ -18,7 +18,6 @@
 @property (nonatomic, copy) RCTBubblingEventBlock _Nullable onAdError;
 @property (nonatomic, copy) RCTBubblingEventBlock _Nullable onAdClicked;
 
--(void) setAppId:(NSString * _Nullable) appid;
 -(void) setCodeId:(NSString * _Nullable) codeid;
 
 @property (nonatomic, strong, nullable) UILabel *titleLabel;

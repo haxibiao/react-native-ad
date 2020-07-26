@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:react-native-ad.xcodeproj">
+      location = "group:Ad.xcodeproj">
    </FileRef>
 </Workspace>

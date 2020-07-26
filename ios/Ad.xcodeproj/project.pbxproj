@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C26110324CDBE7700531A92 /* FullScreenVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610DC24CDBE7700531A92 /* FullScreenVideo.m */; };
+		2C26110424CDBE7700531A92 /* BUDSlotViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610DE24CDBE7700531A92 /* BUDSlotViewModel.m */; };
+		2C26110524CDBE7700531A92 /* FeedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610E524CDBE7700531A92 /* FeedAd.m */; };
+		2C26110624CDBE7700531A92 /* DrawFeedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610E624CDBE7700531A92 /* DrawFeedAd.m */; };
+		2C26110724CDBE7700531A92 /* FeedAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610E724CDBE7700531A92 /* FeedAdManager.m */; };
+		2C26110824CDBE7700531A92 /* DrawFeedAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610E924CDBE7700531A92 /* DrawFeedAdManager.m */; };
+		2C26110924CDBE7700531A92 /* RewardVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610EA24CDBE7700531A92 /* RewardVideo.m */; };
+		2C26110A24CDBE7700531A92 /* BUDBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610EC24CDBE7700531A92 /* BUDBase64.m */; };
+		2C26110B24CDBE7700531A92 /* UIView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610EF24CDBE7700531A92 /* UIView+Draw.m */; };
+		2C26110C24CDBE7700531A92 /* NSString+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610F024CDBE7700531A92 /* NSString+Json.m */; };
+		2C26110D24CDBE7700531A92 /* NSString+LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610F124CDBE7700531A92 /* NSString+LocalizedString.m */; };
+		2C26110E24CDBE7700531A92 /* BUDCocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610F624CDBE7700531A92 /* BUDCocoaSecurity.m */; };
+		2C26110F24CDBE7700531A92 /* AdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610F724CDBE7700531A92 /* AdManager.m */; };
+		2C26111024CDBE7700531A92 /* RewardVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610FB24CDBE7700531A92 /* RewardVideoViewController.m */; };
+		2C26111124CDBE7700531A92 /* FullscreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2610FE24CDBE7700531A92 /* FullscreenViewController.m */; };
+		2C26111224CDBE7700531A92 /* AdBoss.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26110024CDBE7700531A92 /* AdBoss.m */; };
+		2C26111324CDBE7700531A92 /* SplashAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26110124CDBE7700531A92 /* SplashAd.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58B511D91A9E6C8500147676 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		134814201AA4EA6300B7C361 /* libAd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C2610DC24CDBE7700531A92 /* FullScreenVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenVideo.m; sourceTree = "<group>"; };
+		2C2610DE24CDBE7700531A92 /* BUDSlotViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDSlotViewModel.m; sourceTree = "<group>"; };
+		2C2610DF24CDBE7700531A92 /* BUDDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDDefs.h; sourceTree = "<group>"; };
+		2C2610E024CDBE7700531A92 /* BUDSlotViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDSlotViewModel.h; sourceTree = "<group>"; };
+		2C2610E124CDBE7700531A92 /* SplashAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashAd.h; sourceTree = "<group>"; };
+		2C2610E224CDBE7700531A92 /* AdBoss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdBoss.h; sourceTree = "<group>"; };
+		2C2610E424CDBE7700531A92 /* DrawFeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawFeedAd.h; sourceTree = "<group>"; };
+		2C2610E524CDBE7700531A92 /* FeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAd.m; sourceTree = "<group>"; };
+		2C2610E624CDBE7700531A92 /* DrawFeedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAd.m; sourceTree = "<group>"; };
+		2C2610E724CDBE7700531A92 /* FeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedAdManager.m; sourceTree = "<group>"; };
+		2C2610E824CDBE7700531A92 /* FeedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedAd.h; sourceTree = "<group>"; };
+		2C2610E924CDBE7700531A92 /* DrawFeedAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawFeedAdManager.m; sourceTree = "<group>"; };
+		2C2610EA24CDBE7700531A92 /* RewardVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVideo.m; sourceTree = "<group>"; };
+		2C2610EC24CDBE7700531A92 /* BUDBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDBase64.m; sourceTree = "<group>"; };
+		2C2610EE24CDBE7700531A92 /* NSString+LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LocalizedString.h"; sourceTree = "<group>"; };
+		2C2610EF24CDBE7700531A92 /* UIView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Draw.m"; sourceTree = "<group>"; };
+		2C2610F024CDBE7700531A92 /* NSString+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Json.m"; sourceTree = "<group>"; };
+		2C2610F124CDBE7700531A92 /* NSString+LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LocalizedString.m"; sourceTree = "<group>"; };
+		2C2610F224CDBE7700531A92 /* NSString+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Json.h"; sourceTree = "<group>"; };
+		2C2610F324CDBE7700531A92 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
+		2C2610F424CDBE7700531A92 /* BUDCocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDCocoaSecurity.h; sourceTree = "<group>"; };
+		2C2610F524CDBE7700531A92 /* BUDBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDBase64.h; sourceTree = "<group>"; };
+		2C2610F624CDBE7700531A92 /* BUDCocoaSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDCocoaSecurity.m; sourceTree = "<group>"; };
+		2C2610F724CDBE7700531A92 /* AdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdManager.m; sourceTree = "<group>"; };
+		2C2610F924CDBE7700531A92 /* BUDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDMacros.h; sourceTree = "<group>"; };
+		2C2610FB24CDBE7700531A92 /* RewardVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardVideoViewController.m; sourceTree = "<group>"; };
+		2C2610FC24CDBE7700531A92 /* FullscreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullscreenViewController.h; sourceTree = "<group>"; };
+		2C2610FD24CDBE7700531A92 /* RewardVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVideoViewController.h; sourceTree = "<group>"; };
+		2C2610FE24CDBE7700531A92 /* FullscreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullscreenViewController.m; sourceTree = "<group>"; };
+		2C2610FF24CDBE7700531A92 /* FullScreenVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenVideo.h; sourceTree = "<group>"; };
+		2C26110024CDBE7700531A92 /* AdBoss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdBoss.m; sourceTree = "<group>"; };
+		2C26110124CDBE7700531A92 /* SplashAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashAd.m; sourceTree = "<group>"; };
+		2C26110224CDBE7700531A92 /* RewardVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardVideo.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		58B511D81A9E6C8500147676 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		134814211AA4EA7D00B7C361 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				134814201AA4EA6300B7C361 /* libAd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2C2610DB24CDBE7700531A92 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610E124CDBE7700531A92 /* SplashAd.h */,
+				2C26110124CDBE7700531A92 /* SplashAd.m */,
+				2C2610E224CDBE7700531A92 /* AdBoss.h */,
+				2C26110024CDBE7700531A92 /* AdBoss.m */,
+				2C2610F724CDBE7700531A92 /* AdManager.m */,
+				2C2610FF24CDBE7700531A92 /* FullScreenVideo.h */,
+				2C2610DC24CDBE7700531A92 /* FullScreenVideo.m */,
+				2C26110224CDBE7700531A92 /* RewardVideo.h */,
+				2C2610EA24CDBE7700531A92 /* RewardVideo.m */,
+				2C2610FA24CDBE7700531A92 /* ViewControllers */,
+				2C2610DD24CDBE7700531A92 /* ViewModels */,
+				2C2610E324CDBE7700531A92 /* ViewManagers */,
+				2C2610EB24CDBE7700531A92 /* Utils */,
+				2C2610F824CDBE7700531A92 /* Macros */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2C2610DD24CDBE7700531A92 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610DE24CDBE7700531A92 /* BUDSlotViewModel.m */,
+				2C2610DF24CDBE7700531A92 /* BUDDefs.h */,
+				2C2610E024CDBE7700531A92 /* BUDSlotViewModel.h */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2C2610E324CDBE7700531A92 /* ViewManagers */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610E824CDBE7700531A92 /* FeedAd.h */,
+				2C2610E524CDBE7700531A92 /* FeedAd.m */,
+				2C2610E724CDBE7700531A92 /* FeedAdManager.m */,
+				2C2610E424CDBE7700531A92 /* DrawFeedAd.h */,
+				2C2610E624CDBE7700531A92 /* DrawFeedAd.m */,
+				2C2610E924CDBE7700531A92 /* DrawFeedAdManager.m */,
+			);
+			path = ViewManagers;
+			sourceTree = "<group>";
+		};
+		2C2610EB24CDBE7700531A92 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610EC24CDBE7700531A92 /* BUDBase64.m */,
+				2C2610ED24CDBE7700531A92 /* Category */,
+				2C2610F424CDBE7700531A92 /* BUDCocoaSecurity.h */,
+				2C2610F524CDBE7700531A92 /* BUDBase64.h */,
+				2C2610F624CDBE7700531A92 /* BUDCocoaSecurity.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2C2610ED24CDBE7700531A92 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610EE24CDBE7700531A92 /* NSString+LocalizedString.h */,
+				2C2610EF24CDBE7700531A92 /* UIView+Draw.m */,
+				2C2610F024CDBE7700531A92 /* NSString+Json.m */,
+				2C2610F124CDBE7700531A92 /* NSString+LocalizedString.m */,
+				2C2610F224CDBE7700531A92 /* NSString+Json.h */,
+				2C2610F324CDBE7700531A92 /* UIView+Draw.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		2C2610F824CDBE7700531A92 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610F924CDBE7700531A92 /* BUDMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		2C2610FA24CDBE7700531A92 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C2610FD24CDBE7700531A92 /* RewardVideoViewController.h */,
+				2C2610FB24CDBE7700531A92 /* RewardVideoViewController.m */,
+				2C2610FC24CDBE7700531A92 /* FullscreenViewController.h */,
+				2C2610FE24CDBE7700531A92 /* FullscreenViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		58B511D21A9E6C8500147676 = {
+			isa = PBXGroup;
+			children = (
+				2C2610DB24CDBE7700531A92 /* src */,
+				134814211AA4EA7D00B7C361 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		58B511DA1A9E6C8500147676 /* Ad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Ad" */;
+			buildPhases = (
+				58B511D71A9E6C8500147676 /* Sources */,
+				58B511D81A9E6C8500147676 /* Frameworks */,
+				58B511D91A9E6C8500147676 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ad;
+			productName = RCTDataManager;
+			productReference = 134814201AA4EA6300B7C361 /* libAd.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		58B511D31A9E6C8500147676 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					58B511DA1A9E6C8500147676 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Ad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 58B511D21A9E6C8500147676;
+			productRefGroup = 58B511D21A9E6C8500147676;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				58B511DA1A9E6C8500147676 /* Ad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		58B511D71A9E6C8500147676 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C26110524CDBE7700531A92 /* FeedAd.m in Sources */,
+				2C26110424CDBE7700531A92 /* BUDSlotViewModel.m in Sources */,
+				2C26110724CDBE7700531A92 /* FeedAdManager.m in Sources */,
+				2C26110624CDBE7700531A92 /* DrawFeedAd.m in Sources */,
+				2C26110924CDBE7700531A92 /* RewardVideo.m in Sources */,
+				2C26110E24CDBE7700531A92 /* BUDCocoaSecurity.m in Sources */,
+				2C26110824CDBE7700531A92 /* DrawFeedAdManager.m in Sources */,
+				2C26110B24CDBE7700531A92 /* UIView+Draw.m in Sources */,
+				2C26110F24CDBE7700531A92 /* AdManager.m in Sources */,
+				2C26110A24CDBE7700531A92 /* BUDBase64.m in Sources */,
+				2C26110324CDBE7700531A92 /* FullScreenVideo.m in Sources */,
+				2C26111324CDBE7700531A92 /* SplashAd.m in Sources */,
+				2C26111024CDBE7700531A92 /* RewardVideoViewController.m in Sources */,
+				2C26110C24CDBE7700531A92 /* NSString+Json.m in Sources */,
+				2C26111124CDBE7700531A92 /* FullscreenViewController.m in Sources */,
+				2C26110D24CDBE7700531A92 /* NSString+LocalizedString.m in Sources */,
+				2C26111224CDBE7700531A92 /* AdBoss.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		58B511ED1A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		58B511EE1A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
+					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
+					"\"$(inherited)\"",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		58B511F01A9E6C8500147676 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Ad;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		58B511F11A9E6C8500147676 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../../React/**",
+					"$(SRCROOT)/../../react-native/React/**",
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Ad;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Ad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511ED1A9E6C8500147676 /* Debug */,
+				58B511EE1A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Ad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				58B511F01A9E6C8500147676 /* Debug */,
+				58B511F11A9E6C8500147676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 58B511D31A9E6C8500147676 /* Project object */;
+}

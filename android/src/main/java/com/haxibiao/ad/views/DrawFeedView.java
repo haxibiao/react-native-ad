@@ -31,8 +31,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxibiao.R;
 import com.haxibiao.ad.AdBoss;
-import com.haxibiao.ad.AdManager;
-import com.haxibiao.ad.TTAdManagerHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +39,10 @@ public class DrawFeedView extends RelativeLayout {
 
     private String TAG = "DrawFeed";
 	private String _isExpress = "true";
-	private String _appid = null;
     private String _codeid = null;
     protected Context mContext;
     protected ReactContext reactContext;
     final protected FrameLayout mContainer;
-    private TTAdNative mTTAdNative;
     private AdSlot adSlot;
 
 
@@ -62,11 +58,6 @@ public class DrawFeedView extends RelativeLayout {
         // 修复 add view 不显示问题
         setupLayoutHack();
     }
-
-	public void setAppId(String appId) {
-        _appid = appId;
-        loadDrawFeedAd();
-	}
 	
     public void setCodeId(String codeId) {
         _codeid = codeId;
@@ -74,16 +65,10 @@ public class DrawFeedView extends RelativeLayout {
     }
 
     void loadDrawFeedAd() {
-        if (_appid == null || _codeid == null) {
-            Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _appid=" + _appid + " _codeid=" + _codeid);
+        if (_codeid == null) {
+            Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _codeid=" + _codeid);
             return;
 		}
-        Log.d(TAG, "初始化appid "+_appid+"，获得sdk mTTAdNative " + _codeid);
-		//初始化appid，获得sdk mTTAdNative
-		if(!TTAdManagerHolder.sInit) {
-			TTAdManagerHolder.init(AdManager.reactAppContext, _appid);
-		}
-		mTTAdNative = AdBoss.TTAdSdk;
 
         if (_isExpress.equals("true")) {
             // 开始渲染 Draw 广告，原生模版
@@ -133,7 +118,7 @@ public class DrawFeedView extends RelativeLayout {
                 .build();
 
         // 请求广告,对请求回调的广告作渲染处理
-        mTTAdNative.loadExpressDrawFeedAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+        AdBoss.TTAdSdk.loadExpressDrawFeedAd(adSlot, new TTAdNative.NativeExpressAdListener() {
             @Override
             public void onError(int code, String message) {
                 Log.d(TAG, message);
@@ -236,7 +221,7 @@ public class DrawFeedView extends RelativeLayout {
 
         // 请求广告，对请求回调的广告做渲染处理
         final DrawFeedView _this = this;
-        mTTAdNative.loadDrawFeedAd(adSlot, new TTAdNative.DrawFeedAdListener() {
+        AdBoss.TTAdSdk.loadDrawFeedAd(adSlot, new TTAdNative.DrawFeedAdListener() {
             @Override
             public void onError(int code, String message) {
                 message = "错误结果 loadDrawFeedAd onError: " + code + ", " + message;

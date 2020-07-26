@@ -22,14 +22,11 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 
 @interface AdBoss: NSObject
 
-+(void) init: (NSString*) appid;
-+(BOOL) hasInit;
-
 +(UIViewController*) getRootVC;
++(void) init: (NSString*) appid;
 
 +(void) loadRewardAd: (NSString*) codeid userid:(NSString *)uid;
 +(BUNativeExpressRewardedVideoAd *) getRewardAd;
-
 +(void) loadFullScreenAd: (NSString*) codeid;
 +(BUNativeExpressFullscreenVideoAd *) getFullScreenAd;
 
@@ -37,7 +34,6 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 +(void) clickRewardVideo;
 +(void) resetClickRewardVideo;
 +(int) getRewardVideoClicks;
-
 
 //保存js回调
 +(void) saveResolve:(RCTPromiseResolveBlock) resolve;

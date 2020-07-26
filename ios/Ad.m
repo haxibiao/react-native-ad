@@ -1,7 +1,6 @@
-#import "BytedAd.h"
+#import "Ad.h"
 
-
-@implementation BytedAd
+@implementation Ad
 
 RCT_EXPORT_MODULE()
 

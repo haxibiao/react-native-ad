@@ -57,13 +57,12 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(loadAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     NSString *codeid = options[@"codeid"];
-    NSLog(@"full screen load code id %@",codeid);
+    NSLog(@"full screen load codeid %@",codeid);
     if(codeid == nil) {
         return;
     }
     
     [AdBoss loadFullScreenAd:codeid];
-    
     resolve(@"OK");
 }
 
@@ -74,18 +73,18 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
         return;
     }
     
-    NSString *appid = options[@"appid"];
-    if(appid != nil) {
-        [AdBoss init:appid];
-    }
+    //    NSString *appid = options[@"appid"];
+    //    if(appid != nil) {
+    //        [AdBoss init:appid];
+    //    }
     
-    NSLog(@"loadFullScreenAd codeid %@",codeid);
+    NSLog(@"full screen start codeid %@",codeid);
     [AdBoss loadFullScreenAd:codeid];
     
     FullscreenViewController *vc = [FullscreenViewController new];
     vc.slotID = codeid;
     vc.view.backgroundColor = [UIColor whiteColor];
-
+    
     [[AdBoss getRootVC] presentViewController:vc animated:true completion:^{
         [AdBoss saveResolve:resolve];
         [AdBoss saveReject:reject];

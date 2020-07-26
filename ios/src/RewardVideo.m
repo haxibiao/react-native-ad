@@ -90,28 +90,10 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
     
     RewardVideoViewController *vc = [RewardVideoViewController new];
     vc.view.backgroundColor = [UIColor whiteColor];
-
     
     [[AdBoss getRootVC] presentViewController:vc animated:true completion:^{
-        
         [AdBoss saveResolve:resolve];
         [AdBoss saveReject:reject];
-        
-        //    if([AdBoss getRewardVideoClicks] > 0)
-        //    {
-        //      resolve(@{
-        //        @"video_play":@1,
-        //        @"ad_click":@1,
-        //        @"verify_status":@0
-        //      });
-        //    } else {
-        //      resolve(@{
-        //        @"video_play":@1,
-        //        @"ad_click":@0,
-        //        @"verify_status":@0
-        //      });
-        //    }
-        
     }];
     
 }

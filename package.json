@@ -1,33 +1,33 @@
 {
-  "name": "react-native-ad",
-  "title": "react-native 广告联盟SDK",
-  "version": "1.0.2",
-  "description": "给rn封装一些常用的广告平台的 sdk，头条穿山甲，腾讯广点通，百度百青藤等广告模块...",
-  "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/haxibiao/react-native-ad.git",
-    "baseUrl": "https://github.com/haxibiao/react-native-ad"
-  },
-  "keywords": [
-    "react-native"
-  ],
-  "author": {
-    "name": "wangbin",
-    "email": "wangbin@haxibiao.com"
-  },
-  "license": "MIT",
-  "licenseFilename": "LICENSE",
-  "readmeFilename": "README.md",
-  "peerDependencies": {
-    "react": "^16.13.1",
-    "react-native": ">=0.63.0 <1.0.x"
-  },
-  "devDependencies": {
-    "react": "^16.13.1",
-    "react-native": "^0.63.0"
-  }
+    "name": "react-native-ad",
+    "title": "react-native 广告联盟SDK",
+    "version": "1.0.3",
+    "description": "给rn封装一些常用的广告平台的 sdk，头条穿山甲，腾讯广点通，百度百青藤等广告模块...",
+    "main": "index.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/haxibiao/react-native-ad.git",
+        "baseUrl": "https://github.com/haxibiao/react-native-ad"
+    },
+    "keywords": [
+        "react-native"
+    ],
+    "author": {
+        "name": "wangbin",
+        "email": "wangbin@haxibiao.com"
+    },
+    "license": "MIT",
+    "licenseFilename": "LICENSE",
+    "readmeFilename": "README.md",
+    "peerDependencies": {
+        "react": "^16.13.1",
+        "react-native": ">=0.63.0 <1.0.x"
+    },
+    "devDependencies": {
+        "react": "^16.13.1",
+        "react-native": "^0.63.0"
+    }
 }
