@@ -61,7 +61,7 @@
 
 - (void)nativeExpressFullscreenVideoAdDidClick:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     BUD_Log(@"%s 全屏视频",__func__);
-    [FullScreenVideo emitEvent: @{@"type": @"onAdClicked", @"message": @""}];
+    [FullScreenVideo emitEvent: @{@"type": @"onAdClick", @"message": @""}];
 }
 
 - (void)nativeExpressFullscreenVideoAdDidClickSkip:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {

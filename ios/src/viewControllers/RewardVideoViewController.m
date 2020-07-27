@@ -109,7 +109,7 @@
     BUD_Log(@"%s 激励视频",__func__);
     //点了激励视频
     [AdBoss clickRewardVideo];
-    [RewardVideo emitEvent: @{@"type": @"onAdClicked", @"message": @""}];
+    [RewardVideo emitEvent: @{@"type": @"onAdClick", @"message": @""}];
 }
 
 - (void)nativeExpressRewardedVideoAdDidClickSkip:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {

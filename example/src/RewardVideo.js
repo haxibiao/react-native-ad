@@ -44,7 +44,7 @@ export default function RewardVideo() {
             console.log('广告被关闭监听', event);
           });
 
-          rewardVideo.subscribe('onAdClicked', (event) => {
+          rewardVideo.subscribe('onAdClick', (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

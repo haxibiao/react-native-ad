@@ -53,20 +53,21 @@ public class FullScreenActivity extends Activity {
         mTTAdNative.loadFullScreenVideoAd(adSlot, new TTAdNative.FullScreenVideoAdListener() {
             @Override
             public void onError(int code, String message) {
-                // TToast.show(mContext, message);
+				//加载出错
+				RNCallBack("onAdError", message);
             }
 
             @Override
             public void onFullScreenVideoCached() {
+				String msg = "成功缓存全屏广告的视频";
+				RNCallBack("onVideoCached", msg);
             }
 
             @Override
             public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {
-                // 缓存加载的全屏广告
                 fullAd = ad;
-//                if (promise != null) {
-//                    promise.resolve(true);
-//                }
+				String msg = "成功加载的全屏广告";
+				RNCallBack("onAdShow", msg);
                 showAd();
             }
         });
@@ -85,33 +86,38 @@ public class FullScreenActivity extends Activity {
 
             @Override
             public void onAdShow() {
-                // TToast.show(_this, "展示全屏视频广告");
+				String msg = "展示全屏视频广告";
+				RNCallBack("onAdShow", msg);
                 is_show = true;
             }
 
             @Override
             public void onAdVideoBarClick() {
-                // TToast.show(_this, "查看详情成功,奖励即将发放");
+				String msg = "查看详情成功,奖励即将发放";
+				RNCallBack("onAdClick", msg);
                 is_click = true;
             }
 
             @Override
             public void onAdClose() {
-                // TToast.show(_this, "全屏视频广告已关闭");
+				String msg = "全屏视频广告已关闭";
+				RNCallBack("onAdClose", msg);
                 getRewardResult();
             }
 
             // 视频播放完成回调
             @Override
             public void onVideoComplete() {
-                // TToast.show(_this, "全屏视频广告播放完成");
+				String msg = "全屏视频广告播放完成";
+				RNCallBack("onVideoComplete", msg);
                 is_show = true;
             }
 
             @Override
             public void onSkippedVideo() {
-                // TToast.show(_this, "跳过全屏视频广告播放");
-                is_show = true; //主动跳过也算看完了
+                String msg = "跳过全屏视频广告播放";
+				is_show = true; //主动跳过也算看完了
+				RNCallBack("onAdSkip", msg);
             }
         });
 
@@ -128,6 +134,13 @@ public class FullScreenActivity extends Activity {
         }
         Log.d(TAG, "getRewardResult: " + json);
         return json;
+	}
+	
+    // 二次封装回调函数
+    public void RNCallBack(String eventName, String message) {
+        WritableMap p = Arguments.createMap();
+        p.putString("message", message);
+        sendEvent(eventName, p);
     }
 
 }

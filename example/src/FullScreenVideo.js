@@ -44,7 +44,7 @@ export default function FullVideo() {
             console.log('广告被关闭监听', event);
           });
 
-          fullVideo.subscribe('onAdClicked', (event) => {
+          fullVideo.subscribe('onAdClick', (event) => {
             console.log('广告点击查看详情监听', event);
           });
         }}>

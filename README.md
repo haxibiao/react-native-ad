@@ -9,19 +9,7 @@
 ### 安装方法 🔨
 
 ```
-yarn add git+http://auto:hxb332211@code.haxibiao.cn/packages/react-native-ad.git
-```
-
-或者
-
-```
-npm install -D git+http://auto:hxb332211@code.haxibiao.cn/packages/react-native-ad.git
-```
-
-或者在项目 package.json 的 dependencies 下添加一行
-
-```
-"react-native-ad":"git+http://auto:hxb332211@code.haxibiao.cn/packages/react-native-ad.git"
+yarn add git+https://github.com/haxibiao/react-native-ad.git
 ```
 
 ### 文档地址 🍎

@@ -171,7 +171,7 @@ public class RewardActivity extends Activity {
                 // TToast.show(_this, msg);
                 Log.d(TAG, msg);
 
-                RNCallBack("onAdClicked", 203, msg);
+                RNCallBack("onAdClick", 203, msg);
 
 
             }

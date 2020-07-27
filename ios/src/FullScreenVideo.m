@@ -24,7 +24,7 @@ RCT_EXPORT_MODULE();
         @"FullScreenVideo-onAdLoaded",
         @"FullScreenVideo-onAdError",
         @"FullScreenVideo-onAdClose",
-        @"FullScreenVideo-onAdClicked"
+        @"FullScreenVideo-onAdClick"
     ];
 }
 
@@ -43,8 +43,8 @@ RCT_EXPORT_MODULE();
         [self sendEventWithName:@"FullScreenVideo-onAdError" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
     }else if( [@"onAdClose" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
         [self sendEventWithName:@"FullScreenVideo-onAdClose" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
-    }else if( [@"onAdClicked" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"FullScreenVideo-onAdClicked" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+    }else if( [@"onAdClick" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
+        [self sendEventWithName:@"FullScreenVideo-onAdClick" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
     }
 }
 

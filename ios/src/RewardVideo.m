@@ -26,7 +26,7 @@ RCT_EXPORT_MODULE();
         @"RewardVideo-onAdError",
         @"RewardVideo-onAdLoaded",
         @"RewardVideo-onAdVideoCached",
-        @"RewardVideo-onAdClicked",
+        @"RewardVideo-onAdClick",
         @"RewardVideo-onAdClose",
         @"RewardVideo-onVideoComplete",
         @"RewardVideo-onDownloadActive"
@@ -50,8 +50,8 @@ RCT_EXPORT_MODULE();
         [self sendEventWithName:@"RewardVideo-onAdError" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
     }else if( [@"onAdClose" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
         [self sendEventWithName:@"RewardVideo-onAdClose" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
-    }else if( [@"onAdClicked" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"RewardVideo-onAdClicked" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+    }else if( [@"onAdClick" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
+        [self sendEventWithName:@"RewardVideo-onAdClick" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
     }
 }
 
