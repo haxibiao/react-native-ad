@@ -3,18 +3,19 @@ package com.haxibiao.ad.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-
-
 import androidx.annotation.Nullable;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.WritableMap;
 import com.haxibiao.R;
 import com.haxibiao.ad.AdBoss;
 import com.haxibiao.ad.TTAdManagerHolder;
+import static com.haxibiao.ad.FullScreenVideo.sendEvent;
 
 public class FullScreenActivity extends Activity {
 

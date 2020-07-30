@@ -37,19 +37,7 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
     public String getName() {
         return TAG;
     }
-
-//    @ReactMethod
-//    public void loadAd(ReadableMap options, final Promise promise) {
-//        mContext.getCurrentActivity().runOnUiThread(() -> {
-//            // 加载广告
-//            String codeid = options.hasKey("codeid") ? options.getString("codeid") : null;
-//            if(!codeid.isEmpty()) {
-//                loadAdSlot(codeid, TTAdConstant.VERTICAL, promise);
-//            }
-//        });
-//    }
-
-
+    
     @ReactMethod
     public void startAd(ReadableMap options, final Promise promise) {
 
