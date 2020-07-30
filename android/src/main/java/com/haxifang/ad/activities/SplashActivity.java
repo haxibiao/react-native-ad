@@ -1,4 +1,4 @@
-package com.haxibiao.ad.activities;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -23,10 +23,10 @@ import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.haxibiao.R;
-import com.haxibiao.ad.AdBoss;
-import com.haxibiao.ad.AdManager;
-import com.haxibiao.ad.WeakHandler;
+import com.haxifang.R;
+import com.haxifang.ad.AdBoss;
+import com.haxifang.ad.AdManager;
+import com.haxifang.ad.WeakHandler;
 
 public class SplashActivity extends Activity implements WeakHandler.IHandler {
 

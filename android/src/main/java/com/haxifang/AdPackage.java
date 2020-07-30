@@ -1,4 +1,4 @@
-package com.haxibiao;
+package com.haxifang;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,12 +9,12 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 
 import com.facebook.react.uimanager.ViewManager;
-import com.haxibiao.ad.AdManager;
-import com.haxibiao.ad.DrawFeedViewManager;
-import com.haxibiao.ad.FeedAdViewManager;
-import com.haxibiao.ad.FullScreenVideo;
-import com.haxibiao.ad.RewardVideo;
-import com.haxibiao.ad.SplashAd;
+import com.haxifang.ad.AdManager;
+import com.haxifang.ad.DrawFeedViewManager;
+import com.haxifang.ad.FeedAdViewManager;
+import com.haxifang.ad.FullScreenVideo;
+import com.haxifang.ad.RewardVideo;
+import com.haxifang.ad.SplashAd;
 
 public class AdPackage implements ReactPackage {
     @Override

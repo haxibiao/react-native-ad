@@ -1,4 +1,4 @@
-package com.haxibiao.ad;
+package com.haxifang.ad;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +10,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.haxibiao.ad.views.DrawFeedView;
+import com.haxifang.ad.views.DrawFeedView;
 
 import java.util.Map;
 

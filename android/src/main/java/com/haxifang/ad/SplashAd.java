@@ -1,4 +1,4 @@
-package com.haxibiao.ad;
+package com.haxifang.ad;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
-import com.haxibiao.ad.activities.SplashActivity;
+import com.haxifang.ad.activities.SplashActivity;
 
 public class SplashAd extends ReactContextBaseJavaModule {
 
@@ -70,7 +70,7 @@ public class SplashAd extends ReactContextBaseJavaModule {
     }
 
     private void startTxSplash(String codeid) {
-//        Intent intent = new Intent(mContext, com.haxibiao.ad.activities.tencent.SplashActivity.class);
+//        Intent intent = new Intent(mContext, com.haxifang.ad.activities.tencent.SplashActivity.class);
 //        try {
 //            String appid = AdBoss.tx_appid;
 //            // String codeid = "8863364436303842593";

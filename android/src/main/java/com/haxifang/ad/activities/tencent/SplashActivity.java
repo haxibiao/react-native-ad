@@ -1,4 +1,4 @@
-//package com.haxibiao.ad.activities.tencent;
+//package com.haxifang.ad.activities.tencent;
 //
 //import android.app.Activity;
 //import android.content.Context;
@@ -19,7 +19,7 @@
 //import com.bumptech.glide.Glide;
 //import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 //import com.bumptech.glide.request.RequestOptions;
-//import com.haxibiao.R;
+//import com.haxifang.R;
 //import com.qq.e.ads.splash.SplashAD;
 //import com.qq.e.ads.splash.SplashADListener;
 //import com.qq.e.comm.util.AdError;

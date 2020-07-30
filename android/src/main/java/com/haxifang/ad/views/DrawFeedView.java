@@ -1,4 +1,4 @@
-package com.haxibiao.ad.views;
+package com.haxifang.ad.views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,8 +29,8 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.haxibiao.R;
-import com.haxibiao.ad.AdBoss;
+import com.haxifang.R;
+import com.haxifang.ad.AdBoss;
 
 import java.util.ArrayList;
 import java.util.List;

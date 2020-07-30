@@ -1,4 +1,4 @@
-package com.haxibiao.ad.utils;
+package com.haxifang.ad.utils;
 
 
 import android.annotation.SuppressLint;

@@ -1,4 +1,4 @@
-//package com.haxibiao.ad.activities.tencent;
+//package com.haxifang.ad.activities.tencent;
 //
 //import android.app.Activity;
 //import android.os.Bundle;
@@ -8,10 +8,10 @@
 //
 //import androidx.annotation.Nullable;
 //
-//import com.haxibiao.ad.AdBoss;
-//import com.haxibiao.ad.RewardVideo;
-//import com.haxibiao.ad.utils.TToast;
-//import com.haxibiao.R;
+//import com.haxifang.ad.AdBoss;
+//import com.haxifang.ad.RewardVideo;
+//import com.haxifang.ad.utils.TToast;
+//import com.haxifang.R;
 //import com.qq.e.ads.rewardvideo.RewardVideoAD;
 //import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 //import com.qq.e.comm.util.AdError;

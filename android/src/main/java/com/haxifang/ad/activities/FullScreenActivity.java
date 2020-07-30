@@ -1,4 +1,4 @@
-package com.haxibiao.ad.activities;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
-import com.haxibiao.R;
-import com.haxibiao.ad.AdBoss;
-import com.haxibiao.ad.TTAdManagerHolder;
-import static com.haxibiao.ad.FullScreenVideo.sendEvent;
+import com.haxifang.R;
+import com.haxifang.ad.AdBoss;
+import com.haxifang.ad.TTAdManagerHolder;
+import static com.haxifang.ad.FullScreenVideo.sendEvent;
 
 public class FullScreenActivity extends Activity {
 

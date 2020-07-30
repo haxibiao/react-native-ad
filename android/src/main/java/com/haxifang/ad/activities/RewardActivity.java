@@ -1,4 +1,4 @@
-package com.haxibiao.ad.activities;
+package com.haxifang.ad.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,12 +15,12 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
-import com.haxibiao.R;
-import com.haxibiao.ad.AdBoss;
-import com.haxibiao.ad.RewardVideo;
-import com.haxibiao.ad.TTAdManagerHolder;
+import com.haxifang.R;
+import com.haxifang.ad.AdBoss;
+import com.haxifang.ad.RewardVideo;
+import com.haxifang.ad.TTAdManagerHolder;
 
-import static com.haxibiao.ad.RewardVideo.sendEvent;
+import static com.haxifang.ad.RewardVideo.sendEvent;
 
 public class RewardActivity extends Activity {
 

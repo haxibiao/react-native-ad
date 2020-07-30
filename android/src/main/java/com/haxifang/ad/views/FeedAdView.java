@@ -1,4 +1,4 @@
-package com.haxibiao.ad.views;
+package com.haxifang.ad.views;
 
 import android.app.Activity;
 import android.util.Log;
@@ -16,10 +16,10 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.haxibiao.R;
-import com.haxibiao.ad.AdBoss;
-import com.haxibiao.ad.utils.DislikeDialog;
-import com.haxibiao.ad.utils.Utils;
+import com.haxifang.R;
+import com.haxifang.ad.AdBoss;
+import com.haxifang.ad.utils.DislikeDialog;
+import com.haxifang.ad.utils.Utils;
 
 import java.util.List;
 

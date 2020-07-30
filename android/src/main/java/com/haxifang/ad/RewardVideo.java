@@ -1,4 +1,4 @@
-package com.haxibiao.ad;
+package com.haxifang.ad;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.haxibiao.ad.activities.RewardActivity;
-import com.haxibiao.ad.utils.TToast;
+import com.haxifang.ad.activities.RewardActivity;
+import com.haxifang.ad.utils.TToast;
 
 public class RewardVideo extends ReactContextBaseJavaModule {
 
@@ -84,7 +84,7 @@ public class RewardVideo extends ReactContextBaseJavaModule {
         if (ac != null) {
             ac.runOnUiThread(() -> {
                 TToast.show(mContext, message);
-                Intent intent = new Intent(mContext, com.haxibiao.ad.activities.RewardActivity.class);
+                Intent intent = new Intent(mContext, com.haxifang.ad.activities.RewardActivity.class);
                 intent.putExtra("appid", appId);
                 intent.putExtra("codeid", codeId);
                 ac.startActivity(intent);
