@@ -299,8 +299,8 @@ public class DrawFeedView extends RelativeLayout {
         tvAdAppName.setText("@ " + ad.getTitle());
         TextView tvDescription = findViewById(R.id.tvDescription);
         tvDescription.setText(ad.getDescription());
-        Button btnAction = findViewById(R.id.btnAction);
-        btnAction.setText(ad.getButtonText());
+        // Button btnAction = findViewById(R.id.btnAction);
+        // btnAction.setText(ad.getButtonText());
 
         if (_isExpress.equals("false")) {
             tvAdAppName.setVisibility(VISIBLE);
@@ -374,7 +374,7 @@ public class DrawFeedView extends RelativeLayout {
         List<View> clickViews = new ArrayList<>();
         clickViews.add(mContainer);
         List<View> creativeViews = new ArrayList<>();
-        creativeViews.add(btnAction); // 添加广告点击按钮可触发广告点击
+        // creativeViews.add(btnAction); // 添加广告点击按钮可触发广告点击
         creativeViews.add(usAvatar); // 添加点击广告用户可触发广告点击
 
         ad.registerViewForInteraction(container, clickViews, creativeViews, new TTNativeAd.AdInteractionListener() {
