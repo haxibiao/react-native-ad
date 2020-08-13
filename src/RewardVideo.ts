@@ -12,6 +12,7 @@ interface EVENT_TYPE {
 	onAdLoaded: string; // 广告加载成功监听
 	onAdClick: string; // 广告被点击监听
 	onAdClose: string; // 广告关闭监听
+	onVideoComplete: string; // 广告播放完成监听
 }
 
 export default function ({ appid, codeid }) {

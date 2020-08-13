@@ -41,6 +41,7 @@ public class RewardVideo extends ReactContextBaseJavaModule {
             // 上下文未初始化，跳出加载广告方法，避免闪退问题
             return;
         }
+        TTAdManagerHolder.setPromise(promise);
         String appid = options.hasKey("appid") ? options.getString("appid") : null;
         String codeid = options.hasKey("codeid") ? options.getString("codeid") : null;
         // Log.d(TAG, "startAd:  appid: " + appid + ", codeid: " + codeid);
