@@ -1,24 +1,20 @@
 package com.haxifang.ad;
 
 import android.content.Context;
-import android.util.Log;
-
 import com.bytedance.sdk.openadsdk.TTAdConfig;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdSdk;
-import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReactContext;
+
 
 /**
- * 可以用一个单例来保存TTAdManager实例，在需要初始化sdk的时候调用
+ * 单例来保存TTAdManager实例，在需要初始化sdk的时候调用
  */
 public class TTAdManagerHolder {
 
     private static String TAG = "TTAdManagerHolder";
     public static boolean sInit;
     public static Context mContext;
-    public static Promise mPromise;
 
     public static TTAdManager get() {
         if (!sInit) {
@@ -30,10 +26,6 @@ public class TTAdManagerHolder {
     public static void init(Context context, String appid) {
         mContext = context;
         doInit(context, appid);
-    }
-
-    public static void setPromise(Promise promise) {
-        mPromise = promise;
     }
 
     // 接入网盟广告sdk的初始化操作，详情见接入文档和穿山甲平台说明

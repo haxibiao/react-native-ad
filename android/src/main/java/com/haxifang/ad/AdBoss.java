@@ -43,10 +43,32 @@ public class AdBoss {
     public static Promise rewardPromise;
     public static Activity rewardActivity;
 
-    public static Boolean is_show = false, is_click = false, is_close = false, is_reward = false;
+    public static Boolean is_show = false, is_click = false,
+            is_close = false, is_reward = false;
     public static Boolean is_download_idle = false;
     public static boolean is_download_active = false;
     public static boolean is_install = false;
+
+    /**
+     * 准备新的激励(全屏)视频回调
+     *
+     * @param promise
+     */
+    public static void prepareReward(Promise promise, Context context, String appId) {
+        rewardPromise = promise;
+        resetRewardResult();
+        init(context, appId);
+    }
+
+    /**
+     * 关联页面，返回页面用
+     *
+     * @param activity
+     */
+    public static void hookActivity(Activity activity) {
+        rewardActivity = activity;
+    }
+
 
     public static void resetRewardResult() {
         is_show = false;
@@ -91,34 +113,44 @@ public class AdBoss {
 
     public static void init(Context context, String appId) {
 
-        tt_appid = appId;
+        if (TTAdSdk != null && tt_appid == appId) {
+            //已初始化
+            Log.d(TAG, "已初始化 TTAdSdk tt_appid " + tt_appid);
+            return;
+        }
+
         Log.d(TAG, "init feed tt_appid:" + tt_appid);
+        if(appId == null || appId.isEmpty()) {
+            return;
+        }
+
+        tt_appid = appId;
         if (context.getClass().getName() == "ReactApplicationContext") {
             reactContext = (ReactContext) context;
         }
 
+        //初始化回调结果
+        resetRewardResult();
+
 //        runOnUiThread(() -> {
 
-            // step1: 初始化sdk appid
-            TTAdManagerHolder.init(context, appId);
+        // step1: 初始化sdk appid
+        TTAdManagerHolder.init(context, appId);
 
-            // step2:创建TTAdNative对象，createAdNative(Context context)
-            // feed广告context需要传入Activity对象
-            ttAdManager = TTAdManagerHolder.get();
-            TTAdSdk = ttAdManager.createAdNative(context);
-            Log.d(TAG, "TTAdSdk init: " + TTAdSdk);
+        // step2:创建TTAdNative对象，createAdNative(Context context)
+        // feed广告context需要传入Activity对象
+        ttAdManager = TTAdManagerHolder.get();
+        TTAdSdk = ttAdManager.createAdNative(context);
+        Log.d(TAG, "TTAdSdk init: " + TTAdSdk);
 
-            // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
-            // 换到激励视频时才调用
-            // ttAdManager.requestPermissionIfNecessary(mContext);
+        // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
+        // 换到激励视频时才调用
+        // ttAdManager.requestPermissionIfNecessary(mContext);
 
 //        });
 
     }
 
-    public static boolean hasInit() {
-        return TTAdSdk == null;
-    }
 
     public static void initTx(Context context, String appId) {
         tx_appid = appId;

@@ -25,62 +25,28 @@ import static com.haxifang.ad.RewardVideo.sendEvent;
 public class RewardActivity extends Activity {
 
     final private static String TAG = "RewardVideo";
-    private Promise rewardPromise;
-    private Activity rewardActivity;
-    private TTAdNative mTTAdNative;
-
-    private boolean is_show = false,
-            is_click = false,
-            is_install = false,
-            is_reward = false,
-            is_close = false,
-            is_download_idle = false,
-            is_download_active = false;
-
-    // 启动激励视频页面
-    public static void startActivity(Activity context, String codeId) {
-        if (context != null) {
-            context.runOnUiThread(() -> {
-                Intent intent = new Intent(context, RewardActivity.class);
-                try {
-                    intent.putExtra("codeId", codeId);
-                    context.overridePendingTransition(0, 0); // 不要过渡动画
-                    context.startActivityForResult(intent, 10000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "startActivity: ", e);
-                }
-            });
-        }
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_view);
-        rewardActivity = this;
-        rewardPromise = TTAdManagerHolder.mPromise;
 
-        // 读取 code id
+        //关联boss处理回调
+        AdBoss.hookActivity(this);
+
+        // 读取 codeId
         Bundle extras = getIntent().getExtras();
         String codeId = extras.getString("codeId");
 
-        mTTAdNative = AdBoss.TTAdSdk;
-
         // 开始加载广告
         loadAd(codeId);
-
     }
 
     private void loadAd(String codeId) {
         if (codeId.isEmpty()) {
-            // 广告位 CodeId 未传, 抛出异常
-            getRewardResult();
-
-            RNCallBack("onAdError", 1001, "广告位 CodeId 未传");
-
-            if (RewardVideo.promise != null)
-                RewardVideo.promise.resolve(false);
+            // 广告位 CodeId 未传, 抛出error
+            AdBoss.getRewardResult();
+            fireEvent("onAdError", 1001, "广告位 CodeId 未传");
             return;
         }
 
@@ -96,12 +62,12 @@ public class RewardActivity extends Activity {
 
 		//FIXME:  穿山甲需要全面替换 express 模式
         // 请求广告
-        mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
+        AdBoss.TTAdSdk.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int code, String message) {
                 Log.d("reward onError ", message);
 
-                RNCallBack("onAdError", 1002, message);
+                fireEvent("onAdError", 1002, message);
 
                 if (RewardVideo.promise != null)
                     RewardVideo.promise.resolve(false);
@@ -112,7 +78,7 @@ public class RewardActivity extends Activity {
             public void onRewardVideoCached() {
                 Log.d("reward Cached ", "穿山甲激励视频缓存成功");
 
-                RNCallBack("onAdVideoCached", 201, "穿山甲激励视频缓存成功");
+                fireEvent("onAdVideoCached", 201, "穿山甲激励视频缓存成功");
 
             }
 
@@ -122,7 +88,7 @@ public class RewardActivity extends Activity {
                 Log.d("reward AdLoad ", ad.toString());
                 sendEvent("AdLoaded", null);
 
-                RNCallBack("onAdLoaded", 200, "视频广告的素材加载完毕");
+                fireEvent("onAdLoaded", 200, "视频广告的素材加载完毕");
 
                 // 展示加载成功的广告
                 showAd(ad);
@@ -143,7 +109,7 @@ public class RewardActivity extends Activity {
             Log.d(TAG, msg);
             // TToast.show(this, msg);
 
-            RNCallBack("onAdError", 1003, msg);
+            fireEvent("onAdError", 1003, msg);
 
 
             finish();
@@ -159,48 +125,42 @@ public class RewardActivity extends Activity {
                 // TToast.show(_this, msg);
                 Log.d(TAG, msg);
 
-                RNCallBack("onAdLoaded", 202, msg);
-
-                is_show = true;
+                fireEvent("onAdLoaded", 202, msg);
+                AdBoss.is_show = true;
             }
 
             @Override
             public void onAdVideoBarClick() {
-                is_click = true;
+                AdBoss.is_click = true;
                 String msg = "头条奖励视频查看成功,奖励即将发放";
                 // TToast.show(_this, msg);
                 Log.d(TAG, msg);
-
-                RNCallBack("onAdClick", 203, msg);
-
-
+                fireEvent("onAdClick", 203, msg);
             }
 
             @Override
             public void onAdClose() {
-                is_close = true;
-
-                RNCallBack("onAdClose", 204, "关闭激励视频");
-
-                getRewardResult();
+                AdBoss.is_close = true;
+                fireEvent("onAdClose", 204, "关闭激励视频");
+                AdBoss.getRewardResult();
             }
 
             // 视频播放完成回调
             @Override
             public void onVideoComplete() {
-                is_show = true;
+                AdBoss.is_show = true;
                 String msg = "头条奖励视频成功播放完成";
                 // TToast.show(_this, msg);
                 Log.d(TAG, msg);
 
-                RNCallBack("onVideoComplete", 205, msg);
+                fireEvent("onVideoComplete", 205, msg);
 
             }
 
             @Override
             public void onVideoError() {
                 // TToast.show(_this, "奖励视频出错了...");
-                RNCallBack("onAdError", 1004, "激励视频播放出错了");
+                fireEvent("onAdError", 1004, "激励视频播放出错了");
             }
 
             // 视频播放完成后，奖励验证回调，rewardVerify：是否有效，rewardAmount：奖励数量，rewardName：奖励名称
@@ -211,47 +171,47 @@ public class RewardActivity extends Activity {
                 } else {
                     // TToast.show(_this, "头条激励视频验证:" + "失败 ...", Toast.LENGTH_SHORT);
                 }
-                is_reward = true;
+                AdBoss.is_reward = true;
             }
 
             @Override
             public void onSkippedVideo() {
                 // TToast.show(_this, "rewardVideoAd has onSkippedVideo");
-                is_show = false; //激励视频不允许跳过...
+                AdBoss.is_show = false; //激励视频不允许跳过...
             }
         });
 
         ad.setDownloadListener(new TTAppDownloadListener() {
             @Override
             public void onIdle() {
-                is_download_idle = true;
+                AdBoss.is_download_idle = true;
             }
 
             @Override
             public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
-                if (!is_download_active) {
-                    is_download_active = true;
+                if (!AdBoss.is_download_active) {
+                    AdBoss.is_download_active = true;
                     // TToast.show(_this, "下载中，点击下载区域暂停", Toast.LENGTH_LONG);
-                    RNCallBack("onDownloadActive", 300, "下载中，点击下载区域暂停");
+                    fireEvent("onDownloadActive", 300, "下载中，点击下载区域暂停");
                 }
             }
 
             @Override
             public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
                 // TToast.show(_this, "下载暂停，点击下载区域继续", Toast.LENGTH_LONG);
-                RNCallBack("onDownloadActive", 301, "下载暂停，点击下载区域继续");
+                fireEvent("onDownloadActive", 301, "下载暂停，点击下载区域继续");
             }
 
             @Override
             public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
                 // TToast.show(_this, "下载失败，点击下载区域重新下载", Toast.LENGTH_LONG);
-                RNCallBack("onDownloadActive", 304, "下载失败，点击下载区域重新下载");
+                fireEvent("onDownloadActive", 304, "下载失败，点击下载区域重新下载");
             }
 
             @Override
             public void onDownloadFinished(long totalBytes, String fileName, String appName) {
                 // TToast.show(_this, "下载完成，点击下载区域重新下载", Toast.LENGTH_LONG);
-                RNCallBack("onDownloadActive", 302, "下载完成，点击下载区域重新下载");
+                fireEvent("onDownloadActive", 302, "下载完成，点击下载区域重新下载");
             }
 
             @Override
@@ -259,10 +219,8 @@ public class RewardActivity extends Activity {
                 String msg = "安装完成，点击下载区域打开";
                 // TToast.show(_this, msg);
                 Log.d(TAG, "onInstalled: " + msg);
-
-                RNCallBack("onDownloadActive", 303, msg);
-
-                is_install = true;
+                fireEvent("onDownloadActive", 303, msg);
+                AdBoss.is_install = true;
             }
         });
 
@@ -270,19 +228,9 @@ public class RewardActivity extends Activity {
         ad.showRewardVideoAd(_this);
     }
 
-    public String getRewardResult() {
-        String json = "{\"video_play\":" + is_show + ",\"ad_click\":" + is_click + ",\"apk_install\":" + is_install + ",\"verify_status\":" + is_reward + "}";
-        if (rewardPromise != null)
-            rewardPromise.resolve(json); //返回当前窗口加载的
-        if (rewardActivity != null) {
-            rewardActivity.finish();
-        }
-        Log.d(TAG, "getRewardResult: " + json);
-        return json;
-    }
 
-    // 二次封装回调函数
-    public void RNCallBack(String eventName, int startCode, String message) {
+    // 二次封装发送到RN的事件函数
+    public void fireEvent(String eventName, int startCode, String message) {
         WritableMap p = Arguments.createMap();
         p.putInt("code", startCode);
         p.putString("message", message);

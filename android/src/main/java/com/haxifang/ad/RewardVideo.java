@@ -37,43 +37,41 @@ public class RewardVideo extends ReactContextBaseJavaModule {
     @ReactMethod
     public void startAd(ReadableMap options, final Promise promise) {
 
-        if(mContext == null) {
-            // 上下文未初始化，跳出加载广告方法，避免闪退问题
-            return;
-        }
-        String appid = options.hasKey("appid") ? options.getString("appid") : null;
-        String codeid = options.hasKey("codeid") ? options.getString("codeid") : null;
-        // Log.d(TAG, "startAd:  appid: " + appid + ", codeid: " + codeid);
+        //拿到参数
+        String appId = options.getString("appid"); //可空
+        String codeId = options.getString("codeid");
+        Log.d(TAG, "startAd:  appId: " + appId + ", codeId: " + codeId);
 
-        // 判断头条 SDK 是否初始化
-        if (!TTAdManagerHolder.sInit) {
-            TTAdManagerHolder.init(mContext, appid);
-		}
-		
-		AdBoss.rewardPromise = promise;
+        //准备激励回调
+        AdBoss.prepareReward(promise, mContext, appId);
 
-        // 启动激励视频广告页面
-        RewardActivity.startActivity(mContext.getCurrentActivity(), codeid);
-
-	}
+        // 启动激励视频页面
+        startTT(codeId);
+    }
 
 
     /**
      * 启动穿山甲激励视频
-     * @param codeid
+     *
+     * @param codeId
      */
-    public static void startTT(String codeid) {
-        Activity ac = mContext.getCurrentActivity();
-        if (ac != null) {
-            ac.runOnUiThread(() -> {
-                Intent intent = new Intent(mContext, RewardActivity.class);
-                ac.startActivityForResult(intent, 10000);
-            });
+    public static void startTT(String codeId) {
+        Activity context = mContext.getCurrentActivity();
+        try {
+            Intent intent = new Intent(mContext, RewardActivity.class);
+            intent.putExtra("codeId", codeId);
+            // 不要过渡动画
+            context.overridePendingTransition(0, 0);
+            context.startActivityForResult(intent, 10000);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "start reward Activity error: ", e);
         }
     }
 
     /**
      * 启动优量汇激励视频
+     *
      * @param codeId
      */
     public static void startTx(String codeId) {
@@ -94,7 +92,8 @@ public class RewardVideo extends ReactContextBaseJavaModule {
 
     // 发送事件到RN
     public static void sendEvent(String eventName, @Nullable WritableMap params) {
-        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(TAG + "-" + eventName, params);
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(TAG + "-" + eventName, params);
     }
 
 }
