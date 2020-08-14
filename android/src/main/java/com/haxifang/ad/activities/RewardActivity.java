@@ -199,6 +199,8 @@ public class RewardActivity extends Activity {
 
             @Override
             public void onVideoError() {
+                // 当视频播放出错时，video_play 应为 false
+                is_show = true;
                 // TToast.show(_this, "奖励视频出错了...");
                 RNCallBack("onAdError", 1004, "激励视频播放出错了");
             }
