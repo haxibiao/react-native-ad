@@ -110,8 +110,6 @@ public class RewardActivity extends Activity {
             // TToast.show(this, msg);
 
             fireEvent("onAdError", 1003, msg);
-
-
             finish();
             return;
         }
@@ -122,18 +120,14 @@ public class RewardActivity extends Activity {
             @Override
             public void onAdShow() {
                 String msg = "开始展示奖励视频";
-                // TToast.show(_this, msg);
                 Log.d(TAG, msg);
-
                 fireEvent("onAdLoaded", 202, msg);
-                AdBoss.is_show = true;
             }
 
             @Override
             public void onAdVideoBarClick() {
                 AdBoss.is_click = true;
                 String msg = "头条奖励视频查看成功,奖励即将发放";
-                // TToast.show(_this, msg);
                 Log.d(TAG, msg);
                 fireEvent("onAdClick", 203, msg);
             }
@@ -152,14 +146,11 @@ public class RewardActivity extends Activity {
                 String msg = "头条奖励视频成功播放完成";
                 // TToast.show(_this, msg);
                 Log.d(TAG, msg);
-
                 fireEvent("onVideoComplete", 205, msg);
-
             }
 
             @Override
             public void onVideoError() {
-                // TToast.show(_this, "奖励视频出错了...");
                 fireEvent("onAdError", 1004, "激励视频播放出错了");
             }
 
@@ -176,8 +167,8 @@ public class RewardActivity extends Activity {
 
             @Override
             public void onSkippedVideo() {
-                // TToast.show(_this, "rewardVideoAd has onSkippedVideo");
-                AdBoss.is_show = false; //激励视频不允许跳过...
+                //激励视频不允许跳过...
+                AdBoss.is_show = false; 
             }
         });
 
@@ -191,33 +182,28 @@ public class RewardActivity extends Activity {
             public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
                 if (!AdBoss.is_download_active) {
                     AdBoss.is_download_active = true;
-                    // TToast.show(_this, "下载中，点击下载区域暂停", Toast.LENGTH_LONG);
                     fireEvent("onDownloadActive", 300, "下载中，点击下载区域暂停");
                 }
             }
 
             @Override
             public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
-                // TToast.show(_this, "下载暂停，点击下载区域继续", Toast.LENGTH_LONG);
                 fireEvent("onDownloadActive", 301, "下载暂停，点击下载区域继续");
             }
 
             @Override
             public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
-                // TToast.show(_this, "下载失败，点击下载区域重新下载", Toast.LENGTH_LONG);
                 fireEvent("onDownloadActive", 304, "下载失败，点击下载区域重新下载");
             }
 
             @Override
             public void onDownloadFinished(long totalBytes, String fileName, String appName) {
-                // TToast.show(_this, "下载完成，点击下载区域重新下载", Toast.LENGTH_LONG);
                 fireEvent("onDownloadActive", 302, "下载完成，点击下载区域重新下载");
             }
 
             @Override
             public void onInstalled(String fileName, String appName) {
                 String msg = "安装完成，点击下载区域打开";
-                // TToast.show(_this, msg);
                 Log.d(TAG, "onInstalled: " + msg);
                 fireEvent("onDownloadActive", 303, msg);
                 AdBoss.is_install = true;
