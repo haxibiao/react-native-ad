@@ -45,6 +45,9 @@ public class FullScreenActivity extends Activity {
                 .setCodeId(codeId)
                 .setSupportDeepLink(true)
                 .setImageAcceptedSize(1080, 1920)
+                .setRewardName(AdBoss.rewardName) // 奖励的名称
+                .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
+                .setUserID(AdBoss.userId)// 用户id,必传参数
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
 

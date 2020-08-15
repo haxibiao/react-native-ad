@@ -29,11 +29,25 @@ public class AdManager extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void init(ReadableMap options) {
-		//默认头条穿山甲
-		AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
-		AdBoss.init(reactAppContext, AdBoss.tt_appid);
-		
-		// 支持一口气init所有需要的adConfig
+        //默认头条穿山甲
+        AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
+        AdBoss.init(reactAppContext, AdBoss.tt_appid);
+
+        //支持传参头条需要的userId和appName ...
+        if(options.hasKey("uid")) {
+            AdBoss.userId = options.getString("uid");
+        }
+        if(options.hasKey("app")) {
+            AdBoss.appName = options.getString("app");
+        }
+        if(options.hasKey("amount")) {
+            AdBoss.rewardAmount = options.getInt("amount");
+        }
+        if(options.hasKey("reward")) {
+            AdBoss.rewardName = options.getString("reward");
+        }
+
+        // 支持一口气init所有需要的adConfig
         AdBoss.tx_appid = options.hasKey("tx_appid") ? options.getString("tx_appid") : AdBoss.tx_appid;
         AdBoss.initTx(reactAppContext, AdBoss.tx_appid);
         AdBoss.bd_appid = options.hasKey("bd_appid") ? options.getString("bd_appid") : AdBoss.bd_appid;
@@ -62,10 +76,10 @@ public class AdManager extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void loadFeedAd(ReadableMap options) {
-        String codeid = options.hasKey("codeid") ? options.getString("codeid") : null;
+        String codeId = options.getString("codeId");
         int width = options.hasKey("width") ? options.getInt("width") : 0;
-        Log.d(TAG, "loadFeedAd codeid " + codeid + " width:" + width);
-        AdBoss.loadFeedAd(codeid, width);
+        Log.d(TAG, "loadFeedAd codeId " + codeId + " width:" + width);
+        AdBoss.loadFeedAd(codeId, width);
     }
 
     /**

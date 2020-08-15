@@ -40,7 +40,7 @@ public class TTAdManagerHolder {
         return new TTAdConfig.Builder()
                 .appId(appid)
                 .useTextureView(true) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
-                .appName("答妹") //FIXME: 需要重构这里
+                .appName(AdBoss.appName)
                 .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
                 .allowShowNotify(true) //是否允许sdk展示通知栏提示
                 .allowShowPageWhenScreenLock(true) //是否在锁屏场景支持展示广告落地页

@@ -17,35 +17,42 @@ import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 
-import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
-
-
+/**
+ * 管理广告模块的核心对象
+ */
 public class AdBoss {
 
     public static String TAG = "AdBoss";
 
     public static String tt_appid;
-    public static String tx_appid;
-    public static String bd_appid;
+    public static String tx_appid; //腾讯
+    public static String bd_appid; //百度
 
-    // AdManager
+    //头条广告init需要传的参数
+    public static String userId = "";
+    public static String appName = "";
+    public static int rewardAmount = 1;
+    public static String rewardName = "金币";
+
+    // 头条广告sdk
     public static TTAdManager ttAdManager;
     public static TTAdNative TTAdSdk;
 
-
-    // 缓存加载的头条广告
+    // 缓存加载的头条广告数据
     public static TTRewardVideoAd rewardAd;
     public static TTFullScreenVideoAd fullAd;
     public static TTNativeExpressAd feedAd;
-
 
     // 存激励视频，全屏视频的回调
     public static Promise rewardPromise;
     public static Activity rewardActivity;
 
-    public static Boolean is_show = false, is_click = false,
-            is_close = false, is_reward = false;
-    public static Boolean is_download_idle = false;
+    //激励视频类的状态
+    public static boolean is_show = false;
+    public static boolean is_click = false;
+    public static boolean is_close = false;
+    public static boolean is_reward = false;
+    public static boolean is_download_idle = false;
     public static boolean is_download_active = false;
     public static boolean is_install = false;
 
@@ -92,9 +99,9 @@ public class AdBoss {
     }
 
     //providers
-    public static String feed_provider = "";
-    public static String reward_provider = "";
-    public static String splash_provider = "";
+    public static String feed_provider = "头条";
+    public static String reward_provider = "头条";
+    public static String splash_provider = "头条";
 
     //codeids
     public static String codeid_splash;
@@ -120,7 +127,7 @@ public class AdBoss {
         }
 
         Log.d(TAG, "init feed tt_appid:" + tt_appid);
-        if(appId == null || appId.isEmpty()) {
+        if (appId == null || appId.isEmpty()) {
             return;
         }
 
@@ -194,11 +201,14 @@ public class AdBoss {
      */
     private static void loadTTFeedAd(String codeId, float width) {
         // step4:创建广告请求参数AdSlot,具体参数含义参考文档
-        float expressViewWidth = width > 0 ? width : 280; // 默认宽度，兼容大部分弹层的宽度即可
+        // 默认宽度，兼容大部分弹层的宽度即可
+        float expressViewWidth = width > 0 ? width : 280;
         float expressViewHeight = 0; // 自动高度
 
-        AdSlot adSlot = new AdSlot.Builder().setCodeId(codeId) // 广告位id
-                .setSupportDeepLink(true).setAdCount(1) // 请求广告数量为1到3条
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(codeId) // 广告位id
+                .setSupportDeepLink(true)
+                .setAdCount(1) // 请求广告数量为1到3条
                 .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp,高度0自适应
                 .setImageAcceptedSize(640, 320).setNativeAdType(AdSlot.TYPE_INTERACTION_AD) // 坑啊，不设置这个，feed广告native出不来，一直差量无效，文档太烂
                 .build();

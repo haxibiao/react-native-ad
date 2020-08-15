@@ -13,13 +13,9 @@ import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
 import com.haxifang.R;
 import com.haxifang.ad.AdBoss;
-import com.haxifang.ad.RewardVideo;
-import com.haxifang.ad.TTAdManagerHolder;
-
 import static com.haxifang.ad.RewardVideo.sendEvent;
 
 public class RewardActivity extends Activity {
@@ -51,11 +47,13 @@ public class RewardActivity extends Activity {
         }
 
         // 创建广告请求参数 AdSlot, 具体参数含义参考文档
-        AdSlot adSlot = new AdSlot.Builder().setCodeId(codeId).setSupportDeepLink(true)
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(codeId)
+                .setSupportDeepLink(true)
                 .setImageAcceptedSize(1080, 1920)
-                .setRewardName("金币") // 奖励的名称 //暂时不都显示
-                .setRewardAmount(1) // 奖励的数量 //暂时不都显示
-                .setUserID("1")// 用户id,必传参数 //暂时不都显示
+                .setRewardName(AdBoss.rewardName) // 奖励的名称
+                .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
+                .setUserID(AdBoss.userId)// 用户id,必传参数
                 .setMediaExtra("media_extra") // 附加参数，可选
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
@@ -66,20 +64,14 @@ public class RewardActivity extends Activity {
             @Override
             public void onError(int code, String message) {
                 Log.d("reward onError ", message);
-
                 fireEvent("onAdError", 1002, message);
-
-                if (RewardVideo.promise != null)
-                    RewardVideo.promise.resolve(false);
             }
 
             // 视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
             @Override
             public void onRewardVideoCached() {
                 Log.d("reward Cached ", "穿山甲激励视频缓存成功");
-
                 fireEvent("onAdVideoCached", 201, "穿山甲激励视频缓存成功");
-
             }
 
             // 视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
@@ -87,15 +79,10 @@ public class RewardActivity extends Activity {
             public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
                 Log.d("reward AdLoad ", ad.toString());
                 sendEvent("AdLoaded", null);
-
                 fireEvent("onAdLoaded", 200, "视频广告的素材加载完毕");
 
                 // 展示加载成功的广告
                 showAd(ad);
-
-                if (RewardVideo.promise != null) {
-                    RewardVideo.promise.resolve(true);
-                }
             }
         });
     }
