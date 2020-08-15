@@ -1,19 +1,26 @@
 package com.haxifang.ad;
 
+import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.TTAdNative;
+import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import java.util.List;
+
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 public class AdManager extends ReactContextBaseJavaModule {
     public static ReactApplicationContext reactAppContext;
-    protected String TAG = "AdManager";
+    final public static String TAG = "AdManager";
 
 
     public AdManager(ReactApplicationContext reactContext) {
@@ -34,16 +41,16 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.init(reactAppContext, AdBoss.tt_appid);
 
         //支持传参头条需要的userId和appName ...
-        if(options.hasKey("uid")) {
+        if (options.hasKey("uid")) {
             AdBoss.userId = options.getString("uid");
         }
-        if(options.hasKey("app")) {
+        if (options.hasKey("app")) {
             AdBoss.appName = options.getString("app");
         }
-        if(options.hasKey("amount")) {
+        if (options.hasKey("amount")) {
             AdBoss.rewardAmount = options.getInt("amount");
         }
-        if(options.hasKey("reward")) {
+        if (options.hasKey("reward")) {
             AdBoss.rewardName = options.getString("reward");
         }
 
@@ -72,14 +79,64 @@ public class AdManager extends ReactContextBaseJavaModule {
     }
 
     /**
-     * 方便从RN主动预加载第一个广告，避免用户第一个签到的信息流广告加载+图片显示感觉很慢 （需要注意在展示弹层前才预加载）
+     * 方便从RN主动预加载第一个广告，避免用户第一个签到的信息流广告加载+图片显示感觉很慢
+     * （需要注意在展示弹层前才预加载）
      */
     @ReactMethod
-    public void loadFeedAd(ReadableMap options) {
+    public void loadFeedAd(ReadableMap options, final Promise promise) {
         String codeId = options.getString("codeId");
-        int width = options.hasKey("width") ? options.getInt("width") : 0;
-        Log.d(TAG, "loadFeedAd codeId " + codeId + " width:" + width);
-        AdBoss.loadFeedAd(codeId, width);
+        int width = options.getInt("width");
+        AdBoss.feedPromise = promise;
+        if (AdBoss.feed_provider.equals("腾讯")) {
+            //FIXME ...
+            return;
+        }
+        if (AdBoss.feed_provider.equals("百度")) {
+            //百度的是横幅banner，不需要预加载
+            return;
+        }
+        loadTTFeedAd(codeId, width);
+    }
+
+    /**
+     * 加载穿山甲的信息流广告
+     *
+     * @param codeId
+     * @param width
+     */
+    private static void loadTTFeedAd(String codeId, float width) {
+        // step4:创建广告请求参数AdSlot,具体参数含义参考文档
+        // 默认宽度，兼容大部分弹层的宽度即可
+        float expressViewWidth = width > 0 ? width : 280;
+        float expressViewHeight = 0; // 自动高度
+
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(codeId) // 广告位id
+                .setSupportDeepLink(true)
+                .setAdCount(1) // 请求广告数量为1到3条
+                .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp,高度0自适应
+                .setImageAcceptedSize(640, 320).setNativeAdType(AdSlot.TYPE_INTERACTION_AD) // 坑啊，不设置这个，feed广告native出不来，一直差量无效，文档太烂
+                .build();
+
+        // step5:请求广告，对请求回调的广告作渲染处理
+        AdBoss.TTAdSdk.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
+            @Override
+            public void onError(int code, String message) {
+                Log.d(TAG, message);
+                AdBoss.feedPromise.reject("101","feed ad error" + message);
+            }
+
+            @Override
+            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
+                Log.d(TAG, "onNativeExpressAdLoad: FeedAd !!!");
+                if (ads == null || ads.size() == 0) {
+                    return;
+                }
+                // 缓存加载成功的信息流广告
+                AdBoss.feedAd = ads.get(0);
+                AdBoss.feedPromise.resolve(true);
+            }
+        });
     }
 
     /**

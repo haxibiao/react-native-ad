@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
-
 
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdManager;
@@ -46,6 +44,9 @@ public class AdBoss {
     // 存激励视频，全屏视频的回调
     public static Promise rewardPromise;
     public static Activity rewardActivity;
+
+    //信息流广告回调
+    public static Promise feedPromise;
 
     //激励视频类的状态
     public static boolean is_show = false;
@@ -175,66 +176,6 @@ public class AdBoss {
 //        BaiduManager.init(mContext);
 //        AdView.setAppSid(context, bd_appid);
         // 注意：AdView.setAppsId还有用,被垃圾百度文档搞晕...
-    }
-
-    /**
-     * 提前加载广告，避免第一次和弹层时，加载的有些慢
-     */
-    public static void loadFeedAd(String codeId, float width) {
-        if (feed_provider.equals("腾讯")) {
-//            loadTxFeedAd(codeId, width);
-            return;
-        }
-        if (feed_provider.equals("百度")) {
-            //百度的是横幅banner，不需要预加载
-            return;
-        }
-        loadTTFeedAd(codeId, width);
-    }
-
-
-    /**
-     * 加载穿山甲的信息流广告
-     *
-     * @param codeId
-     * @param width
-     */
-    private static void loadTTFeedAd(String codeId, float width) {
-        // step4:创建广告请求参数AdSlot,具体参数含义参考文档
-        // 默认宽度，兼容大部分弹层的宽度即可
-        float expressViewWidth = width > 0 ? width : 280;
-        float expressViewHeight = 0; // 自动高度
-
-        AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(codeId) // 广告位id
-                .setSupportDeepLink(true)
-                .setAdCount(1) // 请求广告数量为1到3条
-                .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp,高度0自适应
-                .setImageAcceptedSize(640, 320).setNativeAdType(AdSlot.TYPE_INTERACTION_AD) // 坑啊，不设置这个，feed广告native出不来，一直差量无效，文档太烂
-                .build();
-
-        // step5:请求广告，对请求回调的广告作渲染处理
-        AdBoss.TTAdSdk.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
-            @Override
-            public void onError(int code, String message) {
-                Log.d(TAG, message);
-            }
-
-            @Override
-            public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
-                Log.d(TAG, "onNativeExpressAdLoad: FeedAd !!!");
-                if (ads == null || ads.size() == 0) {
-                    return;
-                }
-                // 缓存加载成功的信息流广告
-                Activity ac = reactContext.getCurrentActivity();
-                if (ac != null) {
-                    ac.runOnUiThread(() -> {
-                        feedAd = ads.get(0);
-                    });
-                }
-            }
-        });
     }
 
 }

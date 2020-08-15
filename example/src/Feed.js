@@ -7,6 +7,20 @@ export default function Feed() {
     ad.init({
       appid: '5016582',
     });
+
+    //提前加载feed ad 结果测试
+    ad.loadFeedAd({
+      appid: '5016582',
+      codeid: '945339778',
+    }).then(
+      (result) => {
+        console.log('load feed ad result ', result);
+      },
+      (reason) => {
+        console.log('加载 feed ad 失败理由 ', reason);
+      },
+    );
+
     return () => {};
   }, []);
   return (

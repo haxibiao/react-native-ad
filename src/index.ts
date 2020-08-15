@@ -13,9 +13,14 @@ export const init = ({ appid }) => {
     AdManager.init({ appid });
 };
 
-export const loadFeedAd = ({ appid }) => {
-    //提前加载信息流FeedAd
-    AdManager.loadFeedAd({ appid });
+type feedInfo = {
+    appid: string;
+    codeid: string;
+};
+
+export const loadFeedAd = (info: feedInfo) => {
+    //提前加载信息流FeedAd, 结果返回promise
+    return AdManager.loadFeedAd(info);
 };
 
 export default {

@@ -6,7 +6,6 @@ const FeedAdComponent = requireNativeComponent('FeedAd');
 console.log('FeedAdComponent', FeedAdComponent);
 
 interface Props {
-    appid: string;
     codeid: string;
     adWidth?: number;
     visible?: boolean;
@@ -17,15 +16,14 @@ interface Props {
 }
 
 const FeedAd = (props: Props) => {
-    const { appid, codeid, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick } = props;
+    const { codeid, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick } = props;
     // let [visible, setVisible] = useState(true);
     // 状态交友父组件来控制，使得广告显示状态在父组件中可以实时监听
-    const { visible = true, visibleHandler } = props;
+    const { visible = true } = props;
     const [height, setHeight] = React.useState(0); // 默认高度
     if (!visible) return null;
     return (
         <FeedAdComponent
-            appid={appid ?? null}
             codeid={codeid}
             adWidth={adWidth}
             style={{ width: adWidth, height }}

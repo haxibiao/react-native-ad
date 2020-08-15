@@ -9,7 +9,6 @@ console.log('DrawFeedComponent', DrawFeedComponent);
 // FIXME: 记得全部重新申请代码位，因为穿山甲马上要弃用旧代码位
 
 interface Props {
-    appid: string;
     codeid: string;
     visible?: boolean;
     onAdError?: Function;
@@ -18,12 +17,11 @@ interface Props {
 }
 
 export const DrawFeedAd = (props: Props) => {
-    const { appid, codeid, onAdError, onAdShow, onAdClick, visible = true } = props;
+    const { codeid, onAdError, onAdShow, onAdClick, visible = true } = props;
     if (!visible) return null;
     return (
         <DrawFeedComponent
             provider={'头条'}
-            appid={appid}
             codeid={codeid}
             style={{ ...styles.container }}
             onAdError={(e: any) => {
