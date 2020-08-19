@@ -8,9 +8,17 @@ import Feed from './Feed';
 
 const { AdManager } = NativeModules;
 
-export const init = ({ appid }) => {
+type appInfo = {
+    appid: string;
+    app: string;
+    uid: string;
+    amount: number;
+    reward: string;
+};
+
+export const init = (appInfo) => {
     //FIXME: init 传入一些codeid可以提前加载广告，比如视频类
-    AdManager.init({ appid });
+    AdManager.init(appInfo);
 };
 
 type feedInfo = {

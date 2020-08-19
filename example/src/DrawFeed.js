@@ -6,6 +6,7 @@ export default function DrawFeed() {
   useEffect(() => {
     ad.init({
       appid: '5016582',
+      app: '演示APP',
     });
     return () => {};
   }, []);

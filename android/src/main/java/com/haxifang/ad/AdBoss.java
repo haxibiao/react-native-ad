@@ -28,7 +28,7 @@ public class AdBoss {
 
     //头条广告init需要传的参数
     public static String userId = "";
-    public static String appName = "";
+    public static String appName = "穿山甲媒体APP";
     public static int rewardAmount = 1;
     public static String rewardName = "金币";
 
