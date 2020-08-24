@@ -86,7 +86,8 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
         [AdBoss init:appid];
     }
     
-    [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
+    // 前面已经预加载，此处注释
+    // [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
     
     RewardVideoViewController *vc = [RewardVideoViewController new];
     vc.view.backgroundColor = [UIColor whiteColor];

@@ -70,6 +70,27 @@ RCT_EXPORT_METHOD(loadFeedAd:(NSDictionary *)options resolve:(RCTPromiseResolveB
     resolve(@"TODO: 还未实现是否需要给ios提前预加载 Feed Ad，这里同步的安卓的RN方法 ...");
 }
 
+
+// iOS 预加载激励视频广告
+RCT_EXPORT_METHOD(loadRewardAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
+{
+    NSString *appid = options[@"appid"];
+    if(appid != nil) {
+        [AdBoss init:appid];
+    }
+    
+    NSString *codeid = options[@"codeId"];
+    if(codeid == nil) {
+        return;
+    }
+        
+    [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
+    
+    printf("自定义预加载成功");
+   
+    resolve(@"OK");
+}
+
 @end
 
 
