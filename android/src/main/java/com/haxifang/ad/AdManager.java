@@ -6,8 +6,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
+import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -17,6 +19,7 @@ import com.facebook.react.bridge.ReadableMap;
 import java.util.List;
 
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+import static com.haxifang.ad.RewardVideo.sendEvent;
 
 public class AdManager extends ReactContextBaseJavaModule {
     public static ReactApplicationContext reactAppContext;
@@ -160,9 +163,11 @@ public class AdManager extends ReactContextBaseJavaModule {
         loadTTRewardAd(codeId);
     }
 
+    /**
+     * endachao@gmail.com
+     * 调用 SDK 加载一个激励视频的广告，并全局缓存
+     */
     private static void loadTTRewardAd(String codeId) {
-
-        // 创建广告请求参数 AdSlot, 具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId)
                 .setSupportDeepLink(true)
