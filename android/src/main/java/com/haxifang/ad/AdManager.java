@@ -148,4 +148,56 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.ttAdManager.requestPermissionIfNecessary(reactAppContext);
     }
 
+
+    /**
+     *  预加载一个激励视频广告
+     */
+    @ReactMethod
+    public void loadRewardAd(ReadableMap options, final Promise promise) {
+        String codeId = options.getString("codeId");
+        AdBoss.rewardAdPromise = promise;
+
+        loadTTRewardAd(codeId);
+    }
+
+    private static void loadTTRewardAd(String codeId) {
+
+        // 创建广告请求参数 AdSlot, 具体参数含义参考文档
+        AdSlot adSlot = new AdSlot.Builder()
+                .setCodeId(codeId)
+                .setSupportDeepLink(true)
+                .setImageAcceptedSize(1080, 1920)
+                .setRewardName(AdBoss.rewardName) // 奖励的名称
+                .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
+                .setUserID(AdBoss.userId)// 用户id,必传参数
+                .setMediaExtra("media_extra") // 附加参数，可选
+                .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
+                .build();
+
+        //FIXME:  穿山甲需要全面替换 express 模式
+        // 请求广告
+        AdBoss.TTAdSdk.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
+            @Override
+            public void onError(int code, String message) {
+                Log.d("reward onError ", message);
+                AdBoss.rewardAdPromise.reject("1002", "loadRewardVideoAd ad error" + message);
+            }
+
+            // 视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
+            @Override
+            public void onRewardVideoCached() {
+                Log.d("reward Cached ", "穿山甲激励视频缓存成功");
+            }
+
+            // 视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
+            @Override
+            public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
+                Log.d("reward AdLoad ", ad.toString());
+                sendEvent("AdLoaded", null);
+                AdBoss.rewardAd = ad;
+                AdBoss.rewardAdPromise.resolve(true);
+            }
+        });
+    }
+
 }

@@ -48,6 +48,9 @@ public class AdBoss {
     //信息流广告回调
     public static Promise feedPromise;
 
+    // 激励视频的回调
+    public static Promise rewardAdPromise;
+
     //激励视频类的状态
     public static boolean is_show = false;
     public static boolean is_click = false;

@@ -35,7 +35,8 @@ public class RewardActivity extends Activity {
         String codeId = extras.getString("codeId");
 
         // 开始加载广告
-        loadAd(codeId);
+        // loadAd(codeId);
+        showAd(AdBoss.rewardAd);
     }
 
     private void loadAd(String codeId) {

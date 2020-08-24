@@ -31,6 +31,11 @@ export const loadFeedAd = (info: feedInfo) => {
     return AdManager.loadFeedAd(info);
 };
 
+export const loadRewardAd = (info: feedInfo) => {
+    //提前加载信息流FeedAd, 结果返回promise
+    return AdManager.loadRewardAd(info);
+};
+
 export default {
     init,
     loadFeedAd,
@@ -39,4 +44,5 @@ export default {
     startRewardVideo,
     DrawFeed,
     Feed,
+    loadRewardAd
 };
