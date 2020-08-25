@@ -28,7 +28,7 @@ export default function Feed() {
       <Text>测试FeedAd</Text>
       <ad.Feed
         codeid="916582486" //必传 广告位 codeid 注意区分 Android 和 IOS
-        adWidth={300}
+        adWidth={400}
         onAdLayout={(data) => {
           console.log('Feed 广告加载成功！', data);
         }}

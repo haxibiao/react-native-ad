@@ -19,6 +19,7 @@
 @property (strong, nonatomic) BUNativeExpressAdManager *nativeExpressAdManager;
 
 @property(nonatomic, strong) NSString *_codeid;
+@property(nonatomic) NSInteger _adwidth ;
 
 @end
 
@@ -31,6 +32,12 @@
     [self loadFeedAd];
 }
 
+- (void)setAdWidth:(NSString *)width {
+    self._adwidth = [width integerValue];
+    NSLog(@"开始 加载Feed广告 adwidth: %ld", self._adwidth);
+    [self loadFeedAd];
+}
+
 /**
  加载Feed广告
  */
@@ -38,6 +45,10 @@
     
     if(self._codeid == nil) {
         return;
+    }
+    
+    if(!self._adwidth){
+        self._adwidth  = 228;  //默认feed尺寸 228 * 150
     }
     
     if (!self.expressAdViews) {
@@ -51,7 +62,7 @@
     slot1.position = BUAdSlotPositionFeed;
     slot1.isSupportDeepLink = YES;
     
-    CGSize adSize = CGSizeMake(228, 150);
+    CGSize adSize = CGSizeMake(self._adwidth, self._adwidth * 150/228);
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:adSize];
     }
@@ -82,9 +93,9 @@
 
 - (void)nativeExpressAdFailToLoad:(BUNativeExpressAdManager *)nativeExpressAd error:(NSError *)error {
     BUD_Log(@"feed ad faild to load");
-      self.onAdError(@{
+    self.onAdError(@{
         @"message":[error localizedDescription],
-      });
+    });
 }
 
 - (void)nativeExpressAdViewRenderSuccess:(BUNativeExpressAdView *)nativeExpressAdView {
@@ -94,9 +105,9 @@
 
 - (void)nativeExpressAdViewRenderFail:(BUNativeExpressAdView *)nativeExpressAdView error:(NSError *)error {
     BUD_Log(@"feed ad render fail %@", error);
-      self.onAdError(@{
+    self.onAdError(@{
         @"message":[error localizedDescription],
-      });
+    });
 }
 
 - (void)nativeExpressAdViewWillShow:(BUNativeExpressAdView *)nativeExpressAdView {
@@ -115,16 +126,16 @@
     BUD_Log(@"feed ad clicked");
     self.onAdClick(@{
         @"message": @"ad been clicked",
-      });
+    });
 }
 
 - (void)nativeExpressAdView:(BUNativeExpressAdView *)nativeExpressAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterWords {
     //【重要】需要在点击叉以后 在这个回调中移除视图，否则，会出现用户点击叉无效的情况
     [self.expressAdViews removeObject:nativeExpressAdView];
     [self willRemoveSubview:nativeExpressAdView];
-//    self.onAdDislike(@{
-//        @"message":filterWords[0].name,
-//    });
+    //    self.onAdDislike(@{
+    //        @"message":filterWords[0].name,
+    //    });
 }
 
 - (void)nativeExpressAdViewDidClosed:(BUNativeExpressAdView *)nativeExpressAdView {
