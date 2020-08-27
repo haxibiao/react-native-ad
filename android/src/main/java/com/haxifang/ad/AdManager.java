@@ -40,12 +40,12 @@ public class AdManager extends ReactContextBaseJavaModule {
     @ReactMethod
     public void init(ReadableMap options) {
         //默认头条穿山甲
-        AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
+        AdBoss.tt_appid = options.hasKey("appId") ? options.getString("appId") : AdBoss.tt_appid;
         AdBoss.init(reactAppContext, AdBoss.tt_appid);
 
         //支持传参头条需要的userId和appName ...
-        if (options.hasKey("uid")) {
-            AdBoss.userId = options.getString("uid");
+        if (options.hasKey("userId")) {
+            AdBoss.userId = options.getString("userId");
         }
         if (options.hasKey("app")) {
             AdBoss.appName = options.getString("app");
@@ -126,7 +126,7 @@ public class AdManager extends ReactContextBaseJavaModule {
             @Override
             public void onError(int code, String message) {
                 Log.d(TAG, message);
-                AdBoss.feedPromise.reject("101","feed ad error" + message);
+                AdBoss.feedPromise.reject("101", "feed ad error" + message);
             }
 
             @Override
@@ -153,21 +153,22 @@ public class AdManager extends ReactContextBaseJavaModule {
 
 
     /**
-     *  预加载一个激励视频广告
+     * 预加载一个激励视频广告
      */
     @ReactMethod
     public void loadRewardAd(ReadableMap options, final Promise promise) {
         String codeId = options.getString("codeId");
+        String extra = options.getString("extra");
         AdBoss.rewardAdPromise = promise;
 
-        loadTTRewardAd(codeId);
+        loadTTRewardAd(codeId, extra);
     }
 
     /**
      * endachao@gmail.com
      * 调用 SDK 加载一个激励视频的广告，并全局缓存
      */
-    private static void loadTTRewardAd(String codeId) {
+    private static void loadTTRewardAd(String codeId, String extra) {
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId)
                 .setSupportDeepLink(true)
@@ -175,7 +176,7 @@ public class AdManager extends ReactContextBaseJavaModule {
                 .setRewardName(AdBoss.rewardName) // 奖励的名称
                 .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
                 .setUserID(AdBoss.userId)// 用户id,必传参数
-                .setMediaExtra("media_extra") // 附加参数，可选
+                .setMediaExtra(extra) // 附加参数，可选
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
 
@@ -200,7 +201,7 @@ public class AdManager extends ReactContextBaseJavaModule {
                 Log.d("reward AdLoad ", ad.toString());
                 sendEvent("AdLoaded", null);
                 AdBoss.rewardAd = ad;
-                AdBoss.rewardAdPromise.resolve(true);
+                AdBoss.rewardAdPromise.resolve("OK");
             }
         });
     }

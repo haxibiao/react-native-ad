@@ -31,8 +31,8 @@ public class RewardActivity extends Activity {
         AdBoss.hookActivity(this);
 
         // 读取 codeId
-        Bundle extras = getIntent().getExtras();
-        String codeId = extras.getString("codeId");
+//        Bundle extras = getIntent().getExtras();
+//        String codeId = extras.getString("codeId");
 
         // 开始加载广告
         // loadAd(codeId);
