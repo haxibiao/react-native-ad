@@ -159,23 +159,24 @@ public class AdManager extends ReactContextBaseJavaModule {
     public void loadRewardAd(ReadableMap options, final Promise promise) {
         String codeId = options.getString("codeId");
         String extra = options.getString("extra");
+        String userId = options.getString("userId");
         AdBoss.rewardAdPromise = promise;
 
-        loadTTRewardAd(codeId, extra);
+        loadTTRewardAd(codeId, extra, userId);
     }
 
     /**
      * endachao@gmail.com
      * 调用 SDK 加载一个激励视频的广告，并全局缓存
      */
-    private static void loadTTRewardAd(String codeId, String extra) {
+    private static void loadTTRewardAd(String codeId, String extra, String userId) {
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId)
                 .setSupportDeepLink(true)
                 .setImageAcceptedSize(1080, 1920)
                 .setRewardName(AdBoss.rewardName) // 奖励的名称
                 .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
-                .setUserID(AdBoss.userId)// 用户id,必传参数
+                .setUserID(userId)// 用户id,必传参数
                 .setMediaExtra(extra) // 附加参数，可选
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();

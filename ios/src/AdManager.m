@@ -44,7 +44,7 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(init:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     
-    NSString  *appid = options[@"appid"];
+    NSString  *appid = options[@"appId"];
     NSLog(@"AdManager feed init appid %@",appid);
     
     if(appid == nil) {
