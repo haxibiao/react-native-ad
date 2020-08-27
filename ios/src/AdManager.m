@@ -74,7 +74,7 @@ RCT_EXPORT_METHOD(loadFeedAd:(NSDictionary *)options resolve:(RCTPromiseResolveB
 // iOS 预加载激励视频广告
 RCT_EXPORT_METHOD(loadRewardAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
-    NSString *appid = options[@"appid"];
+    NSString *appid = options[@"appId"];
     if(appid != nil) {
         [AdBoss init:appid];
     }
@@ -85,7 +85,8 @@ RCT_EXPORT_METHOD(loadRewardAd:(NSDictionary *)options resolve:(RCTPromiseResolv
     }
     
     NSString *extra = options[@"extra"];
-    [AdBoss loadRewardAd:codeid userid:options[@"uid"] extra:extra];
+    
+    [AdBoss loadRewardAd:codeid userid:options[@"userId"] extra:extra];
     resolve(@"OK");
 }
 

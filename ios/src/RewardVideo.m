@@ -8,7 +8,7 @@
 #import "RewardVideo.h"
 #import "AdBoss.h"
 
-@implementation RewardVideo 
+@implementation RewardVideo
 
 RCT_EXPORT_MODULE();
 
@@ -45,13 +45,13 @@ RCT_EXPORT_MODULE();
 //最终发送事件到rn
 -(void) emitEventInternal:(NSNotification *)notification{
     if([@"onAdLoaded" compare:[notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"RewardVideo-onAdLoaded" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+        [self sendEventWithName:@"RewardVideo-onAdLoaded" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];
     }else if( [@"onAdError" compare:[notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"RewardVideo-onAdError" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+        [self sendEventWithName:@"RewardVideo-onAdError" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];
     }else if( [@"onAdClose" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"RewardVideo-onAdClose" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+        [self sendEventWithName:@"RewardVideo-onAdClose" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];
     }else if( [@"onAdClick" compare: [notification.userInfo objectForKey:@"type"]] == NSOrderedSame ){
-        [self sendEventWithName:@"RewardVideo-onAdClick" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];   
+        [self sendEventWithName:@"RewardVideo-onAdClick" body:@{@"message":[notification.userInfo objectForKey:@"message"]}];
     }
 }
 

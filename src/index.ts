@@ -31,8 +31,14 @@ export const loadFeedAd = (info: feedInfo) => {
     return AdManager.loadFeedAd(info);
 };
 
-export const loadRewardAd = (info: feedInfo) => {
-    //提前加载信息流FeedAd, 结果返回promise
+type adInfo = {
+    appId: string;
+    codeId: string;
+    extra: string;
+    userId: string;
+};
+export const loadRewardAd = (info: adInfo) => {
+    //提前加载激励视频, 结果返回promise
     return AdManager.loadRewardAd(info);
 };
 

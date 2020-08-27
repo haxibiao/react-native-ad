@@ -67,6 +67,7 @@ static RCTPromiseRejectBlock adReject;
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
     model.extra = extra;
+    NSLog(@"Enda %@ %@",uid,extra);
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
     [rewardAd loadAdData];
 }
