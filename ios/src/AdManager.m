@@ -85,11 +85,7 @@ RCT_EXPORT_METHOD(loadRewardAd:(NSDictionary *)options resolve:(RCTPromiseResolv
     }
     
     NSString *extra = options[@"extra"];
-        
     [AdBoss loadRewardAd:codeid userid:options[@"uid"] extra:extra];
-    
-    printf(extra);
-   
     resolve(@"OK");
 }
 

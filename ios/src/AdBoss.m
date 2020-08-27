@@ -66,6 +66,7 @@ static RCTPromiseRejectBlock adReject;
     //    # 避免重复请求数据，每次加载会返回新的广告数据的
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
+    model.extra = extra;
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
     [rewardAd loadAdData];
 }
