@@ -25,7 +25,7 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 +(UIViewController*) getRootVC;
 +(void) init: (NSString*) appid;
 
-+(void) loadRewardAd: (NSString*) codeid userid:(NSString *)uid;
++(void) loadRewardAd: (NSString*) codeid userid:(NSString *)uid extra:(NSString *)extra;
 +(BUNativeExpressRewardedVideoAd *) getRewardAd;
 +(void) loadFullScreenAd: (NSString*) codeid;
 +(BUNativeExpressFullscreenVideoAd *) getFullScreenAd;

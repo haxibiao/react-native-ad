@@ -83,10 +83,12 @@ RCT_EXPORT_METHOD(loadRewardAd:(NSDictionary *)options resolve:(RCTPromiseResolv
     if(codeid == nil) {
         return;
     }
-        
-    [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
     
-    printf("自定义预加载成功");
+    NSString *extra = options[@"extra"];
+        
+    [AdBoss loadRewardAd:codeid userid:options[@"uid"] extra:extra];
+    
+    printf(extra);
    
     resolve(@"OK");
 }
