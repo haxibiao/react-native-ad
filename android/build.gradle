@@ -81,7 +81,8 @@ dependencies {
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
 	//加载广告SDK aar
     // implementation fileTree(dir: 'libs', include: ['*.aar'])
-    implementation files('libs\\open_ad_sdk.aar')
+    // implementation files('libs\\open_ad_sdk.aar')
+    provided files('libs\\open_ad_sdk.aar')
 }
 
 def configureReactNativePom(def pom) {
