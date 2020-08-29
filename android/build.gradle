@@ -80,7 +80,8 @@ dependencies {
 	//加载开屏广告替换appIcon用
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
 	//加载广告SDK aar
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    // implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation files('libs\\open_ad_sdk.aar')
 }
 
 def configureReactNativePom(def pom) {
