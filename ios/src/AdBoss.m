@@ -69,7 +69,7 @@ static RCTPromiseRejectBlock adReject;
     model.extra = extra;
     
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
-    [rewardAd loadAdData];
+//    [rewardAd loadAdData];
     
     // 根据代码位保存预加载视频
     LoadRewardSingle *rewardSingle = [LoadRewardSingle sharedInstance];

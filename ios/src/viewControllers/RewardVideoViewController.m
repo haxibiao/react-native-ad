@@ -31,8 +31,10 @@
 
 @implementation RewardVideoViewController
 
+BUNativeExpressRewardedVideoAd *ad = nil;
+
 - (void)viewDidLoad {
-    
+
     LoadRewardSingle *rewardSingle = [LoadRewardSingle sharedInstance];
     NSLog(@"Enda viewDidLoad CodeId %@",rewardSingle.codeId );
     [rewardSingle.rewardAdMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -40,7 +42,7 @@
     }];
     
     // 根据代码位保存预加载视频
-    BUNativeExpressRewardedVideoAd *ad = [rewardSingle.rewardAdMap objectForKey:rewardSingle.codeId];
+    ad = [rewardSingle.rewardAdMap objectForKey:rewardSingle.codeId];
     
     NSLog(@"Enda viewDidLoad %@",ad);
     ad.delegate = self;
@@ -54,12 +56,12 @@
     BUD_Log(@"rewardedVideoAd 激励视频 %s",__func__);
     [RewardVideo emitEvent: @{@"type": @"onAdLoaded", @"message": @"success"}];
     //express 只有渲染成功时才可以show ? 0.63 又必须这个时候show了
-    [[AdBoss getRewardAd] showAdFromRootViewController:self];
+    [ad showAdFromRootViewController:self];
 }
 
 - (void)nativeExpressRewardedVideoAdViewRenderSuccess:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd {
     BUD_Log(@"%s rewardVideoAd 激励视频 渲染成功",__func__);
-    [[AdBoss getRewardAd] showAdFromRootViewController:self];
+    [ad showAdFromRootViewController:self];
 }
 
 - (void)nativeExpressRewardedVideoAd:(BUNativeExpressRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *_Nullable)error {
