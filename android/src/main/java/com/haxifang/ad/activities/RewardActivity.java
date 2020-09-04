@@ -16,6 +16,10 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.haxifang.R;
 import com.haxifang.ad.AdBoss;
+
+import java.util.Iterator;
+import java.util.Set;
+
 import static com.haxifang.ad.RewardVideo.sendEvent;
 
 public class RewardActivity extends Activity {
@@ -31,12 +35,20 @@ public class RewardActivity extends Activity {
         AdBoss.hookActivity(this);
 
         // 读取 codeId
-//        Bundle extras = getIntent().getExtras();
-//        String codeId = extras.getString("codeId");
+        Bundle extras = getIntent().getExtras();
+        String codeId = extras.getString("codeId");
+
+        // 循环输出所有keys
+        Set<String> keys = AdBoss.rewardVideoAdMap.keySet();  // 得到全部的key
+        Iterator<String> iter = keys.iterator();
+        while (iter.hasNext()) {
+            String str = iter.next();
+            Log.d("RewardActivity", str);
+        }
 
         // 开始加载广告
         // loadAd(codeId);
-        showAd(AdBoss.rewardAd);
+        showAd(AdBoss.rewardVideoAdMap.get(codeId));
     }
 
     private void loadAd(String codeId) {
@@ -59,7 +71,7 @@ public class RewardActivity extends Activity {
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
 
-		//FIXME:  穿山甲需要全面替换 express 模式
+        //FIXME:  穿山甲需要全面替换 express 模式
         // 请求广告
         AdBoss.TTAdSdk.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
             @Override
@@ -156,7 +168,7 @@ public class RewardActivity extends Activity {
             @Override
             public void onSkippedVideo() {
                 //激励视频不允许跳过...
-                AdBoss.is_show = false; 
+                AdBoss.is_show = false;
             }
         });
 

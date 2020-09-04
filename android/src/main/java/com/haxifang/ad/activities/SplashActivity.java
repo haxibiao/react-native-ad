@@ -82,40 +82,40 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
         // 初始化广告渲染组件
         mSplashContainer = this.findViewById(R.id.splash_container);
 
-        // 设置软件底部 icon，title
-        try {
-            ActivityInfo appInfo = getPackageManager().getActivityInfo(this.getComponentName(),
-                    PackageManager.GET_META_DATA);
-
-            RoundedCorners roundedCorners = new RoundedCorners(20);
-            // 通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
-            ImageView splashIcon = findViewById(R.id.splash_icon);
-            Glide.with(this).load(appInfo.loadIcon(getPackageManager())).apply(options).into(splashIcon);
-            // 设置 appIcon
-
-            Bundle bundle = appInfo.metaData;
-
-            if (bundle != null) {
-
-                String splashTitle = bundle.getString("splash_title");
-                // 获取标题
-
-                int splashTitleColor = bundle.getInt("splash_title_color");
-                // 获取标题颜色
-
-                TextView splashName = findViewById(R.id.splash_name);
-                if (splashTitle != null) {
-                    splashName.setText(splashTitle);
-                }
-                if (splashTitleColor != 0) {
-                    splashName.setTextColor(splashTitleColor);
-                }
-            }
-
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+//        // 设置软件底部 icon，title
+//        try {
+//            ActivityInfo appInfo = getPackageManager().getActivityInfo(this.getComponentName(),
+//                    PackageManager.GET_META_DATA);
+//
+//            RoundedCorners roundedCorners = new RoundedCorners(20);
+//            // 通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+//            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+//            ImageView splashIcon = findViewById(R.id.splash_icon);
+//            Glide.with(this).load(appInfo.loadIcon(getPackageManager())).apply(options).into(splashIcon);
+//            // 设置 appIcon
+//
+//            Bundle bundle = appInfo.metaData;
+//
+//            if (bundle != null) {
+//
+//                String splashTitle = bundle.getString("splash_title");
+//                // 获取标题
+//
+//                int splashTitleColor = bundle.getInt("splash_title_color");
+//                // 获取标题颜色
+//
+//                TextView splashName = findViewById(R.id.splash_name);
+//                if (splashTitle != null) {
+//                    splashName.setText(splashTitle);
+//                }
+//                if (splashTitleColor != 0) {
+//                    splashName.setTextColor(splashTitleColor);
+//                }
+//            }
+//
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 
     // 加载开屏广告方法

@@ -7,56 +7,11 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/splash_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
         >
-        <FrameLayout
-            android:id="@+id/splash_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            >
-        </FrameLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/splash_icon"
-                android:src="@null"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:paddingLeft="15dp"
-                android:textSize="50px"
-                android:gravity="center"
-                android:id="@+id/splash_name"
-                android:text="@string/app_name"/>
-
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center"
-            android:textColor="#AAA"
-            android:text="正在启动中…"/>
-    </LinearLayout>
-
+    </FrameLayout>
 </LinearLayout>

@@ -16,7 +16,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 import static com.haxifang.ad.RewardVideo.sendEvent;
@@ -201,7 +203,16 @@ public class AdManager extends ReactContextBaseJavaModule {
             public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
                 Log.d("reward AdLoad ", ad.toString());
                 sendEvent("AdLoaded", null);
-                AdBoss.rewardAd = ad;
+                AdBoss.rewardVideoAdMap.put(codeId, ad);
+
+                // 循环输出所有keys
+                Set<String> keys = AdBoss.rewardVideoAdMap.keySet();  // 得到全部的key
+                Iterator<String> iter = keys.iterator();
+                while (iter.hasNext()) {
+                    String str = iter.next();
+                    Log.d("RewardActivity", str);
+                }
+
                 AdBoss.rewardAdPromise.resolve("OK");
             }
         });

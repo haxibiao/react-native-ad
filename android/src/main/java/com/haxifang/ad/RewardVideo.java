@@ -36,28 +36,31 @@ public class RewardVideo extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startAd(ReadableMap options, final Promise promise) {
-//
-//        //拿到参数
-//        String appId = options.getString("appid"); //可空
-//        String codeId = options.getString("codeid");
-//        Log.d(TAG, "startAd:  appId: " + appId + ", codeId: " + codeId);
+        String codeId = options.getString("codeId");
+        if (!options.hasKey("codeId")) {
+            promise.reject("400", "codeId is required");
+        }
+
+        if (!AdBoss.rewardVideoAdMap.containsKey(codeId)) {
+            promise.reject("400", codeId + " not load");
+        }
 
         //准备激励回调
         AdBoss.prepareReward(promise, mContext, "");
 
         // 启动激励视频页面
-        startTT();
+        startTT(codeId);
     }
 
 
     /**
      * 启动穿山甲激励视频
      */
-    public static void startTT() {
+    public static void startTT(String codeId) {
         Activity context = mContext.getCurrentActivity();
         try {
             Intent intent = new Intent(mContext, RewardActivity.class);
-//            intent.putExtra("codeId", codeId);
+            intent.putExtra("codeId", codeId);
             // 不要过渡动画
             context.overridePendingTransition(0, 0);
             context.startActivityForResult(intent, 10000);

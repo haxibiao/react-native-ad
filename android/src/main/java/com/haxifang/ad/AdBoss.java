@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
@@ -44,6 +46,9 @@ public class AdBoss {
     // 存激励视频，全屏视频的回调
     public static Promise rewardPromise;
     public static Activity rewardActivity;
+
+    // 多广告位缓存激励视频
+    public static Map<String, TTRewardVideoAd> rewardVideoAdMap = new HashMap<>();
 
     //信息流广告回调
     public static Promise feedPromise;
