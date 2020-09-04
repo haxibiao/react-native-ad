@@ -6,7 +6,7 @@
 //
 
 #import "AdBoss.h"
-
+#import "LoadRewardSingle.h"
 //穿山甲广告SDK
 #import <BUAdSDK/BUAdSDKManager.h>
 #import <BUAdSDK/BUNativeExpressRewardedVideoAd.h>
@@ -67,9 +67,25 @@ static RCTPromiseRejectBlock adReject;
     BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     model.userId = uid;
     model.extra = extra;
-    NSLog(@"Enda %@ %@",uid,extra);
+    
     rewardAd = [[BUNativeExpressRewardedVideoAd alloc] initWithSlotID:codeid rewardedVideoModel:model];
     [rewardAd loadAdData];
+    
+    // 根据代码位保存预加载视频
+    LoadRewardSingle *rewardSingle = [LoadRewardSingle sharedInstance];
+    
+    NSLog(@"Enda MAP %@",rewardSingle.rewardAdMap);
+    
+    [rewardSingle.rewardAdMap setObject:rewardAd forKey:codeid];
+    
+    NSLog(@"Enda MAP 2 %@",rewardSingle.rewardAdMap);
+
+    
+    [rewardSingle.rewardAdMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSLog(@"Enda map key:%@",key);
+    }];
+    
+    NSLog(@"Enda 遍历完了");
 }
 
 + (BUNativeExpressRewardedVideoAd *)getRewardAd {

@@ -10,6 +10,7 @@
 #import <BUAdSDK/BURewardedVideoModel.h>
 #import "AdBoss.h"
 #import "RewardVideo.h"
+#import "LoadRewardSingle.h"
 
 #define BUD_RGB(a,b,c) [UIColor colorWithRed:(a/255.0) green:(b/255.0) blue:(c/255.0) alpha:1]
 #define GlobleHeight [UIScreen mainScreen].bounds.size.height
@@ -26,12 +27,26 @@
 
 @end
 
+
+
 @implementation RewardVideoViewController
 
 - (void)viewDidLoad {
-    [AdBoss getRewardAd].delegate = self;
-    [[AdBoss getRewardAd] loadAdData];
+    
+    LoadRewardSingle *rewardSingle = [LoadRewardSingle sharedInstance];
+    NSLog(@"Enda viewDidLoad CodeId %@",rewardSingle.codeId );
+    [rewardSingle.rewardAdMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSLog(@"Enda viewDidLoad for key:%@",key);
+    }];
+    
+    // 根据代码位保存预加载视频
+    BUNativeExpressRewardedVideoAd *ad = [rewardSingle.rewardAdMap objectForKey:rewardSingle.codeId];
+    
+    NSLog(@"Enda viewDidLoad %@",ad);
+    ad.delegate = self;
+    [ad loadAdData];
 }
+
 
 #pragma mark BUNativeExpressRewardedVideoAdDelegate
 

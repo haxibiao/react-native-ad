@@ -7,6 +7,7 @@
 
 #import "RewardVideo.h"
 #import "AdBoss.h"
+#import "LoadRewardSingle.h"
 
 @implementation RewardVideo
 
@@ -78,9 +79,22 @@ RCT_EXPORT_METHOD(loadAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock
 
 RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
+    NSString *codeId = options[@"codeId"];
+    if(codeId == nil) {
+        NSLog(@"Enda codeId is required");
+        return;
+    }
+    LoadRewardSingle *rewardSingle = [LoadRewardSingle sharedInstance];
+    
+    rewardSingle.codeId = codeId;
 
     RewardVideoViewController *vc = [RewardVideoViewController new];
     vc.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    [rewardSingle.rewardAdMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSLog(@"Enda startAd for key:%@",key);
+    }];
     
     [[AdBoss getRootVC] presentViewController:vc animated:true completion:^{
         [AdBoss saveResolve:resolve];
