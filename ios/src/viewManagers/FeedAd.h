@@ -11,6 +11,7 @@
 
 @interface FeedAd : UIView
 -(void) setCodeId:(NSString *) codeid;
+-(void) setAdWidth:(NSString *) adWidth;
 -(void) loadFeedAd; 
 @property (nonatomic, copy) RCTBubblingEventBlock onAdLayout;
 @property (nonatomic, copy) RCTBubblingEventBlock onAdError;

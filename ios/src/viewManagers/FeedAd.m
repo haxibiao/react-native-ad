@@ -19,6 +19,7 @@
 @property (strong, nonatomic) BUNativeExpressAdManager *nativeExpressAdManager;
 
 @property(nonatomic, strong) NSString *_codeid;
+@property(nonatomic, strong) NSString *_adWidth;
 
 @end
 
@@ -29,6 +30,11 @@
     self._codeid = codeid;
     NSLog(@"开始 加载Feed广告 codeid: %@", self._codeid);
     [self loadFeedAd];
+}
+
+- (void)setAdWidth:(NSString *)adWidth {
+    self._adWidth = adWidth;
+    NSLog(@"开始 加载Feed广告 width : %@", self._adWidth);
 }
 
 /**
@@ -46,12 +52,15 @@
     BUAdSlot *slot1 = [[BUAdSlot alloc] init];
     slot1.ID = self._codeid;
     slot1.AdType = BUAdSlotAdTypeFeed;
-    BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed228_150];
-    slot1.imgSize = imgSize;
+//    BUSize *imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
+//    slot1.imgSize = imgSize;
+    slot1.imgSize = [BUSize sizeBy:BUProposalSize_Feed690_388];
     slot1.position = BUAdSlotPositionFeed;
     slot1.isSupportDeepLink = YES;
     
-    CGSize adSize = CGSizeMake(228, 150);
+    float floatString = [self._adWidth floatValue];
+    
+    CGSize adSize = CGSizeMake(floatString, 150);
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:adSize];
     }

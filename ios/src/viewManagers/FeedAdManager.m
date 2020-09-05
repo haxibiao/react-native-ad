@@ -35,4 +35,11 @@ RCT_CUSTOM_VIEW_PROPERTY(codeid, NSString, FeedAd)
   }
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(adWidth, NSString, FeedAd)
+{
+  if (json) {
+    [view  setAdWidth:json];
+  }
+}
+
 @end
