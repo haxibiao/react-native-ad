@@ -30,14 +30,14 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
     public String getName() {
         return TAG;
     }
-    
+
     @ReactMethod
     public void startAd(ReadableMap options, final Promise promise) {
 
         String appId = options.getString("appid");
         String codeId = options.getString("codeid");
 
-        AdBoss.prepareReward(promise,mContext, appId);
+        AdBoss.prepareReward(promise, mContext, appId);
 
         Intent intent = new Intent(mContext, FullScreenActivity.class);
         try {
@@ -54,6 +54,7 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 
     // 发送事件到RN
     public static void sendEvent(String eventName, @Nullable WritableMap params) {
-        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(TAG + "-" + eventName, params);
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(TAG + "-" + eventName, params);
     }
 }

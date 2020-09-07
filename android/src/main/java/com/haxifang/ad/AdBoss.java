@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdManager;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
@@ -65,7 +64,7 @@ public class AdBoss {
     public static void prepareReward(Promise promise, Context context, String appId) {
         rewardPromise = promise;
         resetRewardResult();
-        init(context, appId);
+        initSdk(context, appId);
     }
 
     /**
@@ -119,7 +118,7 @@ public class AdBoss {
     public static ReactContext reactContext;
     public static ArrayBlockingQueue<String> myBlockingQueue = new ArrayBlockingQueue<String>(1);
 
-    public static void init(Context context, String appId) {
+    public static void initSdk(Context context, String appId) {
 
         if (TTAdSdk != null && tt_appid == appId) {
             //已初始化
@@ -140,8 +139,6 @@ public class AdBoss {
         //初始化回调结果
         resetRewardResult();
 
-//        runOnUiThread(() -> {
-
         // step1: 初始化sdk appid
         TTAdManagerHolder.init(context, appId);
 
@@ -154,8 +151,6 @@ public class AdBoss {
         // step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
         // 换到激励视频时才调用
         // ttAdManager.requestPermissionIfNecessary(mContext);
-
-//        });
 
     }
 

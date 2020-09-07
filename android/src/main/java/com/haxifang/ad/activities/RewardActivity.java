@@ -21,10 +21,14 @@ import static com.haxifang.ad.RewardVideo.sendEvent;
 public class RewardActivity extends Activity {
 
     final private static String TAG = "RewardVideo";
+    private boolean adShowing = false;
+    private TTRewardVideoAd adObj = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //先渲染个白屏的view
         setContentView(R.layout.video_view);
 
         //关联boss处理回调
@@ -35,10 +39,18 @@ public class RewardActivity extends Activity {
         String codeId = extras.getString("codeId");
 
         // 开始加载广告
-        loadAd(codeId);
+        loadAd(codeId, ()->{
+            showAd(AdBoss.rewardAd);
+        });
+
+        //有缓存的广告直接展示
+        if(AdBoss.rewardAd != null) {
+            Log.d(TAG,"直接展示提前加载的广告");
+            showAd(AdBoss.rewardAd);;
+        }
     }
 
-    private void loadAd(String codeId) {
+    public static void loadAd(String codeId, Runnable callback) {
         if (codeId.isEmpty()) {
             // 广告位 CodeId 未传, 抛出error
             AdBoss.getRewardResult();
@@ -81,13 +93,23 @@ public class RewardActivity extends Activity {
                 sendEvent("AdLoaded", null);
                 fireEvent("onAdLoaded", 200, "视频广告的素材加载完毕");
 
-                // 展示加载成功的广告
-                showAd(ad);
+                // 加载成功的广告
+                AdBoss.rewardAd = ad;
+                callback.run();
             }
         });
     }
 
+    /**
+     * 展示已加载好的激励视频广告
+     * @param ad
+     */
     private void showAd(TTRewardVideoAd ad) {
+        if(adShowing) {
+            return;
+        }
+        adShowing = true;
+
         // 激励视频必须全屏 activity 无法加底部...
         final RewardActivity _this = this;
 
@@ -198,16 +220,16 @@ public class RewardActivity extends Activity {
         });
 
         // 开始显示广告,会铺满全屏...
-        ad.showRewardVideoAd(_this);
+        ad.showRewardVideoAd(this);
     }
 
 
     // 二次封装发送到RN的事件函数
-    public void fireEvent(String eventName, int startCode, String message) {
-        WritableMap p = Arguments.createMap();
-        p.putInt("code", startCode);
-        p.putString("message", message);
-        sendEvent(eventName, p);
+    public static void fireEvent(String eventName, int startCode, String message) {
+        WritableMap params = Arguments.createMap();
+        params.putInt("code", startCode);
+        params.putString("message", message);
+        sendEvent(eventName, params);
     }
 
 }

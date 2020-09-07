@@ -23,11 +23,13 @@ import static com.haxifang.ad.FullScreenVideo.sendEvent;
 public class FullScreenActivity extends Activity {
 
     final private String TAG = "FullScreenVideo";
-    private TTFullScreenVideoAd fullAd;
+    private boolean adShowing = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //先渲染个白屏
         setContentView(R.layout.video_view);
 
         AdBoss.hookActivity(this);
@@ -36,10 +38,19 @@ public class FullScreenActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeId = extras.getString("codeId");
 
-        loadAdSlot(codeId);
+        // 然后加载视频广告
+        loadAd(codeId, ()->{
+            showAd(AdBoss.fullAd);
+        });
+
+        //有缓存的广告直接展示
+        if(AdBoss.fullAd != null) {
+            Log.d(TAG,"直接展示提前加载的广告");
+            showAd(AdBoss.fullAd);
+        }
     }
 
-    private void loadAdSlot(String codeId) {
+    public static void loadAd(String codeId, Runnable callback) {
         // 创建广告请求参数 AdSlot ,具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId)
@@ -67,24 +78,34 @@ public class FullScreenActivity extends Activity {
 
             @Override
             public void onFullScreenVideoAdLoad(TTFullScreenVideoAd ad) {
-                fullAd = ad;
                 String msg = "成功加载的全屏广告";
                 fireEvent("onAdShow", msg);
-                showAd();
+
+                AdBoss.fullAd = ad;
+                callback.run();
             }
         });
     }
 
-    private void showAd() {
+    /**
+     * 展示全屏视频广告
+     * @param ad
+     */
+    private void showAd(TTFullScreenVideoAd ad) {
+        if(adShowing) {
+            return;
+        }
+        adShowing = true;
+
         final FullScreenActivity _this = this; // 全屏广告也必须全屏..
 
-        if (fullAd == null) {
+        if (ad == null) {
             // TToast.show(this, "广告加载错误");
             AdBoss.getRewardResult();
             return;
         }
 
-        fullAd.setFullScreenVideoAdInteractionListener(new TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {
+        ad.setFullScreenVideoAdInteractionListener(new TTFullScreenVideoAd.FullScreenVideoAdInteractionListener() {
 
             @Override
             public void onAdShow() {
@@ -124,15 +145,15 @@ public class FullScreenActivity extends Activity {
         });
 
         // 开始显示广告
-        fullAd.showFullScreenVideoAd(_this);
+        ad.showFullScreenVideoAd(_this);
     }
 
 
     // 二次封装发送到RN的事件函数
-    public void fireEvent(String eventName, String message) {
-        WritableMap p = Arguments.createMap();
-        p.putString("message", message);
-        sendEvent(eventName, p);
+    public static void fireEvent(String eventName, String message) {
+        WritableMap params = Arguments.createMap();
+        params.putString("message", message);
+        sendEvent(eventName, params);
     }
 
 }

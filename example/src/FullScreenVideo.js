@@ -6,6 +6,7 @@ export default function FullVideo() {
   useEffect(() => {
     ad.init({
       appid: '5016582',
+      codeid_full_video: '945294087',
     });
     return () => {};
   }, []);

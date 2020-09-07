@@ -1,6 +1,5 @@
 package com.haxifang.ad;
 
-import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.haxifang.ad.activities.FullScreenActivity;
+import com.haxifang.ad.activities.RewardActivity;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class AdManager extends ReactContextBaseJavaModule {
     public void init(ReadableMap options) {
         //默认头条穿山甲
         AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
-        AdBoss.init(reactAppContext, AdBoss.tt_appid);
+        AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
 
         //支持传参头条需要的userId和appName ...
         if (options.hasKey("uid")) {
@@ -69,12 +70,31 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.codeid_splash = options.hasKey("codeid_splash") ? options.getString("codeid_splash") : AdBoss.codeid_splash;
         AdBoss.codeid_splash_tencent = options.hasKey("codeid_splash_tencent") ? options.getString("codeid_splash_tencent") : AdBoss.codeid_splash_tencent;
         AdBoss.codeid_splash_baidu = options.hasKey("codeid_splash_baidu") ? options.getString("codeid_splash_baidu") : AdBoss.codeid_splash_baidu;
-        AdBoss.codeid_feed = options.hasKey("codeid_feed") ? options.getString("codeid_feed") : AdBoss.codeid_feed;
+
+        if(options.hasKey("codeid_feed")) {
+            AdBoss.codeid_feed = options.getString("codeid_feed");
+        }
         AdBoss.codeid_feed_tencent = options.hasKey("codeid_feed_tencent") ? options.getString("codeid_feed_tencent") : AdBoss.codeid_feed_tencent;
         AdBoss.codeid_feed_baidu = options.hasKey("codeid_feed_baidu") ? options.getString("codeid_feed_baidu") : AdBoss.codeid_feed_baidu;
+
         AdBoss.codeid_draw_video = options.hasKey("codeid_draw_video") ? options.getString("codeid_draw_video") : AdBoss.codeid_draw_video;
-        AdBoss.codeid_full_video = options.hasKey("codeid_full_video") ? options.getString("codeid_full_video") : AdBoss.codeid_full_video;
-        AdBoss.codeid_reward_video = options.hasKey("codeid_reward_video") ? options.getString("codeid_reward_video") : AdBoss.codeid_reward_video;
+
+        if(options.hasKey("codeid_full_video") ) {
+            AdBoss.codeid_full_video = options.getString("codeid_full_video");
+            //提前加载
+            FullScreenActivity.loadAd(AdBoss.codeid_reward_video,()->{
+                Log.d(TAG, "提前加载 成功 codeid_full_video " + AdBoss.codeid_full_video);
+            });
+        }
+
+        if(options.hasKey("codeid_reward_video")) {
+            AdBoss.codeid_reward_video = options.getString("codeid_reward_video");
+            //提前加载
+            RewardActivity.loadAd(AdBoss.codeid_reward_video,()->{
+                Log.d(TAG, "提前加载 成功 codeid_reward_video " + AdBoss.codeid_reward_video);
+            });
+        }
+
         AdBoss.codeid_reward_video_tencent = options.hasKey("codeid_reward_video_tencent") ? options.getString("codeid_reward_video_tencent") : AdBoss.codeid_reward_video_tencent;
     }
 

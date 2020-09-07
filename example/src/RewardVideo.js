@@ -6,6 +6,7 @@ export default function RewardVideo() {
   useEffect(() => {
     ad.init({
       appid: '5016582',
+      codeid_reward_video: '945294086',
     });
     return () => {};
   }, []);
