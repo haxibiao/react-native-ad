@@ -80,6 +80,9 @@ public class FeedAdView extends RelativeLayout {
 
     // 显示头条的信息流广告
     public void loadTTFeedAd() {
+        if(AdBoss.TTAdSdk == null) {
+            return;
+        }
 
         // 创建广告请求参数AdSlot,具体参数含义参考文档 modules.add(new Interaction(reactContext));
         adSlot = new AdSlot.Builder().setCodeId(_codeid) // 广告位id

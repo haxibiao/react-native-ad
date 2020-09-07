@@ -11,7 +11,7 @@ export default function Feed() {
     //提前加载feed ad 结果测试
     ad.loadFeedAd({
       appid: '5016582',
-      codeid: '945339778',
+      codeid: '916582486',
     }).then(
       (result) => {
         console.log('load feed ad result ', result);

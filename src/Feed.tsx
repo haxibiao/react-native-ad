@@ -3,8 +3,6 @@ import { requireNativeComponent, StyleSheet } from 'react-native';
 
 const FeedAdComponent = requireNativeComponent('FeedAd');
 
-console.log('FeedAdComponent', FeedAdComponent);
-
 interface Props {
     codeid: string;
     adWidth?: number;

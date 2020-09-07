@@ -84,8 +84,11 @@ public class AdManager extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void loadFeedAd(ReadableMap options, final Promise promise) {
-        String codeId = options.getString("codeId");
-        int width = options.getInt("width");
+        String codeId = options.getString("codeid");
+        float width =   0;
+        if(options.hasKey("adWidth")) {
+            width = Float.parseFloat(options.getString("adWidth"));
+        }
         AdBoss.feedPromise = promise;
         if (AdBoss.feed_provider.equals("腾讯")) {
             //FIXME ...

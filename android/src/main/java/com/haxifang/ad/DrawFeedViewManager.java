@@ -16,16 +16,17 @@ import java.util.Map;
 
 public class DrawFeedViewManager extends ViewGroupManager<DrawFeedView> {
 
-    public static final String REACT_CLASS = "DrawFeedAd";
+    public static final String TAG = "DrawFeedAd";
+    private ReactContext mContext;
 
     public DrawFeedViewManager(ReactApplicationContext context) {
-        AdManager.reactAppContext = context;
+        mContext = context;
     }
 
     @NonNull
     @Override
     public String getName() {
-        return REACT_CLASS;
+        return TAG;
     }
 
     @NonNull
@@ -34,14 +35,18 @@ public class DrawFeedViewManager extends ViewGroupManager<DrawFeedView> {
         return new DrawFeedView(reactContext);
     }
 
+    @Override
+    public boolean needsCustomLayoutForChildren() {
+        return true;
+    }
+
     @ReactProp(name = "codeid")
     public void setCodeId(@NonNull DrawFeedView view, @NonNull String codeid) {
         view.setCodeId(codeid);
     }
 
-    @Nullable
     @Override
-    public Map getExportedCustomDirectEventTypeConstants() {
+    public Map getExportedCustomBubblingEventTypeConstants() {
         return MapBuilder.builder()
                 .put(
                         "onAdError",

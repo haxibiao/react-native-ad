@@ -35,10 +35,12 @@ import com.haxifang.ad.AdBoss;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+
 public class DrawFeedView extends RelativeLayout {
 
     private String TAG = "DrawFeed";
-	private String _isExpress = "true";
+    private String _isExpress = "true";
     private String _codeid = null;
     protected Context mContext;
     protected ReactContext reactContext;
@@ -58,28 +60,33 @@ public class DrawFeedView extends RelativeLayout {
         // 修复 add view 不显示问题
         setupLayoutHack();
     }
-	
+
     public void setCodeId(String codeId) {
         _codeid = codeId;
         loadDrawFeedAd();
     }
 
     void loadDrawFeedAd() {
+        if (AdBoss.TTAdSdk == null) {
+            Log.d(TAG, "AdBoss 还没初始化完成 with appid " + AdBoss.tt_appid);
+            return;
+        }
         if (_codeid == null) {
             Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _codeid=" + _codeid);
             return;
-		}
-
-        if (_isExpress.equals("true")) {
-            // 开始渲染 Draw 广告，原生模版
-            Log.d(TAG, "loadDrawFeedAd: loadExpressDrawNativeAd()");
-            loadExpressDrawNativeAd();
-        } else {
-            // 开始渲染 Draw 广告，自定义模版
-            Log.d(TAG, "loadDrawFeedAd: loadAd");
-            loadAd();
         }
 
+        if (_isExpress.equals("true")) {
+            // 开始渲染 Draw 广告，模版渲染
+            Log.d(TAG, "模版渲染 loadDrawFeedAd: loadExpressDrawNativeAd()");
+            runOnUiThread(() -> {
+                loadExpressDrawNativeAd();
+            });
+        } else {
+            // 开始渲染 Draw 广告，原生渲染
+            Log.d(TAG, "原生渲染 loadDrawFeedAd: loadAd");
+            loadAd();
+        }
     }
 
     // for fix addView not showing
@@ -136,65 +143,68 @@ public class DrawFeedView extends RelativeLayout {
                     ad.setVideoAdListener(new TTNativeExpressAd.ExpressVideoAdListener() {
                         @Override
                         public void onVideoLoad() {
-
+                            Log.d(TAG, "express onVideoLoad");
+                            onExpressAdLoad();
                         }
 
                         @Override
                         public void onVideoError(int errorCode, int extraCode) {
-
+                            Log.d(TAG, "express onVideoError");
                         }
 
                         @Override
                         public void onVideoAdStartPlay() {
-
+                            Log.d(TAG, "express onVideoAdStartPlay");
                         }
 
                         @Override
                         public void onVideoAdPaused() {
-
+                            Log.d(TAG, "express onVideoAdPaused");
                         }
 
                         @Override
                         public void onVideoAdContinuePlay() {
-
+                            Log.d(TAG, "express onVideoAdContinuePlay");
                         }
 
                         @Override
                         public void onProgressUpdate(long current, long duration) {
-
+//                            Log.d(TAG, "express onProgressUpdate");
                         }
 
                         @Override
                         public void onVideoAdComplete() {
-
+                            Log.d(TAG, "express onVideoAdComplete");
                         }
 
                         @Override
                         public void onClickRetry() {
                             // TToast.show(mContext, " onClickRetry !");
-                            Log.d("drawss", "onClickRetry!");
+                            Log.d(TAG, "express onClickRetry!");
                         }
                     });
                     ad.setCanInterruptVideoPlay(true);
                     ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
                         @Override
                         public void onAdClicked(View view, int type) {
-							onAdClick();
+                            Log.d(TAG, "express onAdClicked");
+                            onAdClick();
                         }
 
                         @Override
                         public void onAdShow(View view, int type) {
-//                            onExpressAdLoad();
+                            Log.d(TAG, "express onAdShow");
+                            onExpressAdLoad();
                         }
 
                         @Override
                         public void onRenderFail(View view, String msg, int code) {
-
+                            Log.d(TAG, "express onRenderFail");
                         }
 
                         @Override
                         public void onRenderSuccess(View view, float width, float height) {
-                            // TToast.show(mContext, "Draw渲染成功");
+                            Log.d(TAG, "express onRenderSuccess");
                             mContainer.addView(ad.getExpressAdView());
                             onExpressAdLoad();
                         }
@@ -396,12 +406,11 @@ public class DrawFeedView extends RelativeLayout {
                 if (ad.getIcon() != null && ad.getIcon().getImageUrl() != null) {
                     headicon = ad.getIcon().getImageUrl();
                 }
-                 onNativeAdLoad(headicon);
+                onNativeAdLoad(headicon);
             }
         });
 
     }
-
 
     // 组件 Error 事件返回
     public void onError(String message) {
