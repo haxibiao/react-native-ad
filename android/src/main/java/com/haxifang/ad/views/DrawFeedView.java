@@ -179,12 +179,12 @@ public class DrawFeedView extends RelativeLayout {
                     ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
                         @Override
                         public void onAdClicked(View view, int type) {
-
+							onAdClick();
                         }
 
                         @Override
                         public void onAdShow(View view, int type) {
-
+//                            onExpressAdLoad();
                         }
 
                         @Override
@@ -196,6 +196,7 @@ public class DrawFeedView extends RelativeLayout {
                         public void onRenderSuccess(View view, float width, float height) {
                             // TToast.show(mContext, "Draw渲染成功");
                             mContainer.addView(ad.getExpressAdView());
+                            onExpressAdLoad();
                         }
                     });
                     ad.render();
@@ -280,7 +281,7 @@ public class DrawFeedView extends RelativeLayout {
                     if (ad.getIcon() != null && ad.getIcon().getImageUrl() != null) {
                         headicon = ad.getIcon().getImageUrl();
                     }
-                    onAdLoad(headicon);
+                    onNativeAdLoad(headicon);
 
                     // 点击标题，下载按钮+事件
                     initAdViewAndAction(ad, mContainer);
@@ -362,6 +363,7 @@ public class DrawFeedView extends RelativeLayout {
             }
         });
 
+        // 几秒后渐渐初选下载APP按钮....
 //        new Thread(() -> {
 //            try {
 //                Thread.sleep(6500);
@@ -394,7 +396,7 @@ public class DrawFeedView extends RelativeLayout {
                 if (ad.getIcon() != null && ad.getIcon().getImageUrl() != null) {
                     headicon = ad.getIcon().getImageUrl();
                 }
-//                 onAdDidShow(headicon);
+                 onNativeAdLoad(headicon);
             }
         });
 
@@ -414,10 +416,16 @@ public class DrawFeedView extends RelativeLayout {
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdClick", event);
     }
 
-    // 广告加载回调
-    public void onAdLoad(String headIconUrl) {
+    // 原生广告加载成功回调
+    public void onNativeAdLoad(String headIconUrl) {
         WritableMap event = Arguments.createMap();
         event.putString("headicon", headIconUrl);
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdShow", event);
+    }
+
+    // 新模板渲染广告加载成功回调
+    public void onExpressAdLoad() {
+        WritableMap event = Arguments.createMap();
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "onAdShow", event);
     }
 
