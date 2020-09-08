@@ -43,8 +43,8 @@ public class RewardActivity extends Activity {
             showAd(AdBoss.rewardAd);
         });
 
-        //有缓存的广告直接展示
-        if(AdBoss.rewardAd != null) {
+        //有缓存的广告,并且代码位和init的相同，直接展示
+        if(AdBoss.rewardAd != null && codeId == AdBoss.codeid_reward_video) {
             Log.d(TAG,"直接展示提前加载的广告");
             showAd(AdBoss.rewardAd);;
         }
