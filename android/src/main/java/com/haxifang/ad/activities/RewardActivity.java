@@ -28,7 +28,7 @@ public class RewardActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //先渲染个白屏的view
+        //先渲染个黑色背景的view
         setContentView(R.layout.video_view);
 
         //关联boss处理回调

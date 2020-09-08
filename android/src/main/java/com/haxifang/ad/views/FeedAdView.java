@@ -39,22 +39,22 @@ public class FeedAdView extends RelativeLayout {
     final private long startTime = 0;
     private boolean mHasShowDownloadActive = false;
 
-    final protected RelativeLayout mExpressContainer;
 
     public FeedAdView(ReactContext context) {
         super(context);
         mContext = context.getCurrentActivity();
-        reactContext = context;
-        inflate(context, R.layout.feed_view, this);
-        mExpressContainer = findViewById(R.id.feed_container);
+		reactContext = context;
+		//开始展开
+		inflate(context, R.layout.feed_view, this);
 
         // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
         Utils.setupLayoutHack(this);
-    }
-
+	}
+	
     public void setWidth(int width) {
         Log.d(TAG, "setCodeId = " + _codeid + ", setWidth:" + width);
-        _expectedWidth = width;
+		_expectedWidth = width;
+		
         showAd();
     }
 
@@ -65,7 +65,8 @@ public class FeedAdView extends RelativeLayout {
     }
 
     public void showAd() {
-        Log.d(TAG, "showAd: width:" + _expectedWidth + " codeid:" + _codeid);
+		Log.d(TAG, "showAd: width:" + _expectedWidth + " codeid:" + _codeid);
+
         // 显示广告
         if (_expectedWidth == 0 || _codeid.isEmpty()) {
             // 广告宽度未设置或 code id 未设置，停止显示广告
@@ -100,7 +101,6 @@ public class FeedAdView extends RelativeLayout {
                 message = "错误结果 loadNativeExpressAd onAdError: " + code + ", " + message;
                 // TToast.show(getContext(), message);
                 Log.d(TAG, message);
-                mExpressContainer.removeAllViews();
                 _this.onAdError(message);
             }
 
@@ -154,14 +154,13 @@ public class FeedAdView extends RelativeLayout {
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
-                // 渲染成功，清掉缓存
-                // AdBoss.feedAd = null;
-
                 // 返回view的宽高 单位 dp
                 // TToast.show(mContext, "渲染成功");
                 // 在渲染成功回调时展示广告，提升体验
-                mExpressContainer.removeAllViews();
-                mExpressContainer.addView(view);
+                RelativeLayout mExpressContainer = findViewById(R.id.feed_container);
+                if(mExpressContainer!= null) {
+                    mExpressContainer.addView(view);
+                }
                 onAdLayout((int) width, (int) height);
             }
         });
