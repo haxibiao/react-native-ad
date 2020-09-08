@@ -135,7 +135,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
             @MainThread
             public void onError(int code, String message) {
                 // 广告渲染失败
-                Log.d(TAG, message);
+                Log.d(TAG, "开屏广告渲染失败:" + message);
                 mHasLoaded = true;
 //                showToast(message + " - " + code_id);
 
