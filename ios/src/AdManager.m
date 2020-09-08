@@ -46,14 +46,31 @@ RCT_EXPORT_METHOD(init:(NSDictionary *)options resolve:(RCTPromiseResolveBlock)r
     
     NSString  *appid = options[@"appid"];
     NSLog(@"AdManager feed init appid %@",appid);
+    NSString  *uid = options[@"uid"];
+    
     
     if(appid == nil) {
         reject(@"",@"AdManager init appid 未提供",nil);
         return;
     }
     
-    //穿山甲 init appid
+    //穿山甲 sdk init appid
     [AdBoss init: appid];
+    
+    //缓存激励视频
+    NSString  *codeid_reward_video = options[@"codeid_reward_video"];
+    if(codeid_reward_video != nil) {
+        NSLog(@"AdManager 提前加载 激励视频  %@",codeid_reward_video);
+        [AdBoss initRewardAd:codeid_reward_video userid:uid];
+    }
+    
+    //缓存全屏视频
+    NSString  *codeid_full_video = options[@"codeid_full_video"];
+    if(codeid_full_video != nil) {
+        NSLog(@"AdManager 提前加载 全屏视频  %@",codeid_reward_video);
+        [AdBoss initFullScreenAd:codeid_full_video];
+    }
+    
     resolve(@"OK");
 }
 

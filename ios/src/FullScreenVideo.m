@@ -62,7 +62,7 @@ RCT_EXPORT_METHOD(loadAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock
         return;
     }
     
-    [AdBoss loadFullScreenAd:codeid];
+    [AdBoss initFullScreenAd:codeid];
     resolve(@"OK");
 }
 
@@ -73,13 +73,13 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
         return;
     }
     
-    //    NSString *appid = options[@"appid"];
-    //    if(appid != nil) {
-    //        [AdBoss init:appid];
-    //    }
+    if([AdBoss getFullScreenAd].adValid) {
+        NSLog(@"有提前初始化的 full screen ad from adManager");
+    }
     
+    //加载新的广告位数据
     NSLog(@"full screen start codeid %@",codeid);
-    [AdBoss loadFullScreenAd:codeid];
+    [AdBoss initFullScreenAd:codeid];
     
     FullscreenViewController *vc = [FullscreenViewController new];
     vc.slotID = codeid;

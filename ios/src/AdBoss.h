@@ -20,15 +20,26 @@ NSLog(@"【BUAd】%@", [NSString stringWithFormat:frmt,##__VA_ARGS__]);  \
 } while(0)
 
 
-@interface AdBoss: NSObject
+@interface AdBoss : NSObject
 
 +(UIViewController*) getRootVC;
 +(void) init: (NSString*) appid;
 
-+(void) loadRewardAd: (NSString*) codeid userid:(NSString *)uid;
+//加载视频广告
++(void) initRewardAd: (NSString*) codeid userid:(NSString *)uid;
++(void) initFullScreenAd: (NSString*) codeid;
+
+//保存缓存的视频广告
++(void) setRewardAdCache: (BUNativeExpressRewardedVideoAd *) ad;
++(void) setFullScreenAdCache: (BUNativeExpressFullscreenVideoAd *) ad;
+
+
+//返回缓存的视频广告
 +(BUNativeExpressRewardedVideoAd *) getRewardAd;
-+(void) loadFullScreenAd: (NSString*) codeid;
 +(BUNativeExpressFullscreenVideoAd *) getFullScreenAd;
+
++(BUNativeExpressRewardedVideoAd *) getRewardAdCache;
++(BUNativeExpressFullscreenVideoAd *) getFullScreenAdCache;
 
 //统计激励视频是否点击查看
 +(void) clickRewardVideo;

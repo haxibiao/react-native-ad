@@ -9,7 +9,7 @@
 #import "FullscreenViewController.h"
 
 @interface FullscreenViewController () <BUNativeExpressFullscreenVideoAdDelegate>
-
+@property BOOL isAdShowing;
 @end
 
 @implementation FullscreenViewController
@@ -17,9 +17,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [AdBoss getFullScreenAd].delegate = self;
-    //主动加载一次数据缓存
-//    [[AdBoss getFullScreenAd] loadAdData];
+    BUNativeExpressFullscreenVideoAd * ad = [AdBoss getFullScreenAd];
+    if(ad != nil) {
+        //关联回调
+        ad.delegate = self;
+        [ad loadAdData]; //加载广告
+    }
+}
+
+//展示广告
+- (void) showAd :(BUNativeExpressFullscreenVideoAd *) ad {
+    if(!self.isAdShowing) {
+        self.isAdShowing = true;
+        NSLog(@"展示 提前缓存的ad adValid = %s", ad.adValid ? "Yes":"NO");
+        if(ad.adValid) {
+            [ad showAdFromRootViewController:self];
+        }
+    }
+    else {
+        NSLog(@"已展示提前缓存的ad !!!");
+    }
 }
 
 #pragma mark BUFullscreenVideoAdDelegate
@@ -28,13 +45,14 @@
 - (void)nativeExpressFullscreenVideoAdDidLoad:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     BUD_Log(@"%s 全屏视频",__func__);
     [FullScreenVideo emitEvent: @{@"type": @"onAdLoaded", @"message": @"onAdLoaded"}];
-    //express 只有渲染成功时才可以show ? 0.63 又必须这个时候show了
-    [[AdBoss getFullScreenAd] showAdFromRootViewController:self];
+    [AdBoss setFullScreenAdCache: fullscreenVideoAd];
+    [self showAd: fullscreenVideoAd];
 }
 
-- (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)rewardedVideoAd {
+- (void)nativeExpressFullscreenVideoAdViewRenderSuccess:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd {
     BUD_Log(@"%s 全屏视频 渲染成功....",__func__);
-    [[AdBoss getFullScreenAd] showAdFromRootViewController:self];
+    [AdBoss setFullScreenAdCache: fullscreenVideoAd];
+    [self showAd: fullscreenVideoAd];
 }
 
 - (void)nativeExpressFullscreenVideoAd:(BUNativeExpressFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *_Nullable)error {

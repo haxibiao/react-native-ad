@@ -70,7 +70,7 @@ RCT_EXPORT_METHOD(loadAd:(NSDictionary *)options resolve:(RCTPromiseResolveBlock
         return;
     }
     
-    [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
+    [AdBoss initRewardAd:codeid userid:options[@"uid"]];
     resolve(@"OK");
 }
 
@@ -85,8 +85,15 @@ RCT_EXPORT_METHOD(startAd:(NSDictionary *)options resolve:(RCTPromiseResolveBloc
     if(appid != nil) {
         [AdBoss init:appid];
     }
+
+    if([AdBoss getRewardAd].adValid) {
+        NSLog(@"有提前初始化的ad from adManager");
+        //RN 提前加载激励视频没效果...
+    }
     
-    [AdBoss loadRewardAd:codeid userid:options[@"uid"]];
+    //加载新的广告位数据
+    [AdBoss initRewardAd:codeid userid:options[@"uid"]]; 
+    
     
     RewardVideoViewController *vc = [RewardVideoViewController new];
     vc.view.backgroundColor = [UIColor whiteColor];
