@@ -1,9 +1,13 @@
 package com.haxifang;
 
+import android.app.Application;
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import com.reyun.tracking.sdk.Tracking;
 
 public class AdModule extends ReactContextBaseJavaModule {
 
@@ -16,12 +20,22 @@ public class AdModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "Ad";
+        return "AdModule";
     }
 
     @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    public void initRY(String key, Callback callback) {
+//        Tracking.setDebugMode(true);
+//        String key = "844fa6a32c83a5144b441d49c33aeddf";
+        Tracking.initWithKeyAndChannelId((Application)reactContext.getApplicationContext(),key,"_default_");
+        callback.invoke("Tracking done init 热云 sdk ... " );
     }
+
+    @ReactMethod
+    public void trackRYEvent(String eventName, Callback callback) {
+        Log.d("Tracking","Tracking Received 热云 track eventName: " + eventName);
+        Tracking.setEvent(eventName);
+        callback.invoke("Tracking Received 热云 track eventName: " + eventName );
+    }
+
 }

@@ -4,6 +4,14 @@ import {ad} from 'react-native-ad';
 
 export default function Feed() {
   useEffect(() => {
+    //初始化热云sdk key
+    ad.initRY('844fa6a32c83a5144b441d49c33aeddf');
+
+    //跟踪热云自定义事件
+    ad.trackRYEvent('event_1');
+    ad.trackRYEvent('event_2');
+    ad.trackRYEvent('event_3');
+
     ad.init({
       appid: '5016582',
     });

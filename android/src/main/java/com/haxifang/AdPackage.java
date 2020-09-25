@@ -20,6 +20,7 @@ public class AdPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
+        modules.add(new AdModule(reactContext));
         modules.add(new AdManager(reactContext));
         modules.add(new SplashAd(reactContext));
         modules.add(new FullScreenVideo(reactContext));

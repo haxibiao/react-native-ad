@@ -12,7 +12,7 @@
 
 def DEFAULT_COMPILE_SDK_VERSION = 28
 def DEFAULT_BUILD_TOOLS_VERSION = '28.0.3'
-def DEFAULT_MIN_SDK_VERSION = 16
+def DEFAULT_MIN_SDK_VERSION = 21
 def DEFAULT_TARGET_SDK_VERSION = 28
 
 def safeExtGet(prop, fallback) {
@@ -80,7 +80,7 @@ dependencies {
 	//加载开屏广告替换appIcon用
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
 	//加载广告SDK aar
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar','*.jar'])
 }
 
 def configureReactNativePom(def pom) {
