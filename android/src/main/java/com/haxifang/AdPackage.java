@@ -15,6 +15,8 @@ import com.haxifang.ad.FeedAdViewManager;
 import com.haxifang.ad.FullScreenVideo;
 import com.haxifang.ad.RewardVideo;
 import com.haxifang.ad.SplashAd;
+import com.haxifang.AdModule;
+
 
 public class AdPackage implements ReactPackage {
     @Override
