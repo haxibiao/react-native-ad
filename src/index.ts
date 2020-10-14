@@ -7,8 +7,6 @@ import startRewardVideo from './RewardVideo';
 import DrawFeed from './DrawFeed';
 import Feed from './Feed';
 
-import { initRY, trackRYEvent } from './AdModule';
-
 export default {
     init,
     loadFeedAd,
@@ -17,6 +15,4 @@ export default {
     startRewardVideo,
     DrawFeed,
     Feed,
-    initRY,
-    trackRYEvent,
 };
