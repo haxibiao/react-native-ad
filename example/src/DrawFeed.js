@@ -8,6 +8,15 @@ export default function DrawFeed() {
       appid: '5016582',
       app: '演示APP',
     });
+
+    console.log(ad);
+
+    //提前加载 drawfeed ad
+    ad.loadDrawFeedAd({
+      appid: '5016582',
+      codeid: '945339778',
+    });
+
     return () => {};
   }, []);
   return (

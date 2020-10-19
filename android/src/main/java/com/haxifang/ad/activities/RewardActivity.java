@@ -38,7 +38,7 @@ public class RewardActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         String codeId = extras.getString("codeId");
 
-        // 开始加载广告
+        // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
         loadAd(codeId, ()->{
             showAd(AdBoss.rewardAd);
         });
@@ -93,7 +93,7 @@ public class RewardActivity extends Activity {
                 sendEvent("AdLoaded", null);
                 fireEvent("onAdLoaded", 200, "视频广告的素材加载完毕");
 
-                // 加载成功的广告
+                // 缓存的更新为最新加载成功的广告
                 AdBoss.rewardAd = ad;
                 callback.run();
             }
@@ -165,7 +165,7 @@ public class RewardActivity extends Activity {
 
             // 视频播放完成后，奖励验证回调，rewardVerify：是否有效，rewardAmount：奖励数量，rewardName：奖励名称
             @Override
-            public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName) {
+            public void onRewardVerify(boolean rewardVerify, int rewardAmount, String rewardName, int rewardAA, String aa) {
                 if (rewardVerify) {
                     // TToast.show(_this, "验证:成功  数量:" + rewardAmount + " 奖励:" + rewardName, Toast.LENGTH_LONG);
                 } else {

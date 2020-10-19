@@ -39,6 +39,7 @@ public class AdBoss {
     public static TTRewardVideoAd rewardAd;
     public static TTFullScreenVideoAd fullAd;
     public static TTNativeExpressAd feedAd;
+    public static TTNativeExpressAd drawfeedAd;
 
     // 存激励视频，全屏视频的回调
     public static Promise rewardPromise;

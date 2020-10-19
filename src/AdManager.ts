@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 const { AdManager } = NativeModules;
 
 type appInfo = {
@@ -26,7 +26,16 @@ export const loadFeedAd = (info: feedInfo) => {
     return AdManager.loadFeedAd(info);
 };
 
+export const loadDrawFeedAd = (info: feedInfo) => {
+    //提前加载视频刷信息流DrawFeedAd, 无返回，暂时只写完android
+    console.log(Platform.OS);
+    if (Platform.OS === 'android') {
+        return AdManager.loadDrawFeedAd(info);
+    }
+};
+
 export default {
     init,
     loadFeedAd,
+    loadDrawFeedAd,
 };

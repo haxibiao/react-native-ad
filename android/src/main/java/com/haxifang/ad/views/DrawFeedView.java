@@ -31,6 +31,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxifang.R;
 import com.haxifang.ad.AdBoss;
+import com.haxifang.ad.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +41,13 @@ import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 public class DrawFeedView extends RelativeLayout {
 
     private String TAG = "DrawFeed";
-    private String _isExpress = "true";
-    private String _codeid = null;
+    private String _isExpress = "true"; //新的默认用模板渲染
+    private String _codeId = null;
     protected Context mContext;
     protected ReactContext reactContext;
     final protected FrameLayout mContainer;
     private AdSlot adSlot;
+    private boolean adShowing = false;
 
 
     public DrawFeedView(ReactContext context) {
@@ -57,31 +59,38 @@ public class DrawFeedView extends RelativeLayout {
         inflate(mContext, R.layout.draw_video, this);
         mContainer = findViewById(R.id.tt_video_layout_hxb);
 
-        // 修复 add view 不显示问题
-        setupLayoutHack();
+        // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
+        Utils.setupLayoutHack(this);
     }
 
     public void setCodeId(String codeId) {
-        _codeid = codeId;
-        loadDrawFeedAd();
+        _codeId = codeId;
+        runOnUiThread(() -> {
+            tryShowAd();
+        });
     }
 
-    void loadDrawFeedAd() {
+    void tryShowAd() {
         if (AdBoss.TTAdSdk == null) {
             Log.d(TAG, "AdBoss 还没初始化完成 with appid " + AdBoss.tt_appid);
             return;
         }
-        if (_codeid == null) {
-            Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _codeid=" + _codeid);
+        if (_codeId == null) {
+            Log.d(TAG, "loadDrawFeedAd: 属性还不完整 _codeId=" + _codeId);
             return;
         }
 
         if (_isExpress.equals("true")) {
             // 开始渲染 Draw 广告，模版渲染
             Log.d(TAG, "模版渲染 loadDrawFeedAd: loadExpressDrawNativeAd()");
-            runOnUiThread(() -> {
-                loadExpressDrawNativeAd();
-            });
+            if (AdBoss.drawfeedAd != null) {
+                //渲染已缓存的广告
+                Log.d(TAG, "渲染已缓存的广告");
+                showAd(AdBoss.drawfeedAd);
+            }
+
+            //加载新的广告并尝试渲染
+            loadExpressDrawNativeAd();
         } else {
             // 开始渲染 Draw 广告，原生渲染
             Log.d(TAG, "原生渲染 loadDrawFeedAd: loadAd");
@@ -89,35 +98,13 @@ public class DrawFeedView extends RelativeLayout {
         }
     }
 
-    // for fix addView not showing
-    void setupLayoutHack() {
-        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
-            @Override
-            public void doFrame(long frameTimeNanos) {
-                manuallyLayoutChildren();
-                getViewTreeObserver().dispatchOnGlobalLayout();
-                Choreographer.getInstance().postFrameCallback(this);
-            }
-        });
-    }
-
-    void manuallyLayoutChildren() {
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            child.measure(MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY));
-            child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-        }
-    }
-
-
     // 加载原生渲染方式的 Draw 广告
     private void loadExpressDrawNativeAd() {
         // 创建广告请求参数AdSlot,具体参数含义参考文档
         float expressViewWidth = 1080;
         float expressViewHeight = 1920;
         AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId(_codeid)
+                .setCodeId(_codeId)
                 .setSupportDeepLink(true)
                 .setImageAcceptedSize(1080, 1920)
                 .setExpressViewAcceptedSize(expressViewWidth, expressViewHeight) // 期望模板广告view的size,单位dp
@@ -138,83 +125,94 @@ public class DrawFeedView extends RelativeLayout {
                     // TToast.show(mContext, " ad is null!");
                     return;
                 }
-                for (final TTNativeExpressAd ad : ads) {
-                    // 点击监听器必须在getAdView之前调
-                    ad.setVideoAdListener(new TTNativeExpressAd.ExpressVideoAdListener() {
-                        @Override
-                        public void onVideoLoad() {
-                            Log.d(TAG, "express onVideoLoad");
-                            onExpressAdLoad();
-                        }
-
-                        @Override
-                        public void onVideoError(int errorCode, int extraCode) {
-                            Log.d(TAG, "express onVideoError");
-                        }
-
-                        @Override
-                        public void onVideoAdStartPlay() {
-                            Log.d(TAG, "express onVideoAdStartPlay");
-                        }
-
-                        @Override
-                        public void onVideoAdPaused() {
-                            Log.d(TAG, "express onVideoAdPaused");
-                        }
-
-                        @Override
-                        public void onVideoAdContinuePlay() {
-                            Log.d(TAG, "express onVideoAdContinuePlay");
-                        }
-
-                        @Override
-                        public void onProgressUpdate(long current, long duration) {
-//                            Log.d(TAG, "express onProgressUpdate");
-                        }
-
-                        @Override
-                        public void onVideoAdComplete() {
-                            Log.d(TAG, "express onVideoAdComplete");
-                        }
-
-                        @Override
-                        public void onClickRetry() {
-                            // TToast.show(mContext, " onClickRetry !");
-                            Log.d(TAG, "express onClickRetry!");
-                        }
-                    });
-                    ad.setCanInterruptVideoPlay(true);
-                    ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
-                        @Override
-                        public void onAdClicked(View view, int type) {
-                            Log.d(TAG, "express onAdClicked");
-                            onAdClick();
-                        }
-
-                        @Override
-                        public void onAdShow(View view, int type) {
-                            Log.d(TAG, "express onAdShow");
-                            onExpressAdLoad();
-                        }
-
-                        @Override
-                        public void onRenderFail(View view, String msg, int code) {
-                            Log.d(TAG, "express onRenderFail");
-                        }
-
-                        @Override
-                        public void onRenderSuccess(View view, float width, float height) {
-                            Log.d(TAG, "express onRenderSuccess");
-                            mContainer.addView(ad.getExpressAdView());
-                            onExpressAdLoad();
-                        }
-                    });
-                    ad.render();
-                }
-
-
+                //成功加载到广告，开始渲染,我们每次只拉取1条
+                TTNativeExpressAd ad = ads.get(0);
+                //尝试展示广告
+                showAd(ad);
+                //缓存给下次直接秒展示
+                AdBoss.drawfeedAd = ad;
             }
         });
+    }
+
+    private void showAd(TTNativeExpressAd ad) {
+        if (adShowing) {
+            return;
+        }
+        adShowing = true; //当前实例已在渲染广告
+
+        // 点击监听器必须在getAdView之前调
+        ad.setVideoAdListener(new TTNativeExpressAd.ExpressVideoAdListener() {
+            @Override
+            public void onVideoLoad() {
+                Log.d(TAG, "express onVideoLoad");
+                onExpressAdLoad();
+            }
+
+            @Override
+            public void onVideoError(int errorCode, int extraCode) {
+                Log.d(TAG, "express onVideoError");
+            }
+
+            @Override
+            public void onVideoAdStartPlay() {
+                Log.d(TAG, "express onVideoAdStartPlay");
+            }
+
+            @Override
+            public void onVideoAdPaused() {
+                Log.d(TAG, "express onVideoAdPaused");
+            }
+
+            @Override
+            public void onVideoAdContinuePlay() {
+                Log.d(TAG, "express onVideoAdContinuePlay");
+            }
+
+            @Override
+            public void onProgressUpdate(long current, long duration) {
+//                            Log.d(TAG, "express onProgressUpdate");
+            }
+
+            @Override
+            public void onVideoAdComplete() {
+                Log.d(TAG, "express onVideoAdComplete");
+            }
+
+            @Override
+            public void onClickRetry() {
+                // TToast.show(mContext, " onClickRetry !");
+                Log.d(TAG, "express onClickRetry!");
+            }
+        });
+        ad.setCanInterruptVideoPlay(true);
+        ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
+            @Override
+            public void onAdClicked(View view, int type) {
+                Log.d(TAG, "express onAdClicked");
+                onAdClick();
+            }
+
+            @Override
+            public void onAdShow(View view, int type) {
+                Log.d(TAG, "express onAdShow");
+                onExpressAdLoad();
+            }
+
+            @Override
+            public void onRenderFail(View view, String msg, int code) {
+                Log.d(TAG, "express onRenderFail");
+            }
+
+            @Override
+            public void onRenderSuccess(View view, float width, float height) {
+                Log.d(TAG, "express onRenderSuccess");
+                mContainer.addView(ad.getExpressAdView());
+                onExpressAdLoad();
+            }
+        });
+        ad.render();
+        adShowing = false; //当前实例已完成渲染广告
     }
 
     // 开始加载自定义方式的 Draw 广告
@@ -224,7 +222,7 @@ public class DrawFeedView extends RelativeLayout {
 
         // 创建广告请求参数
         adSlot = new AdSlot.Builder()
-                .setCodeId(_codeid) // 设置广告位 ID
+                .setCodeId(_codeId) // 设置广告位 ID
                 .setSupportDeepLink(true)
                 .setAdCount(1) // 设置请求广告条数为 1 到 3 条
                 .setImageAcceptedSize(1080, 1920)

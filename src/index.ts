@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 
-import { init, loadFeedAd } from './AdManager';
+import { init, loadFeedAd, loadDrawFeedAd } from './AdManager';
 import startSplash from './Splash';
 import startFullVideo from './FullScreenVideo';
 import startRewardVideo from './RewardVideo';
@@ -10,6 +10,7 @@ import Feed from './Feed';
 export default {
     init,
     loadFeedAd,
+    loadDrawFeedAd,
     startSplash,
     startFullVideo,
     startRewardVideo,
