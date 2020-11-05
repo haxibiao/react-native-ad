@@ -82,7 +82,7 @@ public class SplashActivity extends Activity {
             ImageView splashIcon = findViewById(R.id.tx_splash_icon);
             Glide.with(this).load(appInfo.loadIcon(getPackageManager())).apply(options).into(splashIcon);
             // 设置 appIcon
-
+            skipContainer.setBackgroundResource(R.drawable.shape_corner);
             Bundle bundle = appInfo.metaData;
 
             if(bundle != null ){
