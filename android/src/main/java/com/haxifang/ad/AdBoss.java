@@ -13,6 +13,7 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
+import com.qq.e.comm.managers.GDTADManager;
 
 /**
  * 管理广告模块的核心对象
@@ -159,6 +160,9 @@ public class AdBoss {
     public static void initTx(Context context, String appId) {
         tx_appid = appId;
         Log.d(TAG, "tx_appid:" + tx_appid);
+
+         // 通过调用此方法初始化 SDK。如果需要在多个进程拉取广告，每个进程都需要初始化 SDK。
+      GDTADManager.getInstance().initWith(context, tx_appid);
 
         // 初始化TX sdk   无需额外操作...
     }

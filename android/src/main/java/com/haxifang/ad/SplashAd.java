@@ -40,14 +40,14 @@ public class SplashAd extends ReactContextBaseJavaModule {
         if (provider.equals("腾讯")) {
 			// SDK 初始化
         	AdBoss.initTx(mContext, appid);
-			 startTxSplash(AdBoss.codeid_splash_tencent);
+			 startTxSplash(codeid);
 			 return;
 		}
 
         if (provider.equals("百度")) {
 			// SDK 初始化
         	AdBoss.initBd(mContext, appid);
-			 startBdSplash(AdBoss.codeid_splash_baidu);
+			 startBdSplash(codeid);
 			 return;
         }
 
@@ -70,21 +70,21 @@ public class SplashAd extends ReactContextBaseJavaModule {
     }
 
     private void startTxSplash(String codeid) {
-//        Intent intent = new Intent(mContext, com.haxifang.ad.activities.tencent.SplashActivity.class);
-//        try {
-//            String appid = AdBoss.tx_appid;
-//            // String codeid = "8863364436303842593";
-//            Log.d(TAG, "loadSplashAd: codeid=" + codeid + " appid=" + appid);
-//            intent.putExtra("appid", appid);
-//            intent.putExtra("codeid", codeid);
-//            final Activity context = getCurrentActivity();
-//            context.overridePendingTransition(0, 0); // 不要过渡动画
-//            context.startActivityForResult(intent, 10000);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.d(TAG, "loadSplashAd: " + e.getMessage());
-//        }
+       Intent intent = new Intent(mContext, com.haxifang.ad.activities.tencent.SplashActivity.class);
+       try {
+           String appid = AdBoss.tx_appid;
+           // String codeid = "8863364436303842593";
+           Log.d(TAG, "loadSplashAd: codeid=" + codeid + " appid=" + appid);
+           intent.putExtra("appid", appid);
+           intent.putExtra("codeid", codeid);
+           final Activity context = getCurrentActivity();
+           context.overridePendingTransition(0, 0); // 不要过渡动画
+           context.startActivityForResult(intent, 10000);
+
+       } catch (Exception e) {
+           e.printStackTrace();
+           Log.d(TAG, "loadSplashAd: " + e.getMessage());
+       }
     }
 
     private void startBdSplash(String codeid) {

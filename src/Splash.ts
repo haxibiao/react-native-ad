@@ -11,10 +11,10 @@ interface EVENT_TYPE {
 
 const listenerCache = {};
 
-export default ({ appid, codeid }) => {
+export default ({ appid, codeid, provider }) => {
     const { SplashAd } = NativeModules;
     const eventEmitter = new NativeEventEmitter(SplashAd);
-    let result = SplashAd.loadSplashAd({ appid, codeid });
+    let result = SplashAd.loadSplashAd({ appid, codeid, provider });
 
     return {
         result,

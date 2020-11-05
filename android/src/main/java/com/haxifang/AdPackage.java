@@ -25,6 +25,7 @@ public class AdPackage implements ReactPackage {
         modules.add(new AdModule(reactContext));
         modules.add(new AdManager(reactContext));
         modules.add(new SplashAd(reactContext));
+    
         modules.add(new FullScreenVideo(reactContext));
         modules.add(new RewardVideo(reactContext));
         return modules;
