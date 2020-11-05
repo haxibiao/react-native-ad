@@ -20,7 +20,8 @@
         <activity android:name=".ad.activities.SplashActivity" />
         <activity android:name=".ad.activities.FullScreenActivity" />
         <activity android:name=".ad.activities.RewardActivity" />
-        <activity android:name=".ad.activities.tencent.SplashActivity" />
+        <activity android:name=".ad.activities.tencent.SplashActivity" 
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
