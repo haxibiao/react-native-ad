@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/shape_gradient"
         android:orientation="vertical"
-        android:paddingBottom="60dp" >
+        android:paddingBottom="65dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,25 +33,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="end"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
             android:padding="10dp" >
 
             <ImageView
                 android:id="@+id/usAvatar"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/extra_large" />
 
             <LinearLayout
-                android:layout_width="45dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingTop="30dp">
+                android:paddingTop="20dp">
 
                 <ImageButton
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
                     android:id="@+id/btn_likevideo"
                     android:src="@drawable/ic_video_like"
                     android:scaleType="fitCenter"
@@ -63,7 +63,57 @@
                     android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
-                    android:text="66 W" />
+                    android:text="999+" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="15dp">
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/btn_comment_video"
+                    android:src="@drawable/ic_comment_item"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                     android:paddingTop="5dp"
+                    android:text="999+" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="15dp">
+
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:id="@+id/btn_share_video"
+                    android:src="@drawable/ic_share_item"
+                    android:scaleType="fitCenter"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:paddingTop="5dp"
+                    android:text="分享" />
 
             </LinearLayout>
 

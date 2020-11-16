@@ -9,7 +9,7 @@ type appInfo = {
     reward?: string | null; //奖励是啥
     codeid_reward_video?: string | null; //需要提前预加载的激励视频广告位
     codeid_full_video?: string | null; //需要提前预加载的全屏视频广告位
-    tx_appid: string;
+    tx_appid?: string;
 };
 
 export const init = (appInfo: appInfo) => {

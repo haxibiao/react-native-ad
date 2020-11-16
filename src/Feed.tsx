@@ -23,7 +23,7 @@ const FeedAd = (props: Props) => {
     return (
         <FeedAdComponent
             codeid={codeid}
-            adWidth={adWidth}
+            adWidth={adWidth - 30}
             style={{ width: adWidth, height }}
             onAdError={(e: any) => {
                 onAdError && onAdError(e.nativeEvent);
@@ -36,7 +36,7 @@ const FeedAd = (props: Props) => {
             }}
             onAdLayout={(e: any) => {
                 if (e.nativeEvent.height) {
-                    setHeight(e.nativeEvent.height);
+                    setHeight(e.nativeEvent.height + 10);
                     onAdLayout && onAdLayout(e.nativeEvent);
                 }
             }}
