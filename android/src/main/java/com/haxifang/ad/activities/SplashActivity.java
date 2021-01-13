@@ -208,7 +208,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                         Log.d(TAG, "onAdShow");
                         WritableMap params = Arguments.createMap();
                         params.putBoolean("onAdShow", true);
-                        sendEvent(TAG + "-OnAdShow", params);
+                        sendEvent(TAG + "-onAdShow", params);
                         // showToast("开屏广告展示");
                     }
 
