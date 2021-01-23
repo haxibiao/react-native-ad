@@ -6,7 +6,7 @@ import {
 } from "react-native";
 
 
-interface EVENT_TYPE {
+export interface EVENT_TYPE {
 	onAdError: string; // 广告加载失败监听
 	onAdClick: string; // 广告被点击监听
 	onAdClose: string; // 广告关闭
@@ -14,12 +14,18 @@ interface EVENT_TYPE {
 	onAdShow: string; // 开屏广告开始展示
 }
 
+export interface SPLASHAD_PROPS_TYPE {
+	appid: string,
+	codeid: string,
+	anim?: "default" | "none" | "catalyst" | "slide" | "fade",
+};
+
 const listenerCache = {};
 
-export default ({ appid, codeid }) => {
+export default ({ appid, codeid, anim = "default" }: SPLASHAD_PROPS_TYPE) => {
 	const { SplashAd } = NativeModules;
 	const eventEmitter = new NativeEventEmitter(SplashAd);
-	let result = SplashAd.loadSplashAd({ appid, codeid });
+	let result = SplashAd.loadSplashAd({ appid, codeid, anim });
 
 	return {
 		result,

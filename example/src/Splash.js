@@ -26,6 +26,7 @@ export default function SplashAd() {
           const splashAd = ad.startSplash({
             appid: '5016582',
             codeid: '816582039',
+            anim: 'default',
           });
 
           splashAd.subscribe('onAdClose', (event) => {

@@ -57,6 +57,10 @@ public class AdBoss {
     public static boolean is_download_active = false;
     public static boolean is_install = false;
 
+    // SplashAd config
+    public static int splashAd_anim_in = 0;
+    public static int splashAd_anim_out = 0;
+
     /**
      * 准备新的激励(全屏)视频回调
      *
