@@ -62,7 +62,7 @@ npm install -D git+http://auto:hxb332211@code.haxibiao.cn/native/bytedad.git
 ...
 const appid = "";
 const codeid = "";
-ad.loadSplashAd(appid, codeid);
+ad.loadSplashAd({appid, codeid});
 ...
 ```
 
@@ -107,6 +107,10 @@ splashAd.subscribe('onAdClick', i => {
 });
 
 ```
+
+> **可选参数：**
+> 
+> `ad.loadSplashAd({appid, codeid, anim: 'default'});`（开屏 Splash 广告启动动画效果）详细文档请查看：[SplashAd Anim 文档](./splash_anim.md)
 
 更多使用示例代码请查看：[SplashAd](../example/src/SplashAd.js)
 
