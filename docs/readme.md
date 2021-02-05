@@ -10,7 +10,19 @@
 
 文档目录：
 
--   [穿山甲（头条）React Native 广告模块对接文档](#穿山甲头条react-native-广告模块对接文档) - [创建获取 appId 和广告位 codeId](#创建获取-appid-和广告位-codeid) - [获取穿山甲 appId](#获取穿山甲-appid) - [获取穿山甲 codeId](#获取穿山甲-codeid) - [安装配置 react-native-ad 模块](#安装配置-react-native-ad-模块) - [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例) - [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例) - [激励视频回调对象](#激励视频回调对象) - [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullvideo广告的对接及示例) - [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例) - [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例) - [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
+- [穿山甲（头条）React Native 广告模块对接文档](#穿山甲头条react-native-广告模块对接文档) 
+- [创建获取 appId 和广告位 codeId](#创建获取-appid-和广告位-codeid) 
+- [获取穿山甲 appId](#获取穿山甲-appid) 
+- [获取穿山甲 codeId](#获取穿山甲-codeid) 
+- [安装配置 react-native-ad 模块](#安装配置-react-native-ad-模块) 
+- [初始化 react-native-ad SDK](#初始化SDK)
+- [开屏（Splash）广告的对接及示例](#开屏splash广告的对接及示例) 
+- [激励视频（RewardVideo）广告的对接及示例](#激励视频rewardvideo广告的对接及示例) 
+- [激励视频回调对象](#激励视频回调对象) 
+- [全屏视频（FullVideo）广告的对接及示例](#全屏视频fullvideo广告的对接及示例) 
+- [信息流（Feed）广告的对接及示例](#信息流feed广告的对接及示例) 
+- [视频信息流（DrawFeed）广告的对接及示例](#视频信息流drawfeed广告的对接及示例) 
+- [横幅（Banner）广告的对接及示例](#横幅banner广告的对接及示例)
 
 ## 创建获取 appId 和广告位 codeId
 
@@ -49,6 +61,36 @@ npm install -D git+http://auto:hxb332211@code.haxibiao.cn/native/bytedad.git
 ```
 "hxf-byted-ad":"git+http://auto:hxb332211@code.haxibiao.cn/native/bytedad.git"
 ```
+
+## 初始化 SDK
+> 为了实现部分广告的预加载，新增加 ad.init() 方法，在调用任何广告之前需要先调用 ad.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid
+
+```
+import React, { useEffect } from 'react';
+import {ad} from 'react-native-ad';
+
+function App() {
+  useEffect(() => {
+    // 启动前，初始化Ad
+    ad.init({
+        appid: "99999999",
+    });
+  }, []);
+}
+
+```
+ad.init 参数参照表：
+
+| 参数名  |  是否必传  |  参数类型  |                说明                |
+| ------- | :--------:| :--------: | :--------------------------------: |
+| appid  |  必传  |   string   |             广告 APP ID              |
+| app |  可选  |   string   |              APP 名称              |
+| uid |  可选  |  string   |     有些 uid 和穿山甲商务有合作的需要     |
+| amount  |  可选  | number | 奖励数量 |
+| reward |  可选  | string | 奖励名称 |
+| codeid_reward_video |  可选  | string |   需要提前预加载的激励视频广告位   |
+| codeid_full_video |  可选  | string |   需要提前预加载的全屏视频广告位   |
+
 
 ## 开屏（Splash）广告的对接及示例
 
