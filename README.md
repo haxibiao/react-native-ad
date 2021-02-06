@@ -1,4 +1,5 @@
 # react-native-ad
+[![npm version](https://badge.fury.io/js/react-native-ad.svg)](https://badge.fury.io/js/react-native-ad)  [![GitHub stars](https://img.shields.io/github/stars/haxibiao/react-native-ad?style=social)](https://github.com/haxibiao/react-native-ad/stargazers)
 
 ### 注意事项
 
@@ -8,9 +9,26 @@
 
 ### 安装方法 🔨
 
+目前已经发布 NPM 和 Github，并且支持 npm 和 yarn 两种安装方式，两种平台和两种安装方式任选其一就好。
+
 ```
-yarn add git+https://github.com/haxibiao/react-native-ad.git
+
+# yarn for origin
+$ yarn add react-native-ad
+
+# npm for npmjs
+$ npm i -D react-native-ad
+
+
+
+# yarn for Github 
+$ yarn add git+https://github.com/haxibiao/react-native-ad.git
+
+# npm for Github
+$ npm install git+https://github.com/haxibiao/react-native-ad.git
+
 ```
+
 
 ### 文档地址 🍎
 
