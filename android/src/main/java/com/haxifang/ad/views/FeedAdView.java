@@ -12,6 +12,7 @@ import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
+import com.bytedance.sdk.openadsdk.DislikeInfo;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -216,12 +217,16 @@ public class FeedAdView extends RelativeLayout {
         final RelativeLayout mExpressContainer = findViewById(R.id.feed_container);
         if (customStyle) {
             // 使用自定义样式
-            List<FilterWord> words = ad.getFilterWords();
-            if (words == null || words.isEmpty()) {
+//            List<FilterWord> words = ad.getFilterWords();
+//            if (words == null || words.isEmpty()) {
+//                return;
+//            }
+            DislikeInfo dislikeInfo = ad.getDislikeInfo();
+            if (dislikeInfo == null || dislikeInfo.getFilterWords() == null || dislikeInfo.getFilterWords().isEmpty()) {
                 return;
             }
 
-            final DislikeDialog dislikeDialog = new DislikeDialog(getContext(), words);
+            final DislikeDialog dislikeDialog = new DislikeDialog(getContext(), dislikeInfo.getFilterWords());
             dislikeDialog.setOnDislikeItemClick(new DislikeDialog.OnDislikeItemClick() {
                 @Override
                 public void onItemClick(FilterWord filterWord) {
@@ -237,6 +242,10 @@ public class FeedAdView extends RelativeLayout {
         }
         // 使用默认个性化模板中默认dislike弹出样式
         ad.setDislikeCallback(mContext, new TTAdDislike.DislikeInteractionCallback() {
+            @Override
+            public void onShow() {
+
+            }
             @Override
             public void onSelected(int position, String value) {
                 // TToast.show(mContext, "点击 " + value);

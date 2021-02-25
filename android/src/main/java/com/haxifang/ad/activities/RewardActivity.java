@@ -61,8 +61,7 @@ public class RewardActivity extends Activity {
         // 创建广告请求参数 AdSlot, 具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId)
-                .setSupportDeepLink(true)
-                .setImageAcceptedSize(1080, 1920)
+                .setExpressViewAcceptedSize(500,500)
                 .setRewardName(AdBoss.rewardName) // 奖励的名称
                 .setRewardAmount(AdBoss.rewardAmount) // 奖励的数量
                 .setUserID(AdBoss.userId)// 用户id,必传参数
@@ -220,7 +219,7 @@ public class RewardActivity extends Activity {
         });
 
         // 开始显示广告,会铺满全屏...
-        ad.showRewardVideoAd(this);
+        ad.showRewardVideoAd(this,TTAdConstant.RitScenes.CUSTOMIZE_SCENES, "scenes_test");
     }
 
 
