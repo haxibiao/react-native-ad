@@ -1,7 +1,7 @@
 {
     "name": "react-native-ad",
     "title": "react-native 广告联盟SDK",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "description": "给rn封装一些常用的广告平台的 sdk，头条穿山甲，腾讯广点通，百度百青藤等广告模块...",
     "main": "index.ts",
     "scripts": {
@@ -16,8 +16,8 @@
         "react-native"
     ],
     "author": {
-        "name": "wangbin",
-        "email": "wangbin@haxibiao.com"
+        "name": "haxibiao",
+        "email": "ivan@haxibiao.com"
     },
     "license": "MIT",
     "licenseFilename": "LICENSE",

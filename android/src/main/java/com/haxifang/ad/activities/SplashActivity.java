@@ -1,6 +1,5 @@
 package com.haxifang.ad.activities;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -28,7 +28,7 @@ import com.haxifang.ad.AdBoss;
 import com.haxifang.ad.AdManager;
 import com.haxifang.ad.WeakHandler;
 
-public class SplashActivity extends Activity implements WeakHandler.IHandler {
+public class SplashActivity extends AppCompatActivity implements WeakHandler.IHandler {
 
     // 开屏广告加载超时时间,建议大于1000,这里为了冷启动第一次加载到广告并且展示,示例设置了2000ms
     private static final int AD_TIME_OUT = 2000;
@@ -208,7 +208,7 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
                         Log.d(TAG, "onAdShow");
                         WritableMap params = Arguments.createMap();
                         params.putBoolean("onAdShow", true);
-                        sendEvent(TAG + "-OnAdShow", params);
+                        sendEvent(TAG + "-onAdShow", params);
                         // showToast("开屏广告展示");
                     }
 
@@ -264,5 +264,13 @@ public class SplashActivity extends Activity implements WeakHandler.IHandler {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        if (AdBoss.splashAd_anim_in != -1) {
+            // 实现广告关闭跳转 Activity 动画设置
+            overridePendingTransition(AdBoss.splashAd_anim_in, AdBoss.splashAd_anim_out);
+        }
+    }
 }
 
