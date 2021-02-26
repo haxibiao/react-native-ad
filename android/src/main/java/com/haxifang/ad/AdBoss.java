@@ -120,6 +120,8 @@ public class AdBoss {
     public static String codeid_full_video;
     public static String codeid_reward_video;
     public static String codeid_reward_video_tencent;
+    public static String codeid_stream;
+
 
     public static ReactContext reactContext;
     public static ArrayBlockingQueue<String> myBlockingQueue = new ArrayBlockingQueue<String>(1);

@@ -99,6 +99,12 @@ public class AdManager extends ReactContextBaseJavaModule {
         }
 
         AdBoss.codeid_reward_video_tencent = options.hasKey("codeid_reward_video_tencent") ? options.getString("codeid_reward_video_tencent") : AdBoss.codeid_reward_video_tencent;
+
+        if(options.hasKey("codeid_stream")) {
+            AdBoss.codeid_stream = options.getString("codeid_stream");
+           
+        }
+
     }
 
     /**
