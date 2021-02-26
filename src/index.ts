@@ -6,6 +6,7 @@ import startFullVideo from './FullScreenVideo';
 import startRewardVideo from './RewardVideo';
 import DrawFeed from './DrawFeed';
 import Feed from './Feed';
+import Stream from './Stream';
 
 export default {
     init,
@@ -16,4 +17,5 @@ export default {
     startRewardVideo,
     DrawFeed,
     Feed,
+    Stream,
 };
