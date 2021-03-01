@@ -81,7 +81,7 @@ public class StreamView extends RelativeLayout {
     private void loadStreamAd() {
         // step4:创建feed广告请求类型参数AdSlot,具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
-                .setCodeId("945593053")
+                .setCodeId(_codeId)
                 .setImageAcceptedSize(640, 320)
                 .setAdCount(1) //请求广告数量为1到3条
                 .build();
