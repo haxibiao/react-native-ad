@@ -1,43 +1,27 @@
 package com.haxifang.ad.views;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.Choreographer;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdNative;
-import com.bytedance.sdk.openadsdk.TTDrawFeedAd;
 import com.bytedance.sdk.openadsdk.TTNativeAd;
 import com.bytedance.sdk.openadsdk.TTFeedAd;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
-import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.TTImage;
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxifang.R;
 import com.haxifang.ad.AdBoss;
 import com.haxifang.ad.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,7 +47,7 @@ public class StreamView extends RelativeLayout {
         mContext = context;
 
         // 初始化广告渲染组件
-        inflate(mContext, R.layout.activity_stream, this);
+        inflate(mContext, R.layout.stream_view, this);
         mContainer = findViewById(R.id.tt_stream_container);
 
         // 这个函数很关键，不然不能触发再次渲染，让 view 在 RN 里渲染成功!!
@@ -105,7 +89,7 @@ public class StreamView extends RelativeLayout {
         AdBoss.TTAdSdk.loadStream(adSlot, new TTAdNative.FeedAdListener() {
             @Override
             public void onError(int code, String message) {
-                  Log.d(TAG, message);
+                Log.d(TAG, message);
 //                TToast.show(StreamActivity.this, message);
             }
 
