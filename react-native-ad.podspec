@@ -25,6 +25,6 @@ Pod::Spec.new do |s|
   # ...
   # s.dependency "..."
 
-  s.dependency 'Bytedance-UnionAD', '3.1.0.5'
+  s.dependency 'Ads-CN', '3.4.2.3'
 end
 
