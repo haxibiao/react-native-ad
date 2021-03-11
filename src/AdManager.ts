@@ -20,6 +20,7 @@ export const init = (appInfo: appInfo) => {
 type feedInfo = {
     appid: string;
     codeid: string;
+    adWidth?: string;
 };
 
 export const loadFeedAd = (info: feedInfo) => {
