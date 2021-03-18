@@ -2,8 +2,7 @@ import React from 'react';
 import { requireNativeComponent, StyleSheet } from 'react-native';
 
 const FeedAdComponent = requireNativeComponent('FeedAd');
-
-interface Props {
+export interface FeedAdProps {
     codeid: string;
     adWidth?: number;
     visible?: boolean;
@@ -13,7 +12,7 @@ interface Props {
     onAdClick?: Function;
 }
 
-const FeedAd = (props: Props) => {
+const FeedAd = (props: FeedAdProps) => {
     const { codeid, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick } = props;
     // let [visible, setVisible] = useState(true);
     // 状态交友父组件来控制，使得广告显示状态在父组件中可以实时监听

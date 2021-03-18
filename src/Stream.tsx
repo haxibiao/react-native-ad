@@ -6,7 +6,7 @@ const StreamComponent = requireNativeComponent('StreamAd');
 // 关于以前用旧的 native 方式申请的 Stream 代码位...
 // FIXME: 记得全部重新申请代码位，因为穿山甲马上要弃用旧代码位
 
-interface Props {
+export interface StreamProps {
     codeid: string;
     visible?: boolean;
     onAdError?: Function;
@@ -14,7 +14,7 @@ interface Props {
     onAdClick?: Function;
 }
 
-export const Stream = (props: Props) => {
+export const Stream = (props: StreamProps) => {
     const { codeid, onAdError, onAdShow, onAdClick, visible = true } = props;
     if (!visible) return null;
     return (

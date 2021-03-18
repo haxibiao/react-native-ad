@@ -56,7 +56,7 @@
                 android:textSize="60px"
                 android:gravity="center"
                 android:id="@+id/tx_splash_name"
-                android:text="@string/app_name"
+                android:text="Loading..."
                 android:textColor="#000"/>
 
         </LinearLayout>

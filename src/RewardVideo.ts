@@ -2,8 +2,7 @@ import React from 'react';
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
 const listenerCache = {};
-
-interface EVENT_TYPE {
+export interface AD_EVENT_TYPE {
     onAdError: string; // 广告加载失败监听
     onAdLoaded: string; // 广告加载成功监听
     onAdClick: string; // 广告被点击监听
@@ -26,7 +25,7 @@ export default function (info: rewardInfo) {
 
     return {
         result,
-        subscribe: (type: keyof EVENT_TYPE, callback: (event: any) => void) => {
+        subscribe: (type: keyof AD_EVENT_TYPE, callback: (event: any) => void) => {
             if (listenerCache[type]) {
                 listenerCache[type].remove();
             }

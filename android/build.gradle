@@ -79,8 +79,8 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 	//加载开屏广告替换appIcon用
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
-	//加载广告SDK aar
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+	//加载广告   SDK aar
+    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 }
 
 def configureReactNativePom(def pom) {
