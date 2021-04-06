@@ -13,13 +13,12 @@ export interface FeedAdProps {
 }
 
 const FeedAd = (props: FeedAdProps) => {
-    const { codeid, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick } = props;
-    // let [visible, setVisible] = useState(true);
-    // 状态交友父组件来控制，使得广告显示状态在父组件中可以实时监听
-    const { visible = true } = props;
-    const [height, setHeight] = React.useState(0); // 默认高度
-    if (!visible) return null;
-    return (
+    const { codeid, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick, visible = true } = props;
+    const [closed, setClosed] = React.useState(false);
+    const [height, setHeight] = React.useState(0);
+    // FeedAd是否显示，外部和内部均可控制，外部visible、内部closed
+    if (!visible || closed) return null;
+    return ( 
         <FeedAdComponent
             codeid={codeid}
             adWidth={adWidth - 30}
@@ -31,6 +30,7 @@ const FeedAd = (props: FeedAdProps) => {
                 onAdClick && onAdClick(e.nativeEvent);
             }}
             onAdClose={(e: any) => {
+                setClosed(true);
                 onAdClose && onAdClose(e.nativeEvent);
             }}
             onAdLayout={(e: any) => {
