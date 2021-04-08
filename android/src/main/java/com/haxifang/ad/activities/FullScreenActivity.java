@@ -39,13 +39,13 @@ public class FullScreenActivity extends Activity {
         String codeId = extras.getString("codeId");
 
         // 然后加载视频广告
-        loadAd(codeId, ()->{
+        loadAd(codeId, () -> {
             showAd(AdBoss.fullAd);
         });
 
         //有缓存的广告直接展示
-        if(AdBoss.fullAd != null) {
-            Log.d(TAG,"直接展示提前加载的广告");
+        if (AdBoss.fullAd != null) {
+            Log.d(TAG, "直接展示提前加载的广告");
             showAd(AdBoss.fullAd);
         }
     }
@@ -61,6 +61,11 @@ public class FullScreenActivity extends Activity {
                 .setUserID(AdBoss.userId)// 用户id,必传参数
                 .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
                 .build();
+
+        if (AdBoss.TTAdSdk == null) {
+            // TTAdSdk 未 init，直接跳出预加载，避免导致空异常
+            return;
+        }
 
         // 请求广告
         AdBoss.TTAdSdk.loadFullScreenVideoAd(adSlot, new TTAdNative.FullScreenVideoAdListener() {
@@ -85,14 +90,16 @@ public class FullScreenActivity extends Activity {
                 callback.run();
             }
         });
+
     }
 
     /**
      * 展示全屏视频广告
+     *
      * @param ad
      */
     private void showAd(TTFullScreenVideoAd ad) {
-        if(adShowing) {
+        if (adShowing) {
             return;
         }
         adShowing = true;

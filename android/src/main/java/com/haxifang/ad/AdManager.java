@@ -40,8 +40,27 @@ public class AdManager extends ReactContextBaseJavaModule {
         //默认头条穿山甲
         AdBoss.tt_appid = options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
 
-        runOnUiThread(()->{
+        runOnUiThread(() -> {
             AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
+
+            // Bin：这里预加载穿山甲广告逻辑需要放在 sdk init 逻辑之后
+
+            if (options.hasKey("codeid_full_video")) {
+                AdBoss.codeid_full_video = options.getString("codeid_full_video");
+                //提前加载
+                FullScreenActivity.loadAd(AdBoss.codeid_full_video, () -> {
+                    Log.d(TAG, "提前加载 成功 codeid_full_video " + AdBoss.codeid_full_video);
+                });
+            }
+
+            if (options.hasKey("codeid_reward_video")) {
+                AdBoss.codeid_reward_video = options.getString("codeid_reward_video");
+                //提前加载
+                RewardActivity.loadAd(AdBoss.codeid_reward_video, () -> {
+                    Log.d(TAG, "提前加载 成功 codeid_reward_video " + AdBoss.codeid_reward_video);
+                });
+            }
+
         });
 
         //支持传参头条需要的userId和appName ...
@@ -74,7 +93,7 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.codeid_splash_tencent = options.hasKey("codeid_splash_tencent") ? options.getString("codeid_splash_tencent") : AdBoss.codeid_splash_tencent;
         AdBoss.codeid_splash_baidu = options.hasKey("codeid_splash_baidu") ? options.getString("codeid_splash_baidu") : AdBoss.codeid_splash_baidu;
 
-        if(options.hasKey("codeid_feed")) {
+        if (options.hasKey("codeid_feed")) {
             AdBoss.codeid_feed = options.getString("codeid_feed");
         }
         AdBoss.codeid_feed_tencent = options.hasKey("codeid_feed_tencent") ? options.getString("codeid_feed_tencent") : AdBoss.codeid_feed_tencent;
@@ -82,27 +101,12 @@ public class AdManager extends ReactContextBaseJavaModule {
 
         AdBoss.codeid_draw_video = options.hasKey("codeid_draw_video") ? options.getString("codeid_draw_video") : AdBoss.codeid_draw_video;
 
-        if(options.hasKey("codeid_full_video") ) {
-            AdBoss.codeid_full_video = options.getString("codeid_full_video");
-            //提前加载
-            FullScreenActivity.loadAd(AdBoss.codeid_reward_video,()->{
-                Log.d(TAG, "提前加载 成功 codeid_full_video " + AdBoss.codeid_full_video);
-            });
-        }
-
-        if(options.hasKey("codeid_reward_video")) {
-            AdBoss.codeid_reward_video = options.getString("codeid_reward_video");
-            //提前加载
-            RewardActivity.loadAd(AdBoss.codeid_reward_video,()->{
-                Log.d(TAG, "提前加载 成功 codeid_reward_video " + AdBoss.codeid_reward_video);
-            });
-        }
 
         AdBoss.codeid_reward_video_tencent = options.hasKey("codeid_reward_video_tencent") ? options.getString("codeid_reward_video_tencent") : AdBoss.codeid_reward_video_tencent;
 
-        if(options.hasKey("codeid_stream")) {
+        if (options.hasKey("codeid_stream")) {
             AdBoss.codeid_stream = options.getString("codeid_stream");
-           
+
         }
 
     }
@@ -114,8 +118,8 @@ public class AdManager extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadFeedAd(ReadableMap options, final Promise promise) {
         String codeId = options.getString("codeid");
-        float width =   0;
-        if(options.hasKey("adWidth")) {
+        float width = 0;
+        if (options.hasKey("adWidth")) {
             width = Float.parseFloat(options.getString("adWidth"));
         }
         AdBoss.feedPromise = promise;
@@ -147,8 +151,8 @@ public class AdManager extends ReactContextBaseJavaModule {
      * @param width
      */
     private static void loadTTFeedAd(String codeId, float width) {
-        if(AdBoss.TTAdSdk == null) {
-            Log.e(TAG,"TTAdSdk 还没初始化");
+        if (AdBoss.TTAdSdk == null) {
+            Log.e(TAG, "TTAdSdk 还没初始化");
             return;
         }
 
@@ -170,7 +174,7 @@ public class AdManager extends ReactContextBaseJavaModule {
             @Override
             public void onError(int code, String message) {
                 Log.d(TAG, message);
-                AdBoss.feedPromise.reject("101","feed ad error" + message);
+                AdBoss.feedPromise.reject("101", "feed ad error" + message);
             }
 
             @Override
@@ -192,8 +196,8 @@ public class AdManager extends ReactContextBaseJavaModule {
      * @param codeId
      */
     private static void loadTTDrawFeedAd(String codeId) {
-        if(AdBoss.TTAdSdk == null) {
-            Log.e(TAG,"TTAdSdk 还没初始化");
+        if (AdBoss.TTAdSdk == null) {
+            Log.e(TAG, "TTAdSdk 还没初始化");
             return;
         }
 
