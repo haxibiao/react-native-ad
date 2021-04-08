@@ -183,7 +183,8 @@ android {
 dependencies {
 	implementation project(':react-native-ad')
 
-    implementation fileTree(dir: "libs", include: ["*.aar"])
+    // import react-native-ad sdks
+    implementation fileTree(dir: "../../node_modules/react-native-ad/android/libs", include: ["*.aar"])
     
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
