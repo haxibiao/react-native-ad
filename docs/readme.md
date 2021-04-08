@@ -342,7 +342,7 @@ fullVideo.subscribe('onAdClick', (event) => {
 **import {ad} from 'react-native-ad';**
 
 调用 ad.init 方法初始化 SDK（已经初始化过的可以忽略，初始化一次后其他地方可以不需要再初始化了），需要传入穿山甲广告平台的 appid。
-需要预加载 Feed AD 有两种方式，通过 `ad.init` 方法使用方法请参照：[初始化 react-native-ad SDK](#初始化-SDK) ，通过提前调用 `ad.loadFeedAd` 方法，该方法参数为广告配置对象 `{ appid, codeid }` ，使用示例代码如下：
+需要预加载 Feed AD 有两种方式，通过 `ad.init` 方法使用方法请参照：[初始化 react-native-ad SDK](#初始化-SDK) ，通过提前调用 `ad.loadFeedAd` 方法，该方法参数为广告配置对象 `{ appid, codeid, width }` ，使用示例代码如下：
 
 ```
 ...
@@ -351,12 +351,14 @@ React.useEffect(() => {
 
   const appid = "";
   const codeid = "";
+  const width = ""; // feed ad 宽度
   ad.init(appid);
 
   // 预加载 feed ad
   ad.loadFeedAd({
     appid,
     codeid,
+    width,
   }).then(
     (result) => {
       console.log('load feed ad result ', result);
@@ -370,8 +372,8 @@ React.useEffect(() => {
 
 ...
 ```
-> **提示：** 并非必须预加载广告，根据自己需求所定。预加载广告可能提升部分用户体验
 
+> **提示：** 并非必须预加载广告，根据自己需求所定。预加载广告可能提升部分用户体验
 
 使用组件 <ad.Feed /> 显示广告，codeId（ 广告位 ID ）必传，adWidth（ 广告宽度 ）必传
 
