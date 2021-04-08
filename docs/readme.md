@@ -44,6 +44,9 @@
 
 ## 安装配置 react-native-ad 模块
 
+[![npm version](https://badge.fury.io/js/react-native-ad.svg)](https://badge.fury.io/js/react-native-ad) 
+
+
 可以使用 yarn 或者 npm 进行安装
 
 ```
@@ -59,8 +62,10 @@ npm install -D react-native-ad
 或者在项目 package.json 的 dependencies 下添加一行
 
 ```
-"react-native-ad":"^1.1.4"
+"react-native-ad":"^1.1.6"
 ```
+
+**注意：** 对接 react-native-ad v1.1.5 及以上版本或 React Native v0.64.0 以上版本对接之后导致闪退的需参考：[React Native v0.64.0 Android 对接 sdk 过渡方案](./excessive_v1.16.md)
 
 ## 初始化 SDK
 
