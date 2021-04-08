@@ -182,6 +182,8 @@ android {
 
 dependencies {
 	implementation project(':react-native-ad')
+
+    implementation fileTree(dir: "libs", include: ["*.aar"])
     
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
