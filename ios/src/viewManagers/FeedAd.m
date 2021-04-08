@@ -62,7 +62,7 @@
     slot1.position = BUAdSlotPositionFeed;
     slot1.isSupportDeepLink = YES;
     
-    CGSize adSize = CGSizeMake(self._adwidth, self._adwidth * 150/228);
+    CGSize adSize = CGSizeMake(self._adwidth, self._adwidth * 0);
     if (!self.nativeExpressAdManager) {
         self.nativeExpressAdManager = [[BUNativeExpressAdManager alloc] initWithSlot:slot1 adSize:adSize];
     }
