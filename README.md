@@ -59,3 +59,11 @@ $ npm update react-native-ad
 ```
 $ yarn upgrade react-native-ad
 ```
+
+
+### 特别鸣谢
+> 感谢 JetBrains 提供了优秀的 IDE 和授权的开源许可。
+
+> Thanks to jetbrains for providing great IDEs and open source licensing
+
+[![jetbrains](docs/assets/jetbrains-variant.png)](https://www.jetbrains.com/)
