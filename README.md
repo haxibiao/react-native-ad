@@ -66,4 +66,4 @@ $ yarn upgrade react-native-ad
 
 > Thanks to jetbrains for providing great IDEs and open source licensing
 
-[![jetbrains](docs/assets/jetbrains-variant.png)](https://www.jetbrains.com/)
+[<img src="docs/assets/jetbrains-variant.png" alt="ad_anim_none.gif" width="160">](https://www.jetbrains.com/)
