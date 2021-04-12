@@ -10,10 +10,17 @@ export interface AD_EVENT_TYPE {
     onAdClose: string; // 广告关闭监听
 }
 
-export default ({ appid, codeid }) => {
+interface FullScreenProps {
+    appid: string;
+    codeid: string;
+    orientation?: 'HORIZONTAL' | 'VERTICAL';
+}
+
+export default (props: FullScreenProps) => {
+    const { appid, codeid, orientation = 'VERTICAL' } = props;
     const { FullScreenVideo } = NativeModules;
     const eventEmitter = new NativeEventEmitter(FullScreenVideo);
-    let result = FullScreenVideo.startAd({ appid, codeid });
+    let result = FullScreenVideo.startAd({ appid, codeid, orientation });
 
     return {
         result,

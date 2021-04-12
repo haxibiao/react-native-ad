@@ -18,7 +18,7 @@
     <application>
 
         <activity android:name=".ad.activities.SplashActivity" />
-        <activity android:name=".ad.activities.FullScreenActivity" />
+        <activity android:name=".ad.activities.FullScreenActivity" android:theme="@style/TranslucentStyle"/>
         <activity android:name=".ad.activities.RewardActivity" />
         <activity android:name=".ad.activities.tencent.SplashActivity" 
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
