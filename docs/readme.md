@@ -267,13 +267,13 @@ rewardVideo.then(val => {
 
 更多使用示例代码请查看：[RewardVideo](../example/src/RewardVideo.js)
 
-## 全屏视频（FullVideo）广告的对接及示例
+## 全屏视频/新插屏广告（FullVideo）广告的对接及示例
 
 导入 `ad` 模块
 
 **import {ad} from 'react-native-ad';**
 
-调用 ad.startFullVideo 方法，需要传入穿山甲广告平台的 appid 和 codeid
+调用 ad.startFullVideo 方法，需要传入穿山甲广告平台的 appid 和 codeid，可传orientation参数（'VERTICAL'，'HORIZONTAL'），默认'HORIZONTAL'
 
 ```
 ...
