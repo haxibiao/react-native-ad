@@ -4,9 +4,9 @@
 
 > 广告平台对接文档地址：<https://ad.oceanengine.com/union/media/union/download>
 
-> 当前 Android 集成广告平台 SDK 版本：v3.1.0.0
+> 当前 Android 集成广告平台 SDK 版本：v3.5.5.0
 
-> 当前 IOS 集成广告平台 SDK 版本：v3.1.0.5
+> 当前 IOS 集成广告平台 SDK 版本：v3.4.2.3
 
 文档目录：
 
@@ -564,3 +564,20 @@ React.useEffect(() => {
   - 修复开屏广告 onAdShow 回调方法
   - 添加 Android 开屏广告可选动画效果
   - 更新对接文档
+
+- v1.1.5
+  - feat: 添加视频贴片广告 (StreamAd)
+  - feat: 贴片广告外部传入 code
+  - fix: 修复贴片广告 view 样式
+  - 简单更新支持 rn 0.64.0 需要手动主项目引用 aar
+
+- v1.1.6
+  - fix: New Repair example Compatible v1.1.6
+  - fix: Repair TTAD FullVideo Preload Abnormal
+  - ios feedAd 高度自适应
+  - 去除获取其他 App 状态权限，防止小米隐私违规问题
+  - FeedAd 的显示外部和内部均可控制，外部 visible 、内部 closed
+
+- v1.1.7
+  - 升级 sdk 3.5.5.0
+  - 兼容新的插屏广告，增加方向参数以及插屏背景透明
