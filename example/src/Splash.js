@@ -6,6 +6,7 @@ export default function SplashAd() {
   useEffect(() => {
     ad.init({
       appid: '5016582',
+      codeid_splash: '816582039',
     });
     return () => {};
   }, []);

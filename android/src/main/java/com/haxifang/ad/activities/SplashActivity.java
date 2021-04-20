@@ -73,8 +73,20 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
         // 初始化自定义广告 View
         initView();
 
-        // 加载开屏广告
-        loadSplashAd();
+        // 绑定广告控制 Activity
+        AdBoss.hookActivity(this);
+
+        if (AdBoss.splashAd != null) {
+            // 直接展示预加载的开屏广告
+            showSplashAd();
+        } else {
+            // 加载并显示开屏广告
+            loadSplashAd(code_id, this::showSplashAd, () -> {
+                mHasLoaded = true;
+                goToMainActivity();
+            });
+        }
+
     }
 
     // 初始化开屏广告 View
@@ -119,7 +131,19 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
     }
 
     // 加载开屏广告方法
-    private void loadSplashAd() {
+    public static void loadSplashAd(String code_id, Runnable callback, Runnable goback) {
+
+        TTAdNative mTTAdNative;
+
+        if (AdBoss.TTAdSdk == null) {
+            // 广告 SDK 未初始化
+            WritableMap params = Arguments.createMap();
+            params.putString("onAdError", "广告 sdk init 异常");
+            sendEvent(TAG + "-onAdError", params);
+            return;
+        } else {
+            mTTAdNative = AdBoss.TTAdSdk;
+        }
 
         // 创建开屏广告请求参数 AdSlot ,具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
@@ -136,8 +160,7 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
             public void onError(int code, String message) {
                 // 广告渲染失败
                 Log.d(TAG, "开屏广告渲染失败:" + message);
-                mHasLoaded = true;
-//                showToast(message + " - " + code_id);
+                // showToast(message + " - " + code_id);
 
                 // 回调监听方法
                 WritableMap params = Arguments.createMap();
@@ -145,95 +168,29 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
                 sendEvent(TAG + "-onAdError", params);
 
                 // 关闭开屏广告
-                goToMainActivity();
+                goback.run();
             }
 
             @Override
             @MainThread
             public void onTimeout() {
                 // 开屏广告渲染超时
-                mHasLoaded = true;
-//                showToast("加载超时");
+                // showToast("加载超时");
                 // 回调监听方法
                 WritableMap params = Arguments.createMap();
                 params.putString("onAdError", "加载超时");
                 sendEvent(TAG + "-onAdError", params);
 
                 // 关闭开屏广告
-                goToMainActivity();
+                goback.run();
             }
 
             @Override
             @MainThread
             public void onSplashAdLoad(TTSplashAd ad) {
-                mHasLoaded = true;
-                mHandler.removeCallbacksAndMessages(null);
-                if (ad == null) {
-                    // 回调监听方法
-                    WritableMap params = Arguments.createMap();
-                    params.putString("onAdError", "未拉取到开屏广告");
-                    sendEvent(TAG + "-onAdError", params);
-
-                    // 未知错误获取到的广告对象为空，关闭广告
-                    goToMainActivity();
-                    return;
-                }
-
-                // 获取SplashView
-                View view = ad.getSplashView();
-                mSplashContainer.removeAllViews();
-
-                // 把SplashView 添加到ViewGroup中,注意开屏广告view：width >=70%屏幕宽；height >=50%屏幕宽
-                mSplashContainer.addView(view);
-
-                // 设置不开启开屏广告倒计时功能以及不显示跳过按钮,如果这么设置，您需要自定义倒计时逻辑
-                // ad.setNotAllowSdkCountdown();
-
-                // 设置SplashView的交互监听器
-                ad.setSplashInteractionListener(new TTSplashAd.AdInteractionListener() {
-
-                    @Override
-                    public void onAdClicked(View view, int type) {
-                        Log.d(TAG, "onAdClick");
-                        WritableMap params = Arguments.createMap();
-                        params.putBoolean("onAdClick", true);
-                        sendEvent(TAG + "-onAdClick", params);
-
-                        // showToast("开屏广告点击");
-                        goToMainActivity();
-                    }
-
-                    @Override
-                    public void onAdShow(View view, int type) {
-                        Log.d(TAG, "onAdShow");
-                        WritableMap params = Arguments.createMap();
-                        params.putBoolean("onAdShow", true);
-                        sendEvent(TAG + "-onAdShow", params);
-                        // showToast("开屏广告展示");
-                    }
-
-                    @Override
-                    public void onAdSkip() {
-                        Log.d(TAG, "onAdSkip");
-                        WritableMap params = Arguments.createMap();
-                        params.putBoolean("onAdSkip", true);
-                        sendEvent(TAG + "-onAdSkip", params);
-
-                        // showToast("开屏广告跳过");
-                        goToMainActivity();
-
-                    }
-
-                    @Override
-                    public void onAdTimeOver() {
-                        Log.d(TAG, "onAdTimeOver");
-                        // showToast("开屏广告倒计时结束");
-                        WritableMap params = Arguments.createMap();
-                        params.putBoolean("onAdClose", true);
-                        sendEvent(TAG + "-onAdClose", params);
-                        goToMainActivity();
-                    }
-                });
+                // 开屏广告加载成功，调用显示开屏广告
+                AdBoss.splashAd = ad;
+                callback.run();
             }
 
         }, AD_TIME_OUT);
@@ -241,13 +198,93 @@ public class SplashActivity extends AppCompatActivity implements WeakHandler.IHa
 
     }
 
+    private void showSplashAd() {
+
+        TTSplashAd ad = AdBoss.splashAd;
+        mHasLoaded = true;
+        mHandler.removeCallbacksAndMessages(null);
+        if (ad == null) {
+            // 回调监听方法
+            WritableMap params = Arguments.createMap();
+            params.putString("onAdError", "未拉取到开屏广告");
+            sendEvent(TAG + "-onAdError", params);
+
+            // 未知错误获取到的广告对象为空，关闭广告
+            goToMainActivity();
+            return;
+        }
+
+        // 清空加载成功的广告对象
+        AdBoss.splashAd = null;
+
+        // 获取SplashView
+        View view = ad.getSplashView();
+        mSplashContainer.removeAllViews();
+
+        // 把SplashView 添加到ViewGroup中,注意开屏广告view：width >=70%屏幕宽；height >=50%屏幕宽
+        mSplashContainer.addView(view);
+
+        // 设置不开启开屏广告倒计时功能以及不显示跳过按钮,如果这么设置，您需要自定义倒计时逻辑
+        // ad.setNotAllowSdkCountdown();
+
+        // 设置SplashView的交互监听器
+        ad.setSplashInteractionListener(new TTSplashAd.AdInteractionListener() {
+
+            @Override
+            public void onAdClicked(View view, int type) {
+                Log.d(TAG, "onAdClick");
+                WritableMap params = Arguments.createMap();
+                params.putBoolean("onAdClick", true);
+                sendEvent(TAG + "-onAdClick", params);
+
+                // showToast("开屏广告点击");
+                goToMainActivity();
+            }
+
+            @Override
+            public void onAdShow(View view, int type) {
+                Log.d(TAG, "onAdShow");
+                WritableMap params = Arguments.createMap();
+                params.putBoolean("onAdShow", true);
+                sendEvent(TAG + "-onAdShow", params);
+                // showToast("开屏广告展示");
+            }
+
+            @Override
+            public void onAdSkip() {
+                Log.d(TAG, "onAdSkip");
+                WritableMap params = Arguments.createMap();
+                params.putBoolean("onAdSkip", true);
+                sendEvent(TAG + "-onAdSkip", params);
+
+                // showToast("开屏广告跳过");
+                goToMainActivity();
+
+            }
+
+            @Override
+            public void onAdTimeOver() {
+                Log.d(TAG, "onAdTimeOver");
+                // showToast("开屏广告倒计时结束");
+                WritableMap params = Arguments.createMap();
+                params.putBoolean("onAdClose", true);
+                sendEvent(TAG + "-onAdClose", params);
+                goToMainActivity();
+            }
+        });
+    }
+
     // 关闭开屏广告方法
     private void goToMainActivity() {
+        if (AdBoss.rewardActivity == null) {
+            // 开屏广告控制活动未绑定
+            return;
+        }
         if (mSplashContainer != null) {
             mSplashContainer.removeAllViews();
         }
-        this.overridePendingTransition(0, 0); // 不要过渡动画
-        this.finish();
+        AdBoss.rewardActivity.overridePendingTransition(0, 0); // 不要过渡动画
+        AdBoss.rewardActivity.finish();
     }
 
     private void showToast(String msg) {

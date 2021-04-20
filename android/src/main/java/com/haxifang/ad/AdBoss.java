@@ -8,6 +8,7 @@ import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTFullScreenVideoAd;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
+import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.qq.e.comm.managers.GDTADManager;
@@ -23,7 +24,7 @@ public class AdBoss {
   public static String tx_appid; //腾讯
   public static String bd_appid; //百度
 
-  //头条广告init需要传的参数
+  // 头条广告init需要传的参数
   public static String userId = "";
   public static String appName = "穿山甲媒体APP";
   public static int rewardAmount = 1;
@@ -38,15 +39,16 @@ public class AdBoss {
   public static TTFullScreenVideoAd fullAd;
   public static TTNativeExpressAd feedAd;
   public static TTNativeExpressAd drawfeedAd;
+  public static TTSplashAd splashAd;
 
   // 存激励视频，全屏视频的回调
   public static Promise rewardPromise;
   public static Activity rewardActivity;
 
-  //信息流广告回调
+  // 信息流广告回调
   public static Promise feedPromise;
 
-  //激励视频类的状态
+  // 激励视频类的状态
   public static boolean is_show = false;
   public static boolean is_click = false;
   public static boolean is_close = false;
