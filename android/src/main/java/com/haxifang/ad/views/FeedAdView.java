@@ -247,7 +247,7 @@ public class FeedAdView extends RelativeLayout {
 
             }
             @Override
-            public void onSelected(int position, String value) {
+            public void onSelected(int position, String value, boolean enforce) {
                 // TToast.show(mContext, "点击 " + value);
                 // 用户选择不喜欢原因后，移除广告展示
                 mExpressContainer.removeAllViews();
@@ -257,11 +257,6 @@ public class FeedAdView extends RelativeLayout {
             @Override
             public void onCancel() {
                 // TToast.show(mContext, "点击取消 ");
-            }
-
-            @Override
-            public void onRefuse() {
-
             }
         });
     }
