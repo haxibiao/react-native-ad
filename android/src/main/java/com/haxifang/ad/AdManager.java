@@ -41,9 +41,19 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.tt_appid =
                 options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
 
-        runOnUiThread(
+		//init 必须主线程执行
+	    new android.os.Handler(android.os.Looper.getMainLooper()).post(new java.lang.Runnable() {
+			@Override
+			public void run() {
+				AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
+			}
+		});
+
+        
+		runOnUiThread(
                 () -> {
-                    AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
+                    //之前在这里执行init
+					// AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
 
                     // Bin：这里预加载穿山甲广告逻辑需要放在 sdk init 逻辑之后
 
