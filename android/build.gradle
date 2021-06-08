@@ -79,8 +79,12 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 	//加载开屏广告替换appIcon用
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
-	//加载广告   SDK aar
+	
+	//加载广告  SDK aar (剩余优量汇的) - 注意：新RN 安卓编译整在逐步淘汰这样npm下子项目加载本地aar的方式...
     compileOnly fileTree(dir: 'libs', include: ['*.aar'])
+
+	//加载广告  穿山甲 3.5.0.6 以后支持 gradle 方式  - 注意：安卓项目手动添加maven和对齐sdk 版本号
+	implementation 'com.pangle.cn:ads-sdk:3.6.1.4'
 }
 
 def configureReactNativePom(def pom) {
