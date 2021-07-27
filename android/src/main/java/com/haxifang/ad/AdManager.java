@@ -41,19 +41,9 @@ public class AdManager extends ReactContextBaseJavaModule {
         AdBoss.tt_appid =
                 options.hasKey("appid") ? options.getString("appid") : AdBoss.tt_appid;
 
-		//init 必须主线程执行
-	    new android.os.Handler(android.os.Looper.getMainLooper()).post(new java.lang.Runnable() {
-			@Override
-			public void run() {
-				AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
-			}
-		});
-
-        
-		runOnUiThread(
+        runOnUiThread(
                 () -> {
-                    //之前在这里执行init
-					// AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
+                    AdBoss.initSdk(reactAppContext, AdBoss.tt_appid);
 
                     // Bin：这里预加载穿山甲广告逻辑需要放在 sdk init 逻辑之后
 
@@ -120,12 +110,17 @@ public class AdManager extends ReactContextBaseJavaModule {
                 options.hasKey("tx_appid")
                         ? options.getString("tx_appid")
                         : AdBoss.tx_appid;
-        AdBoss.initTx(reactAppContext, AdBoss.tx_appid);
+        if (AdBoss.tx_appid != null) {
+            AdBoss.initTx(reactAppContext, AdBoss.tx_appid);
+        }
+
         AdBoss.bd_appid =
                 options.hasKey("bd_appid")
                         ? options.getString("bd_appid")
                         : AdBoss.bd_appid;
-        AdBoss.initBd(reactAppContext, AdBoss.bd_appid);
+        if (AdBoss.bd_appid != null) {
+            AdBoss.initBd(reactAppContext, AdBoss.bd_appid);
+        }
 
         // providers
         AdBoss.splash_provider =
