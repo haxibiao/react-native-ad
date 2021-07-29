@@ -84,7 +84,7 @@ dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 
 	//加载广告  穿山甲 3.5.0.6 以后支持 gradle 方式  - 注意：安卓项目手动添加maven和对齐sdk 版本号
-	implementation 'com.pangle.cn:ads-sdk:3.6.1.4'
+	// implementation 'com.pangle.cn:ads-sdk:3.6.1.4'
 }
 
 def configureReactNativePom(def pom) {

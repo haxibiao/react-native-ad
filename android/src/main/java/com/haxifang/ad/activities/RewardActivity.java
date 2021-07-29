@@ -93,9 +93,12 @@ public class RewardActivity extends Activity {
           fireEvent("onAdError", 1002, message);
         }
 
+        @Override
+        public void onRewardVideoCached() {}
+
         // 视频广告加载后，视频资源缓存到本地的回调，在此回调后，播放本地视频，流畅不阻塞。
         @Override
-        public void onRewardVideoCached() {
+        public void onRewardVideoCached(TTRewardVideoAd ad) {
           Log.d("reward Cached ", "穿山甲激励视频缓存成功");
           fireEvent("onAdVideoCached", 201, "穿山甲激励视频缓存成功");
         }
