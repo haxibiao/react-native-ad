@@ -17,6 +17,7 @@ import com.haxifang.ad.RewardVideo;
 import com.haxifang.ad.SplashAd;
 import com.haxifang.AdModule;
 import com.haxifang.ad.StreamViewManager;
+import com.haxifang.ad.TxFeedAdViewManager;
 
 
 public class AdPackage implements ReactPackage {
@@ -37,7 +38,8 @@ public class AdPackage implements ReactPackage {
         return Arrays.<ViewManager>asList(
                 new DrawFeedViewManager(reactContext),
                 new FeedAdViewManager(reactContext),
-                new StreamViewManager(reactContext)
+                new StreamViewManager(reactContext),
+                new TxFeedAdViewManager(reactContext)
         );
     }
 }
