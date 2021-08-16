@@ -16,6 +16,7 @@ type rewardInfo = {
     uid?: string; //头条穿山甲参数userId (目前安卓可用，可选);
     reward?: string; //头条穿山甲参数rewardName (目前安卓可用，可选)
     amount?: number; //头条穿山甲参数rewardAmount (目前安卓可用，可选)
+    provider?: '头条' | '百度' | '腾讯';
 };
 
 export default function (info: rewardInfo) {

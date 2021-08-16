@@ -11,6 +11,10 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
+import com.qq.e.ads.nativ.NativeExpressAD;
+import com.qq.e.ads.nativ.NativeExpressADView;
+import com.qq.e.ads.nativ.NativeExpressADView;
+import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.comm.managers.GDTADManager;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -40,6 +44,10 @@ public class AdBoss {
   public static TTNativeExpressAd feedAd;
   public static TTNativeExpressAd drawfeedAd;
   public static TTSplashAd splashAd;
+
+  // 缓存加载的腾讯广告数据
+  public static NativeExpressADView txFeedAd;
+  public static RewardVideoAD txRewardAd;
 
   // 存激励视频，全屏视频的回调
   public static Promise rewardPromise;
