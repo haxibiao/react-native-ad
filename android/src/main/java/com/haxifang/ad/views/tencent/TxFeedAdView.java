@@ -126,6 +126,7 @@ public class TxFeedAdView
       // 预加载视频素材，加载成功会回调mediaListener的onVideoCached方法，失败的话回调onVideoError方法errorCode为702。
       txFeedAdView.preloadVideo();
     } else {
+      mExpressContainer.addView(txFeedAdView);
       Log.e(TAG, "素材渲染:");
       // 图文情况:广告可见才会产生曝光，否则将无法产生收益。
       if (txFeedLoadCount < 3) {
@@ -177,7 +178,7 @@ public class TxFeedAdView
   @Override
   public void onRenderFail(NativeExpressADView nativeExpressADView) {
     Log.i(TAG, "onRenderFail");
-    onError("onRenderFail");
+    onAdError("onRenderFail");
   }
 
   @Override
@@ -185,11 +186,7 @@ public class TxFeedAdView
     Log.i(TAG, "onRenderSuccess");
     // 返回view的宽高 单位 dp
     // TToast.show(mContext, "渲染成功");
-    // 在渲染成功回调时展示广告，提升体验
-    RelativeLayout mExpressContainer = findViewById(R.id.feed_container);
-    if (mExpressContainer != null) {
-      mExpressContainer.addView(txFeedAdView);
-    }
+
     if (txFeedAdView.getMeasuredWidth() > 0) {
       onLayoutChanged(
         txFeedAdView.getMeasuredWidth(),
@@ -351,16 +348,7 @@ public class TxFeedAdView
     // event.putInt("height", height);
     // reactContext.getJSModule(RCTEventEmitter.class)
     //   .receiveEvent(getId(), "onLayoutChanged", event);
-  }
-
-  // 外部事件..
-
-  public void onError(String message) {
-    Log.d(TAG, "onError: " + message + ", " + message);
-    // WritableMap event = Arguments.createMap();
-    // event.putString("message", message);
-    // reactContext.getJSModule(RCTEventEmitter.class)
-    //   .receiveEvent(getId(), "onAdError", event);
+    onAdLayout((int) width, (int) height);
   }
 
   @Override
@@ -373,6 +361,41 @@ public class TxFeedAdView
         adError.getErrorMsg()
       )
     );
-    onError(adError.getErrorMsg());
+    onAdError(adError.getErrorMsg());
+  }
+
+  // 外部事件..
+  public void onAdError(String message) {
+    WritableMap event = Arguments.createMap();
+    event.putString("message", message);
+    reactContext
+      .getJSModule(RCTEventEmitter.class)
+      .receiveEvent(getId(), "onAdError", event);
+  }
+
+  public void onAdClick() {
+    WritableMap event = Arguments.createMap();
+    reactContext
+      .getJSModule(RCTEventEmitter.class)
+      .receiveEvent(getId(), "onAdClick", event);
+  }
+
+  public void onAdClose(String reason) {
+    Log.d(TAG, "onAdClose: " + reason);
+    WritableMap event = Arguments.createMap();
+    event.putString("reason", reason);
+    reactContext
+      .getJSModule(RCTEventEmitter.class)
+      .receiveEvent(getId(), "onAdClose", event);
+  }
+
+  public void onAdLayout(int width, int height) {
+    Log.d(TAG, "onAdLayout: " + width + ", " + height);
+    WritableMap event = Arguments.createMap();
+    event.putInt("width", width);
+    event.putInt("height", height);
+    reactContext
+      .getJSModule(RCTEventEmitter.class)
+      .receiveEvent(getId(), "onAdLayout", event);
   }
 }
