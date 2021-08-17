@@ -259,7 +259,7 @@ public class RewardActivity
   }
 
   @Override
-  public void onRewardonReward() {}
+  public void onReward() {}
 
   public void onReward(Map<String, Object> map) {
     AdBoss.is_reward = true;
