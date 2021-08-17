@@ -3,7 +3,9 @@ package com.haxifang.ad.activities.tencent;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import com.haxifang.R;
@@ -13,12 +15,15 @@ import com.haxifang.ad.utils.TToast;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;
+import java.util.Map;
 
 /**
  * 腾讯激励视频广告
  */
 
-public class RewardActivity extends Activity {
+public class RewardActivity
+  extends Activity
+  implements RewardVideoADListener, AdapterView.OnItemSelectedListener {
   static String TAG = "TXRewardActivity";
 
   @Override
@@ -49,101 +54,101 @@ public class RewardActivity extends Activity {
       new RewardVideoAD(
         this,
         codeId,
-        new RewardVideoADListener() {
+        // new RewardVideoADListener() {
 
-          @Override
-          public void onADLoad() {
-            String msg =
-              "腾讯激励视频加载 onADLoad eCPM = " +
-              AdBoss.txRewardAd.getECPM() +
-              " , eCPMLevel = " +
-              AdBoss.txRewardAd.getECPMLevel();
-            Log.v(TAG, msg);
-            showAd();
-          }
+        //   @Override
+        //   public void onADLoad() {
+        //     String msg =
+        //       "腾讯激励视频加载 onADLoad eCPM = " +
+        //       AdBoss.txRewardAd.getECPM() +
+        //       " , eCPMLevel = " +
+        //       AdBoss.txRewardAd.getECPMLevel();
+        //     Log.v(TAG, msg);
+        //     showAd();
+        //   }
 
-          @Override
-          public void onVideoCached() {
-            // 视频素材缓存成功，可在此回调后进行广告展示
-            String msg = "onVideoCached: 视频素材缓存成功";
-            Log.d(TAG, msg);
-          }
+        //   @Override
+        //   public void onVideoCached() {
+        //     // 视频素材缓存成功，可在此回调后进行广告展示
+        //     String msg = "onVideoCached: 视频素材缓存成功";
+        //     Log.d(TAG, msg);
+        //   }
 
-          @Override
-          public void onADShow() {
-            // 激励视频广告页面开始展示
-            String msg = "onADShow: 激励视频广告页面开始展示";
-            Log.d(TAG, msg);
-            AdBoss.is_show = true;
-          }
+        //   @Override
+        //   public void onADShow() {
+        //     // 激励视频广告页面开始展示
+        //     String msg = "onADShow: 激励视频广告页面开始展示";
+        //     Log.d(TAG, msg);
+        //     AdBoss.is_show = true;
+        //   }
 
-          @Override
-          public void onADExpose() {
-            // 激励视频广告曝光
-            String msg = "onADExpose: 激励视频广告曝光 ";
-            Log.d(TAG, msg);
-            AdBoss.is_show = true;
-          }
+        //   @Override
+        //   public void onADExpose() {
+        //     // 激励视频广告曝光
+        //     String msg = "onADExpose: 激励视频广告曝光 ";
+        //     Log.d(TAG, msg);
+        //     AdBoss.is_show = true;
+        //   }
 
-          @Override
-          public void onReward() {
-            // 激励视频触发激励（观看视频大于一定时长或者视频播放完毕）
-            AdBoss.is_reward = true;
-            String msg = "onReward: 激励视频触发激励";
-            Log.d(TAG, msg);
-          }
+        //   @Override
+        //   public void onADClick() {
+        //     // 激励视频广告被点击
+        //     AdBoss.is_click = true;
+        //     Log.d(TAG, "onADClick: ");
+        //   }
 
-          @Override
-          public void onADClick() {
-            // 激励视频广告被点击
-            AdBoss.is_click = true;
-            Log.d(TAG, "onADClick: ");
-          }
+        //   @Override
+        //   public void onVideoComplete() {
+        //     // 激励视频播放完毕
+        //     AdBoss.is_show = true;
+        //     String msg = "腾讯激励视频播放完毕";
+        //     Log.d(TAG, msg);
+        //     // TToast.show(_this, msg);
+        //   }
 
-          @Override
-          public void onVideoComplete() {
-            // 激励视频播放完毕
-            AdBoss.is_show = true;
-            String msg = "腾讯激励视频播放完毕";
-            Log.d(TAG, msg);
-            TToast.show(_this, msg);
-          }
+        //   @Override
+        //   public void onADClose() {
+        //     // 激励视频广告被关闭
+        //     AdBoss.is_close = true;
+        //     Log.d(TAG, "onADClose: ");
+        //     AdBoss.getRewardResult();
+        //     if (AdBoss.rewardActivity != null) {
+        //       AdBoss.rewardActivity.finish();
+        //     }
+        //   }
 
-          @Override
-          public void onADClose() {
-            // 激励视频广告被关闭
-            AdBoss.is_close = true;
-            Log.d(TAG, "onADClose: ");
-            AdBoss.getRewardResult();
-            if (AdBoss.rewardActivity != null) {
-              AdBoss.rewardActivity.finish();
-            }
-          }
+        //   @Override
+        //   public void onError(AdError adError) {
+        //     String message =
+        //       adError.getErrorCode() +
+        //       " 加载腾讯激励视频失败:" +
+        //       adError.getErrorMsg();
+        //     Log.e(TAG, message);
+        //     // AdBoss.rewardPromise.reject(
+        //     //   "{\"ad_error_msg\": \"" + adError.getErrorMsg() + "\"}"
+        //     // );
+        //     if (AdBoss.rewardActivity != null) {
+        //       AdBoss.rewardActivity.finish();
+        //     }
+        //     // _this.runOnUiThread(
+        //     //   () -> {
+        //     //     TToast.show(_this, message);
+        //     //     String msg = "切头条激励视频...";
+        //     //     Log.d(TAG, "onError: " + msg);
+        //     //     TToast.show(_this, msg, Toast.LENGTH_LONG);
+        //     //     RewardVideo.startTT(AdBoss.codeid_reward_video);
+        //     //   }
+        //     // );
+        //   }
 
-          @Override
-          public void onError(AdError adError) {
-            String message =
-              adError.getErrorCode() +
-              " 加载腾讯激励视频失败:" +
-              adError.getErrorMsg();
-            Log.e(TAG, message);
-            // AdBoss.rewardPromise.reject(
-            //   "{\"ad_error_msg\": \"" + adError.getErrorMsg() + "\"}"
-            // );
-            // if (AdBoss.rewardActivity != null) {
-            //   AdBoss.rewardActivity.finish();
-            // }
-            // _this.runOnUiThread(
-            //   () -> {
-            //     TToast.show(_this, message);
-            //     String msg = "切头条激励视频...";
-            //     Log.d(TAG, "onError: " + msg);
-            //     TToast.show(_this, msg, Toast.LENGTH_LONG);
-            //     RewardVideo.startTT(AdBoss.codeid_reward_video);
-            //   }
-            // );
-          }
-        },
+        //     @Override
+        //     public void onRewardonReward() {
+        //         AdBoss.is_reward = true;
+        //         String msg = "onReward: 激励视频触发激励";
+        //         Log.d(TAG, msg);
+        //     }
+        // },
+        this,
         true
       );
 
@@ -169,4 +174,107 @@ public class RewardActivity extends Activity {
       TToast.show(this, msg);
     }
   }
+
+  @Override
+  public void onADLoad() {
+    String msg =
+      "腾讯激励视频加载 onADLoad eCPM = " +
+      AdBoss.txRewardAd.getECPM() +
+      " , eCPMLevel = " +
+      AdBoss.txRewardAd.getECPMLevel();
+    Log.v(TAG, msg);
+    showAd();
+  }
+
+  @Override
+  public void onVideoCached() {
+    // 视频素材缓存成功，可在此回调后进行广告展示
+    String msg = "onVideoCached: 视频素材缓存成功";
+    Log.d(TAG, msg);
+  }
+
+  @Override
+  public void onADShow() {
+    // 激励视频广告页面开始展示
+    String msg = "onADShow: 激励视频广告页面开始展示";
+    Log.d(TAG, msg);
+    AdBoss.is_show = true;
+  }
+
+  @Override
+  public void onADExpose() {
+    // 激励视频广告曝光
+    String msg = "onADExpose: 激励视频广告曝光 ";
+    Log.d(TAG, msg);
+    AdBoss.is_show = true;
+  }
+
+  @Override
+  public void onADClick() {
+    // 激励视频广告被点击
+    AdBoss.is_click = true;
+    Log.d(TAG, "onADClick: ");
+  }
+
+  @Override
+  public void onVideoComplete() {
+    // 激励视频播放完毕
+    AdBoss.is_show = true;
+    String msg = "腾讯激励视频播放完毕";
+    Log.d(TAG, msg);
+    // TToast.show(_this, msg);
+  }
+
+  @Override
+  public void onADClose() {
+    // 激励视频广告被关闭
+    AdBoss.is_close = true;
+    Log.d(TAG, "onADClose: ");
+    AdBoss.getRewardResult();
+    if (AdBoss.rewardActivity != null) {
+      AdBoss.rewardActivity.finish();
+    }
+  }
+
+  @Override
+  public void onError(AdError adError) {
+    String message =
+      adError.getErrorCode() + " 加载腾讯激励视频失败:" + adError.getErrorMsg();
+    Log.e(TAG, message);
+    // AdBoss.rewardPromise.reject(
+    //   "{\"ad_error_msg\": \"" + adError.getErrorMsg() + "\"}"
+    // );
+    if (AdBoss.rewardActivity != null) {
+      AdBoss.rewardActivity.finish();
+    }
+    // _this.runOnUiThread(
+    //   () -> {
+    //     TToast.show(_this, message);
+    //     String msg = "切头条激励视频...";
+    //     Log.d(TAG, "onError: " + msg);
+    //     TToast.show(_this, msg, Toast.LENGTH_LONG);
+    //     RewardVideo.startTT(AdBoss.codeid_reward_video);
+    //   }
+    // );
+  }
+
+  @Override
+  public void onRewardonReward() {}
+
+  public void onReward(Map<String, Object> map) {
+    AdBoss.is_reward = true;
+    String msg = "onReward: 激励视频触发激励";
+    Log.d(TAG, msg);
+  }
+
+  @Override
+  public void onItemSelected(
+    AdapterView<?> parent,
+    View view,
+    int position,
+    long id
+  ) {}
+
+  @Override
+  public void onNothingSelected(AdapterView<?> parent) {}
 }
