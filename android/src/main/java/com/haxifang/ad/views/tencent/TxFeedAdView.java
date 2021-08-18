@@ -74,10 +74,6 @@ public class TxFeedAdView
   }
 
   void showAd() {
-    if (AdBoss.TTAdSdk == null) {
-      Log.d(TAG, "AdBoss 还没初始化完成 with appid " + AdBoss.tt_appid);
-      return;
-    }
     if (_codeId == null) {
       Log.d(TAG, "loadStreamAd: 属性还不完整 _codeId=" + _codeId);
       return;
@@ -98,7 +94,7 @@ public class TxFeedAdView
     tx_nativeExpressAD =
       new NativeExpressAD(
         mContext,
-        new ADSize(ADSize.FULL_WIDTH, ADSize.AUTO_HEIGHT),
+        new ADSize(_expectedWidth, ADSize.AUTO_HEIGHT),
         _codeId,
         this
       );
@@ -187,7 +183,7 @@ public class TxFeedAdView
     // 返回view的宽高 单位 dp
     // TToast.show(mContext, "渲染成功");
 
-    if (txFeedAdView.getMeasuredWidth() > 0) {
+    if (txFeedAdView.getMeasuredHeight() > 0) {
       onLayoutChanged(
         txFeedAdView.getMeasuredWidth(),
         txFeedAdView.getMeasuredHeight()
