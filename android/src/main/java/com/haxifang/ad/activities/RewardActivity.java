@@ -36,6 +36,13 @@ public class RewardActivity extends Activity {
     Bundle extras = getIntent().getExtras();
     String codeId = extras.getString("codeId");
 
+    if (AdBoss.TTAdSdk == null) {
+      // TTAdSdk 未 init，直接跳出加载，避免导致空异常
+      fireEvent("onAdError", "TTAdSdk 未 init");
+      AdBoss.rewardActivity.finish();
+      return;
+    }
+
     // 开始加载广告，如果已用缓存的展示过，给下次展示激励视频提前缓存广告
     loadAd(
       codeId,
