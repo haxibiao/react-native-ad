@@ -38,7 +38,7 @@ public class RewardActivity extends Activity {
 
     if (AdBoss.TTAdSdk == null) {
       // TTAdSdk 未 init，直接跳出加载，避免导致空异常
-      fireEvent("onAdError", "TTAdSdk 未 init");
+      fireEvent("onAdError", 500, "TTAdSdk 未 init");
       AdBoss.rewardActivity.finish();
       return;
     }
@@ -79,6 +79,7 @@ public class RewardActivity extends Activity {
       .setUserID(AdBoss.userId) // 用户id,必传参数
       .setMediaExtra("media_extra") // 附加参数，可选
       .setOrientation(TTAdConstant.VERTICAL) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
+      .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP)
       .build();
 
     //FIXME:  穿山甲需要全面替换 express 模式

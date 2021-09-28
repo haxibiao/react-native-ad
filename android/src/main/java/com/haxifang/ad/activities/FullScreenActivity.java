@@ -76,6 +76,7 @@ public class FullScreenActivity extends Activity {
           ? TTAdConstant.HORIZONTAL
           : TTAdConstant.VERTICAL
       ) // 必填参数，期望视频的播放方向：TTAdConstant.HORIZONTAL 或 TTAdConstant.VERTICAL
+      .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP)
       .build();
 
     // 请求广告
