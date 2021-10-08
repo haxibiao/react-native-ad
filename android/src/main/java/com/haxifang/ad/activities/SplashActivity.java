@@ -164,6 +164,7 @@ public class SplashActivity
       .setSupportDeepLink(true)
       .setImageAcceptedSize(1080, 1920)
       .setDownloadType(TTAdConstant.DOWNLOAD_TYPE_POPUP)
+      .setSplashButtonType(TTAdConstant.SPLASH_BUTTON_TYPE_DOWNLOAD_BAR)
       .build();
 
     // 请求广告，调用开屏广告异步请求接口，对请求回调的广告作渲染处理
