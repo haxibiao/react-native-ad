@@ -13,6 +13,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
+import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.comm.managers.GDTADManager;
 import java.util.concurrent.ArrayBlockingQueue;
 
