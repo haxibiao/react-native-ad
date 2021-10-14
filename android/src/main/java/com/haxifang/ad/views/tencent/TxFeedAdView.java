@@ -19,6 +19,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.haxifang.R;
 import com.haxifang.ad.AdBoss;
 import com.haxifang.ad.utils.Utils;
+import com.qq.e.ads.cfg.DownAPPConfirmPolicy;
 import com.qq.e.ads.cfg.VideoOption;
 import com.qq.e.ads.nativ.ADSize;
 import com.qq.e.ads.nativ.NativeExpressAD;
@@ -138,13 +139,19 @@ public class TxFeedAdView
   }
 
   @Override
-  public void onADClicked(NativeExpressADView nativeExpressADView) {}
+  public void onADClicked(NativeExpressADView nativeExpressADView) {
+    // mExpressContainer.removeAllViews();
+    onAdClick();
+  }
 
   @Override
   public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {}
 
   @Override
-  public void onADClosed(NativeExpressADView nativeExpressADView) {}
+  public void onADClosed(NativeExpressADView nativeExpressADView) {
+    onAdClose();
+    mExpressContainer.removeAllViews();
+  }
 
   @Override
   public void onADExposure(NativeExpressADView nativeExpressADView) {}
@@ -183,14 +190,23 @@ public class TxFeedAdView
     // 返回view的宽高 单位 dp
     // TToast.show(mContext, "渲染成功");
 
-    if (txFeedAdView.getMeasuredHeight() > 0) {
-      onLayoutChanged(
-        txFeedAdView.getMeasuredWidth(),
-        txFeedAdView.getMeasuredHeight()
-      );
-    } else {
-      onLayoutChanged(_expectedWidth, 220);
-    }
+    txFeedAdView.post(
+      new Runnable() {
+
+        @Override
+        public void run() {
+          //单位为px，传给RN需要转换单位使用
+          if (txFeedAdView.getMeasuredHeight() > 0) {
+            onLayoutChanged(
+              _expectedWidth,
+              px2dip(txFeedAdView.getMeasuredHeight())
+            );
+          } else {
+            onLayoutChanged(_expectedWidth, 220);
+          }
+        }
+      }
+    );
   }
 
   /**
@@ -274,10 +290,13 @@ public class TxFeedAdView
       Log.i(TAG, "onVideoCached");
       // 视频素材加载完成，此时展示视频广告不会有进度条。
       // 广告可见才会产生曝光，否则将无法产生收益。
+
+      if (mExpressContainer.getChildCount() > 0) {
+        mExpressContainer.removeAllViews();
+      }
       mExpressContainer.addView(txFeedAdView);
       txFeedAdView.render();
-
-      onLayoutChanged(adView.getMeasuredWidth(), 220);
+      // onLayoutChanged(adView.getMeasuredWidth(), adView.getMeasuredHeight());
     }
 
     @Override
@@ -376,10 +395,10 @@ public class TxFeedAdView
       .receiveEvent(getId(), "onAdClick", event);
   }
 
-  public void onAdClose(String reason) {
-    Log.d(TAG, "onAdClose: " + reason);
+  public void onAdClose() {
+    Log.d(TAG, "onAdClose: ");
     WritableMap event = Arguments.createMap();
-    event.putString("reason", reason);
+
     reactContext
       .getJSModule(RCTEventEmitter.class)
       .receiveEvent(getId(), "onAdClose", event);
@@ -393,5 +412,10 @@ public class TxFeedAdView
     reactContext
       .getJSModule(RCTEventEmitter.class)
       .receiveEvent(getId(), "onAdLayout", event);
+  }
+
+  public int px2dip(float pxValue) {
+    final float scale = reactContext.getResources().getDisplayMetrics().density;
+    return (int) (pxValue / scale + 0.5f);
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { requireNativeComponent, StyleSheet, ViewStyle } from 'react-native';
+import { requireNativeComponent, PixelRatio, ViewStyle } from 'react-native';
 
 const FeedAdComponent = requireNativeComponent('TxFeedAd');
 export interface FeedAdProps {
@@ -19,6 +19,7 @@ const TxFeedAd = (props: FeedAdProps) => {
     const [height, setHeight] = React.useState(0);
     // FeedAd是否显示，外部和内部均可控制，外部visible、内部closed
     if (!visible || closed) return null;
+
     return (
         <FeedAdComponent
             codeid={codeid}
@@ -38,7 +39,7 @@ const TxFeedAd = (props: FeedAdProps) => {
             }}
             onAdLayout={(e: any) => {
                 if (e.nativeEvent.height) {
-                    setHeight(e.nativeEvent.height + 10);
+                    setHeight(e.nativeEvent.height + 30);
                     onAdLayout && onAdLayout(e.nativeEvent);
                 }
             }}
