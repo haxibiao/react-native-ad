@@ -1,7 +1,7 @@
 {
     "name": "react-native-ad",
     "title": "react-native 广告联盟SDK",
-    "version": "1.1.9",
+    "version": "1.2.2",
     "description": "给rn封装一些常用的广告平台的 sdk，头条穿山甲，腾讯广点通，百度百青藤等广告模块...",
     "main": "index.ts",
     "scripts": {
