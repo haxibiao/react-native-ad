@@ -81,7 +81,7 @@ public class RewardVideo extends ReactContextBaseJavaModule {
     if (ac != null) {
       ac.runOnUiThread(
         () -> {
-          TToast.show(mContext, message);
+          // TToast.show(mContext, message);
           Intent intent = new Intent(
             mContext,
             com.haxifang.ad.activities.tencent.RewardActivity.class

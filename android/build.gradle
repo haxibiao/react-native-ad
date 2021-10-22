@@ -85,6 +85,7 @@ dependencies {
 
 	//加载广告  穿山甲 3.5.0.6 以后支持 gradle 方式  - 注意：安卓项目手动添加maven和对齐sdk 版本号
 	implementation 'com.pangle.cn:ads-sdk:3.9.0.5'
+    implementation 'com.qq.e.union:union:+' // 普通版本
 }
 
 def configureReactNativePom(def pom) {

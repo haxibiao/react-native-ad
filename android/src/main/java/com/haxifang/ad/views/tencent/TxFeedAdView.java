@@ -31,9 +31,7 @@ import com.qq.e.comm.util.AdError;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TxFeedAdView
-  extends RelativeLayout
-  implements NativeExpressAD.NativeExpressADListener {
+public class TxFeedAdView extends RelativeLayout {
   public static final String TAG = "TxFeedAdView";
   private String _codeId = null;
   protected Context mContext;
@@ -97,7 +95,91 @@ public class TxFeedAdView
         mContext,
         new ADSize(_expectedWidth, ADSize.AUTO_HEIGHT),
         _codeId,
-        this
+        new NativeExpressAD.NativeExpressADListener() {
+
+          @Override
+          public void onNoAD(AdError error) {
+            // mExpressContainer.removeAllViews();
+
+          }
+
+          @Override
+          public void onADClicked(NativeExpressADView nativeExpressADView) {
+            // mExpressContainer.removeAllViews();
+            onAdClick();
+          }
+
+          @Override
+          public void onADCloseOverlay(
+            NativeExpressADView nativeExpressADView
+          ) {}
+
+          @Override
+          public void onADClosed(NativeExpressADView nativeExpressADView) {
+            onAdClose();
+            mExpressContainer.removeAllViews();
+          }
+
+          @Override
+          public void onADExposure(NativeExpressADView nativeExpressADView) {}
+
+          @Override
+          public void onADLeftApplication(
+            NativeExpressADView nativeExpressADView
+          ) {}
+
+          // 腾讯信息流广告需要监听的...
+          @Override
+          public void onADLoaded(List<NativeExpressADView> adList) {
+            Log.i(TAG, "onADLoaded: " + adList.size());
+
+            txFeedAdView = adList.get(0);
+
+            //AdBoss 主动 load时 会缓存腾讯FeedAd
+            //        AdBoss.txFeedAdView = txFeedAdView;
+
+            Log.i(TAG, "onADLoaded, video info: " + getAdInfo(txFeedAdView));
+
+            //主动加载成功的，要显示
+            _showTxFeedAd(txFeedAdView);
+          }
+
+          @Override
+          public void onADOpenOverlay(
+            NativeExpressADView nativeExpressADView
+          ) {}
+
+          @Override
+          public void onRenderFail(NativeExpressADView nativeExpressADView) {
+            Log.i(TAG, "onRenderFail");
+            onAdError("onRenderFail");
+          }
+
+          @Override
+          public void onRenderSuccess(NativeExpressADView txFeedAdView) {
+            Log.i(TAG, "onRenderSuccess");
+            // 返回view的宽高 单位 dp
+            // TToast.show(mContext, "渲染成功");
+
+            txFeedAdView.post(
+              new Runnable() {
+
+                @Override
+                public void run() {
+                  //单位为px，传给RN需要转换单位使用
+                  if (txFeedAdView.getMeasuredHeight() > 0) {
+                    onLayoutChanged(
+                      _expectedWidth,
+                      px2dip(txFeedAdView.getMeasuredHeight())
+                    );
+                  } else {
+                    onLayoutChanged(_expectedWidth, 220);
+                  }
+                }
+              }
+            );
+          }
+        }
       );
     tx_nativeExpressAD.loadAD(1);
   }
@@ -136,77 +218,6 @@ public class TxFeedAdView
         }
       }
     }
-  }
-
-  @Override
-  public void onADClicked(NativeExpressADView nativeExpressADView) {
-    // mExpressContainer.removeAllViews();
-    onAdClick();
-  }
-
-  @Override
-  public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {}
-
-  @Override
-  public void onADClosed(NativeExpressADView nativeExpressADView) {
-    onAdClose();
-    mExpressContainer.removeAllViews();
-  }
-
-  @Override
-  public void onADExposure(NativeExpressADView nativeExpressADView) {}
-
-  @Override
-  public void onADLeftApplication(NativeExpressADView nativeExpressADView) {}
-
-  // 腾讯信息流广告需要监听的...
-  @Override
-  public void onADLoaded(List<NativeExpressADView> adList) {
-    Log.i(TAG, "onADLoaded: " + adList.size());
-
-    txFeedAdView = adList.get(0);
-
-    //AdBoss 主动 load时 会缓存腾讯FeedAd
-    //        AdBoss.txFeedAdView = txFeedAdView;
-
-    Log.i(TAG, "onADLoaded, video info: " + getAdInfo(txFeedAdView));
-
-    //主动加载成功的，要显示
-    _showTxFeedAd(txFeedAdView);
-  }
-
-  @Override
-  public void onADOpenOverlay(NativeExpressADView nativeExpressADView) {}
-
-  @Override
-  public void onRenderFail(NativeExpressADView nativeExpressADView) {
-    Log.i(TAG, "onRenderFail");
-    onAdError("onRenderFail");
-  }
-
-  @Override
-  public void onRenderSuccess(NativeExpressADView txFeedAdView) {
-    Log.i(TAG, "onRenderSuccess");
-    // 返回view的宽高 单位 dp
-    // TToast.show(mContext, "渲染成功");
-
-    txFeedAdView.post(
-      new Runnable() {
-
-        @Override
-        public void run() {
-          //单位为px，传给RN需要转换单位使用
-          if (txFeedAdView.getMeasuredHeight() > 0) {
-            onLayoutChanged(
-              _expectedWidth,
-              px2dip(txFeedAdView.getMeasuredHeight())
-            );
-          } else {
-            onLayoutChanged(_expectedWidth, 220);
-          }
-        }
-      }
-    );
   }
 
   /**
@@ -364,19 +375,6 @@ public class TxFeedAdView
     // reactContext.getJSModule(RCTEventEmitter.class)
     //   .receiveEvent(getId(), "onLayoutChanged", event);
     onAdLayout((int) width, (int) height);
-  }
-
-  @Override
-  public void onNoAD(AdError adError) {
-    Log.i(
-      TAG,
-      String.format(
-        "onNoAD, error code: %d, error msg: %s",
-        adError.getErrorCode(),
-        adError.getErrorMsg()
-      )
-    );
-    onAdError(adError.getErrorMsg());
   }
 
   // 外部事件..

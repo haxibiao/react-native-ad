@@ -14,7 +14,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
-import com.qq.e.comm.managers.GDTADManager;
+import com.qq.e.comm.managers.GDTAdSdk;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -186,7 +186,7 @@ public class AdBoss {
     Log.d(TAG, "tx_appid:" + tx_appid);
 
     // 通过调用此方法初始化 SDK。如果需要在多个进程拉取广告，每个进程都需要初始化 SDK。
-    GDTADManager.getInstance().initWith(context, tx_appid);
+    GDTAdSdk.init(context, tx_appid);
     // 初始化TX sdk   无需额外操作...
   }
 

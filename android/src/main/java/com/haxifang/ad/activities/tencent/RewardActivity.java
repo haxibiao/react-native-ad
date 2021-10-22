@@ -259,8 +259,6 @@ public class RewardActivity
   }
 
   @Override
-  public void onReward() {}
-
   public void onReward(Map<String, Object> map) {
     AdBoss.is_reward = true;
     String msg = "onReward: 激励视频触发激励";
