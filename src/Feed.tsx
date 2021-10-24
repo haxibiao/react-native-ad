@@ -1,8 +1,9 @@
 import React from 'react';
 import { requireNativeComponent, StyleSheet, ViewStyle } from 'react-native';
-
 const FeedAdComponent = requireNativeComponent('FeedAd');
+import TxFeed from './TxFeed';
 export interface FeedAdProps {
+    provider?: string;
     codeid: string;
     style?: ViewStyle;
     adWidth?: number;
@@ -14,12 +15,27 @@ export interface FeedAdProps {
 }
 
 const FeedAd = (props: FeedAdProps) => {
-    const { codeid, style, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick, visible = true } = props;
+    const {
+        provider,
+        codeid,
+        style,
+        adWidth = 150,
+        onAdLayout,
+        onAdError,
+        onAdClose,
+        onAdClick,
+        visible = true,
+    } = props;
     const [closed, setClosed] = React.useState(false);
     const [height, setHeight] = React.useState(0);
     // FeedAd是否显示，外部和内部均可控制，外部visible、内部closed
     if (!visible || closed) return null;
-    return ( 
+
+    if (provider === '腾讯') {
+        return <TxFeed codeid={codeid} adWidth={adWidth} />;
+    }
+
+    return (
         <FeedAdComponent
             codeid={codeid}
             // 里面素材的宽度，减30是有些情况下，里面素材过宽贴边显示不全
