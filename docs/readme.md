@@ -4,7 +4,7 @@
 
 > 广告平台对接文档地址：<https://ad.oceanengine.com/union/media/union/download>
 
-> 当前 Android 集成广告平台 SDK 版本：v3.5.5.0
+> 当前 Android 集成广告平台 SDK 版本：v3.9.0.5
 
 > 当前 IOS 集成广告平台 SDK 版本：v3.4.2.3
 
