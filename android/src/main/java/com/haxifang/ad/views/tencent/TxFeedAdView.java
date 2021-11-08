@@ -38,6 +38,7 @@ public class TxFeedAdView extends RelativeLayout {
   protected ReactContext reactContext;
   private boolean adShowing = false;
   private int _expectedWidth = 0;
+  private int _expectedHeight = 0;
   protected final RelativeLayout mExpressContainer;
   //避免腾讯重复加载死循环
   private int txFeedLoadCount = 0;
@@ -59,8 +60,12 @@ public class TxFeedAdView extends RelativeLayout {
 
   public void setWidth(int width) {
     _expectedWidth = width;
+    // showAd();
+  }
 
-    showAd();
+  public void setHeight(int height) {
+    _expectedHeight = height;
+    // showAd();
   }
 
   public void setCodeId(String codeId) {
@@ -90,10 +95,14 @@ public class TxFeedAdView extends RelativeLayout {
   NativeExpressAD tx_nativeExpressAD;
 
   private void loadTxFeedAd() {
+    Log.i(TAG, "loadTxFeedAd: ");
     tx_nativeExpressAD =
       new NativeExpressAD(
         mContext,
-        new ADSize(_expectedWidth, ADSize.AUTO_HEIGHT),
+        new ADSize(
+          _expectedWidth,
+          _expectedHeight > 0 ? _expectedHeight : ADSize.AUTO_HEIGHT
+        ),
         _codeId,
         new NativeExpressAD.NativeExpressADListener() {
 
@@ -181,6 +190,13 @@ public class TxFeedAdView extends RelativeLayout {
           }
         }
       );
+    tx_nativeExpressAD.setVideoOption(
+      new VideoOption.Builder()
+        .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.WIFI) // WIFI 环境下可以自动播放视频
+        .setAutoPlayMuted(true) // 自动播放时为静音
+        .build()
+    ); //
+    tx_nativeExpressAD.setVideoPlayPolicy(VideoOption.VideoPlayPolicy.AUTO);
     tx_nativeExpressAD.loadAD(1);
   }
 
@@ -208,14 +224,13 @@ public class TxFeedAdView extends RelativeLayout {
       mExpressContainer.addView(txFeedAdView);
       Log.e(TAG, "素材渲染:");
       // 图文情况:广告可见才会产生曝光，否则将无法产生收益。
-      if (txFeedLoadCount < 3) {
-        try {
-          txFeedAdView.render();
-        } catch (Exception e) {
-          Log.e(TAG, "腾讯的FeedAd居然异常:" + e.getMessage());
-          //只好重新加载,别死循环..
-          loadTxFeedAd();
-        }
+
+      try {
+        txFeedAdView.render();
+      } catch (Exception e) {
+        Log.e(TAG, "腾讯的FeedAd居然异常:" + e.getMessage());
+        //只好重新加载,别死循环..
+        loadTxFeedAd();
       }
     }
   }

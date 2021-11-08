@@ -66,6 +66,11 @@ public class TxFeedAdViewManager extends ViewGroupManager<TxFeedAdView> {
     view.setWidth(adWidth);
   }
 
+  @ReactProp(name = "adHeight")
+  public void setAdHeight(TxFeedAdView view, @Nullable int adHeight) {
+    view.setHeight(adHeight);
+  }
+
   @Override
   public Map getExportedCustomBubblingEventTypeConstants() {
     return MapBuilder

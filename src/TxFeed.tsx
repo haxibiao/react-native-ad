@@ -6,6 +6,7 @@ export interface FeedAdProps {
     codeid: string;
     style?: ViewStyle;
     adWidth?: number;
+    adHiehgt?: number;
     visible?: boolean;
     onAdLayout?: Function;
     onAdError?: Function;
@@ -14,7 +15,17 @@ export interface FeedAdProps {
 }
 
 const TxFeedAd = (props: FeedAdProps) => {
-    const { codeid, style, adWidth = 150, onAdLayout, onAdError, onAdClose, onAdClick, visible = true } = props;
+    const {
+        codeid,
+        style,
+        adWidth = 150,
+        onAdLayout,
+        onAdError,
+        onAdClose,
+        onAdClick,
+        visible = true,
+        adHiehgt,
+    } = props;
     const [closed, setClosed] = React.useState(false);
     const [height, setHeight] = React.useState(0);
     // FeedAd是否显示，外部和内部均可控制，外部visible、内部closed
@@ -26,6 +37,7 @@ const TxFeedAd = (props: FeedAdProps) => {
             // 里面素材的宽度，减30是有些情况下，里面素材过宽贴边显示不全
             adWidth={adWidth - 30}
             // 为了不影响广告宽度占满屏幕的情况，style的width可单独控制
+            adHiehgt={adHiehgt}
             style={{ width: adWidth, height, ...style }}
             onAdError={(e: any) => {
                 onAdError && onAdError(e.nativeEvent);
