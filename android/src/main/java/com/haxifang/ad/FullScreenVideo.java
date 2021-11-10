@@ -29,11 +29,10 @@ public class FullScreenVideo extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void startAd(ReadableMap options, final Promise promise) {
-    String appId = options.getString("appid");
     String codeId = options.getString("codeid");
     String orientation = options.getString("orientation");
 
-    AdBoss.prepareReward(promise, mContext, appId);
+    AdBoss.prepareReward(promise, mContext);
 
     Intent intent = new Intent(mContext, FullScreenActivity.class);
     try {

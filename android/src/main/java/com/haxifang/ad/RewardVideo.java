@@ -34,16 +34,17 @@ public class RewardVideo extends ReactContextBaseJavaModule {
   @ReactMethod
   public void startAd(ReadableMap options, final Promise promise) {
     //拿到参数
-    String appId = options.getString("appid"); //可空
     String codeId = options.getString("codeid");
     String provider = options.getString("provider");
-    Log.d(TAG, "startAd:  appId: " + appId + ", codeId: " + codeId + provider);
+    Log.d(TAG, "startAd:codeId: " + codeId + provider);
 
     //准备激励回调
-    AdBoss.prepareReward(promise, mContext, appId);
+    AdBoss.prepareReward(promise, mContext);
     // 启动激励视频页面
     if (provider.equals("腾讯")) {
       startTx(codeId);
+    } else if (provider.equals("快手")) {
+      startKs(codeId);
     } else {
       startTT(codeId);
     }
@@ -74,9 +75,8 @@ public class RewardVideo extends ReactContextBaseJavaModule {
    * @param codeId
    */
   public static void startTx(String codeId) {
-    String appId = AdBoss.tx_appid;
     final String message = "启动腾讯激励视频";
-    Log.d(TAG, message + "AppID：" + appId + "  codeID: " + codeId);
+    Log.d(TAG, message + "  codeID: " + codeId);
     Activity ac = mContext.getCurrentActivity();
     if (ac != null) {
       ac.runOnUiThread(
@@ -86,7 +86,30 @@ public class RewardVideo extends ReactContextBaseJavaModule {
             mContext,
             com.haxifang.ad.activities.tencent.RewardActivity.class
           );
-          intent.putExtra("appid", appId);
+          intent.putExtra("codeId", codeId);
+          ac.startActivity(intent);
+        }
+      );
+    }
+  }
+
+  /**
+   * 启动快手激励视频
+   *
+   * @param codeId
+   */
+  public static void startKs(String codeId) {
+    final String message = "启动快手激励视频";
+    Log.d(TAG, message + "  codeID: " + codeId);
+    Activity ac = mContext.getCurrentActivity();
+    if (ac != null) {
+      ac.runOnUiThread(
+        () -> {
+          // TToast.show(mContext, message);
+          Intent intent = new Intent(
+            mContext,
+            com.haxifang.ad.activities.kuaishou.RewardActivity.class
+          );
           intent.putExtra("codeId", codeId);
           ac.startActivity(intent);
         }

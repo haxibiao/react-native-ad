@@ -17,12 +17,19 @@
 
     <application>
 
+        <!-- 头条 -->
         <activity android:name=".ad.activities.SplashActivity" />
         <activity android:name=".ad.activities.FullScreenActivity" android:theme="@style/TranslucentStyle"/>
         <activity android:name=".ad.activities.RewardActivity" />
+
+        <!-- 腾讯 -->
         <activity android:name=".ad.activities.tencent.SplashActivity" 
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-         <activity android:name=".ad.activities.tencent.RewardActivity"/>
+        <activity android:name=".ad.activities.tencent.RewardActivity"/>
+
+
+        <!-- 快手 -->
+        <activity android:name=".ad.activities.kuaishou.RewardActivity"/>         
 
         <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
@@ -37,6 +44,19 @@
             android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
             android:authorities="${applicationId}.TTMultiProvider"
             android:exported="false" />
+
+        <service
+          android:name="com.qq.e.comm.DownloadService"
+          android:exported="false" />
+        <provider
+            android:name="com.qq.e.comm.GDTFileProvider"
+            android:authorities="${applicationId}.gdt.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/gdt_file_path" />
+        </provider>
     </application>
 
 

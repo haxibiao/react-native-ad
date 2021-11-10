@@ -11,6 +11,10 @@ import com.bytedance.sdk.openadsdk.TTRewardVideoAd;
 import com.bytedance.sdk.openadsdk.TTSplashAd;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
+import com.kwad.sdk.api.KsAdSDK;
+import com.kwad.sdk.api.KsDrawAd;
+import com.kwad.sdk.api.KsRewardVideoAd;
+import com.kwad.sdk.api.SdkConfig;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
@@ -23,9 +27,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class AdBoss {
   public static String TAG = "AdBoss";
 
+  public static Boolean debug = true;
+
   public static String tt_appid;
   public static String tx_appid; //腾讯
   public static String bd_appid; //百度
+  public static String ks_appid; //快手
 
   // 头条广告init需要传的参数
   public static String userId = "";
@@ -47,6 +54,10 @@ public class AdBoss {
   // 缓存加载的腾讯广告数据
   public static NativeExpressADView txFeedAd;
   public static RewardVideoAD txRewardAd;
+
+  // 缓存加载的快手广告数据
+  public static KsRewardVideoAd ksRewardAd;
+  public static KsDrawAd ksDrawAd;
 
   // 存激励视频，全屏视频的回调
   public static Promise rewardPromise;
@@ -73,14 +84,10 @@ public class AdBoss {
    *
    * @param promise
    */
-  public static void prepareReward(
-    Promise promise,
-    Context context,
-    String appId
-  ) {
+  public static void prepareReward(Promise promise, Context context) {
     rewardPromise = promise;
     resetRewardResult();
-    initSdk(context, appId);
+    // initSdk(context, appId);  随着广告类型越来越多，不再单独对某汇种类型广告做补刀处理,使用广告前自身注意广告是否初始化
   }
 
   /**
@@ -147,7 +154,7 @@ public class AdBoss {
     1
   );
 
-  public static void initSdk(Context context, String appId) {
+  public static void initSdk(Context context, String appId, Boolean debug) {
     if (TTAdSdk != null && tt_appid == appId) {
       //已初始化
       Log.d(TAG, "已初始化 TTAdSdk tt_appid " + tt_appid);
@@ -168,7 +175,7 @@ public class AdBoss {
     resetRewardResult();
 
     // step1: 初始化sdk appid
-    TTAdManagerHolder.init(context, appId);
+    TTAdManagerHolder.init(context, appId, debug);
 
     // step2:创建TTAdNative对象，createAdNative(Context context)
     // feed广告context需要传入Activity对象
@@ -184,6 +191,8 @@ public class AdBoss {
   public static void initTx(Context context, String appId) {
     tx_appid = appId;
     Log.d(TAG, "tx_appid:" + tx_appid);
+    //初始化回调结果
+    resetRewardResult();
 
     // 通过调用此方法初始化 SDK。如果需要在多个进程拉取广告，每个进程都需要初始化 SDK。
     GDTAdSdk.init(context, tx_appid);
@@ -199,5 +208,21 @@ public class AdBoss {
     //        BaiduManager.init(mContext);
     //        AdView.setAppSid(context, bd_appid);
     // 注意：AdView.setAppsId还有用,被垃圾百度文档搞晕...
+  }
+
+  public static void initKs(Context context, String appId, Boolean debug) {
+    ks_appid = appId;
+    Log.d(TAG, "ks_appid:" + ks_appid);
+    //初始化回调结果
+    resetRewardResult();
+
+    KsAdSDK.init(
+      context,
+      new SdkConfig.Builder()
+        .appId(appId) // AppId，必填
+        .showNotification(true) // 是否展示下载通知栏
+        .debug(debug) // 是否开启sdk 调试⽇志 可选
+        .build()
+    ); // 通过调用此方法初始化 SDK。如果需要在多个进程拉取广告，每个进程都需要初始化 SDK。
   }
 }

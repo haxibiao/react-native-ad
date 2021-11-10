@@ -92,6 +92,9 @@ public class RewardActivity extends Activity {
         public void onError(int code, String message) {
           Log.d("reward onError ", message);
           fireEvent("onAdError", 1002, message);
+          if (AdBoss.rewardActivity != null) {
+            AdBoss.rewardActivity.finish();
+          }
         }
 
         @Override
@@ -181,6 +184,9 @@ public class RewardActivity extends Activity {
         @Override
         public void onVideoError() {
           fireEvent("onAdError", 1004, "激励视频播放出错了");
+          if (AdBoss.rewardActivity != null) {
+            AdBoss.rewardActivity.finish();
+          }
         }
 
         // 视频播放完成后，奖励验证回调，rewardVerify：是否有效，rewardAmount：奖励数量，rewardName：奖励名称

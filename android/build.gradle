@@ -81,11 +81,16 @@ dependencies {
 	implementation 'com.github.bumptech.glide:glide:4.9.0'
 	
 	//加载广告  SDK aar (剩余优量汇的) - 注意：新RN 安卓编译整在逐步淘汰这样npm下子项目加载本地aar的方式...
-    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
-
+    // compileOnly fileTree(dir: 'libs', include: ['*.aar'])
+    implementation (name: 'kssdk-ad--3.3.17.3', ext: 'aar')
 	//加载广告  穿山甲 3.5.0.6 以后支持 gradle 方式  - 注意：安卓项目手动添加maven和对齐sdk 版本号
 	implementation 'com.pangle.cn:ads-sdk:3.9.0.5'
-    implementation 'com.qq.e.union:union:+' // 普通版本
+    implementation 'com.qq.e.union:union:4.422.1292'
+
+     def version = ""
+    // supprot库依赖，SDK内部依赖如下support，请确保添加
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0" 
 }
 
 def configureReactNativePom(def pom) {
