@@ -55,7 +55,8 @@ public class AdBoss {
   public static NativeExpressADView txFeedAd;
   public static RewardVideoAD txRewardAd;
 
-  // 缓存加载的快手广告数据
+  // 缓存加载的快手广告
+  public static KsAdSDK ksAdSdk;
   public static KsRewardVideoAd ksRewardAd;
   public static KsDrawAd ksDrawAd;
 

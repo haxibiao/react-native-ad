@@ -8,6 +8,7 @@ import DrawFeed from './DrawFeed';
 import Feed from './Feed';
 import Stream from './Stream';
 import TxFeed from './TxFeed';
+import KsDrawFeed from './KsDrawFeed';
 
 export default {
     init,
@@ -20,4 +21,5 @@ export default {
     Feed,
     Stream,
     TxFeed,
+    KsDrawFeed,
 };
