@@ -15,6 +15,7 @@ import com.kwad.sdk.api.KsAdSDK;
 import com.kwad.sdk.api.KsDrawAd;
 import com.kwad.sdk.api.KsRewardVideoAd;
 import com.kwad.sdk.api.SdkConfig;
+import com.qq.e.ads.interstitial2.UnifiedInterstitialAD;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
@@ -54,6 +55,7 @@ public class AdBoss {
   // 缓存加载的腾讯广告数据
   public static NativeExpressADView txFeedAd;
   public static RewardVideoAD txRewardAd;
+  public static UnifiedInterstitialAD txfullScreenAd;
 
   // 缓存加载的快手广告
   public static KsAdSDK ksAdSdk;
