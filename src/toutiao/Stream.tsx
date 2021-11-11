@@ -3,9 +3,6 @@ import { requireNativeComponent, StyleSheet } from 'react-native';
 
 const StreamComponent = requireNativeComponent('StreamAd');
 
-// 关于以前用旧的 native 方式申请的 Stream 代码位...
-// FIXME: 记得全部重新申请代码位，因为穿山甲马上要弃用旧代码位
-
 export interface StreamProps {
     codeid: string;
     visible?: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { requireNativeComponent, StyleSheet, ViewStyle } from 'react-native';
 const FeedAdComponent = requireNativeComponent('FeedAd');
-import TxFeed from './TxFeed';
+import TxFeed from '../tencent/TxFeed';
 export interface FeedAdProps {
     provider?: string;
     codeid: string;

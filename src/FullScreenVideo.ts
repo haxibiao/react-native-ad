@@ -11,16 +11,16 @@ export interface AD_EVENT_TYPE {
 }
 
 interface FullScreenProps {
-    appid: string;
     codeid: string;
     orientation?: 'HORIZONTAL' | 'VERTICAL';
+    provider?: '头条' | '腾讯' | '快手';
 }
 
 export default (props: FullScreenProps) => {
-    const { appid, codeid, orientation = 'VERTICAL' } = props;
+    const { provider, codeid, orientation = 'VERTICAL' } = props;
     const { FullScreenVideo } = NativeModules;
     const eventEmitter = new NativeEventEmitter(FullScreenVideo);
-    let result = FullScreenVideo.startAd({ appid, codeid, orientation });
+    let result = FullScreenVideo.startAd({ codeid, orientation, provider });
 
     return {
         result,
