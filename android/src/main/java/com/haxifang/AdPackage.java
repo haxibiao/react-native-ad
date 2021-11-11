@@ -14,6 +14,7 @@ import com.haxifang.ad.SplashAd;
 import com.haxifang.ad.StreamViewManager;
 import com.haxifang.ad.TxFeedAdViewManager;
 import com.haxifang.ad.viewManager.kuaishou.KsDrawFeedViewManager;
+import com.haxifang.ad.viewManager.kuaishou.KsFeedViewManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +44,8 @@ public class AdPackage implements ReactPackage {
       new FeedAdViewManager(reactContext),
       new StreamViewManager(reactContext),
       new TxFeedAdViewManager(reactContext),
-      new KsDrawFeedViewManager(reactContext)
+      new KsDrawFeedViewManager(reactContext),
+      new KsFeedViewManager(reactContext)
     );
   }
 }

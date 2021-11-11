@@ -1,7 +1,7 @@
 import React from 'react';
 import { requireNativeComponent, PixelRatio, ViewStyle } from 'react-native';
 
-const FeedAdComponent = requireNativeComponent('TxFeedAd');
+const FeedAdComponent = requireNativeComponent('KsFeedAd');
 export interface FeedAdProps {
     codeid: string;
     style?: ViewStyle;
@@ -14,7 +14,7 @@ export interface FeedAdProps {
     onAdClick?: Function;
 }
 
-const TxFeedAd = (props: FeedAdProps) => {
+const KsFeed = (props: FeedAdProps) => {
     const {
         codeid,
         style,
@@ -59,4 +59,4 @@ const TxFeedAd = (props: FeedAdProps) => {
     );
 };
 
-export default TxFeedAd;
+export default KsFeed;
