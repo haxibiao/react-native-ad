@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <TextView
+        <!-- <TextView
             android:id="@+id/tx_skip_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:gravity="center"
             android:text="跳过"
             android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp"/> -->
     </RelativeLayout>
 
 
