@@ -5,13 +5,15 @@ import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
