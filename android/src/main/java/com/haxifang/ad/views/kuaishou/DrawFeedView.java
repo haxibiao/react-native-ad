@@ -5,7 +5,6 @@ import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
