@@ -5501,10 +5501,8 @@ react-is@^16.13.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-ad@^1.2.4:
+"react-native-ad@file:../":
   version "1.2.4"
-  resolved "https://registry.yarnpkg.com/react-native-ad/-/react-native-ad-1.2.4.tgz#1957272cb7fe3b6873ec522ef302e2dc422600a1"
-  integrity sha512-+hHzKsH7Qs6hnDYHVE7i3U1cXz4mX1B3+kGmvagYLUhjQfFbVgRb0hksQZqrug9qqx+xC+Jqxcbbprx90LdM3g==
 
 react-native-codegen@^0.0.8:
   version "0.0.8"
