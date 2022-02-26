@@ -60,6 +60,14 @@ $ npm update react-native-ad
 $ yarn upgrade react-native-ad
 ```
 
+### 联系我们 👾
+> 由于团队以及产品方向问题，该包的维护越来越困难。目前有计划考虑社区共同维护，订阅方式捐赠，付费技术支持等一系列方式，将收益用于持续跟踪 issues 和提供 SDK 升级迭代，同时也能够让该项目可持续发展下去，有订阅或付费意向的小伙伴们可以联系我
+
+> BY. [@PBK-B](https://github.com/PBK-B)
+
+> Email: bin@PBK6.cn
+
+> 微信: tzmax_
 
 ### 特别鸣谢
 > 感谢 JetBrains 提供了优秀的 IDE 和授权的开源许可。
